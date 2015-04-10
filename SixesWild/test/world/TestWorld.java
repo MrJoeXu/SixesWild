@@ -1,10 +1,10 @@
-package sample;
+package test.world;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class deal {
+public class TestWorld {
 
 	@Test
 	public void test() {
