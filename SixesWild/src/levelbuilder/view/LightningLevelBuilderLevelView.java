@@ -7,12 +7,12 @@ package src.levelbuilder.view;
  * @author Halsey
  *
  */
-public class LightningLevelBuilderView extends LevelBuilderView {
+public class LightningLevelBuilderLevelView extends LevelBuilderLevelView {
 
 	/**
 	 * 
 	 */
-	public LightningLevelBuilderView() {
+	public LightningLevelBuilderLevelView() {
 		// TODO Auto-generated constructor stub
 	}
 

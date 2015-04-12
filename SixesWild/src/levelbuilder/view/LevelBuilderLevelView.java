@@ -4,15 +4,15 @@
 package src.levelbuilder.view;
 
 /**
- * @author Hvandenberg
+ * @author Halsey
  *
  */
-public class LevelBuilderGameTypeView {
+public class LevelBuilderLevelView {
 
 	/**
 	 * 
 	 */
-	public LevelBuilderGameTypeView() {
+	public LevelBuilderLevelView() {
 		// TODO Auto-generated constructor stub
 	}
 
