@@ -22,13 +22,28 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
+
+import src.sixeswildgame.controllers.SelectGameTypeController;
+import src.sixeswildgame.world.World;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class SixesWildWindow {
 
-	private JFrame frmSixesWild;
+	//JFrames
+	protected JFrame frmSixesWild;
+	
+	//JPanels
+	protected GameTypeView gameTypeView;
+	
+	//JButtons
+	protected JButton startButton;
+	
+	//World
+	protected World world;
 
 	/**
 	 * Create the application.
@@ -73,16 +88,12 @@ public class SixesWildWindow {
 		gbc_lblSixeswild.gridy = 0;
 		frmSixesWild.getContentPane().add(lblSixeswild, gbc_lblSixeswild);
 		
-		JButton button = new JButton("Start");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		startButton = new JButton("Start");
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 5, 0);
 		gbc_button.gridx = 0;
 		gbc_button.gridy = 1;
-		frmSixesWild.getContentPane().add(button, gbc_button);
+		frmSixesWild.getContentPane().add(startButton, gbc_button);
 		
 		JLabel label_5 = new JLabel("Presented By:");
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
@@ -137,7 +148,7 @@ public class SixesWildWindow {
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
-		
+		startButton.addActionListener(new SelectGameTypeController(this, world));
 		
 	}
 	
@@ -156,5 +167,36 @@ public class SixesWildWindow {
 			}
 		});
 	}
+
+	/**
+	 * @return the gameTypeView
+	 */
+	public GameTypeView getGameTypeView() {
+		return gameTypeView;
+	}
+
+	/**
+	 * @param gameTypeView the gameTypeView to set
+	 */
+	public void setGameTypeView(GameTypeView gameTypeView) {
+		this.gameTypeView = gameTypeView;
+	}
+
+	/**
+	 * @return the startButton
+	 */
+	public JButton getStartButton() {
+		return startButton;
+	}
+
+	/**
+	 * @param startButton the startButton to set
+	 */
+	public void setStartButton(JButton startButton) {
+		this.startButton = startButton;
+	}
+	
+	//Getters and Setters
+	
 
 }
