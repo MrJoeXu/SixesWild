@@ -1,18 +1,18 @@
 /**
  * 
  */
-package src.sixeswildgame.world;
+package src.sixeswildgame.view;
 
 /**
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class SpaceView {
 
 	/**
 	 * 
 	 */
-	public ReleaseLevel() {
+	public SpaceView() {
 		// TODO Auto-generated constructor stub
 	}
 

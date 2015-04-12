@@ -1,18 +1,18 @@
 /**
  * 
  */
-package src.sixeswildgame.world;
+package src.sixeswildgame.controllers;
 
 /**
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class LevelBackController {
 
 	/**
 	 * 
 	 */
-	public ReleaseLevel() {
+	public LevelBackController() {
 		// TODO Auto-generated constructor stub
 	}
 

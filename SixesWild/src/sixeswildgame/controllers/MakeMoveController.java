@@ -1,18 +1,18 @@
 /**
  * 
  */
-package src.sixeswildgame.world;
+package src.sixeswildgame.controllers;
 
 /**
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class MakeMoveController {
 
 	/**
 	 * 
 	 */
-	public ReleaseLevel() {
+	public MakeMoveController() {
 		// TODO Auto-generated constructor stub
 	}
 

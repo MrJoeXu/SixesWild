@@ -7,12 +7,12 @@ package src.sixeswildgame.world;
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class PuzzleLevel extends Level {
 
 	/**
 	 * 
 	 */
-	public ReleaseLevel() {
+	public PuzzleLevel() {
 		// TODO Auto-generated constructor stub
 	}
 

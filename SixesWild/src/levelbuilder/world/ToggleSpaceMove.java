@@ -1,18 +1,18 @@
 /**
  * 
  */
-package src.sixeswildgame.world;
+package src.levelbuilder.world;
 
 /**
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class ToggleSpaceMove {
 
 	/**
 	 * 
 	 */
-	public ReleaseLevel() {
+	public ToggleSpaceMove() {
 		// TODO Auto-generated constructor stub
 	}
 

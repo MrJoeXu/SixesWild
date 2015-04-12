@@ -7,7 +7,7 @@ package src.sixeswildgame.world;
  * @author Halsey
  *
  */
-public class LightningLevel {
+public class LightningLevel extends Level {
 
 	/**
 	 * 
