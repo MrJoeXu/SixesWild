@@ -36,11 +36,26 @@ public class SixesWildWindow {
 	public SixesWildWindow() {
 		initialize();
 	}
+	
+	private void initialize() {
+		initializeModel();
+		initializeView();
+		initializeControllers();
+		
+	}
+
+	/**
+	 * Initialize the model.
+	 */
+	private void initializeModel() {
+		
+		
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initializeView() {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
 		frmSixesWild.setBounds(550, 100, 750, 750);
@@ -116,6 +131,14 @@ public class SixesWildWindow {
 		gbc_label_4.gridx = 0;
 		gbc_label_4.gridy = 7;
 		frmSixesWild.getContentPane().add(label_4, gbc_label_4);
+	}
+	
+	/**
+	 * Initialize the controllers.
+	 */
+	private void initializeControllers() {
+		
+		
 	}
 	
 	/**
