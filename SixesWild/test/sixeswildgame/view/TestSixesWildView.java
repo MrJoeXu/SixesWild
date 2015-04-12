@@ -1,18 +1,18 @@
 /**
  * 
  */
-package test.view;
+package test.sixeswildgame.view;
 
 /**
  * @author Hvandenberg
  *
  */
-public class TestLevelBuilderGameTypeView {
+public class TestSixesWildView {
 
 	/**
 	 * 
 	 */
-	public TestLevelBuilderGameTypeView() {
+	public TestSixesWildView() {
 		// TODO Auto-generated constructor stub
 	}
 

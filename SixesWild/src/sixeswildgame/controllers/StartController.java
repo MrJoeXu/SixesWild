@@ -1,18 +1,18 @@
 /**
  * 
  */
-package test.controllers;
+package src.sixeswildgame.controllers;
 
 /**
  * @author Hvandenberg
  *
  */
-public class TestStartController {
+public class StartController {
 
 	/**
 	 * 
 	 */
-	public TestStartController() {
+	public StartController() {
 		// TODO Auto-generated constructor stub
 	}
 

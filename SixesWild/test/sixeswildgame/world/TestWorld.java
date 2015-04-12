@@ -1,4 +1,4 @@
-package test.world;
+package test.sixeswildgame.world;
 
 import static org.junit.Assert.*;
 

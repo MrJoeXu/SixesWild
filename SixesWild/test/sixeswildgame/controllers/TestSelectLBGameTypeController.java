@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.controllers;
+package test.sixeswildgame.controllers;
 
 /**
  * @author Hvandenberg

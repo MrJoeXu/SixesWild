@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src.controllers;
+package src.levelbuilder.controllers;
 
 /**
  * @author Hvandenberg

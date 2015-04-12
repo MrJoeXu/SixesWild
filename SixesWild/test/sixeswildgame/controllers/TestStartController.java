@@ -1,18 +1,18 @@
 /**
  * 
  */
-package src.view;
+package test.sixeswildgame.controllers;
 
 /**
  * @author Hvandenberg
  *
  */
-public class LevelBuilderGameTypeView {
+public class TestStartController {
 
 	/**
 	 * 
 	 */
-	public LevelBuilderGameTypeView() {
+	public TestStartController() {
 		// TODO Auto-generated constructor stub
 	}
 

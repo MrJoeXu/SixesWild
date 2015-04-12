@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src.view;
+package src.sixeswildgame.view;
 
 /**
  * @author Hvandenberg
