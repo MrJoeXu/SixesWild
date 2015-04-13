@@ -31,7 +31,6 @@ public class LBGameTypeBackController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		application.getFrame().setContentPane(application.getMainMenuView());
 		application.getFrame().setTitle("Level Builder Main Menu");
-		//application.getFrame().setBounds(550, 100, 1000, 750);
 		application.getFrame().pack();
 	}
 

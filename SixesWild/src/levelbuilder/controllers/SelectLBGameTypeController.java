@@ -32,11 +32,10 @@ public class SelectLBGameTypeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		application.setGameType(gameType);
-		if (application.getLbLevelView() == null) application.setLbLevelView(new LBLevelView(application, world));
+		application.setLbLevelView(new LBLevelView(application, world));
 		application.getFrame().setContentPane(application.getLbLevelView());
 		application.getLbLevelView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");
-		application.getFrame().setBounds(550, 100, 1000, 750);
 		application.getFrame().pack();
 	}
 

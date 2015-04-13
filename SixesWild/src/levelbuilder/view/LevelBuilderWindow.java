@@ -1,20 +1,29 @@
 package src.levelbuilder.view;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.SplashScreen;
+import java.awt.Toolkit;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import src.levelbuilder.controllers.SelectLBGameTypeController;
 import src.sixeswildgame.world.World;
@@ -23,6 +32,10 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.CardLayout;
 import java.awt.Insets;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class LevelBuilderWindow {
 
@@ -65,10 +78,16 @@ public class LevelBuilderWindow {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initializeView() {
-		frame = new JFrame();
+	private void initializeView() {	    
+	    frame = new JFrame();
+		frame.getContentPane().setPreferredSize(new Dimension(1000, 750));
 		frame.setTitle("Sixes Wild Level Builder");
-		frame.setBounds(550, 100, 1000, 750);
+		int width = 1000;
+	    int height = 750;
+	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (screen.width - width) / 2;
+	    int y = (screen.height - height) / 2;
+	    frame.setBounds(x, y, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		Border paddingBorder = BorderFactory.createEmptyBorder(100,100,100,100);
@@ -182,6 +201,31 @@ public class LevelBuilderWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		/*JWindow splash = new JWindow();
+	    BufferedImage splashScreenImg;
+		try {
+			splashScreenImg = ImageIO.read(new File("resources/lbSplashScreen.png"));
+			splash.getContentPane().add(new JLabel(new ImageIcon(splashScreenImg)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    int width = 500;
+	    int height = 300;
+	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (screen.width - width) / 2;
+	    int y = (screen.height - height) / 2;
+	    splash.setBounds(x, y, width, height);
+	    splash.setVisible(true);
+	    try {
+	        Thread.sleep(2000);
+	    } catch (InterruptedException e) {
+	        e.printStackTrace();
+	    }
+	    splash.setVisible(false);
+	    splash.dispose();*/
+        
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
