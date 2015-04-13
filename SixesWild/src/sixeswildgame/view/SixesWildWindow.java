@@ -2,34 +2,24 @@ package src.sixeswildgame.view;
 
 import java.awt.EventQueue;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Component;
-
-import javax.swing.Box;
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
-import java.awt.Insets;
-
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Font;
 
 import javax.swing.JButton;
 
 import src.sixeswildgame.controllers.SelectGameTypeController;
+import src.sixeswildgame.controllers.StartController;
 import src.sixeswildgame.world.World;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+/**
+ * @author Joe Xu
+ *
+ */
 
 public class SixesWildWindow {
 
@@ -37,13 +27,17 @@ public class SixesWildWindow {
 	protected JFrame frmSixesWild;
 	
 	//JPanels
+	protected JPanel mainMenuView;
 	protected GameTypeView gameTypeView;
+	protected LevelSelectorView levelSelectorView;
 	
 	//JButtons
 	protected JButton startButton;
 	
 	//World
 	protected World world;
+	
+	protected int gameType;
 
 	/**
 	 * Create the application.
@@ -73,57 +67,67 @@ public class SixesWildWindow {
 	private void initializeView() {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
-		frmSixesWild.setBounds(0, 0, 1440, 1024);
+		frmSixesWild.setSize(1440, 1020);
+		frmSixesWild.setLocationRelativeTo(null);
+		frmSixesWild.setResizable(false);
+		System.out.println(frmSixesWild.getToolkit().getScreenSize());
+		System.out.println(frmSixesWild.getToolkit().getScreenResolution());
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
 		frmSixesWild.setLayout(null);
+
+		this.mainMenuView = (JPanel) frmSixesWild.getContentPane();
 		
 		JLabel lblSixeswild = new JLabel("SixesWild");
 		lblSixeswild.setFont(new Font("Avenir Next", Font.PLAIN, 78));
-		lblSixeswild.setBounds(543, 180, 354, 109);
+		lblSixeswild.setBounds(543, 261, 354, 109);
 		lblSixeswild.setForeground(Color.decode("#D76262"));
+		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
 		frmSixesWild.getContentPane().add(lblSixeswild);
+		
 		
 		startButton = new BetterButton(Color.decode("#D76262"),271,70,10);
 		startButton.setBorderPainted(false);
+		startButton.setFocusPainted(false);
 		startButton.setFont(new Font("Avenir Next", Font.PLAIN, 30));
 		startButton.setText("Start");
-		startButton.setBounds(585, 370, 271, 70);
+		startButton.setBounds(585, 477, 271, 70);
 		startButton.setForeground(Color.white);
 		frmSixesWild.getContentPane().add(startButton);
+
 		
 		JLabel label1 = new JLabel("Presented by:");
-		label1.setBounds(625, 500, 200, 41);
+		label1.setBounds(625, 657, 200, 41);
 		label1.setFont(new Font("Avenir Next", Font.PLAIN, 30));
 		label1.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label1);
 		
-		JLabel label2 = new JLabel("Metthew Beaulieu");
-		label2.setBounds(640, 600, 170, 27);
+		JLabel label2 = new JLabel("Matthew Beaulieu");
+		label2.setBounds(640, 732, 170, 27);
 		label2.setFont(new Font("Avenir Next", Font.PLAIN, 20));
 		label2.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label2);
 		
 		JLabel label3 = new JLabel("Tiffany Leung");
-		label3.setBounds(662, 630, 170, 27);
+		label3.setBounds(662, 759, 170, 27);
 		label3.setFont(new Font("Avenir Next", Font.PLAIN, 20));
 		label3.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label3);
 		
 		JLabel label4 = new JLabel("Jiaqi Ren");
-		label4.setBounds(680, 660, 170, 27);
+		label4.setBounds(680, 786, 170, 27);
 		label4.setFont(new Font("Avenir Next", Font.PLAIN, 20));
 		label4.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label4);
 		
 		JLabel label5 = new JLabel("Halsey Vandenberg");
-		label5.setBounds(635, 690, 180, 27);
+		label5.setBounds(635, 813, 180, 27);
 		label5.setFont(new Font("Avenir Next", Font.PLAIN, 20));
 		label5.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label5);
 		
-		JLabel label6 = new JLabel("Ziyao Xu 'Joe'");
-		label6.setBounds(664, 720, 170, 27);
+		JLabel label6 = new JLabel("Ziyao Xu \"Joe\"");
+		label6.setBounds(664, 840, 170, 27);
 		label6.setFont(new Font("Avenir Next", Font.PLAIN, 20));
 		label6.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label6);
@@ -134,7 +138,7 @@ public class SixesWildWindow {
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
-		startButton.addActionListener(new SelectGameTypeController(this, world));
+		startButton.addActionListener(new StartController(this, world));
 		
 	}
 	
@@ -157,8 +161,14 @@ public class SixesWildWindow {
 	/**
 	 * @return the gameTypeView
 	 */
+	
+	
 	public GameTypeView getGameTypeView() {
 		return gameTypeView;
+	}
+	
+	public JFrame getFrmSixesWild() {
+		return frmSixesWild;
 	}
 
 	/**
@@ -181,7 +191,36 @@ public class SixesWildWindow {
 	public void setStartButton(JButton startButton) {
 		this.startButton = startButton;
 	}
-	
+
+	public JPanel getMainMenuView() {
+		return mainMenuView;
+	}
+
+	public void setMainMenuView(JPanel mainMenuView) {
+		this.mainMenuView = mainMenuView;
+	}
+
+	public void setFrmSixesWild(JFrame frmSixesWild) {
+		this.frmSixesWild = frmSixesWild;
+	}
+
+	public LevelSelectorView getLevelSelectorView() {
+		return levelSelectorView;
+	}
+
+	public void setLevelSelectorView(LevelSelectorView levelSelectorView) {
+		this.levelSelectorView = levelSelectorView;
+	}
+
+	public int getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(int gameType) {
+		this.gameType = gameType;
+	}
+
+
 	//Getters and Setters
 	
 
