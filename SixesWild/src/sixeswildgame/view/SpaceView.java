@@ -8,6 +8,8 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import src.sixeswildgame.world.Space;
+
 /**
  * @author Halsey
  *
@@ -15,17 +17,23 @@ import javax.swing.JPanel;
 public class SpaceView extends JPanel {
 	
 	protected TileView tileView;
+	protected Space space;
 	protected boolean isEnabled;
 
 	/**
 	 * 
 	 */
-	public SpaceView() {
-		setPreferredSize(new Dimension(50, 50));
-		this.setBackground(Color.green);
-		this.tileView = new TileView();
+	public SpaceView(Space space) {
+		this.space = space;
 		this.isEnabled = true;
-		add(tileView);
+		this.tileView = new TileView(space.getTile());
+		setPreferredSize(new Dimension(80, 80));
+
+		if (!isEnabled()) {
+			setBackground(Color.WHITE);
+		}
+
+		else add(tileView);
 	}
 
 }

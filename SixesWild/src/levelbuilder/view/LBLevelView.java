@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
 
 import javax.swing.JLabel;
@@ -42,6 +43,7 @@ public class LBLevelView extends JPanel {
 	protected JButton backBtn;
 	protected String typeName = "Unknown";
 	protected BoardView boardView;
+	protected Level level;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -50,10 +52,11 @@ public class LBLevelView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LBLevelView(LevelBuilderWindow application, World world) {
-		setPreferredSize(new Dimension(1250, 750));
+	public LBLevelView(LevelBuilderWindow application, World world, Level level) {
+		setPreferredSize(new Dimension(1250, 900));
 		this.application = application;
 		this.world = world;
+		this.level = level;
 		this.setBounds(550, 100, 1250, 750);
 		
 		switch (application.gameType) {
@@ -457,15 +460,16 @@ public class LBLevelView extends JPanel {
 		previewPanel.setLayout(gbl_previewPanel);
 		
 		JPanel boardPanel = new JPanel();
-		boardPanel.setPreferredSize(new Dimension(500, 500));
+		boardPanel.setPreferredSize(new Dimension(600, 600));
 		GridBagConstraints gbc_boardPanel = new GridBagConstraints();
-		gbc_boardPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_boardPanel.fill = GridBagConstraints.BOTH;
 		gbc_boardPanel.gridx = 0;
 		gbc_boardPanel.gridy = 0;
 		previewPanel.add(boardPanel, gbc_boardPanel);
+		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		boardView = new BoardView(9);
+		boardView = new BoardView(level.getBoard());
+		boardView.setPreferredSize(new Dimension(600, 600));
 		boardPanel.add(boardView);
 		
 		JPanel boardBtnPanel = new JPanel();
@@ -494,5 +498,147 @@ public class LBLevelView extends JPanel {
 	public void initializeControllers() {
 		backBtn.addActionListener(new LBGameTypeBackController(application, world));
 	}
+
+	/**
+	 * @return the application
+	 */
+	public LevelBuilderWindow getApplication() {
+		return application;
+	}
+
+	/**
+	 * @param application the application to set
+	 */
+	public void setApplication(LevelBuilderWindow application) {
+		this.application = application;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
+	}
+
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	/**
+	 * @return the backBtn
+	 */
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	/**
+	 * @param backBtn the backBtn to set
+	 */
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
+	}
+
+	/**
+	 * @return the typeName
+	 */
+	public String getTypeName() {
+		return typeName;
+	}
+
+	/**
+	 * @param typeName the typeName to set
+	 */
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	/**
+	 * @return the boardView
+	 */
+	public BoardView getBoardView() {
+		return boardView;
+	}
+
+	/**
+	 * @param boardView the boardView to set
+	 */
+	public void setBoardView(BoardView boardView) {
+		this.boardView = boardView;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public Level getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
+	/**
+	 * @return the lvlNameTextField
+	 */
+	public JTextField getLvlNameTextField() {
+		return lvlNameTextField;
+	}
+
+	/**
+	 * @param lvlNameTextField the lvlNameTextField to set
+	 */
+	public void setLvlNameTextField(JTextField lvlNameTextField) {
+		this.lvlNameTextField = lvlNameTextField;
+	}
+
+	/**
+	 * @return the oneStarTextField
+	 */
+	public JTextField getOneStarTextField() {
+		return oneStarTextField;
+	}
+
+	/**
+	 * @param oneStarTextField the oneStarTextField to set
+	 */
+	public void setOneStarTextField(JTextField oneStarTextField) {
+		this.oneStarTextField = oneStarTextField;
+	}
+
+	/**
+	 * @return the twoStarTextField
+	 */
+	public JTextField getTwoStarTextField() {
+		return twoStarTextField;
+	}
+
+	/**
+	 * @param twoStarTextField the twoStarTextField to set
+	 */
+	public void setTwoStarTextField(JTextField twoStarTextField) {
+		this.twoStarTextField = twoStarTextField;
+	}
+
+	/**
+	 * @return the threeStarTextField
+	 */
+	public JTextField getThreeStarTextField() {
+		return threeStarTextField;
+	}
+
+	/**
+	 * @param threeStarTextField the threeStarTextField to set
+	 */
+	public void setThreeStarTextField(JTextField threeStarTextField) {
+		this.threeStarTextField = threeStarTextField;
+	}
+	
+	
 
 }

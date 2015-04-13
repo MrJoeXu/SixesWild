@@ -4,6 +4,7 @@
 package src.sixeswildgame.world;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.Timer;
 
@@ -31,6 +32,25 @@ public class Level {
 	
 	protected boolean isLocked;
 	protected boolean[] tileRange;
+	
+	public Level(Board board, int id) {
+		this.board = board;
+		this.id = id;
+		this.specialMoves = new ArrayList<SpecialMove>();
+		this.currentScore = 0;
+		this.highScore = 0;
+		this.oneStarScore = 0;
+		this.twoStarScore = 0;
+		this.threeStarScore = 0;
+		this.movesLeft = 10;
+		this.bonusFrequency = 1;
+		this.isLocked = false;
+		this.tileRange = new boolean[5];
+		for (int i = 0; i < 5; i++) {
+			tileRange[i] = true;
+		}
+		
+	}
 	
 	/**
 	 * @param board
@@ -65,6 +85,22 @@ public class Level {
 		this.time = time;
 		this.isLocked = isLocked;
 		this.tileRange = tileRange;
+	}
+	
+	public void initialize() {
+		for (int i = 0; i < board.getDimension()*board.getDimension(); i++) {
+			Tile tile = board.getGrid().get(i).getTile();
+			
+			ArrayList<Integer> values = new ArrayList<Integer>();
+			for (int j = 0; j < 5; j++) if (getTileRange()[j]) values.add(j + 1);
+			values.add(6);
+			
+			Random rand = new Random();
+		    int value = rand.nextInt(values.size());
+					
+			board.getGrid().get(i).setTile(new Tile(values.get(value), 0,
+					tile.getRow(), tile.getColumn(), tile.isSelected));
+		}
 	}
 	
 	public void hasWon() {

@@ -15,9 +15,14 @@ public class LevelBuilderSpace extends Space {
 	protected Tile tile;
 	protected boolean enabled;
 	
+	/**
+	 * @param tile
+	 */
 	public LevelBuilderSpace(Tile tile) {
 		super(tile);
-
+		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 }

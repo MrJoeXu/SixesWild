@@ -5,6 +5,8 @@ package src.sixeswildgame.world;
 
 import java.util.ArrayList;
 
+import src.sixeswildgame.view.SpaceView;
+
 /**
  * @author Halsey
  *
@@ -18,9 +20,17 @@ public class Board {
 	 * @param grid
 	 * @param dimension
 	 */
-	public Board(ArrayList<Space> grid, int dimension) {
-		this.grid = grid;
+	public Board(int dimension) {
 		this.dimension = dimension;
+		this.grid = new ArrayList<Space>();
+
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				Space space = new Space(new Tile(j, i));
+				grid.add(space);
+			}
+		}
+		
 	}
 
 	/**

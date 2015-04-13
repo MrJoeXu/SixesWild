@@ -8,12 +8,18 @@ package src.sixeswildgame.world;
  *
  */
 public class EliminationSpace extends Space {
+	
+	protected boolean isMarked;
 
 	/**
-	 * 
+	 * @param tile
+	 * @param isMarked
 	 */
-	public EliminationSpace() {
-		// TODO Auto-generated constructor stub
+	public EliminationSpace(Tile tile, boolean isMarked) {
+		super(tile);
+		this.isMarked = isMarked;
 	}
+
+	
 
 }

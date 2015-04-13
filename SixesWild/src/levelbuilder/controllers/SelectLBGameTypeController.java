@@ -5,9 +5,13 @@ package src.levelbuilder.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import src.levelbuilder.view.LBLevelView;
 import src.levelbuilder.view.LevelBuilderWindow;
+import src.sixeswildgame.world.Board;
+import src.sixeswildgame.world.Level;
+import src.sixeswildgame.world.Tile;
 import src.sixeswildgame.world.World;
 
 /**
@@ -32,7 +36,9 @@ public class SelectLBGameTypeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		application.setGameType(gameType);
-		application.setLbLevelView(new LBLevelView(application, world));
+		Level newCustomLevel = new Level(new Board(9), 0);
+		newCustomLevel.initialize();
+		application.setLbLevelView(new LBLevelView(application, world, newCustomLevel));
 		application.getFrame().setContentPane(application.getLbLevelView());
 		application.getLbLevelView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");

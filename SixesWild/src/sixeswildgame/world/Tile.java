@@ -15,6 +15,11 @@ public class Tile {
 	protected int column;
 	
 	protected boolean isSelected;
+	
+	public Tile(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
 
 	/**
 	 * @param value
