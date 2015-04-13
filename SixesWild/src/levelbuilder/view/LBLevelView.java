@@ -51,10 +51,10 @@ public class LBLevelView extends JPanel {
 	 * Create the panel.
 	 */
 	public LBLevelView(LevelBuilderWindow application, World world) {
-		setPreferredSize(new Dimension(1000, 750));
+		setPreferredSize(new Dimension(1250, 750));
 		this.application = application;
 		this.world = world;
-		this.setBounds(550, 100, 1000, 750);
+		this.setBounds(550, 100, 1250, 750);
 		
 		switch (application.gameType) {
 		case 1:
@@ -99,7 +99,7 @@ public class LBLevelView extends JPanel {
 		gbc_backBtn.gridy = 0;
 		panel.add(backBtn, gbc_backBtn);
 		
-		JLabel lblTypeBuilder = new JLabel(typeName + " Builder");
+		JLabel lblTypeBuilder = new JLabel("Level Builder");
 		lblTypeBuilder.setBorder(new EmptyBorder(50, 0, 50, 0));
 		lblTypeBuilder.setFont(new Font("Palatino Linotype", Font.PLAIN, 60));
 		GridBagConstraints gbc_lblTypeBuilder = new GridBagConstraints();
@@ -465,7 +465,8 @@ public class LBLevelView extends JPanel {
 		gbc_boardPanel.gridy = 0;
 		previewPanel.add(boardPanel, gbc_boardPanel);
 		
-		boardView = new BoardView();
+		boardView = new BoardView(9);
+		boardPanel.add(boardView);
 		
 		JPanel boardBtnPanel = new JPanel();
 		GridBagConstraints gbc_boardBtnPanel = new GridBagConstraints();

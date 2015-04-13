@@ -8,12 +8,30 @@ package src.sixeswildgame.world;
  *
  */
 public class Space {
+	
+	protected Tile tile;
 
 	/**
 	 * 
 	 */
-	public Space() {
-		// TODO Auto-generated constructor stub
+	public Space(Tile tile) {
+		this.tile = tile;
 	}
 
+	/**
+	 * @return the tile
+	 */
+	public Tile getTile() {
+		return tile;
+	}
+
+	/**
+	 * @param tile the tile to set
+	 */
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
+
+	
+	
 }
