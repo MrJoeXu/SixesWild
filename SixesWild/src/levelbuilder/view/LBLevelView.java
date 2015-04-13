@@ -51,6 +51,7 @@ public class LBLevelView extends JPanel {
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
 	private JTextField threeStarTextField;
+	protected JPanel boardPanel;
 
 	/**
 	 * Create the panel.
@@ -473,8 +474,8 @@ public class LBLevelView extends JPanel {
 		gbl_previewPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		previewPanel.setLayout(gbl_previewPanel);
 		
-		JPanel boardPanel = new JPanel();
-		boardPanel.setPreferredSize(new Dimension(600, 600));
+		boardPanel = new JPanel();
+		boardPanel.setPreferredSize(new Dimension(500, 500));
 		GridBagConstraints gbc_boardPanel = new GridBagConstraints();
 		gbc_boardPanel.fill = GridBagConstraints.BOTH;
 		gbc_boardPanel.gridx = 0;
@@ -483,8 +484,7 @@ public class LBLevelView extends JPanel {
 		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		boardView = new BoardView(level.getBoard());
-		boardView.setPreferredSize(new Dimension(600, 600));
-		boardPanel.removeAll();
+		boardView.setPreferredSize(new Dimension(450, 450));
 		boardPanel.add(boardView);
 		
 		JPanel boardBtnPanel = new JPanel();
@@ -669,6 +669,14 @@ public class LBLevelView extends JPanel {
 	 */
 	public void setThreeStarTextField(JTextField threeStarTextField) {
 		this.threeStarTextField = threeStarTextField;
+	}
+
+	public JPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	public void setBoardPanel(JPanel boardPanel) {
+		this.boardPanel = boardPanel;
 	}
 	
 	

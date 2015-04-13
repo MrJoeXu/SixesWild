@@ -55,19 +55,21 @@ public class UpdateTileRangeController implements ActionListener {
 			System.out.println(j + ": " + i);
 			j++;
 		}
-		
+		/*
 		application.setLbLevelView(new LBLevelView(application, world, level));
 		application.getFrame().setContentPane(application.getLbLevelView());
 		application.getLbLevelView().setVisible(true);
 		application.getFrame().pack();
 		
+		*/
 		
 		
-		/*
 		application.getLbLevelView().setBoardView(newBoardView);
+		application.getLbLevelView().getBoardPanel().removeAll();
+		application.getLbLevelView().getBoardPanel().add(newBoardView);
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();
-		*/
+		
 		
 		level.printTileRange();
 	}
