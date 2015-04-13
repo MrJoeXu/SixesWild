@@ -25,26 +25,29 @@ public class BoardView extends JPanel {
 	protected ArrayList<SpaceView> grid;
 	protected Board board;
 	protected int dimension;
-
+	protected int titleLength;
 	/**
 	 * 
 	 */
 	public BoardView(Board board) {
 		this.board = board;
 		this.dimension = board.getDimension();
-		this.setPreferredSize(new Dimension(500, 500));
+		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		this.setLayout(new GridLayout(dimension, dimension));
 		
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
 				SpaceView spaceView = new SpaceView(board.getGrid().get(i * dimension + j));
+				titleLength = spaceView.getTileView().getLength();
 				this.add(spaceView);
 			}
 		}
+		
+		this.setPreferredSize(new Dimension(40+9*titleLength, 400));
 	}
-
-	/**
+  
+  /**
 	 * @return the grid
 	 */
 	public ArrayList<SpaceView> getGrid() {
@@ -85,7 +88,5 @@ public class BoardView extends JPanel {
 	public void setDimension(int dimension) {
 		this.dimension = dimension;
 	}
-	
-	
 
 }
