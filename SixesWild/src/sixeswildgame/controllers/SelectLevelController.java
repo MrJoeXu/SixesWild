@@ -4,7 +4,7 @@
 package src.sixeswildgame.controllers;
 
 /**
- * @author Halsey
+ * @author Joe Xu
  *
  */
 public class SelectLevelController {
