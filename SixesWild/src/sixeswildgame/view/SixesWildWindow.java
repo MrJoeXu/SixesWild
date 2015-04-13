@@ -73,75 +73,61 @@ public class SixesWildWindow {
 	private void initializeView() {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
-		frmSixesWild.setBounds(550, 100, 750, 750);
+		frmSixesWild.setBounds(0, 0, 1440, 1024);
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		frmSixesWild.getContentPane().setLayout(gridBagLayout);
+		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
+		frmSixesWild.setLayout(null);
 		
-		JLabel lblSixeswild = new JLabel("Sixes Wild");
-		lblSixeswild.setFont(new Font("Palatino Linotype", Font.BOLD, 65));
-		lblSixeswild.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblSixeswild = new GridBagConstraints();
-		gbc_lblSixeswild.fill = GridBagConstraints.BOTH;
-		gbc_lblSixeswild.insets = new Insets(0, 0, 5, 0);
-		gbc_lblSixeswild.gridx = 0;
-		gbc_lblSixeswild.gridy = 0;
-		frmSixesWild.getContentPane().add(lblSixeswild, gbc_lblSixeswild);
+		JLabel lblSixeswild = new JLabel("SixesWild");
+		lblSixeswild.setFont(new Font("Avenir Next", Font.PLAIN, 78));
+		lblSixeswild.setBounds(543, 180, 354, 109);
+		lblSixeswild.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(lblSixeswild);
 		
-		startButton = new JButton("Start");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 0;
-		gbc_button.gridy = 1;
-		frmSixesWild.getContentPane().add(startButton, gbc_button);
+		startButton = new BetterButton(Color.decode("#D76262"),271,70,10);
+		startButton.setBorderPainted(false);
+		startButton.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		startButton.setText("Start");
+		startButton.setBounds(585, 370, 271, 70);
+		startButton.setForeground(Color.white);
+		frmSixesWild.getContentPane().add(startButton);
 		
-		JLabel label_5 = new JLabel("Presented By:");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_5 = new GridBagConstraints();
-		gbc_label_5.insets = new Insets(0, 0, 5, 0);
-		gbc_label_5.gridx = 0;
-		gbc_label_5.gridy = 2;
-		frmSixesWild.getContentPane().add(label_5, gbc_label_5);
+		JLabel label1 = new JLabel("Presented by:");
+		label1.setBounds(625, 500, 200, 41);
+		label1.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		label1.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label1);
 		
-		JLabel label = new JLabel("Halsey Vandenberg");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 3;
-		frmSixesWild.getContentPane().add(label, gbc_label);
+		JLabel label2 = new JLabel("Metthew Beaulieu");
+		label2.setBounds(640, 600, 170, 27);
+		label2.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label2.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label2);
 		
-		JLabel label_1 = new JLabel("Tiffany Leung");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.insets = new Insets(0, 0, 5, 0);
-		gbc_label_1.gridx = 0;
-		gbc_label_1.gridy = 4;
-		frmSixesWild.getContentPane().add(label_1, gbc_label_1);
+		JLabel label3 = new JLabel("Tiffany Leung");
+		label3.setBounds(662, 630, 170, 27);
+		label3.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label3.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label3);
 		
-		JLabel label_2 = new JLabel("Ziyao Xu \"Joe\"");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.insets = new Insets(0, 0, 5, 0);
-		gbc_label_2.gridx = 0;
-		gbc_label_2.gridy = 5;
-		frmSixesWild.getContentPane().add(label_2, gbc_label_2);
+		JLabel label4 = new JLabel("Jiaqi Ren");
+		label4.setBounds(680, 660, 170, 27);
+		label4.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label4.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label4);
 		
-		JLabel label_3 = new JLabel("Matthew Beaulieu");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_3 = new GridBagConstraints();
-		gbc_label_3.insets = new Insets(0, 0, 5, 0);
-		gbc_label_3.gridx = 0;
-		gbc_label_3.gridy = 6;
-		frmSixesWild.getContentPane().add(label_3, gbc_label_3);
+		JLabel label5 = new JLabel("Halsey Vandenberg");
+		label5.setBounds(635, 690, 180, 27);
+		label5.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label5.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label5);
 		
-		JLabel label_4 = new JLabel("Jiaqi Ren");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_4 = new GridBagConstraints();
-		gbc_label_4.insets = new Insets(0, 0, 5, 0);
-		gbc_label_4.gridx = 0;
-		gbc_label_4.gridy = 7;
-		frmSixesWild.getContentPane().add(label_4, gbc_label_4);
+		JLabel label6 = new JLabel("Ziyao Xu 'Joe'");
+		label6.setBounds(664, 720, 170, 27);
+		label6.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label6.setForeground(Color.decode("#D76262"));
+		frmSixesWild.getContentPane().add(label6);
+		
 	}
 	
 	/**
