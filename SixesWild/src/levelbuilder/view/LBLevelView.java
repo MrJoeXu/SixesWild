@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBGameTypeBackController;
+import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
@@ -30,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSlider;
@@ -44,6 +46,7 @@ public class LBLevelView extends JPanel {
 	protected String typeName = "Unknown";
 	protected BoardView boardView;
 	protected Level level;
+	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -57,6 +60,7 @@ public class LBLevelView extends JPanel {
 		this.application = application;
 		this.world = world;
 		this.level = level;
+		this.tileRangeCheckBoxes = new ArrayList<JCheckBox>();
 		this.setBounds(550, 100, 1250, 750);
 		
 		switch (application.gameType) {
@@ -169,33 +173,43 @@ public class LBLevelView extends JPanel {
 		tileRangePanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JCheckBox rangeOneCheckBox = new JCheckBox("1");
+		rangeOneCheckBox.setSelected(true);
 		rangeOneCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		rangeOneCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
 		rangeOneCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		tileRangeCheckBoxes.add(rangeOneCheckBox);
 		tileRangePanel.add(rangeOneCheckBox);
 		
 		JCheckBox rangeTwoCheckBox = new JCheckBox("2");
+		rangeTwoCheckBox.setSelected(true);
 		rangeTwoCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		rangeTwoCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
 		rangeTwoCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		tileRangeCheckBoxes.add(rangeTwoCheckBox);
 		tileRangePanel.add(rangeTwoCheckBox);
 		
 		JCheckBox rangeThreeCheckBox = new JCheckBox("3");
+		rangeThreeCheckBox.setSelected(true);
 		rangeThreeCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		rangeThreeCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
 		rangeThreeCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
+		tileRangeCheckBoxes.add(rangeThreeCheckBox);
 		tileRangePanel.add(rangeThreeCheckBox);
 		
 		JCheckBox rangeFourCheckBox = new JCheckBox("4");
+		rangeFourCheckBox.setSelected(true);
 		rangeFourCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		rangeFourCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
 		rangeFourCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		tileRangeCheckBoxes.add(rangeFourCheckBox);
 		tileRangePanel.add(rangeFourCheckBox);
 		
 		JCheckBox rangeFiveCheckBox = new JCheckBox("5");
+		rangeFiveCheckBox.setSelected(true);
 		rangeFiveCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		rangeFiveCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
 		rangeFiveCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
+		tileRangeCheckBoxes.add(rangeFiveCheckBox);
 		tileRangePanel.add(rangeFiveCheckBox);
 		
 		JLabel lblNewLabel = new JLabel("Board Dimensions:");
@@ -470,6 +484,7 @@ public class LBLevelView extends JPanel {
 		
 		boardView = new BoardView(level.getBoard());
 		boardView.setPreferredSize(new Dimension(600, 600));
+		boardPanel.removeAll();
 		boardPanel.add(boardView);
 		
 		JPanel boardBtnPanel = new JPanel();
@@ -497,6 +512,9 @@ public class LBLevelView extends JPanel {
 	
 	public void initializeControllers() {
 		backBtn.addActionListener(new LBGameTypeBackController(application, world));
+		for (JCheckBox checkBox : tileRangeCheckBoxes) {
+			checkBox.addActionListener(new UpdateTileRangeController(application, level, checkBox));
+		}
 	}
 
 	/**
@@ -581,6 +599,20 @@ public class LBLevelView extends JPanel {
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+
+	/**
+	 * @return the tileRangeCheckBoxes
+	 */
+	public ArrayList<JCheckBox> getTileRangeCheckBoxes() {
+		return tileRangeCheckBoxes;
+	}
+
+	/**
+	 * @param tileRangeCheckBoxes the tileRangeCheckBoxes to set
+	 */
+	public void setTileRangeCheckBoxes(ArrayList<JCheckBox> tileRangeCheckBoxes) {
+		this.tileRangeCheckBoxes = tileRangeCheckBoxes;
 	}
 
 	/**

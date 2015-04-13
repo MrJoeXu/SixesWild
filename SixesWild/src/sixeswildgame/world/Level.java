@@ -88,11 +88,17 @@ public class Level {
 	}
 	
 	public void initialize() {
+		this.board = new Board(board.dimension);
+		
 		for (int i = 0; i < board.getDimension()*board.getDimension(); i++) {
 			Tile tile = board.getGrid().get(i).getTile();
 			
 			ArrayList<Integer> values = new ArrayList<Integer>();
-			for (int j = 0; j < 5; j++) if (getTileRange()[j]) values.add(j + 1);
+			for (int j = 0; j < 5; j++) 
+				if (getTileRange()[j]) {
+					values.add(j + 1);
+					System.out.println("Added: " + (j+1));
+				}
 			values.add(6);
 			
 			Random rand = new Random();
@@ -100,7 +106,9 @@ public class Level {
 					
 			board.getGrid().get(i).setTile(new Tile(values.get(value), 0,
 					tile.getRow(), tile.getColumn(), tile.isSelected));
+			
 		}
+		
 	}
 	
 	public void hasWon() {
@@ -264,5 +272,12 @@ public class Level {
 	public void setTileRange(boolean[] tileRange) {
 		this.tileRange = tileRange;
 	}
-
+	
+	public void printTileRange() {
+		int j = 1;
+		for (boolean i : tileRange) {
+			System.out.println(j + ": " + i);
+			j++;
+		}
+	}
 }

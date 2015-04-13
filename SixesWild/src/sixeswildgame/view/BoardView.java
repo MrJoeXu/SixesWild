@@ -44,4 +44,48 @@ public class BoardView extends JPanel {
 		}
 	}
 
+	/**
+	 * @return the grid
+	 */
+	public ArrayList<SpaceView> getGrid() {
+		return grid;
+	}
+
+	/**
+	 * @param grid the grid to set
+	 */
+	public void setGrid(ArrayList<SpaceView> grid) {
+		this.grid = grid;
+	}
+
+	/**
+	 * @return the board
+	 */
+	public Board getBoard() {
+		return board;
+	}
+
+	/**
+	 * @param board the board to set
+	 */
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	/**
+	 * @return the dimension
+	 */
+	public int getDimension() {
+		return dimension;
+	}
+
+	/**
+	 * @param dimension the dimension to set
+	 */
+	public void setDimension(int dimension) {
+		this.dimension = dimension;
+	}
+	
+	
+
 }
