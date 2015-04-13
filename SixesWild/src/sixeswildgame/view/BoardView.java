@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import src.sixeswildgame.world.Board;
 
 /**
- * @author Halsey
+ * @author Halsey & JoeXu & Tiffany
  *
  */
 public class BoardView extends JPanel {

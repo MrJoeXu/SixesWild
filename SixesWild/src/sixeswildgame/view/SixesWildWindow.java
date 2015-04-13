@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Font;
+import java.io.InputStream;
 
 import javax.swing.JButton;
 
@@ -155,6 +156,7 @@ public class SixesWildWindow {
 					e.printStackTrace();
 				}
 			}
+			//InputStream is = MyClass.class.getClassLoader().getResourceAsStream(name)
 		});
 	}
 
