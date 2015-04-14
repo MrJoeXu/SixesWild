@@ -25,27 +25,29 @@ public class BoardView extends JPanel {
 	protected ArrayList<SpaceView> grid;
 	protected Board board;
 	protected int dimension;
-	protected int titleLength;
+	
+	protected int tielLength;
+	protected int spaceLength;
 	/**
 	 * 
 	 */
-	public BoardView(Board board) {
+	public BoardView(Board board, int tielLength, int spaceLength) {
 		this.board = board;
 		this.dimension = board.getDimension();
+		this.tielLength = tielLength;
+		this.spaceLength = spaceLength;
 		
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		this.setLayout(new GridLayout(dimension, dimension));
 		
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
-				SpaceView spaceView = new SpaceView(board.getGrid().get(i * dimension + j));
-				titleLength = spaceView.getTileView().getLength();
+				SpaceView spaceView = new SpaceView(board.getGrid().get(i * dimension + j), spaceLength);
+				spaceView.getTileView().setLength(tielLength);
 				this.add(spaceView);
 			}
 		}
 		
-		this.setPreferredSize(new Dimension(450, 450));
-		
+		this.setPreferredSize(new Dimension(40+9*tielLength, 40+9*tielLength));
 	}
   
   /**
@@ -90,12 +92,21 @@ public class BoardView extends JPanel {
 		this.dimension = dimension;
 	}
 
-	public int getTitleLength() {
-		return titleLength;
+
+	public int getSpaceLength() {
+		return spaceLength;
 	}
 
-	public void setTitleLength(int titleLength) {
-		this.titleLength = titleLength;
+	public void setSpaceLength(int spaceLength) {
+		this.spaceLength = spaceLength;
+	}
+
+	public int getTielLength() {
+		return tielLength;
+	}
+
+	public void setTielLength(int tielLength) {
+		this.tielLength = tielLength;
 	}
 
 }

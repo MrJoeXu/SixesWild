@@ -12,7 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import src.sixeswildgame.controllers.LevelBackController;
 import src.sixeswildgame.world.World;
 
 /**
@@ -55,7 +57,7 @@ public class LevelView extends JPanel{
 	}
 
 	private void initializeController() {
-
+		backBtn.addActionListener(new LevelBackController(world, application));
 		
 	}
 
@@ -81,10 +83,73 @@ public class LevelView extends JPanel{
 		backBtn.setBounds(50, 30, 94, 58);
 		this.add(backBtn); 
 		
+		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),180,60,15);
+		resetBoardBtn.setBorderPainted(false);
+		resetBoardBtn.setText("Reset Board: 0");
+		resetBoardBtn.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		resetBoardBtn.setForeground(Color.white);
+		resetBoardBtn.setFocusPainted(false);
+		resetBoardBtn.setBounds(1197, 371, 180,60);
+		this.add(resetBoardBtn); 
 		
-		BoardView boardView = new BoardView(level.getBoard());
+		removeTileBtn = new BetterButton(Color.decode("#45D7B3"),180,60,15);
+		removeTileBtn.setBorderPainted(false);
+		removeTileBtn.setText("Remove Tile: 0");
+		removeTileBtn.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		removeTileBtn.setForeground(Color.white);
+		removeTileBtn.setFocusPainted(false);
+		removeTileBtn.setBounds(1197, 456, 180,60);
+		this.add(removeTileBtn); 
+		
+		swapTilesBtn = new BetterButton(Color.decode("#FF9D8F"),180,60,15);
+		swapTilesBtn.setBorderPainted(false);
+		swapTilesBtn.setText("Swap 2 Tiles: 0");
+		swapTilesBtn.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		swapTilesBtn.setForeground(Color.white);
+		swapTilesBtn.setFocusPainted(false);
+		swapTilesBtn.setBounds(1197, 541, 180,60);
+		this.add(swapTilesBtn); 
+		
+		movesLeft = new BetterLabel(Color.decode("#D76262"),276,58,15);
+		movesLeft.setText("Moves Left: " + level.getMovesLeft());
+		movesLeft.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		movesLeft.setHorizontalAlignment(SwingConstants.CENTER);
+		movesLeft.setForeground(Color.white);
+		movesLeft.setBounds(582, 904, 276,58);
+		this.add(movesLeft); 
+		
+		if (application.getGameType() == 2) {
+			movesLeft.setBounds(370, 904, 276,58);
+			
+			timesLeft = new BetterLabel(Color.decode("#D76262"),276,58,15);
+			timesLeft.setText("Timess Left: " + level.getTime());
+			timesLeft.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+			timesLeft.setHorizontalAlignment(SwingConstants.CENTER);
+			timesLeft.setForeground(Color.white);
+			timesLeft.setBounds(794, 904, 276,58);
+			this.add(timesLeft); 
+		}
+		
+		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"),155,352,40);
+		starPanel.setBounds(73, 313, 155, 352);
+		//this.add(starPanel); 
+		
+		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
+		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
+		
+		oneStarLbl = new JLabel();
+		if (level.getCurrentScore() < level.getOneStarScore()) {
+			oneStarLbl.setIcon(firstGreyStar);
+		}
+		else { oneStarLbl.setIcon(firstYellowStar); }
+		oneStarLbl.setBounds(121, 565, 50, 50);
+		this.add(oneStarLbl);
+		
+		
+		BoardView boardView = new BoardView(level.getBoard(),70,70);
 		boardView.setBounds(370, 149, 700, 700);
 		this.add(boardView);
+		
 		
 	}
 

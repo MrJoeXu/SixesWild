@@ -34,18 +34,35 @@ public class UpdateTileRangeController implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		//level.printTileRange();
+		//System.out.println(application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox));
 		level.getTileRange()[application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
+		//System.out.println(checkBox.isSelected());
 		level.setBoard(new Board(level.getBoard().getDimension()));
 		level.initialize();
-		BoardView newBoardView = new BoardView(level.getBoard());
-
-	
+		BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+		//ArrayList<SpaceView> newGrid = new ArrayList<SpaceView>();
+		int j = 1;
+		for(boolean i : level.getTileRange()) {
+			System.out.println("after initialize(): ");
+			System.out.println(j + ": " + i);
+			j++;
+		}
+		/*
+		application.setLbLevelView(new LBLevelView(application, world, level));
+		application.getFrame().setContentPane(application.getLbLevelView());
+		application.getLbLevelView().setVisible(true);
+		application.getFrame().pack();
+		
+		*/
 		application.getLbLevelView().setBoardView(newBoardView);
 		application.getLbLevelView().getBoardPanel().removeAll();
 		application.getLbLevelView().getBoardPanel().add(newBoardView);
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();
 		
+		
+		//level.printTileRange();
 	}
 
 }

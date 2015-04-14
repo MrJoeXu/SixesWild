@@ -152,7 +152,6 @@ public class LBLevelView extends JPanel {
 		gbc_lvlNameTextField.gridy = 0;
 		levelParametersPanel.add(lvlNameTextField, gbc_lvlNameTextField);
 		lvlNameTextField.setColumns(10);
-		TextPrompt tp = new TextPrompt("Type in level name and enter.", lvlNameTextField);
 		
 		JLabel lblTileRange = new JLabel("Tile Range:");
 		lblTileRange.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
@@ -462,7 +461,7 @@ public class LBLevelView extends JPanel {
 		threeStarTextField.setColumns(10);
 		
 		JPanel previewPanel = new JPanel();
-		previewPanel.setPreferredSize(new Dimension(450, 500));
+		previewPanel.setPreferredSize(new Dimension(500, 500));
 		GridBagConstraints gbc_previewPanel = new GridBagConstraints();
 		gbc_previewPanel.fill = GridBagConstraints.BOTH;
 		gbc_previewPanel.gridx = 2;
@@ -476,7 +475,7 @@ public class LBLevelView extends JPanel {
 		previewPanel.setLayout(gbl_previewPanel);
 		
 		boardPanel = new JPanel();
-		boardPanel.setPreferredSize(new Dimension(450, 450));
+		boardPanel.setPreferredSize(new Dimension(500, 500));
 		GridBagConstraints gbc_boardPanel = new GridBagConstraints();
 		gbc_boardPanel.fill = GridBagConstraints.BOTH;
 		gbc_boardPanel.gridx = 0;
@@ -484,7 +483,7 @@ public class LBLevelView extends JPanel {
 		previewPanel.add(boardPanel, gbc_boardPanel);
 		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		boardView = new BoardView(level.getBoard());
+		boardView = new BoardView(level.getBoard(), 50, 50);
 		boardView.setPreferredSize(new Dimension(450, 450));
 		boardPanel.add(boardView);
 		

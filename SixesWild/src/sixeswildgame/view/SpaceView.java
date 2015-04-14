@@ -20,16 +20,18 @@ public class SpaceView extends JPanel {
 	protected TileView tileView;
 	protected Space space;
 	protected boolean isEnabled;
+	protected int spaceLength;
 
 	/**
 	 * 
 	 */
-	public SpaceView(Space space) {
+	public SpaceView(Space space, int spaceLength) {
 		this.space = space;
 		this.isEnabled = true;
-		setPreferredSize(new Dimension(70, 70));
-		this.tileView = new TileView(space.getTile(), 40);
-		
+		this.spaceLength = spaceLength;
+		setPreferredSize(new Dimension(spaceLength, spaceLength));
+		this.tileView = new TileView(space.getTile(), spaceLength);
+		System.out.print(spaceLength);
 
 		if (!isEnabled()) {
 			setBackground(Color.WHITE);
@@ -60,6 +62,14 @@ public class SpaceView extends JPanel {
 
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+	}
+
+	public int getSpaceLength() {
+		return spaceLength;
+	}
+
+	public void setSpaceLength(int spaceLength) {
+		this.spaceLength = spaceLength;
 	}
 	
 	
