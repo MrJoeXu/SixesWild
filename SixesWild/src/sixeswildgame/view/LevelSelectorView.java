@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.sixeswildgame.controllers.LevelSelectorBackController;
+import src.sixeswildgame.controllers.SelectLevelController;
 import src.sixeswildgame.world.World;
 
 /**
@@ -59,6 +61,10 @@ public class LevelSelectorView extends JPanel{
 
 	private void initializeController() {
 		backBtn.addActionListener(new LevelSelectorBackController(world, application));
+		LevelBtn1.addActionListener(new SelectLevelController(application, world, application.getGameType(), 1));
+		LevelBtn2.addActionListener(new SelectLevelController(application, world, application.getGameType(), 2));
+		LevelBtn3.addActionListener(new SelectLevelController(application, world, application.getGameType(), 3));
+		LevelBtn4.addActionListener(new SelectLevelController(application, world, application.getGameType(), 4));
 		
 	}
 

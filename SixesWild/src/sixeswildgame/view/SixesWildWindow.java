@@ -31,6 +31,7 @@ public class SixesWildWindow {
 	protected JPanel mainMenuView;
 	protected GameTypeView gameTypeView;
 	protected LevelSelectorView levelSelectorView;
+	protected LevelView levelView;
 	
 	//JButtons
 	protected JButton startButton;
@@ -39,6 +40,7 @@ public class SixesWildWindow {
 	protected World world;
 	
 	protected int gameType;
+	protected int gameLevel;
 
 	/**
 	 * Create the application.
@@ -220,6 +222,22 @@ public class SixesWildWindow {
 
 	public void setGameType(int gameType) {
 		this.gameType = gameType;
+	}
+
+	public int getGameLevel() {
+		return gameLevel;
+	}
+
+	public void setGameLevel(int gameLevel) {
+		this.gameLevel = gameLevel;
+	}
+
+	public LevelView getLevelView() {
+		return levelView;
+	}
+
+	public void setLevelView(LevelView levelView) {
+		this.levelView = levelView;
 	}
 
 
