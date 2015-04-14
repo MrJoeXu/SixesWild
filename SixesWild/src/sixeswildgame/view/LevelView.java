@@ -132,7 +132,7 @@ public class LevelView extends JPanel{
 		
 		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"),155,352,40);
 		starPanel.setBounds(73, 313, 155, 352);
-		//this.add(starPanel); 
+		this.add(starPanel); 
 		
 		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
@@ -142,8 +142,8 @@ public class LevelView extends JPanel{
 			oneStarLbl.setIcon(firstGreyStar);
 		}
 		else { oneStarLbl.setIcon(firstYellowStar); }
-		oneStarLbl.setBounds(121, 565, 50, 50);
-		this.add(oneStarLbl);
+		oneStarLbl.setBounds(48, 252, 50, 50);
+		starPanel.add(oneStarLbl);
 		
 		
 		BoardView boardView = new BoardView(level.getBoard(),70,70);

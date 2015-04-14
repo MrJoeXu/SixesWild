@@ -2,13 +2,23 @@ package src.sixeswildgame.view;
 
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.FontFormatException;
 import java.awt.Frame;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.SplashScreen;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.swing.JButton;
@@ -44,12 +54,15 @@ public class SixesWildWindow {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	public SixesWildWindow() {
+	public SixesWildWindow() throws FileNotFoundException, FontFormatException, IOException {
 		initialize();
 	}
 	
-	private void initialize() {
+	private void initialize() throws FileNotFoundException, FontFormatException, IOException {
 		initializeModel();
 		initializeView();
 		initializeControllers();
@@ -66,8 +79,11 @@ public class SixesWildWindow {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	private void initializeView() {
+	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
 		frmSixesWild.setSize(1440, 1020);
@@ -82,7 +98,8 @@ public class SixesWildWindow {
 		this.mainMenuView = (JPanel) frmSixesWild.getContentPane();
 		
 		JLabel lblSixeswild = new JLabel("SixesWild");
-		lblSixeswild.setFont(new Font("Avenir Next", Font.PLAIN, 78));
+		Font f = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 78);
+		lblSixeswild.setFont(f);
 		lblSixeswild.setBounds(543, 261, 354, 109);
 		lblSixeswild.setForeground(Color.decode("#D76262"));
 		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
@@ -92,6 +109,7 @@ public class SixesWildWindow {
 		startButton = new BetterButton(Color.decode("#D76262"),271,70,10);
 		startButton.setBorderPainted(false);
 		startButton.setFocusPainted(false);
+		
 		startButton.setFont(new Font("Avenir Next", Font.PLAIN, 30));
 		startButton.setText("Start");
 		startButton.setBounds(585, 477, 271, 70);
@@ -152,6 +170,7 @@ public class SixesWildWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					loadFont();
 					SixesWildWindow window = new SixesWildWindow();
 					window.frmSixesWild.setVisible(true);
 				} catch (Exception e) {
@@ -239,7 +258,14 @@ public class SixesWildWindow {
 	public void setLevelView(LevelView levelView) {
 		this.levelView = levelView;
 	}
+	
+	public static void loadFont() throws FontFormatException, IOException {
+		Font f = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 12);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("resources/avenir-next-regular.ttf")).deriveFont(Font.PLAIN, 20));
+		ge.getAvailableFontFamilyNames();
 
+	}
 
 	//Getters and Setters
 	
