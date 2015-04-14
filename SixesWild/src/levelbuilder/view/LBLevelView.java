@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSlider;
@@ -152,6 +153,8 @@ public class LBLevelView extends JPanel {
 		gbc_lvlNameTextField.gridy = 0;
 		levelParametersPanel.add(lvlNameTextField, gbc_lvlNameTextField);
 		lvlNameTextField.setColumns(10);
+		TextPrompt namePrompt = new TextPrompt("Enter to name the level.", lvlNameTextField);
+		namePrompt.changeStyle(Font.ITALIC);
 		
 		JLabel lblTileRange = new JLabel("Tile Range:");
 		lblTileRange.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
@@ -245,9 +248,16 @@ public class LBLevelView extends JPanel {
 		dimensionsPanel.add(dimensionsSlider, gbc_dimensionsSlider);
 		dimensionsSlider.setMinimum(3);
 		dimensionsSlider.setMaximum(9);
-		dimensionsSlider.setMajorTickSpacing(1);
+		dimensionsSlider.setMajorTickSpacing(2);
+ 
+        Hashtable<Integer, JLabel> labels =
+                new Hashtable<Integer, JLabel>();
+        for (int i = 3; i <= 9; i++) {
+        	labels.put(i, new JLabel(i + "x" + i));
+        }
+        dimensionsSlider.setLabelTable(labels);
 		
-		JLabel dimensionsLbl = new JLabel("0 x 0");
+		JLabel dimensionsLbl = new JLabel();
 		dimensionsLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_dimensionsLbl = new GridBagConstraints();
 		gbc_dimensionsLbl.fill = GridBagConstraints.HORIZONTAL;
@@ -461,7 +471,7 @@ public class LBLevelView extends JPanel {
 		threeStarTextField.setColumns(10);
 		
 		JPanel previewPanel = new JPanel();
-		previewPanel.setPreferredSize(new Dimension(500, 500));
+		previewPanel.setPreferredSize(new Dimension(490, 500));
 		GridBagConstraints gbc_previewPanel = new GridBagConstraints();
 		gbc_previewPanel.fill = GridBagConstraints.BOTH;
 		gbc_previewPanel.gridx = 2;
@@ -475,7 +485,7 @@ public class LBLevelView extends JPanel {
 		previewPanel.setLayout(gbl_previewPanel);
 		
 		boardPanel = new JPanel();
-		boardPanel.setPreferredSize(new Dimension(500, 500));
+		boardPanel.setPreferredSize(new Dimension(490, 490));
 		GridBagConstraints gbc_boardPanel = new GridBagConstraints();
 		gbc_boardPanel.fill = GridBagConstraints.BOTH;
 		gbc_boardPanel.gridx = 0;
@@ -484,7 +494,7 @@ public class LBLevelView extends JPanel {
 		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		boardView = new BoardView(level.getBoard(), 50, 50);
-		boardView.setPreferredSize(new Dimension(450, 450));
+		boardView.setPreferredSize(new Dimension(490, 490));
 		boardPanel.add(boardView);
 		
 		JPanel boardBtnPanel = new JPanel();
@@ -671,14 +681,21 @@ public class LBLevelView extends JPanel {
 		this.threeStarTextField = threeStarTextField;
 	}
 
+	/**
+	 * @return the boardPanel
+	 */
 	public JPanel getBoardPanel() {
 		return boardPanel;
 	}
 
+	/**
+	 * @param boardPanel the boardPanel to set
+	 */
 	public void setBoardPanel(JPanel boardPanel) {
 		this.boardPanel = boardPanel;
 	}
-	
+
+
 	
 
 }

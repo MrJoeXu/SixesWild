@@ -5,6 +5,8 @@ package src.levelbuilder.controllers;
 
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.world.Level;
@@ -14,7 +16,7 @@ import src.sixeswildgame.world.Level;
  * @author Halsey Vandenberg
  *
  */
-public class UpdateDimensionController {
+public class UpdateDimensionController implements ChangeListener {
 	protected Level level;
 	protected LevelBuilderWindow application;
 	protected JSlider slider;
@@ -26,5 +28,12 @@ public class UpdateDimensionController {
 		this.level = level;
 		this.slider = slider;
 	}
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		
+		
+	}
+	
+	
 
 }

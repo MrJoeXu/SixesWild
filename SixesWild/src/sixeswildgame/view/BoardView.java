@@ -31,10 +31,10 @@ public class BoardView extends JPanel {
 	/**
 	 * 
 	 */
-	public BoardView(Board board, int tielLength, int spaceLength) {
+	public BoardView(Board board, int tileLength, int spaceLength) {
 		this.board = board;
 		this.dimension = board.getDimension();
-		this.tielLength = tielLength;
+		this.tielLength = tileLength;
 		this.spaceLength = spaceLength;
 		
 		this.setLayout(new GridLayout(dimension, dimension));
@@ -42,12 +42,12 @@ public class BoardView extends JPanel {
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
 				SpaceView spaceView = new SpaceView(board.getGrid().get(i * dimension + j), spaceLength);
-				spaceView.getTileView().setLength(tielLength);
+				spaceView.getTileView().setLength(tileLength);
 				this.add(spaceView);
 			}
 		}
 		
-		this.setPreferredSize(new Dimension(40+9*tielLength, 40+9*tielLength));
+		this.setPreferredSize(new Dimension(40+9*tileLength, 40+9*tileLength));
 	}
   
   /**
