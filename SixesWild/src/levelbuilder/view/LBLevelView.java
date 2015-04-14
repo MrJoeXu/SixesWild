@@ -258,6 +258,7 @@ public class LBLevelView extends JPanel {
         dimensionsSlider.setLabelTable(labels);
 		
 		JLabel dimensionsLbl = new JLabel();
+		dimensionsLbl.setText("0 x 0");
 		dimensionsLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_dimensionsLbl = new GridBagConstraints();
 		gbc_dimensionsLbl.fill = GridBagConstraints.HORIZONTAL;
@@ -274,14 +275,47 @@ public class LBLevelView extends JPanel {
 		gbc_lblBo.gridy = 3;
 		levelParametersPanel.add(lblBo, gbc_lblBo);
 		
-		JCheckBox specialMovesCheckBox = new JCheckBox("");
-		specialMovesCheckBox.setHorizontalAlignment(SwingConstants.LEFT);
+		JPanel specialMovesPanel = new JPanel();
+		GridBagConstraints gbc_specialMovesPanel = new GridBagConstraints();
+		gbc_specialMovesPanel.fill = GridBagConstraints.BOTH;
+		gbc_specialMovesPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_specialMovesPanel.gridx = 1;
+		gbc_specialMovesPanel.gridy = 3;
+		levelParametersPanel.add(specialMovesPanel, gbc_specialMovesPanel);
+		GridBagLayout gbl_specialMovesPanel = new GridBagLayout();
+		gbl_specialMovesPanel.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_specialMovesPanel.rowHeights = new int[]{0, 0};
+		gbl_specialMovesPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_specialMovesPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		specialMovesPanel.setLayout(gbl_specialMovesPanel);
+		
+		JCheckBox specialMovesCheckBox = new JCheckBox("Reset Board");
 		GridBagConstraints gbc_specialMovesCheckBox = new GridBagConstraints();
+		gbc_specialMovesCheckBox.insets = new Insets(0, 0, 0, 5);
 		gbc_specialMovesCheckBox.anchor = GridBagConstraints.WEST;
-		gbc_specialMovesCheckBox.insets = new Insets(0, 0, 5, 0);
-		gbc_specialMovesCheckBox.gridx = 1;
-		gbc_specialMovesCheckBox.gridy = 3;
-		levelParametersPanel.add(specialMovesCheckBox, gbc_specialMovesCheckBox);
+		gbc_specialMovesCheckBox.gridx = 0;
+		gbc_specialMovesCheckBox.gridy = 0;
+		specialMovesPanel.add(specialMovesCheckBox, gbc_specialMovesCheckBox);
+		specialMovesCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
+		specialMovesCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		specialMovesCheckBox.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JCheckBox chckbxSwapTiles = new JCheckBox("Swap Tiles");
+		chckbxSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
+		chckbxSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
+		GridBagConstraints gbc_chckbxSwapTiles = new GridBagConstraints();
+		gbc_chckbxSwapTiles.insets = new Insets(0, 0, 0, 5);
+		gbc_chckbxSwapTiles.gridx = 1;
+		gbc_chckbxSwapTiles.gridy = 0;
+		specialMovesPanel.add(chckbxSwapTiles, gbc_chckbxSwapTiles);
+		
+		JCheckBox chckbxRemoveTile = new JCheckBox("Remove Tile");
+		chckbxRemoveTile.setVerticalTextPosition(SwingConstants.BOTTOM);
+		chckbxRemoveTile.setHorizontalTextPosition(SwingConstants.CENTER);
+		GridBagConstraints gbc_chckbxRemoveTile = new GridBagConstraints();
+		gbc_chckbxRemoveTile.gridx = 2;
+		gbc_chckbxRemoveTile.gridy = 0;
+		specialMovesPanel.add(chckbxRemoveTile, gbc_chckbxRemoveTile);
 		
 		JLabel lblBonusFrequency = new JLabel("Bonus Frequency:");
 		lblBonusFrequency.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
