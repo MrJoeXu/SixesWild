@@ -32,6 +32,7 @@ public class Level {
 	
 	protected boolean isLocked;
 	protected boolean[] tileRange;
+	protected boolean[] allowedSpecialMoves;
 	
 	public Level(Board board, int id) {
 		this.board = board;
@@ -49,7 +50,10 @@ public class Level {
 		for (int i = 0; i < 5; i++) {
 			tileRange[i] = true;
 		}
-		
+		this.allowedSpecialMoves = new boolean[3];
+		for (int i = 0; i < 3; i++) {
+			allowedSpecialMoves[i] = true;
+		}
 	}
 	
 	/**

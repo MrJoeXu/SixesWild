@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
 
 import src.levelbuilder.view.LevelBuilderWindow;
+import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
 /**
@@ -33,7 +35,16 @@ public class ToggleSpecialMovesController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		level.getTileRange()[application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
+		level.setBoard(new Board(level.getBoard().getDimension()));
+		level.initialize();
+		BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+		
+		application.getLbLevelView().setBoardView(newBoardView);
+		application.getLbLevelView().getBoardPanel().removeAll();
+		application.getLbLevelView().getBoardPanel().add(newBoardView);
+		application.getLbLevelView().repaint();
+		application.getFrame().pack();
 		
 	}
 

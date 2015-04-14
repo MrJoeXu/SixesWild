@@ -123,7 +123,7 @@ public class LBLevelView extends JPanel {
 		levelParametersPanel.setPreferredSize(new Dimension(500, 500));
 		GridBagConstraints gbc_levelParametersPanel = new GridBagConstraints();
 		gbc_levelParametersPanel.gridwidth = 2;
-		gbc_levelParametersPanel.insets = new Insets(0, 0, 0, 5);
+		gbc_levelParametersPanel.insets = new Insets(0, 0, 5, 5);
 		gbc_levelParametersPanel.fill = GridBagConstraints.BOTH;
 		gbc_levelParametersPanel.gridx = 0;
 		gbc_levelParametersPanel.gridy = 1;
@@ -473,23 +473,33 @@ public class LBLevelView extends JPanel {
 		JPanel previewPanel = new JPanel();
 		previewPanel.setPreferredSize(new Dimension(490, 500));
 		GridBagConstraints gbc_previewPanel = new GridBagConstraints();
+		gbc_previewPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_previewPanel.fill = GridBagConstraints.BOTH;
 		gbc_previewPanel.gridx = 2;
 		gbc_previewPanel.gridy = 1;
 		add(previewPanel, gbc_previewPanel);
 		GridBagLayout gbl_previewPanel = new GridBagLayout();
 		gbl_previewPanel.columnWidths = new int[]{0, 0};
-		gbl_previewPanel.rowHeights = new int[]{0, 0, 0};
+		gbl_previewPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_previewPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_previewPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_previewPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		previewPanel.setLayout(gbl_previewPanel);
+		
+		JLabel levelNameLbl = new JLabel("\"Level Name\"");
+		levelNameLbl.setFont(new Font("Palatino Linotype", Font.PLAIN, 18));
+		GridBagConstraints gbc_levelNameLbl = new GridBagConstraints();
+		gbc_levelNameLbl.insets = new Insets(0, 0, 5, 0);
+		gbc_levelNameLbl.gridx = 0;
+		gbc_levelNameLbl.gridy = 0;
+		previewPanel.add(levelNameLbl, gbc_levelNameLbl);
 		
 		boardPanel = new JPanel();
 		boardPanel.setPreferredSize(new Dimension(490, 490));
 		GridBagConstraints gbc_boardPanel = new GridBagConstraints();
+		gbc_boardPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_boardPanel.fill = GridBagConstraints.BOTH;
 		gbc_boardPanel.gridx = 0;
-		gbc_boardPanel.gridy = 0;
+		gbc_boardPanel.gridy = 1;
 		previewPanel.add(boardPanel, gbc_boardPanel);
 		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -501,7 +511,7 @@ public class LBLevelView extends JPanel {
 		GridBagConstraints gbc_boardBtnPanel = new GridBagConstraints();
 		gbc_boardBtnPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_boardBtnPanel.gridx = 0;
-		gbc_boardBtnPanel.gridy = 1;
+		gbc_boardBtnPanel.gridy = 2;
 		previewPanel.add(boardBtnPanel, gbc_boardBtnPanel);
 		
 		JButton redoBtn = new JButton("Redo");
