@@ -35,7 +35,7 @@ public class ToggleSpecialMovesController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		level.getTileRange()[application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
+		level.getTileRange()[application.getLbLevelView().getSpecialMovesCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
 		level.setBoard(new Board(level.getBoard().getDimension()));
 		level.initialize();
 		BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);

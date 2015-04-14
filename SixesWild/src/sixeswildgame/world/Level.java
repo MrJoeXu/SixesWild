@@ -16,7 +16,9 @@ public class Level {
 	
 	protected Board board;
 	
-	protected ArrayList<SpecialMove> specialMoves;
+	protected int resetBoardMoves;
+	protected int swapTwoTilesMoves;
+	protected int removeTileMoves;
 	
 	//ints
 	protected int id;
@@ -37,7 +39,9 @@ public class Level {
 	public Level(Board board, int id) {
 		this.board = board;
 		this.id = id;
-		this.specialMoves = new ArrayList<SpecialMove>();
+		this.resetBoardMoves = 0;
+		this.swapTwoTilesMoves = 0;
+		this.removeTileMoves = 0;
 		this.currentScore = 0;
 		this.highScore = 0;
 		this.oneStarScore = 0;
@@ -56,9 +60,13 @@ public class Level {
 		}
 	}
 	
+	
+	
 	/**
 	 * @param board
-	 * @param specialMoves
+	 * @param resetBoardMoves
+	 * @param swapTwoTilesMoves
+	 * @param removeTileMoves
 	 * @param id
 	 * @param currentScore
 	 * @param highScore
@@ -70,14 +78,18 @@ public class Level {
 	 * @param time
 	 * @param isLocked
 	 * @param tileRange
+	 * @param allowedSpecialMoves
 	 */
-	public Level(Board board, ArrayList<SpecialMove> specialMoves, int id,
-			int currentScore, int highScore, int oneStarScore,
-			int twoStarScore, int threeStarScore, int movesLeft,
-			int bonusFrequency, Timer time, boolean isLocked,
-			boolean[] tileRange) {
+	public Level(Board board, int resetBoardMoves, int swapTwoTilesMoves,
+			int removeTileMoves, int id, int currentScore, int highScore,
+			int oneStarScore, int twoStarScore, int threeStarScore,
+			int movesLeft, int bonusFrequency, Timer time, boolean isLocked,
+			boolean[] tileRange, boolean[] allowedSpecialMoves) {
+		super();
 		this.board = board;
-		this.specialMoves = specialMoves;
+		this.resetBoardMoves = resetBoardMoves;
+		this.swapTwoTilesMoves = swapTwoTilesMoves;
+		this.removeTileMoves = removeTileMoves;
 		this.id = id;
 		this.currentScore = currentScore;
 		this.highScore = highScore;
@@ -89,8 +101,9 @@ public class Level {
 		this.time = time;
 		this.isLocked = isLocked;
 		this.tileRange = tileRange;
+		this.allowedSpecialMoves = allowedSpecialMoves;
 	}
-	
+
 	public void initialize() {
 		this.board = new Board(board.dimension);
 		
@@ -130,18 +143,6 @@ public class Level {
 	 */
 	public void setBoard(Board board) {
 		this.board = board;
-	}
-	/**
-	 * @return the specialMoves
-	 */
-	public ArrayList<SpecialMove> getSpecialMoves() {
-		return specialMoves;
-	}
-	/**
-	 * @param specialMoves the specialMoves to set
-	 */
-	public void setSpecialMoves(ArrayList<SpecialMove> specialMoves) {
-		this.specialMoves = specialMoves;
 	}
 	/**
 	 * @return the id
@@ -275,6 +276,79 @@ public class Level {
 	public void setTileRange(boolean[] tileRange) {
 		this.tileRange = tileRange;
 	}
-	
 
+
+
+	/**
+	 * @return the resetBoardMoves
+	 */
+	public int getResetBoardMoves() {
+		return resetBoardMoves;
+	}
+
+
+
+	/**
+	 * @param resetBoardMoves the resetBoardMoves to set
+	 */
+	public void setResetBoardMoves(int resetBoardMoves) {
+		this.resetBoardMoves = resetBoardMoves;
+	}
+
+
+
+	/**
+	 * @return the swapTwoTilesMoves
+	 */
+	public int getSwapTwoTilesMoves() {
+		return swapTwoTilesMoves;
+	}
+
+
+
+	/**
+	 * @param swapTwoTilesMoves the swapTwoTilesMoves to set
+	 */
+	public void setSwapTwoTilesMoves(int swapTwoTilesMoves) {
+		this.swapTwoTilesMoves = swapTwoTilesMoves;
+	}
+
+
+
+	/**
+	 * @return the removeTileMoves
+	 */
+	public int getRemoveTileMoves() {
+		return removeTileMoves;
+	}
+
+
+
+	/**
+	 * @param removeTileMoves the removeTileMoves to set
+	 */
+	public void setRemoveTileMoves(int removeTileMoves) {
+		this.removeTileMoves = removeTileMoves;
+	}
+
+
+
+	/**
+	 * @return the allowedSpecialMoves
+	 */
+	public boolean[] getAllowedSpecialMoves() {
+		return allowedSpecialMoves;
+	}
+
+
+
+	/**
+	 * @param allowedSpecialMoves the allowedSpecialMoves to set
+	 */
+	public void setAllowedSpecialMoves(boolean[] allowedSpecialMoves) {
+		this.allowedSpecialMoves = allowedSpecialMoves;
+	}
+	
+	
+	
 }

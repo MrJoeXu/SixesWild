@@ -48,6 +48,7 @@ public class LBLevelView extends JPanel {
 	protected BoardView boardView;
 	protected Level level;
 	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
+	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -63,6 +64,7 @@ public class LBLevelView extends JPanel {
 		this.world = world;
 		this.level = level;
 		this.tileRangeCheckBoxes = new ArrayList<JCheckBox>();
+		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
 		this.setBounds(550, 100, 1250, 750);
 		
 		switch (application.gameType) {
@@ -289,18 +291,21 @@ public class LBLevelView extends JPanel {
 		gbl_specialMovesPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		specialMovesPanel.setLayout(gbl_specialMovesPanel);
 		
-		JCheckBox specialMovesCheckBox = new JCheckBox("Reset Board");
+		JCheckBox chckbxResetBoard = new JCheckBox("Reset Board");
+		chckbxResetBoard.setSelected(true);
 		GridBagConstraints gbc_specialMovesCheckBox = new GridBagConstraints();
 		gbc_specialMovesCheckBox.insets = new Insets(0, 0, 0, 5);
 		gbc_specialMovesCheckBox.anchor = GridBagConstraints.WEST;
 		gbc_specialMovesCheckBox.gridx = 0;
 		gbc_specialMovesCheckBox.gridy = 0;
-		specialMovesPanel.add(specialMovesCheckBox, gbc_specialMovesCheckBox);
-		specialMovesCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
-		specialMovesCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
-		specialMovesCheckBox.setHorizontalAlignment(SwingConstants.LEFT);
+		specialMovesPanel.add(chckbxResetBoard, gbc_specialMovesCheckBox);
+		chckbxResetBoard.setHorizontalTextPosition(SwingConstants.CENTER);
+		chckbxResetBoard.setVerticalTextPosition(SwingConstants.BOTTOM);
+		chckbxResetBoard.setHorizontalAlignment(SwingConstants.LEFT);
+		specialMovesCheckBoxes.add(chckbxResetBoard);
 		
 		JCheckBox chckbxSwapTiles = new JCheckBox("Swap Tiles");
+		chckbxSwapTiles.setSelected(true);
 		chckbxSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
 		chckbxSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_chckbxSwapTiles = new GridBagConstraints();
@@ -308,14 +313,17 @@ public class LBLevelView extends JPanel {
 		gbc_chckbxSwapTiles.gridx = 1;
 		gbc_chckbxSwapTiles.gridy = 0;
 		specialMovesPanel.add(chckbxSwapTiles, gbc_chckbxSwapTiles);
+		specialMovesCheckBoxes.add(chckbxSwapTiles);
 		
 		JCheckBox chckbxRemoveTile = new JCheckBox("Remove Tile");
+		chckbxRemoveTile.setSelected(true);
 		chckbxRemoveTile.setVerticalTextPosition(SwingConstants.BOTTOM);
 		chckbxRemoveTile.setHorizontalTextPosition(SwingConstants.CENTER);
 		GridBagConstraints gbc_chckbxRemoveTile = new GridBagConstraints();
 		gbc_chckbxRemoveTile.gridx = 2;
 		gbc_chckbxRemoveTile.gridy = 0;
 		specialMovesPanel.add(chckbxRemoveTile, gbc_chckbxRemoveTile);
+		specialMovesCheckBoxes.add(chckbxRemoveTile);
 		
 		JLabel lblBonusFrequency = new JLabel("Bonus Frequency:");
 		lblBonusFrequency.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
@@ -737,6 +745,21 @@ public class LBLevelView extends JPanel {
 	 */
 	public void setBoardPanel(JPanel boardPanel) {
 		this.boardPanel = boardPanel;
+	}
+
+	/**
+	 * @return the specialMovesCheckBoxes
+	 */
+	public ArrayList<JCheckBox> getSpecialMovesCheckBoxes() {
+		return specialMovesCheckBoxes;
+	}
+
+	/**
+	 * @param specialMovesCheckBoxes the specialMovesCheckBoxes to set
+	 */
+	public void setSpecialMovesCheckBoxes(
+			ArrayList<JCheckBox> specialMovesCheckBoxes) {
+		this.specialMovesCheckBoxes = specialMovesCheckBoxes;
 	}
 
 
