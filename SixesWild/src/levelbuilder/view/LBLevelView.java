@@ -481,7 +481,7 @@ public class LBLevelView extends JPanel {
 		gbc_boardPanel.gridx = 0;
 		gbc_boardPanel.gridy = 0;
 		previewPanel.add(boardPanel, gbc_boardPanel);
-		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		boardPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		boardView = new BoardView(level.getBoard());
 		boardView.setPreferredSize(new Dimension(450, 450));
