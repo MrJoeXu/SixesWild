@@ -136,6 +136,15 @@ public class LevelView extends JPanel{
 		
 		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
+		ImageIcon secondYellowStar = new ImageIcon("resources/Star 2.png");
+		
+		oneStarLbl = new JLabel();
+		if (level.getCurrentScore() < level.getOneStarScore()) {
+			oneStarLbl.setIcon(firstGreyStar);
+		}
+		else { oneStarLbl.setIcon(firstYellowStar); }
+		oneStarLbl.setBounds(48, 252, 50, 50);
+		starPanel.add(oneStarLbl);
 		
 		oneStarLbl = new JLabel();
 		if (level.getCurrentScore() < level.getOneStarScore()) {
@@ -146,7 +155,9 @@ public class LevelView extends JPanel{
 		starPanel.add(oneStarLbl);
 		
 		
-		BoardView boardView = new BoardView(level.getBoard(),70,70);
+		BoardView boardView = new BoardView(level.getBoard(),20,20);
+		boardView.setSpaceLength((700 - 4 * boardView.getDimension())/boardView.getDimension());
+		boardView.setTielLength((700 - 4 * boardView.getDimension())/boardView.getDimension());
 		boardView.setBounds(370, 149, 700, 700);
 		this.add(boardView);
 		
