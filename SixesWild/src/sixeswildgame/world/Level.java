@@ -97,7 +97,6 @@ public class Level {
 			for (int j = 0; j < 5; j++) 
 				if (getTileRange()[j]) {
 					values.add(j + 1);
-					System.out.println("Added: " + (j+1));
 				}
 			values.add(6);
 			
@@ -273,11 +272,5 @@ public class Level {
 		this.tileRange = tileRange;
 	}
 	
-	public void printTileRange() {
-		int j = 1;
-		for (boolean i : tileRange) {
-			System.out.println(j + ": " + i);
-			j++;
-		}
-	}
+
 }

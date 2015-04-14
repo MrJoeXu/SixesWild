@@ -44,7 +44,8 @@ public class BoardView extends JPanel {
 			}
 		}
 		
-		this.setPreferredSize(new Dimension(40+9*titleLength, 400));
+		this.setPreferredSize(new Dimension(450, 450));
+		
 	}
   
   /**
