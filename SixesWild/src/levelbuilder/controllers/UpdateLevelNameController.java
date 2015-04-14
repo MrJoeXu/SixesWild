@@ -34,20 +34,21 @@ public class UpdateLevelNameController implements DocumentListener {
 
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		changeLvlNameTitle();
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		changeLvlNameTitle();
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		changeLvlNameTitle();
+	}
+	
+	public void changeLvlNameTitle() {
+		application.getLbLevelView().getLevelNameLbl().setText("\"" + textField.getText() + "\"");
 	}
 
 }

@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBGameTypeBackController;
+import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.world.Level;
@@ -49,10 +50,12 @@ public class LBLevelView extends JPanel {
 	protected Level level;
 	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
+	protected JLabel levelNameLbl;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
 	private JTextField threeStarTextField;
+	
 	protected JPanel boardPanel;
 
 	/**
@@ -527,7 +530,7 @@ public class LBLevelView extends JPanel {
 		gbl_previewPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		previewPanel.setLayout(gbl_previewPanel);
 		
-		JLabel levelNameLbl = new JLabel("\"Level Name\"");
+		levelNameLbl = new JLabel("\"Level Name\"");
 		levelNameLbl.setFont(new Font("Palatino Linotype", Font.PLAIN, 18));
 		GridBagConstraints gbc_levelNameLbl = new GridBagConstraints();
 		gbc_levelNameLbl.insets = new Insets(0, 0, 5, 0);
@@ -577,6 +580,7 @@ public class LBLevelView extends JPanel {
 		for (JCheckBox checkBox : tileRangeCheckBoxes) {
 			checkBox.addActionListener(new UpdateTileRangeController(application, level, checkBox));
 		}
+		lvlNameTextField.getDocument().addDocumentListener(new UpdateLevelNameController(application, level, lvlNameTextField));
 	}
 
 	/**
@@ -760,6 +764,20 @@ public class LBLevelView extends JPanel {
 	public void setSpecialMovesCheckBoxes(
 			ArrayList<JCheckBox> specialMovesCheckBoxes) {
 		this.specialMovesCheckBoxes = specialMovesCheckBoxes;
+	}
+
+	/**
+	 * @return the levelNameLbl
+	 */
+	public JLabel getLevelNameLbl() {
+		return levelNameLbl;
+	}
+
+	/**
+	 * @param levelNameLbl the levelNameLbl to set
+	 */
+	public void setLevelNameLbl(JLabel levelNameLbl) {
+		this.levelNameLbl = levelNameLbl;
 	}
 
 
