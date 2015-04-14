@@ -4,6 +4,7 @@
 package src.sixeswildgame.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.logging.Level;
 
@@ -37,6 +38,9 @@ public class LevelView extends JPanel{
 	protected JButton removeTileBtn;
 	protected JButton swapTilesBtn;
 	protected JButton backBtn;
+	
+	protected int tileLength;
+	protected int spaceLength;
 	
 	protected World world;
 	protected SixesWildWindow application;
@@ -136,7 +140,7 @@ public class LevelView extends JPanel{
 		
 		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
-		ImageIcon secondYellowStar = new ImageIcon("resources/Star 2.png");
+		ImageIcon YellowStar = new ImageIcon("resources/Star1g.png");
 		
 		oneStarLbl = new JLabel();
 		if (level.getCurrentScore() < level.getOneStarScore()) {
@@ -146,22 +150,133 @@ public class LevelView extends JPanel{
 		oneStarLbl.setBounds(48, 252, 50, 50);
 		starPanel.add(oneStarLbl);
 		
-		oneStarLbl = new JLabel();
-		if (level.getCurrentScore() < level.getOneStarScore()) {
-			oneStarLbl.setIcon(firstGreyStar);
-		}
-		else { oneStarLbl.setIcon(firstYellowStar); }
-		oneStarLbl.setBounds(48, 252, 50, 50);
-		starPanel.add(oneStarLbl);
-		
-		
-		BoardView boardView = new BoardView(level.getBoard(),20,20);
-		boardView.setSpaceLength((700 - 4 * boardView.getDimension())/boardView.getDimension());
-		boardView.setTielLength((700 - 4 * boardView.getDimension())/boardView.getDimension());
-		boardView.setBounds(370, 149, 700, 700);
+		BoardView boardView = new BoardView(level.getBoard(),70,70);
+		int boardLength = 70*(boardView.getDimension()) + 3 * (boardView.getDimension());
+		boardView.setPreferredSize(new Dimension (boardLength, boardLength));
+		boardView.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(boardView);
 		
 		
+	}
+
+	public BoardView getBoardView() {
+		return boardView;
+	}
+
+	public void setBoardView(BoardView boardView) {
+		this.boardView = boardView;
+	}
+
+	public JLabel getScoreLbl() {
+		return scoreLbl;
+	}
+
+	public void setScoreLbl(JLabel scoreLbl) {
+		this.scoreLbl = scoreLbl;
+	}
+
+	public JLabel getTimerLbl() {
+		return timerLbl;
+	}
+
+	public void setTimerLbl(JLabel timerLbl) {
+		this.timerLbl = timerLbl;
+	}
+
+	public JLabel getOneStarLbl() {
+		return oneStarLbl;
+	}
+
+	public void setOneStarLbl(JLabel oneStarLbl) {
+		this.oneStarLbl = oneStarLbl;
+	}
+
+	public JLabel getTwoStarLbl() {
+		return twoStarLbl;
+	}
+
+	public void setTwoStarLbl(JLabel twoStarLbl) {
+		this.twoStarLbl = twoStarLbl;
+	}
+
+	public JLabel getThreeStarLbl() {
+		return threeStarLbl;
+	}
+
+	public void setThreeStarLbl(JLabel threeStarLbl) {
+		this.threeStarLbl = threeStarLbl;
+	}
+
+	public JLabel getMovesLeft() {
+		return movesLeft;
+	}
+
+	public void setMovesLeft(JLabel movesLeft) {
+		this.movesLeft = movesLeft;
+	}
+
+	public JLabel getTimesLeft() {
+		return timesLeft;
+	}
+
+	public void setTimesLeft(JLabel timesLeft) {
+		this.timesLeft = timesLeft;
+	}
+
+	public JButton getResetBoardBtn() {
+		return resetBoardBtn;
+	}
+
+	public void setResetBoardBtn(JButton resetBoardBtn) {
+		this.resetBoardBtn = resetBoardBtn;
+	}
+
+	public JButton getRemoveTileBtn() {
+		return removeTileBtn;
+	}
+
+	public void setRemoveTileBtn(JButton removeTileBtn) {
+		this.removeTileBtn = removeTileBtn;
+	}
+
+	public JButton getSwapTilesBtn() {
+		return swapTilesBtn;
+	}
+
+	public void setSwapTilesBtn(JButton swapTilesBtn) {
+		this.swapTilesBtn = swapTilesBtn;
+	}
+
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
+	}
+
+	public int getTileLength() {
+		return tileLength;
+	}
+
+	public void setTileLength(int tileLength) {
+		this.tileLength = tileLength;
+	}
+
+	public int getSpaceLength() {
+		return spaceLength;
+	}
+
+	public void setSpaceLength(int spaceLength) {
+		this.spaceLength = spaceLength;
+	}
+
+	public SixesWildWindow getApplication() {
+		return application;
+	}
+
+	public void setApplication(SixesWildWindow application) {
+		this.application = application;
 	}
 
 }
