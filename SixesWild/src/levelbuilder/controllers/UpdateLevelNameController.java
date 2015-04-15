@@ -14,7 +14,6 @@ import src.sixeswildgame.world.Level;
 
 /**
  * @author Tiffany Leung
- * @author Halsey Vandenberg
  *
  */
 public class UpdateLevelNameController implements DocumentListener {

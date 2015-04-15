@@ -15,7 +15,7 @@ import src.sixeswildgame.world.Tile;
 import src.sixeswildgame.world.World;
 
 /**
- * @author Hvandenberg
+ * @author Halsey Vandenberg
  *
  */
 public class SelectLBGameTypeController implements ActionListener {
