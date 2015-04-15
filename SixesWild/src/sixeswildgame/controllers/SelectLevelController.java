@@ -35,7 +35,7 @@ public class SelectLevelController implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		application.setGameType(gameType);
 		application.setGameLevel(gameLevel);
-		Level level = new Level(new Board(3), 0);
+		Level level = new Level(new Board(5), 0);
 		level.initialize();
 		application.setLevelView(new LevelView(application, world, level));
 		application.getLevelView().setPreferredSize(new Dimension(1440,1020));

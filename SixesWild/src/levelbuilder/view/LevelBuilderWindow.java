@@ -202,7 +202,7 @@ public class LevelBuilderWindow {
 	 */
 	public static void main(String[] args) {
 		
-		/*JWindow splash = new JWindow();
+		JWindow splash = new JWindow();
 	    BufferedImage splashScreenImg;
 		try {
 			splashScreenImg = ImageIO.read(new File("resources/lbSplashScreen.png"));
@@ -224,7 +224,7 @@ public class LevelBuilderWindow {
 	        e.printStackTrace();
 	    }
 	    splash.setVisible(false);
-	    splash.dispose();*/
+	    splash.dispose();
         
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

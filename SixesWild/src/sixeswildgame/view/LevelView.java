@@ -39,9 +39,6 @@ public class LevelView extends JPanel{
 	protected JButton swapTilesBtn;
 	protected JButton backBtn;
 	
-	protected int tileLength;
-	protected int spaceLength;
-	
 	protected World world;
 	protected SixesWildWindow application;
 	protected src.sixeswildgame.world.Level level;
@@ -135,148 +132,32 @@ public class LevelView extends JPanel{
 		}
 		
 		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"),155,352,40);
+		starPanel.setLayout(null);
 		starPanel.setBounds(73, 313, 155, 352);
 		this.add(starPanel); 
 		
 		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
-		ImageIcon YellowStar = new ImageIcon("resources/Star1g.png");
 		
 		oneStarLbl = new JLabel();
 		if (level.getCurrentScore() < level.getOneStarScore()) {
 			oneStarLbl.setIcon(firstGreyStar);
 		}
 		else { oneStarLbl.setIcon(firstYellowStar); }
-		oneStarLbl.setBounds(48, 252, 50, 50);
-		starPanel.add(oneStarLbl);
+		oneStarLbl.setBounds(121, 565, 50, 50);
+		this.add(oneStarLbl);
+		
 		
 		BoardView boardView = new BoardView(level.getBoard(),70,70);
-		int boardLength = 70*(boardView.getDimension()) + 3 * (boardView.getDimension());
-		boardView.setPreferredSize(new Dimension (boardLength, boardLength));
-		boardView.setAlignmentX(CENTER_ALIGNMENT);
+		int length = boardView.getDimension()*boardView.getTielLength() + 5 * boardView.getDimension();
+		int panelX = (1440 - length)/2;
+		System.out.print(panelX);
+		int panelY = (1020 - length)/2;
+		System.out.print(panelY);
+		boardView.setBounds(panelX, panelY, length, length);
 		this.add(boardView);
 		
 		
-	}
-
-	public BoardView getBoardView() {
-		return boardView;
-	}
-
-	public void setBoardView(BoardView boardView) {
-		this.boardView = boardView;
-	}
-
-	public JLabel getScoreLbl() {
-		return scoreLbl;
-	}
-
-	public void setScoreLbl(JLabel scoreLbl) {
-		this.scoreLbl = scoreLbl;
-	}
-
-	public JLabel getTimerLbl() {
-		return timerLbl;
-	}
-
-	public void setTimerLbl(JLabel timerLbl) {
-		this.timerLbl = timerLbl;
-	}
-
-	public JLabel getOneStarLbl() {
-		return oneStarLbl;
-	}
-
-	public void setOneStarLbl(JLabel oneStarLbl) {
-		this.oneStarLbl = oneStarLbl;
-	}
-
-	public JLabel getTwoStarLbl() {
-		return twoStarLbl;
-	}
-
-	public void setTwoStarLbl(JLabel twoStarLbl) {
-		this.twoStarLbl = twoStarLbl;
-	}
-
-	public JLabel getThreeStarLbl() {
-		return threeStarLbl;
-	}
-
-	public void setThreeStarLbl(JLabel threeStarLbl) {
-		this.threeStarLbl = threeStarLbl;
-	}
-
-	public JLabel getMovesLeft() {
-		return movesLeft;
-	}
-
-	public void setMovesLeft(JLabel movesLeft) {
-		this.movesLeft = movesLeft;
-	}
-
-	public JLabel getTimesLeft() {
-		return timesLeft;
-	}
-
-	public void setTimesLeft(JLabel timesLeft) {
-		this.timesLeft = timesLeft;
-	}
-
-	public JButton getResetBoardBtn() {
-		return resetBoardBtn;
-	}
-
-	public void setResetBoardBtn(JButton resetBoardBtn) {
-		this.resetBoardBtn = resetBoardBtn;
-	}
-
-	public JButton getRemoveTileBtn() {
-		return removeTileBtn;
-	}
-
-	public void setRemoveTileBtn(JButton removeTileBtn) {
-		this.removeTileBtn = removeTileBtn;
-	}
-
-	public JButton getSwapTilesBtn() {
-		return swapTilesBtn;
-	}
-
-	public void setSwapTilesBtn(JButton swapTilesBtn) {
-		this.swapTilesBtn = swapTilesBtn;
-	}
-
-	public JButton getBackBtn() {
-		return backBtn;
-	}
-
-	public void setBackBtn(JButton backBtn) {
-		this.backBtn = backBtn;
-	}
-
-	public int getTileLength() {
-		return tileLength;
-	}
-
-	public void setTileLength(int tileLength) {
-		this.tileLength = tileLength;
-	}
-
-	public int getSpaceLength() {
-		return spaceLength;
-	}
-
-	public void setSpaceLength(int spaceLength) {
-		this.spaceLength = spaceLength;
-	}
-
-	public SixesWildWindow getApplication() {
-		return application;
-	}
-
-	public void setApplication(SixesWildWindow application) {
-		this.application = application;
 	}
 
 }

@@ -3,11 +3,14 @@ package src.sixeswildgame.view;
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FontFormatException;
 import java.awt.Frame;
 import java.awt.Font;
@@ -15,6 +18,8 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.SplashScreen;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -167,10 +172,33 @@ public class SixesWildWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		JWindow splash = new JWindow();
+	    BufferedImage splashScreenImg;
+		try {
+			splashScreenImg = ImageIO.read(new File("resources/swSplashScreen.png"));
+			splash.getContentPane().add(new JLabel(new ImageIcon(splashScreenImg)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    int width = 800;
+	    int height = 800;
+	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (screen.width - width) / 2;
+	    int y = (screen.height - height) / 2;
+	    splash.setBounds(x, y, width, height);
+	    splash.setVisible(true);
+	    try {
+	        Thread.sleep(1000);
+	    } catch (InterruptedException e) {
+	        e.printStackTrace();
+	    }
+	    splash.setVisible(false);
+	    splash.dispose();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loadFont();
 					SixesWildWindow window = new SixesWildWindow();
 					window.frmSixesWild.setVisible(true);
 				} catch (Exception e) {
@@ -257,14 +285,6 @@ public class SixesWildWindow {
 
 	public void setLevelView(LevelView levelView) {
 		this.levelView = levelView;
-	}
-	
-	public static void loadFont() throws FontFormatException, IOException {
-		Font f = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 12);
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("resources/avenir-next-regular.ttf")).deriveFont(Font.PLAIN, 20));
-		ge.getAvailableFontFamilyNames();
-
 	}
 
 	//Getters and Setters
