@@ -175,7 +175,7 @@ public class LBLevelView extends JPanel {
 		Font f20 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 20);
 		redoBtn.setFont(f20);
 		redoBtn.setForeground(Color.white);
-		redoBtn.setBounds(948, 925, 100, 46);
+		redoBtn.setBounds(930, 925, 100, 46);
 		add(redoBtn);
 		
 		BetterButton undoBtn = new BetterButton(Color.decode("#A38F85"), 100, 46, 10);
@@ -388,6 +388,49 @@ public class LBLevelView extends JPanel {
 		boardView.setPreferredSize(new Dimension(490, 490));
 		boardPanel.add(boardView);
 		
+		Icon starIcon = new ImageIcon("resources/lbStar1.png");
+		
+		JLabel starLb1 = new JLabel();
+		starLb1.setIcon(starIcon);
+		starLb1.setBounds(861, 780, 70, 70);
+		add(starLb1);
+		
+		JLabel starLb2 = new JLabel();
+		starLb2.setIcon(starIcon);
+		starLb2.setBounds(1039, 780, 70, 70);
+		add(starLb2);
+		
+		JLabel starLb3 = new JLabel();
+		starLb3.setIcon(starIcon);
+		starLb3.setBounds(1214, 780, 70, 70);
+		add(starLb3);
+		
+		oneStarTextField = new JTextField();
+		oneStarTextField.setBounds(833, 860, 126, 42);
+		oneStarTextField.setBorder(null);
+		oneStarTextField.setText("1111");
+		oneStarTextField.setFont(f20);
+		oneStarTextField.setForeground(Color.decode("#A38F85"));
+		oneStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		this.add(oneStarTextField);
+		
+		twoStarTextField = new JTextField();
+		twoStarTextField.setBounds(1009, 860, 126, 42);
+		twoStarTextField.setBorder(null);
+		twoStarTextField.setText("2222");
+		twoStarTextField.setFont(f20);
+		twoStarTextField.setForeground(Color.decode("#A38F85"));
+		twoStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		this.add(twoStarTextField);
+		
+		threeStarTextField = new JTextField();
+		threeStarTextField.setBounds(1185, 860, 126, 42);
+		threeStarTextField.setBorder(null);
+		threeStarTextField.setText("3333");
+		threeStarTextField.setFont(f20);
+		threeStarTextField.setForeground(Color.decode("#A38F85"));
+		threeStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		this.add(threeStarTextField);
 		
 		/*
 	
