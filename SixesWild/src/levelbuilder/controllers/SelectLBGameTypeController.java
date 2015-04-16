@@ -3,8 +3,10 @@
  */
 package src.levelbuilder.controllers;
 
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import src.levelbuilder.view.LBLevelView;
@@ -16,7 +18,7 @@ import src.sixeswildgame.world.World;
 
 /**
  * @author Halsey Vandenberg
- *
+ * 
  */
 public class SelectLBGameTypeController implements ActionListener {
 	
@@ -38,11 +40,18 @@ public class SelectLBGameTypeController implements ActionListener {
 		application.setGameType(gameType);
 		Level newCustomLevel = new Level(new Board(9), 0);
 		newCustomLevel.initialize();
-		application.setLbLevelView(new LBLevelView(application, world, newCustomLevel));
+		try {
+			application.setLbLevelView(new LBLevelView(application, world, newCustomLevel));
+		} catch (FontFormatException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		application.getFrame().setContentPane(application.getLbLevelView());
+		application.setGameType(gameType);
 		application.getLbLevelView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");
 		application.getFrame().pack();
+		application.getFrame().repaint();
 	}
 
 }

@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.SplashScreen;
@@ -15,6 +16,7 @@ import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import src.levelbuilder.controllers.SelectLBGameTypeController;
+import src.sixeswildgame.view.BetterButton;
+import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.world.World;
 
 import java.awt.GridBagLayout;
@@ -35,6 +39,8 @@ import java.awt.Insets;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class LevelBuilderWindow {
@@ -54,15 +60,21 @@ public class LevelBuilderWindow {
 	
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	public LevelBuilderWindow() {
+	public LevelBuilderWindow() throws FileNotFoundException, FontFormatException, IOException {
 		initialize();
 	}
 	
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	private void initialize() {
+	private void initialize() throws FileNotFoundException, FontFormatException, IOException {
 		initializeWorld();
 		initializeView();
 		initializeControllers();
@@ -77,114 +89,80 @@ public class LevelBuilderWindow {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	private void initializeView() {	    
-	    frame = new JFrame();
-		frame.getContentPane().setPreferredSize(new Dimension(1000, 750));
-		frame.setTitle("Sixes Wild Level Builder");
-		int width = 1000;
-	    int height = 750;
-	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (screen.width - width) / 2;
-	    int y = (screen.height - height) / 2;
-	    frame.setBounds(x, y, width, height);
+	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {	    
+		frame = new JFrame();
+		
+		frame.setTitle("Sixes Wild");
+		frame.setSize(1440, 1020);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		//System.out.println(frmSixesWild.getToolkit().getScreenSize());
+		//System.out.println(frmSixesWild.getToolkit().getScreenResolution());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		Border paddingBorder = BorderFactory.createEmptyBorder(100,100,100,100);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		frame.getContentPane().setLayout(gridBagLayout);
+		frame.setBackground(Color.decode("#E5E5E5"));
+		frame.getContentPane().setLayout(null);
+
 		this.mainMenuView = (JPanel) frame.getContentPane();
+		mainMenuView.setPreferredSize(new Dimension(1440, 1020));
 		
-		JLabel lblNewLabel = new JLabel("Sixes Wild Level Builder");
-		lblNewLabel.setFont(new Font("Palatino Linotype", Font.PLAIN, 65));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		BetterLabel lbLabel = new BetterLabel(Color.decode("#A38F85"), 301, 89, 10);
+		lbLabel.setBounds(575, 116, 301, 89);
+		lbLabel.setLayout(null);
+		Icon Builder = new ImageIcon("resources/Level BuilderButton.png");
+		lbLabel.setIcon(Builder);
+		lbLabel.setHorizontalAlignment(BetterLabel.CENTER);
+		lbLabel.setVerticalAlignment(BetterLabel.CENTER);
+		frame.getContentPane().add(lbLabel);
 		
-		JLabel label = new JLabel(" ");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 1;
-		frame.getContentPane().add(label, gbc_label);
 		
-		puzzleBtn = new JButton("    Puzzle Builder   ");
-		GridBagConstraints gbc_btnPuzzleBuilder = new GridBagConstraints();
-		gbc_btnPuzzleBuilder.insets = new Insets(0, 0, 5, 0);
-		gbc_btnPuzzleBuilder.gridx = 0;
-		gbc_btnPuzzleBuilder.gridy = 2;
-		frame.getContentPane().add(puzzleBtn, gbc_btnPuzzleBuilder);
+		JLabel lblSixeswild = new JLabel("Please Select A Game Type");
+		Font f60 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 60);
+		lblSixeswild.setFont(f60);
+		lblSixeswild.setBounds(354, 298, 750, 82);
+		lblSixeswild.setForeground(Color.decode("#A38F85"));
+		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
+		frame.getContentPane().add(lblSixeswild);
 		
-		lightningBtn = new JButton(" Lightning Builder  ");
-		GridBagConstraints gbc_btnLightningBuilder = new GridBagConstraints();
-		gbc_btnLightningBuilder.insets = new Insets(0, 0, 5, 0);
-		gbc_btnLightningBuilder.gridx = 0;
-		gbc_btnLightningBuilder.gridy = 3;
-		frame.getContentPane().add(lightningBtn, gbc_btnLightningBuilder);
+		puzzleBtn = new BetterButton(Color.decode("#D76262"),271,70,15);
+		puzzleBtn.setBorderPainted(false);
+		puzzleBtn.setFocusPainted(false);
+		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
+		puzzleBtn.setFont(f30);
+		puzzleBtn.setText("Puzzle");
+		puzzleBtn.setBounds(352, 462, 271, 70);
+		puzzleBtn.setForeground(Color.white);
+		frame.getContentPane().add(puzzleBtn);
 		
-		releaseBtn = new JButton("   Release Builder  ");
-		GridBagConstraints gbc_btnReleaseBuilder = new GridBagConstraints();
-		gbc_btnReleaseBuilder.insets = new Insets(0, 0, 5, 0);
-		gbc_btnReleaseBuilder.gridx = 0;
-		gbc_btnReleaseBuilder.gridy = 4;
-		frame.getContentPane().add(releaseBtn, gbc_btnReleaseBuilder);
+		lightningBtn = new BetterButton(Color.decode("#3D7CA2"),271,70,15);
+		lightningBtn.setBorderPainted(false);
+		lightningBtn.setFocusPainted(false);
+		lightningBtn.setFont(f30);
+		lightningBtn.setText("Lightning");
+		lightningBtn.setBounds(820, 462, 271, 70);
+		lightningBtn.setForeground(Color.white);
+		frame.getContentPane().add(lightningBtn);
 		
-		eliminationBtn = new JButton("Elimination Builder");
-		GridBagConstraints gbc_btnEliminationBuilder = new GridBagConstraints();
-		gbc_btnEliminationBuilder.insets = new Insets(0, 0, 5, 0);
-		gbc_btnEliminationBuilder.gridx = 0;
-		gbc_btnEliminationBuilder.gridy = 5;
-		frame.getContentPane().add(eliminationBtn, gbc_btnEliminationBuilder);
+		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),271,70,15);
+		eliminationBtn.setBorderPainted(false);
+		eliminationBtn.setFocusPainted(false);
+		eliminationBtn.setFont(f30);
+		eliminationBtn.setText("Elimination");
+		eliminationBtn.setBounds(352, 632, 271, 70);
+		eliminationBtn.setForeground(Color.white);
+		frame.getContentPane().add(eliminationBtn);
 		
-		JLabel lblNewLabel_1 = new JLabel(" ");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 6;
-		frame.getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		JLabel lblPresentedBy = new JLabel("Presented By:");
-		GridBagConstraints gbc_lblPresentedBy = new GridBagConstraints();
-		gbc_lblPresentedBy.insets = new Insets(0, 0, 5, 0);
-		gbc_lblPresentedBy.gridx = 0;
-		gbc_lblPresentedBy.gridy = 7;
-		frame.getContentPane().add(lblPresentedBy, gbc_lblPresentedBy);
-		
-		JLabel lblMatthewBeaulieu = new JLabel("Matthew Beaulieu");
-		GridBagConstraints gbc_lblMatthewBeaulieu = new GridBagConstraints();
-		gbc_lblMatthewBeaulieu.insets = new Insets(0, 0, 5, 0);
-		gbc_lblMatthewBeaulieu.gridx = 0;
-		gbc_lblMatthewBeaulieu.gridy = 8;
-		frame.getContentPane().add(lblMatthewBeaulieu, gbc_lblMatthewBeaulieu);
-		
-		JLabel lblTiffanyLeung = new JLabel("Tiffany Leung");
-		GridBagConstraints gbc_lblTiffanyLeung = new GridBagConstraints();
-		gbc_lblTiffanyLeung.insets = new Insets(0, 0, 5, 0);
-		gbc_lblTiffanyLeung.gridx = 0;
-		gbc_lblTiffanyLeung.gridy = 9;
-		frame.getContentPane().add(lblTiffanyLeung, gbc_lblTiffanyLeung);
-		
-		JLabel lblJiaqiRen = new JLabel("Jiaqi Ren");
-		GridBagConstraints gbc_lblJiaqiRen = new GridBagConstraints();
-		gbc_lblJiaqiRen.insets = new Insets(0, 0, 5, 0);
-		gbc_lblJiaqiRen.gridx = 0;
-		gbc_lblJiaqiRen.gridy = 10;
-		frame.getContentPane().add(lblJiaqiRen, gbc_lblJiaqiRen);
-		
-		JLabel lblHalseyVandenberg = new JLabel("Halsey Vandenberg");
-		GridBagConstraints gbc_lblHalseyVandenberg = new GridBagConstraints();
-		gbc_lblHalseyVandenberg.insets = new Insets(0, 0, 5, 0);
-		gbc_lblHalseyVandenberg.gridx = 0;
-		gbc_lblHalseyVandenberg.gridy = 11;
-		frame.getContentPane().add(lblHalseyVandenberg, gbc_lblHalseyVandenberg);
-		
-		JLabel lblJiyaoXujoe = new JLabel("Ziyao Xu \"Joe\"");
-		GridBagConstraints gbc_lblJiyaoXujoe = new GridBagConstraints();
-		gbc_lblJiyaoXujoe.gridx = 0;
-		gbc_lblJiyaoXujoe.gridy = 12;
-		frame.getContentPane().add(lblJiyaoXujoe, gbc_lblJiyaoXujoe);
+		releaseBtn = new BetterButton(Color.decode("#45D7B3"),271,70,15);
+		releaseBtn.setBorderPainted(false);
+		releaseBtn.setFocusPainted(false);
+		releaseBtn.setFont(f30);
+		releaseBtn.setText("Release");
+		releaseBtn.setBounds(820, 632, 271, 70);
+		releaseBtn.setForeground(Color.white);
+		frame.getContentPane().add(releaseBtn);
 	}
 	
 	/**

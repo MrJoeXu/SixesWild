@@ -1,11 +1,17 @@
 package src.levelbuilder.view;
-
+/**
+ * @author Joe Xu
+ * @author Halsey Vandenberg
+ *
+ */
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
+import src.sixeswildgame.view.BetterButton;
+import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
@@ -17,20 +23,26 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
 
+import java.awt.Color;
+import java.awt.FontFormatException;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -60,15 +72,17 @@ public class LBLevelView extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	public LBLevelView(LevelBuilderWindow application, World world, Level level) {
-		setPreferredSize(new Dimension(1250, 900));
+	public LBLevelView(LevelBuilderWindow application, World world, Level level) throws FileNotFoundException, FontFormatException, IOException {
+		
 		this.application = application;
 		this.world = world;
 		this.level = level;
 		this.tileRangeCheckBoxes = new ArrayList<JCheckBox>();
 		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
-		this.setBounds(550, 100, 1250, 750);
 		
 		switch (application.gameType) {
 		case 1:
@@ -87,283 +101,296 @@ public class LBLevelView extends JPanel {
 			this.typeName = "Unknown";
 		}
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0};
-		setLayout(gridBagLayout);
+		initialize();	
+	}
+	
+	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
+		initializeView();
+		initializeControllers();
+	}
+	
+	public void initializeView () throws FileNotFoundException, FontFormatException, IOException {
+		setPreferredSize(new Dimension(1440, 1020));
+		this.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EmptyBorder(0, 40, 0, 0));
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		BetterLabel lbLabel = new BetterLabel(Color.decode("#A38F85"), 301, 89, 10);
+		lbLabel.setBounds(570, 32, 301, 89);
+		lbLabel.setLayout(null);
+		Icon Builder = new ImageIcon("resources/Level BuilderButton.png");
+		lbLabel.setIcon(Builder);
+		lbLabel.setHorizontalAlignment(BetterLabel.CENTER);
+		lbLabel.setVerticalAlignment(BetterLabel.CENTER);
+		this.add(lbLabel);
 		
-		backBtn = new JButton("<- Back");
-		GridBagConstraints gbc_backBtn = new GridBagConstraints();
-		gbc_backBtn.gridx = 0;
-		gbc_backBtn.gridy = 0;
-		panel.add(backBtn, gbc_backBtn);
+		BetterButton puzzleBtn = new BetterButton(Color.decode("#D76262"),271,70,15);
+		puzzleBtn.setBorderPainted(false);
+		puzzleBtn.setFocusPainted(false);
+		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
+		puzzleBtn.setFont(f30);
+		puzzleBtn.setText("Puzzle");
+		puzzleBtn.setBounds(585, 148, 271, 70);
+		puzzleBtn.setForeground(Color.white);
 		
-		JLabel lblTypeBuilder = new JLabel("Level Builder");
-		lblTypeBuilder.setBorder(new EmptyBorder(50, 0, 50, 0));
-		lblTypeBuilder.setFont(new Font("Palatino Linotype", Font.PLAIN, 60));
-		GridBagConstraints gbc_lblTypeBuilder = new GridBagConstraints();
-		gbc_lblTypeBuilder.gridwidth = 2;
-		gbc_lblTypeBuilder.insets = new Insets(0, 0, 5, 0);
-		gbc_lblTypeBuilder.gridx = 1;
-		gbc_lblTypeBuilder.gridy = 0;
-		add(lblTypeBuilder, gbc_lblTypeBuilder);
+		BetterButton lightningBtn = new BetterButton(Color.decode("#3D7CA2"),271,70,15);
+		lightningBtn.setBorderPainted(false);
+		lightningBtn.setFocusPainted(false);
+		lightningBtn.setFont(f30);
+		lightningBtn.setText("Lightning");
+		lightningBtn.setBounds(585, 148, 271, 70);
+		lightningBtn.setForeground(Color.white);
 		
-		JPanel levelParametersPanel = new JPanel();
-		levelParametersPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		levelParametersPanel.setPreferredSize(new Dimension(500, 500));
-		GridBagConstraints gbc_levelParametersPanel = new GridBagConstraints();
-		gbc_levelParametersPanel.gridwidth = 2;
-		gbc_levelParametersPanel.insets = new Insets(0, 0, 5, 5);
-		gbc_levelParametersPanel.fill = GridBagConstraints.BOTH;
-		gbc_levelParametersPanel.gridx = 0;
-		gbc_levelParametersPanel.gridy = 1;
-		add(levelParametersPanel, gbc_levelParametersPanel);
-		GridBagLayout gbl_levelParametersPanel = new GridBagLayout();
-		gbl_levelParametersPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_levelParametersPanel.rowHeights = new int[]{0, 131, 0, 0, 0, 0, 0, 0};
-		gbl_levelParametersPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_levelParametersPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		levelParametersPanel.setLayout(gbl_levelParametersPanel);
+		BetterButton eliminationBtn = new BetterButton(Color.decode("#65ABD5"),271,70,15);
+		eliminationBtn.setBorderPainted(false);
+		eliminationBtn.setFocusPainted(false);
+		eliminationBtn.setFont(f30);
+		eliminationBtn.setText("Elimination");
+		eliminationBtn.setBounds(585, 148, 271, 70);
+		eliminationBtn.setForeground(Color.white);
+		
+		BetterButton releaseBtn = new BetterButton(Color.decode("#45D7B3"),271,70,15);
+		releaseBtn.setBorderPainted(false);
+		releaseBtn.setFocusPainted(false);
+		releaseBtn.setFont(f30);
+		releaseBtn.setText("Release");
+		releaseBtn.setBounds(585, 148, 271, 70);
+		releaseBtn.setForeground(Color.white);
+	
+		if (application.getGameType() == 1) { this.add(puzzleBtn); }
+		if (application.getGameType() == 2) { this.add(lightningBtn); }
+		if (application.getGameType() == 3) { this.add(releaseBtn); }
+		if (application.getGameType() == 4) { this.add(eliminationBtn); }
+		
+		backBtn = new BetterButton(Color.decode("#EC7665"),94,58,15);
+		backBtn.setBorderPainted(false);
+		backBtn.setFocusPainted(false);
+		Icon backIcon = new ImageIcon("resources/backIcon.png");
+		backBtn.setIcon(backIcon);
+		backBtn.setBounds(50, 30, 94, 58);
+		this.add(backBtn); 
+		
+		BetterButton redoBtn = new BetterButton(Color.decode("#A38F85"), 100, 46, 10);
+		redoBtn.setBorderPainted(false);
+		redoBtn.setFocusPainted(false);
+		redoBtn.setText("Redo");
+		Font f20 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 20);
+		redoBtn.setFont(f20);
+		redoBtn.setForeground(Color.white);
+		redoBtn.setBounds(948, 925, 100, 46);
+		add(redoBtn);
+		
+		BetterButton undoBtn = new BetterButton(Color.decode("#A38F85"), 100, 46, 10);
+		undoBtn.setBorderPainted(false);
+		undoBtn.setFocusPainted(false);
+		undoBtn.setText("Undo");
+		undoBtn.setFont(f20);
+		undoBtn.setForeground(Color.white);
+		undoBtn.setBounds(1121, 925, 100, 46);
+		add(undoBtn);
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
-		lblLevelName.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
-		lblLevelName.setHorizontalAlignment(SwingConstants.RIGHT);
-		GridBagConstraints gbc_lblLevelName = new GridBagConstraints();
-		gbc_lblLevelName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLevelName.anchor = GridBagConstraints.EAST;
-		gbc_lblLevelName.gridx = 0;
-		gbc_lblLevelName.gridy = 0;
-		levelParametersPanel.add(lblLevelName, gbc_lblLevelName);
+		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
+		lblLevelName.setFont(f40);
+		lblLevelName.setForeground(Color.decode("#A38F85"));
+		lblLevelName.setBounds(160, 309, 240, 55);
+		add(lblLevelName);
 		
 		lvlNameTextField = new JTextField();
-		GridBagConstraints gbc_lvlNameTextField = new GridBagConstraints();
-		gbc_lvlNameTextField.insets = new Insets(0, 0, 5, 0);
-		gbc_lvlNameTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lvlNameTextField.gridx = 1;
-		gbc_lvlNameTextField.gridy = 0;
-		levelParametersPanel.add(lvlNameTextField, gbc_lvlNameTextField);
-		lvlNameTextField.setColumns(10);
+		lvlNameTextField.setBounds(435, 320, 250, 40);
+		lvlNameTextField.setBorder(null);
+		lvlNameTextField.setFont(f20);
+		lvlNameTextField.setForeground(Color.decode("#A38F85"));
+		lvlNameTextField.setHorizontalAlignment(JTextField.CENTER);
 		TextPrompt namePrompt = new TextPrompt("Enter to name the level.", lvlNameTextField);
+		namePrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		namePrompt.changeStyle(Font.ITALIC);
+		this.add(lvlNameTextField);
 		
 		JLabel lblTileRange = new JLabel("Tile Range:");
-		lblTileRange.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
-		lblTileRange.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblTileRange.setHorizontalAlignment(SwingConstants.RIGHT);
-		GridBagConstraints gbc_lblTileRange = new GridBagConstraints();
-		gbc_lblTileRange.anchor = GridBagConstraints.EAST;
-		gbc_lblTileRange.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTileRange.gridx = 0;
-		gbc_lblTileRange.gridy = 1;
-		levelParametersPanel.add(lblTileRange, gbc_lblTileRange);
+		lblTileRange.setFont(f40);
+		lblTileRange.setForeground(Color.decode("#A38F85"));
+		lblTileRange.setBounds(159, 404, 204, 55);
+		add(lblTileRange);
 		
-		JPanel tileRangePanel = new JPanel();
-		GridBagConstraints gbc_tileRangePanel = new GridBagConstraints();
-		gbc_tileRangePanel.insets = new Insets(0, 0, 5, 0);
-		gbc_tileRangePanel.fill = GridBagConstraints.BOTH;
-		gbc_tileRangePanel.gridx = 1;
-		gbc_tileRangePanel.gridy = 1;
-		levelParametersPanel.add(tileRangePanel, gbc_tileRangePanel);
-		tileRangePanel.setLayout(new GridLayout(1, 0, 0, 0));
+		Icon check1Y = new ImageIcon("resources/Check1Y.png");
+		Icon check2Y = new ImageIcon("resources/Check2Y.png");
+		Icon check3Y = new ImageIcon("resources/Check3Y.png");
+		Icon check4Y = new ImageIcon("resources/Check4Y.png");
+		Icon check5Y = new ImageIcon("resources/Check5Y.png");
+		Icon check1N = new ImageIcon("resources/Check1N.png");
+		Icon check2N = new ImageIcon("resources/Check2N.png");
+		Icon check3N = new ImageIcon("resources/Check3N.png");
+		Icon check4N = new ImageIcon("resources/Check4N.png");
+		Icon check5N = new ImageIcon("resources/Check5N.png");
 		
-		JCheckBox rangeOneCheckBox = new JCheckBox("1");
+		JCheckBox rangeOneCheckBox = new JCheckBox();
+		rangeOneCheckBox.setIcon(check1N);
+		rangeOneCheckBox.setSelectedIcon(check1Y);
 		rangeOneCheckBox.setSelected(true);
-		rangeOneCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-		rangeOneCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
-		rangeOneCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		rangeOneCheckBox.setBounds(432, 414, 45, 41);
 		tileRangeCheckBoxes.add(rangeOneCheckBox);
-		tileRangePanel.add(rangeOneCheckBox);
+		add(rangeOneCheckBox);
 		
-		JCheckBox rangeTwoCheckBox = new JCheckBox("2");
+		JCheckBox rangeTwoCheckBox = new JCheckBox();
+		rangeTwoCheckBox.setIcon(check2N);
+		rangeTwoCheckBox.setSelectedIcon(check2Y);
 		rangeTwoCheckBox.setSelected(true);
-		rangeTwoCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-		rangeTwoCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
-		rangeTwoCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		rangeTwoCheckBox.setBounds(484, 414, 45, 41);
 		tileRangeCheckBoxes.add(rangeTwoCheckBox);
-		tileRangePanel.add(rangeTwoCheckBox);
+		add(rangeTwoCheckBox);
 		
-		JCheckBox rangeThreeCheckBox = new JCheckBox("3");
+		JCheckBox rangeThreeCheckBox = new JCheckBox();
+		rangeThreeCheckBox.setIcon(check3N);
+		rangeThreeCheckBox.setSelectedIcon(check3Y);
 		rangeThreeCheckBox.setSelected(true);
-		rangeThreeCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-		rangeThreeCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
-		rangeThreeCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
+		rangeThreeCheckBox.setBounds(540, 414, 45, 41);
 		tileRangeCheckBoxes.add(rangeThreeCheckBox);
-		tileRangePanel.add(rangeThreeCheckBox);
+		add(rangeThreeCheckBox);
 		
-		JCheckBox rangeFourCheckBox = new JCheckBox("4");
+		JCheckBox rangeFourCheckBox = new JCheckBox();
+		rangeFourCheckBox.setIcon(check4N);
+		rangeFourCheckBox.setSelectedIcon(check4Y);
 		rangeFourCheckBox.setSelected(true);
-		rangeFourCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-		rangeFourCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
-		rangeFourCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
+		rangeFourCheckBox.setBounds(593, 414, 45, 41);
 		tileRangeCheckBoxes.add(rangeFourCheckBox);
-		tileRangePanel.add(rangeFourCheckBox);
+		add(rangeFourCheckBox);
 		
-		JCheckBox rangeFiveCheckBox = new JCheckBox("5");
+		JCheckBox rangeFiveCheckBox = new JCheckBox();
+		rangeFiveCheckBox.setIcon(check5N);
+		rangeFiveCheckBox.setSelectedIcon(check5Y);
 		rangeFiveCheckBox.setSelected(true);
-		rangeFiveCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-		rangeFiveCheckBox.setVerticalTextPosition(SwingConstants.BOTTOM);
-		rangeFiveCheckBox.setHorizontalTextPosition(SwingConstants.CENTER);
+		rangeFiveCheckBox.setBounds(646, 414, 45, 41);
 		tileRangeCheckBoxes.add(rangeFiveCheckBox);
-		tileRangePanel.add(rangeFiveCheckBox);
+		add(rangeFiveCheckBox);
 		
-		JLabel lblNewLabel = new JLabel("Board Dimensions:");
-		lblNewLabel.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 2;
-		levelParametersPanel.add(lblNewLabel, gbc_lblNewLabel);
-		
-		JPanel dimensionsPanel = new JPanel();
-		GridBagConstraints gbc_dimensionsPanel = new GridBagConstraints();
-		gbc_dimensionsPanel.fill = GridBagConstraints.BOTH;
-		gbc_dimensionsPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_dimensionsPanel.gridx = 1;
-		gbc_dimensionsPanel.gridy = 2;
-		levelParametersPanel.add(dimensionsPanel, gbc_dimensionsPanel);
-		GridBagLayout gbl_dimensionsPanel = new GridBagLayout();
-		gbl_dimensionsPanel.columnWidths = new int[]{0, 0};
-		gbl_dimensionsPanel.rowHeights = new int[]{0, 0, 0};
-		gbl_dimensionsPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_dimensionsPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		dimensionsPanel.setLayout(gbl_dimensionsPanel);
+		JLabel lblNewLabel = new JLabel("Dimensions:");
+		lblNewLabel.setFont(f40);
+		lblNewLabel.setForeground(Color.decode("#A38F85"));
+		lblNewLabel.setBounds(159, 499, 250, 55);
+		add(lblNewLabel);
 		
 		JSlider dimensionsSlider = new JSlider();
-		GridBagConstraints gbc_dimensionsSlider = new GridBagConstraints();
-		gbc_dimensionsSlider.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dimensionsSlider.insets = new Insets(0, 0, 5, 0);
-		gbc_dimensionsSlider.gridx = 0;
-		gbc_dimensionsSlider.gridy = 0;
-		dimensionsPanel.add(dimensionsSlider, gbc_dimensionsSlider);
+		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+		JLabel label1 = new JLabel("3x3");
+		label1.setFont(f20);
+		label1.setForeground(Color.decode("#A38F85"));
+		JLabel label2 = new JLabel("5x5");
+		label2.setFont(f20);
+		label2.setForeground(Color.decode("#A38F85"));
+		JLabel label3 = new JLabel("7x7");
+		label3.setFont(f20);
+		label3.setForeground(Color.decode("#A38F85"));
+		JLabel label4 = new JLabel("9x9");
+		label4.setFont(f20);
+		label4.setForeground(Color.decode("#A38F85"));
+		labelTable.put( new Integer( 3 ), label1 );
+		labelTable.put( new Integer( 5 ), label2 );
+		labelTable.put( new Integer( 7 ), label3 );
+		labelTable.put( new Integer( 9 ), label4 );
 		dimensionsSlider.setMinimum(3);
 		dimensionsSlider.setMaximum(9);
 		dimensionsSlider.setMajorTickSpacing(2);
- 
-        Hashtable<Integer, JLabel> labels =
-                new Hashtable<Integer, JLabel>();
-        for (int i = 3; i <= 9; i++) {
-        	labels.put(i, new JLabel(i + "x" + i));
-        }
-        dimensionsSlider.setLabelTable(labels);
+		dimensionsSlider.setBorder(null);
+		dimensionsSlider.setPaintTicks(true);
+		dimensionsSlider.setPaintTrack(true);
+		dimensionsSlider.setPaintLabels(true);
+		dimensionsSlider.setFont(f20);
+		dimensionsSlider.setLabelTable(labelTable);
+		dimensionsSlider.setBounds(420, 515, 288, 39);
+		add(dimensionsSlider);
 		
-		JLabel dimensionsLbl = new JLabel();
-		dimensionsLbl.setText("0 x 0");
-		dimensionsLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_dimensionsLbl = new GridBagConstraints();
-		gbc_dimensionsLbl.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dimensionsLbl.gridx = 0;
-		gbc_dimensionsLbl.gridy = 1;
-		dimensionsPanel.add(dimensionsLbl, gbc_dimensionsLbl);
+		JLabel lblRb = new JLabel("Reset Board:");
+		lblRb.setFont(f40);
+		lblRb.setForeground(Color.decode("#A38F85"));
+		lblRb.setBounds(159, 609, 250, 55);
+		add(lblRb);
 		
-		JLabel lblBo = new JLabel("Special Moves:");
-		lblBo.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblBo = new GridBagConstraints();
-		gbc_lblBo.anchor = GridBagConstraints.EAST;
-		gbc_lblBo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBo.gridx = 0;
-		gbc_lblBo.gridy = 3;
-		levelParametersPanel.add(lblBo, gbc_lblBo);
 		
-		JPanel specialMovesPanel = new JPanel();
-		GridBagConstraints gbc_specialMovesPanel = new GridBagConstraints();
-		gbc_specialMovesPanel.fill = GridBagConstraints.BOTH;
-		gbc_specialMovesPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_specialMovesPanel.gridx = 1;
-		gbc_specialMovesPanel.gridy = 3;
-		levelParametersPanel.add(specialMovesPanel, gbc_specialMovesPanel);
-		GridBagLayout gbl_specialMovesPanel = new GridBagLayout();
-		gbl_specialMovesPanel.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_specialMovesPanel.rowHeights = new int[]{0, 0};
-		gbl_specialMovesPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_specialMovesPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		specialMovesPanel.setLayout(gbl_specialMovesPanel);
+		JLabel lblSt = new JLabel("Swap Tiles:");
+		lblSt.setFont(f40);
+		lblSt.setForeground(Color.decode("#A38F85"));
+		lblSt.setBounds(159, 704, 210, 55);
+		add(lblSt);
 		
-		JCheckBox chckbxResetBoard = new JCheckBox("Reset Board");
-		chckbxResetBoard.setSelected(true);
-		GridBagConstraints gbc_specialMovesCheckBox = new GridBagConstraints();
-		gbc_specialMovesCheckBox.insets = new Insets(0, 0, 0, 5);
-		gbc_specialMovesCheckBox.anchor = GridBagConstraints.WEST;
-		gbc_specialMovesCheckBox.gridx = 0;
-		gbc_specialMovesCheckBox.gridy = 0;
-		specialMovesPanel.add(chckbxResetBoard, gbc_specialMovesCheckBox);
-		chckbxResetBoard.setHorizontalTextPosition(SwingConstants.CENTER);
-		chckbxResetBoard.setVerticalTextPosition(SwingConstants.BOTTOM);
-		chckbxResetBoard.setHorizontalAlignment(SwingConstants.LEFT);
-		specialMovesCheckBoxes.add(chckbxResetBoard);
+		JLabel lblRt = new JLabel("Remove Tile:");
+		lblRt.setFont(f40);
+		lblRt.setForeground(Color.decode("#A38F85"));
+		lblRt.setBounds(159, 799, 240, 55);
+		add(lblRt);
 		
-		JCheckBox chckbxSwapTiles = new JCheckBox("Swap Tiles");
-		chckbxSwapTiles.setSelected(true);
-		chckbxSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
-		chckbxSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
-		GridBagConstraints gbc_chckbxSwapTiles = new GridBagConstraints();
-		gbc_chckbxSwapTiles.insets = new Insets(0, 0, 0, 5);
-		gbc_chckbxSwapTiles.gridx = 1;
-		gbc_chckbxSwapTiles.gridy = 0;
-		specialMovesPanel.add(chckbxSwapTiles, gbc_chckbxSwapTiles);
-		specialMovesCheckBoxes.add(chckbxSwapTiles);
+		Icon moveLock = new ImageIcon("resources/MoveLock.png");
+		Icon moveUnlock = new ImageIcon("resources/MoveUnlock.png");
 		
-		JCheckBox chckbxRemoveTile = new JCheckBox("Remove Tile");
-		chckbxRemoveTile.setSelected(true);
-		chckbxRemoveTile.setVerticalTextPosition(SwingConstants.BOTTOM);
-		chckbxRemoveTile.setHorizontalTextPosition(SwingConstants.CENTER);
-		GridBagConstraints gbc_chckbxRemoveTile = new GridBagConstraints();
-		gbc_chckbxRemoveTile.gridx = 2;
-		gbc_chckbxRemoveTile.gridy = 0;
-		specialMovesPanel.add(chckbxRemoveTile, gbc_chckbxRemoveTile);
-		specialMovesCheckBoxes.add(chckbxRemoveTile);
+		JCheckBox checkbxResetBoard = new JCheckBox();
+		checkbxResetBoard.setIcon(moveLock);
+		checkbxResetBoard.setSelectedIcon(moveUnlock);
+		checkbxResetBoard.setSelected(true);
+		checkbxResetBoard.setBounds(430, 617, 85, 38);
+		add(checkbxResetBoard);
+		
+		JCheckBox checkbxSwapTiles = new JCheckBox();
+		checkbxSwapTiles.setIcon(moveLock);
+		checkbxSwapTiles.setSelectedIcon(moveUnlock);
+		checkbxSwapTiles.setSelected(true);
+		checkbxSwapTiles.setBounds(430, 715, 85, 38);
+		add(checkbxSwapTiles);
+		
+		JCheckBox checkbxRemoveTile = new JCheckBox();
+		checkbxRemoveTile.setIcon(moveLock);
+		checkbxRemoveTile.setSelectedIcon(moveUnlock);
+		checkbxRemoveTile.setSelected(true);
+		checkbxRemoveTile.setBounds(430, 810, 85, 38);
+		add(checkbxRemoveTile);
 		
 		JLabel lblBonusFrequency = new JLabel("Bonus Frequency:");
-		lblBonusFrequency.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblBonusFrequency = new GridBagConstraints();
-		gbc_lblBonusFrequency.anchor = GridBagConstraints.EAST;
-		gbc_lblBonusFrequency.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBonusFrequency.gridx = 0;
-		gbc_lblBonusFrequency.gridy = 4;
-		levelParametersPanel.add(lblBonusFrequency, gbc_lblBonusFrequency);
-		
-		JPanel frequencyPanel = new JPanel();
-		GridBagConstraints gbc_frequencyPanel = new GridBagConstraints();
-		gbc_frequencyPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_frequencyPanel.fill = GridBagConstraints.BOTH;
-		gbc_frequencyPanel.gridx = 1;
-		gbc_frequencyPanel.gridy = 4;
-		levelParametersPanel.add(frequencyPanel, gbc_frequencyPanel);
-		GridBagLayout gbl_frequencyPanel = new GridBagLayout();
-		gbl_frequencyPanel.columnWidths = new int[]{0, 0};
-		gbl_frequencyPanel.rowHeights = new int[]{0, 0, 0};
-		gbl_frequencyPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_frequencyPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		frequencyPanel.setLayout(gbl_frequencyPanel);
+		lblBonusFrequency.setFont(f40);
+		lblBonusFrequency.setForeground(Color.decode("#A38F85"));
+		lblBonusFrequency.setBounds(159, 894, 345, 55);
+		add(lblBonusFrequency);
 		
 		JSlider frequencySlider = new JSlider();
-		GridBagConstraints gbc_frequencySlider = new GridBagConstraints();
-		gbc_frequencySlider.fill = GridBagConstraints.HORIZONTAL;
-		gbc_frequencySlider.insets = new Insets(0, 0, 5, 0);
-		gbc_frequencySlider.gridx = 0;
-		gbc_frequencySlider.gridy = 0;
-		frequencyPanel.add(frequencySlider, gbc_frequencySlider);
+		Hashtable<Integer, JLabel> frequencySliderTable = new Hashtable<Integer, JLabel>();
+		JLabel label5 = new JLabel("Low");
+		label5.setFont(f20);
+		label5.setForeground(Color.decode("#A38F85"));
+		JLabel label6 = new JLabel("Medium");
+		label6.setFont(f20);
+		label6.setForeground(Color.decode("#A38F85"));
+		JLabel label7 = new JLabel("High");
+		label7.setFont(f20);
+		label7.setForeground(Color.decode("#A38F85"));
+		frequencySliderTable.put( new Integer( 2 ), label5 );
+		frequencySliderTable.put( new Integer( 4 ), label6 );
+		frequencySliderTable.put( new Integer( 6 ), label7 );
+		frequencySlider.setMinimum(2);
+		frequencySlider.setMaximum(6);
+		frequencySlider.setMajorTickSpacing(2);
+		frequencySlider.setBorder(null);
+		frequencySlider.setPaintTicks(true);
+		frequencySlider.setPaintTrack(true);
+		frequencySlider.setPaintLabels(true);
+		frequencySlider.setLabelTable(frequencySliderTable);
+		frequencySlider.setBounds(538, 910, 259, 50);
+		add(frequencySlider);
 		
-		JLabel frequencyLabel = new JLabel("Medium");
-		GridBagConstraints gbc_frequencyLabel = new GridBagConstraints();
-		gbc_frequencyLabel.gridx = 0;
-		gbc_frequencyLabel.gridy = 1;
-		frequencyPanel.add(frequencyLabel, gbc_frequencyLabel);
+		levelNameLbl = new JLabel("Level Name");
+		levelNameLbl.setBounds(941, 179, 300, 55);
+		levelNameLbl.setHorizontalAlignment(JLabel.CENTER);
+		levelNameLbl.setFont(f40);
+		levelNameLbl.setForeground(Color.decode("#A38F85"));
+		add(levelNameLbl);
+		
+		boardPanel = new JPanel();
+		boardPanel.setBounds(822, 267, 500, 500);
+		boardPanel.setBackground(Color.decode("#D4D4D4"));
+		this.add(boardPanel);
+		
+		boardView = new BoardView(level.getBoard(), 50, 50);
+		boardView.setPreferredSize(new Dimension(490, 490));
+		boardPanel.add(boardView);
+		
+		
+		/*
+	
 		
 		JLabel lblAchievementsThreshold = new JLabel("Achievements Threshold:");
 		lblAchievementsThreshold.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
@@ -570,9 +597,7 @@ public class LBLevelView extends JPanel {
 		boardBtnPanel.add(saveBtn);
 		
 		JButton undoBtn = new JButton("Undo");
-		boardBtnPanel.add(undoBtn);
-		
-		initializeControllers();
+		boardBtnPanel.add(undoBtn);*/
 	}
 	
 	public void initializeControllers() {

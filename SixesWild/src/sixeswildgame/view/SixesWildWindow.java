@@ -94,8 +94,8 @@ public class SixesWildWindow {
 		frmSixesWild.setSize(1440, 1020);
 		frmSixesWild.setLocationRelativeTo(null);
 		frmSixesWild.setResizable(false);
-		System.out.println(frmSixesWild.getToolkit().getScreenSize());
-		System.out.println(frmSixesWild.getToolkit().getScreenResolution());
+		//System.out.println(frmSixesWild.getToolkit().getScreenSize());
+		//System.out.println(frmSixesWild.getToolkit().getScreenResolution());
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
 		frmSixesWild.setLayout(null);

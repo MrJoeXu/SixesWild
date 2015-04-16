@@ -138,15 +138,34 @@ public class LevelView extends JPanel{
 		
 		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
+		ImageIcon secondYellowStar = new ImageIcon("resources/Star 2.png");
+		ImageIcon secondGreyStar = new ImageIcon("resources/Star2g.png");
+		ImageIcon thirdYellowStar = new ImageIcon("resources/Star 3.png");
+		ImageIcon thirdtGreyStar = new ImageIcon("resources/Star3g.png");
 		
 		oneStarLbl = new JLabel();
 		if (level.getCurrentScore() < level.getOneStarScore()) {
 			oneStarLbl.setIcon(firstGreyStar);
 		}
 		else { oneStarLbl.setIcon(firstYellowStar); }
-		oneStarLbl.setBounds(121, 565, 50, 50);
-		this.add(oneStarLbl);
+		oneStarLbl.setBounds(48, 252, 50, 50);
+		starPanel.add(oneStarLbl);
 		
+		twoStarLbl = new JLabel();
+		if (level.getCurrentScore() < level.getTwoStarScore()) {
+			twoStarLbl.setIcon(secondGreyStar);
+		}
+		else { twoStarLbl.setIcon(secondYellowStar); }
+		twoStarLbl.setBounds(38, 162, 70, 70);
+		starPanel.add(twoStarLbl);
+		
+		threeStarLbl = new JLabel();
+		if (level.getCurrentScore() < level.getThreeStarScore()) {
+			threeStarLbl.setIcon(thirdtGreyStar);
+		}
+		else { threeStarLbl.setIcon(thirdYellowStar); }
+		threeStarLbl.setBounds(36, 58, 75, 75);
+		starPanel.add(threeStarLbl);
 		
 		BoardView boardView = new BoardView(level.getBoard(),70,70);
 		int length = boardView.getDimension()*boardView.getTielLength() + 5 * boardView.getDimension();
