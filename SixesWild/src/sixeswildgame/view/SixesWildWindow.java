@@ -3,6 +3,7 @@ package src.sixeswildgame.view;
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -104,6 +105,7 @@ public class SixesWildWindow {
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
 		frmSixesWild.setLayout(null);
+		frmSixesWild.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.decode("#D76262")));
 
 		this.mainMenuView = (JPanel) frmSixesWild.getContentPane();
 		
