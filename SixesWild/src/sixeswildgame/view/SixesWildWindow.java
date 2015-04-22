@@ -3,6 +3,7 @@ package src.sixeswildgame.view;
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,6 +30,8 @@ import java.io.InputStream;
 
 import javax.swing.JButton;
 
+import src.sixeswildgame.controllers.CloseGameController;
+import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.controllers.SelectGameTypeController;
 import src.sixeswildgame.controllers.StartController;
 import src.sixeswildgame.world.World;
@@ -50,6 +54,8 @@ public class SixesWildWindow {
 	
 	//JButtons
 	protected JButton startButton;
+	protected JButton closeBtn;
+	protected JButton miniBtn;
 	
 	//World
 	protected World world;
@@ -91,11 +97,10 @@ public class SixesWildWindow {
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
-		frmSixesWild.setSize(1440, 1020);
+		frmSixesWild.setSize(1000, 708);
 		frmSixesWild.setLocationRelativeTo(null);
 		frmSixesWild.setResizable(false);
-		//System.out.println(frmSixesWild.getToolkit().getScreenSize());
-		//System.out.println(frmSixesWild.getToolkit().getScreenResolution());
+		frmSixesWild.setUndecorated(true);
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
 		frmSixesWild.setLayout(null);
@@ -103,60 +108,78 @@ public class SixesWildWindow {
 		this.mainMenuView = (JPanel) frmSixesWild.getContentPane();
 		
 		JLabel lblSixeswild = new JLabel("SixesWild");
-		Font f = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 78);
-		lblSixeswild.setFont(f);
-		lblSixeswild.setBounds(543, 261, 354, 109);
+		Font f50 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 50);
+		lblSixeswild.setFont(f50);
+		lblSixeswild.setBounds(390, 162, 225, 68);
 		lblSixeswild.setForeground(Color.decode("#D76262"));
 		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
 		frmSixesWild.getContentPane().add(lblSixeswild);
 		
 		
-		startButton = new BetterButton(Color.decode("#D76262"),271,70,10);
+		startButton = new BetterButton(Color.decode("#D76262"),200,52,10);
 		startButton.setBorderPainted(false);
 		startButton.setFocusPainted(false);
-		
-		startButton.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+		startButton.setFont(f22);
 		startButton.setText("Start");
-		startButton.setBounds(585, 477, 271, 70);
+		startButton.setBounds(401, 302, 200, 52);
 		startButton.setForeground(Color.white);
 		frmSixesWild.getContentPane().add(startButton);
 
 		
-		JLabel label1 = new JLabel("Presented by:");
-		label1.setBounds(625, 657, 200, 41);
-		label1.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		JLabel label1 = new JLabel("Presented by");
+		label1.setBounds(438, 412, 135, 30);
+		label1.setFont(f22);
 		label1.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label1);
 		
 		JLabel label2 = new JLabel("Matthew Beaulieu");
-		label2.setBounds(640, 732, 170, 27);
-		label2.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		Font f15 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 15);
+		label2.setBounds(439, 461, 123, 20);
+		label2.setFont(f15);
 		label2.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label2);
 		
 		JLabel label3 = new JLabel("Tiffany Leung");
-		label3.setBounds(662, 759, 170, 27);
-		label3.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label3.setBounds(456, 486, 90, 20);
+		label3.setFont(f15);
 		label3.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label3);
 		
 		JLabel label4 = new JLabel("Jiaqi Ren");
-		label4.setBounds(680, 786, 170, 27);
-		label4.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label4.setBounds(469, 511, 65, 20);
+		label4.setFont(f15);
 		label4.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label4);
 		
 		JLabel label5 = new JLabel("Halsey Vandenberg");
-		label5.setBounds(635, 813, 180, 27);
-		label5.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label5.setBounds(436, 536, 133, 20);
+		label5.setFont(f15);
 		label5.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label5);
 		
 		JLabel label6 = new JLabel("Ziyao Xu \"Joe\"");
-		label6.setBounds(664, 840, 170, 27);
-		label6.setFont(new Font("Avenir Next", Font.PLAIN, 20));
+		label6.setBounds(459, 561, 100, 20);
+		label6.setFont(f15);
 		label6.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label6);
+		
+		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
+		closeBtn.setBorderPainted(false);
+		closeBtn.setFocusPainted(false);
+		Icon closeIcon = new ImageIcon("resources/close.png");
+		closeBtn.setIcon(closeIcon);
+		closeBtn.setBounds(930, 20, 40, 40);
+		frmSixesWild.getContentPane().add(closeBtn); 
+		
+		miniBtn = new BetterButton(Color.decode("#50E3C2"),40,40,10);
+		miniBtn.setBorderPainted(false);
+		miniBtn.setFocusPainted(false);
+		Icon minIcon = new ImageIcon("resources/min.png");
+		miniBtn.setIcon(minIcon);
+		miniBtn.setBounds(880, 20, 40, 40);
+		frmSixesWild.getContentPane().add(miniBtn); 
+
 		
 	}
 	
@@ -165,6 +188,8 @@ public class SixesWildWindow {
 	 */
 	private void initializeControllers() {
 		startButton.addActionListener(new StartController(this, world));
+		closeBtn.addActionListener(new CloseGameController(world, this));
+		miniBtn.addActionListener(new MinimizeGameController(world,this));
 		
 	}
 	

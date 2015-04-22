@@ -4,8 +4,11 @@
 package src.sixeswildgame.controllers;
 
 import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.GameTypeView;
@@ -32,8 +35,19 @@ public class StartController implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		application.setGameTypeView(new GameTypeView(application, world));
-		application.getGameTypeView().setPreferredSize(new Dimension(1440,1020));
+		try {
+			application.setGameTypeView(new GameTypeView(application, world));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FontFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		application.getGameTypeView().setPreferredSize(new Dimension(1000,708));
 		application.getFrmSixesWild().setContentPane(application.getGameTypeView());
 		application.getGameTypeView().setVisible(true);
 		application.getFrmSixesWild().setTitle("Game Type");

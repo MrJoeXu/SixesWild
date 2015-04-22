@@ -168,7 +168,7 @@ public class LevelView extends JPanel{
 		starPanel.add(threeStarLbl);
 		
 		BoardView boardView = new BoardView(level.getBoard(),70,70);
-		int length = boardView.getDimension()*boardView.getTielLength() + 5 * boardView.getDimension();
+		int length = boardView.getDimension()*boardView.getTileLength() + 5 * boardView.getDimension();
 		int panelX = (1440 - length)/2;
 		System.out.print(panelX);
 		int panelY = (1020 - length)/2;

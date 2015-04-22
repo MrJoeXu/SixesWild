@@ -3,6 +3,11 @@ package src.sixeswildgame.view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -12,7 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.SelectLBGameTypeController;
+import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.GameTypeBackController;
+import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.controllers.SelectGameTypeController;
 import src.sixeswildgame.world.World;
 
@@ -27,7 +34,10 @@ public class GameTypeView extends JPanel{
 	protected JButton lightningBtn;
 	protected JButton eliminationBtn;
 	protected JButton releaseBtn;
+	
 	protected JButton backBtn;
+	protected JButton closeBtn;
+	protected JButton miniBtn;
 	
 	// JLabel
 	protected JLabel lblGameType;
@@ -42,15 +52,18 @@ public class GameTypeView extends JPanel{
 	
 
 	/**
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 * 
 	 */
-	public GameTypeView(SixesWildWindow application, World world) {
+	public GameTypeView(SixesWildWindow application, World world) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
 		this.world = world;
 		initialize();
 	}
 	
-	public void initialize() {
+	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
 		initializeView();
 		initializeModel();
 		initializeController();
@@ -58,6 +71,9 @@ public class GameTypeView extends JPanel{
 	
 	private void initializeController() {
 		backBtn.addActionListener(new GameTypeBackController(world, application));
+		closeBtn.addActionListener(new CloseGameController(world, application));
+		miniBtn.addActionListener(new MinimizeGameController(world,application));
+		
 		puzzleBtn.addActionListener(new SelectGameTypeController(application, world, 1));
 		lightningBtn.addActionListener(new SelectGameTypeController(application, world, 2));
 		releaseBtn.addActionListener(new SelectGameTypeController(application, world, 3));
@@ -70,58 +86,77 @@ public class GameTypeView extends JPanel{
 		
 	}
 
-	public void initializeView() {
+	public void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		setLayout(null);
 		
 		JLabel lblGameType = new JLabel("Please Select A Game Type");
-		lblGameType.setFont(new Font("Avenir Next", Font.PLAIN, 60));
-		lblGameType.setBounds(352, 174, 750, 82);
+		Font f45 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 45);
+		lblGameType.setFont(f45);
+		lblGameType.setBounds(223, 162, 565, 61);
 		lblGameType.setForeground(Color.decode("#D76262"));
 		this.add(lblGameType);
 		
-		puzzleBtn = new BetterButton(Color.decode("#D76262"),271,70,15);
+		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+		
+		puzzleBtn = new BetterButton(Color.decode("#D76262"),203,52,10);
 		puzzleBtn.setBorderPainted(false);
 		puzzleBtn.setFocusPainted(false);
-		puzzleBtn.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		puzzleBtn.setFont(f22);
 		puzzleBtn.setText("Puzzle");
-		puzzleBtn.setBounds(352, 375, 271, 70);
+		puzzleBtn.setBounds(257, 283, 203, 52);
 		puzzleBtn.setForeground(Color.white);
 		this.add(puzzleBtn);
 		
-		lightningBtn = new BetterButton(Color.decode("#3D7CA2"),271,70,15);
+		lightningBtn = new BetterButton(Color.decode("#3D7CA2"),203,53,10);
 		lightningBtn.setBorderPainted(false);
 		lightningBtn.setFocusPainted(false);
-		lightningBtn.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		lightningBtn.setFont(f22);
 		lightningBtn.setText("Lightning");
-		lightningBtn.setBounds(820, 375, 271, 70);
+		lightningBtn.setBounds(543, 283, 203, 53);
 		lightningBtn.setForeground(Color.white);
 		this.add(lightningBtn);
 		
-		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),271,70,15);
+		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),203,53,10);
 		eliminationBtn.setBorderPainted(false);
 		eliminationBtn.setFocusPainted(false);
-		eliminationBtn.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		eliminationBtn.setFont(f22);
 		eliminationBtn.setText("Elimination");
-		eliminationBtn.setBounds(352, 545, 271, 70);
+		eliminationBtn.setBounds(257, 373, 203, 53);
 		eliminationBtn.setForeground(Color.white);
 		this.add(eliminationBtn);
 		
-		releaseBtn = new BetterButton(Color.decode("#45D7B3"),271,70,15);
+		releaseBtn = new BetterButton(Color.decode("#45D7B3"),203,53,10);
 		releaseBtn.setBorderPainted(false);
 		releaseBtn.setFocusPainted(false);
-		releaseBtn.setFont(new Font("Avenir Next", Font.PLAIN, 30));
+		releaseBtn.setFont(f22);
 		releaseBtn.setText("Release");
-		releaseBtn.setBounds(820, 545, 271, 70);
+		releaseBtn.setBounds(543, 373, 203, 53);
 		releaseBtn.setForeground(Color.white);
 		this.add(releaseBtn);
 		
-		backBtn = new BetterButton(Color.decode("#EC7665"),94,58,15);
+		backBtn = new BetterButton(Color.decode("#EC7665"),65,40,10);
 		backBtn.setBorderPainted(false);
 		backBtn.setFocusPainted(false);
 		Icon backIcon = new ImageIcon("resources/backIcon.png");
 		backBtn.setIcon(backIcon);
-		backBtn.setBounds(50, 30, 94, 58);
+		backBtn.setBounds(30, 20, 65, 40);
 		this.add(backBtn); 
+		
+		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
+		closeBtn.setBorderPainted(false);
+		closeBtn.setFocusPainted(false);
+		Icon closeIcon = new ImageIcon("resources/close.png");
+		closeBtn.setIcon(closeIcon);
+		closeBtn.setBounds(930, 20, 40, 40);
+		this.add(closeBtn); 
+		
+		miniBtn = new BetterButton(Color.decode("#50E3C2"),40,40,10);
+		miniBtn.setBorderPainted(false);
+		miniBtn.setFocusPainted(false);
+		Icon minIcon = new ImageIcon("resources/min.png");
+		miniBtn.setIcon(minIcon);
+		miniBtn.setBounds(880, 20, 40, 40);
+		this.add(miniBtn); 
 	}
 
 	//Getter and Setters
