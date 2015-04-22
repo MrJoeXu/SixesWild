@@ -101,12 +101,12 @@ public class BoardView extends JPanel {
 		this.spaceLength = spaceLength;
 	}
 
-	public int getTielLength() {
+	public int getTileLength() {
 		return tileLength;
 	}
 
-	public void setTielLength(int tielLength) {
-		this.tileLength = tielLength;
+	public void setTileLength(int tileLength) {
+		this.tileLength = tileLength;
 	}
 
 }

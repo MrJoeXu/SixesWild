@@ -37,7 +37,7 @@ public class UpdateDimensionController implements ChangeListener {
 			level.setBoard(new Board(level.getBoard().getDimension()));
 			level.initialize();
 			
-			BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+			BoardView newBoardView = new BoardView(level.getBoard(), 40+9*tileLength, 40+9*tileLength);
 			
 			application.getLbLevelView().setBoardView(newBoardView);
 			application.getLbLevelView().getBoardPanel().removeAll();
