@@ -4,8 +4,11 @@
 package src.sixeswildgame.controllers;
 
 import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -37,8 +40,19 @@ public class SelectGameTypeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		application.setGameType(gameType);
-		application.setLevelSelectorView(new LevelSelectorView(application, world));
-		application.getLevelSelectorView().setPreferredSize(new Dimension(1440,1020));
+		try {
+			application.setLevelSelectorView(new LevelSelectorView(application, world));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		application.getLevelSelectorView().setPreferredSize(new Dimension(1000,708));
 		application.getFrmSixesWild().setContentPane(application.getLevelSelectorView());
 		application.getLevelSelectorView().setVisible(true);
 		application.getFrmSixesWild().setTitle("Level Select");
