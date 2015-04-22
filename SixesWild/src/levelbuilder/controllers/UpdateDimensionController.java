@@ -3,6 +3,7 @@
  */
 package src.levelbuilder.controllers;
 
+import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -21,33 +22,36 @@ public class UpdateDimensionController implements ChangeListener {
 	protected Level level;
 	protected LevelBuilderWindow application;
 	protected JSlider slider;
+
 	/**
 	 * 
 	 */
-	public UpdateDimensionController(LevelBuilderWindow application, Level level, JSlider slider) {
+	public UpdateDimensionController(LevelBuilderWindow application,
+			Level level, JSlider slider) {
 		this.application = application;
 		this.level = level;
 		this.slider = slider;
 	}
+
 	@Override
 	public void stateChanged(ChangeEvent ce) {
 		if (!slider.getValueIsAdjusting()) {
-			int dimension = (int)slider.getValue();
-			level.getBoard().setDimension(dimension); 
+			int dimension = (int) slider.getValue();
+			level.getBoard().setDimension(dimension);
 			level.setBoard(new Board(level.getBoard().getDimension()));
 			level.initialize();
-			
-			BoardView newBoardView = new BoardView(level.getBoard(), 40+9*tileLength, 40+9*tileLength);
+
+			BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+			newBoardView.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			
 			application.getLbLevelView().setBoardView(newBoardView);
 			application.getLbLevelView().getBoardPanel().removeAll();
 			application.getLbLevelView().getBoardPanel().add(newBoardView);
+			application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			application.getLbLevelView().repaint();
 			application.getFrame().pack();
 		}
-		
+
 	}
-	
-	
 
 }
