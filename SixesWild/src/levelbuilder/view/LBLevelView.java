@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBGameTypeBackController;
+import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.sixeswildgame.view.BetterButton;
@@ -63,6 +64,7 @@ public class LBLevelView extends JPanel {
 	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
 	protected JLabel levelNameLbl;
+	protected JSlider dimensionSlider;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -268,7 +270,7 @@ public class LBLevelView extends JPanel {
 		lblNewLabel.setBounds(159, 499, 250, 55);
 		add(lblNewLabel);
 		
-		JSlider dimensionsSlider = new JSlider();
+		dimensionSlider = new JSlider();
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		JLabel label1 = new JLabel("3x3");
 		label1.setFont(f20);
@@ -286,17 +288,17 @@ public class LBLevelView extends JPanel {
 		labelTable.put( new Integer( 5 ), label2 );
 		labelTable.put( new Integer( 7 ), label3 );
 		labelTable.put( new Integer( 9 ), label4 );
-		dimensionsSlider.setMinimum(3);
-		dimensionsSlider.setMaximum(9);
-		dimensionsSlider.setMajorTickSpacing(2);
-		dimensionsSlider.setBorder(null);
-		dimensionsSlider.setPaintTicks(true);
-		dimensionsSlider.setPaintTrack(true);
-		dimensionsSlider.setPaintLabels(true);
-		dimensionsSlider.setFont(f20);
-		dimensionsSlider.setLabelTable(labelTable);
-		dimensionsSlider.setBounds(420, 515, 288, 39);
-		add(dimensionsSlider);
+		dimensionSlider.setMinimum(3);
+		dimensionSlider.setMaximum(9);
+		dimensionSlider.setMajorTickSpacing(1);
+		dimensionSlider.setBorder(null);
+		dimensionSlider.setPaintTicks(true);
+		dimensionSlider.setPaintTrack(true);
+		dimensionSlider.setPaintLabels(true);
+		dimensionSlider.setFont(f20);
+		dimensionSlider.setLabelTable(labelTable);
+		dimensionSlider.setBounds(420, 515, 288, 39);
+		add(dimensionSlider);
 		
 		JLabel lblRb = new JLabel("Reset Board:");
 		lblRb.setFont(f40);
@@ -349,18 +351,18 @@ public class LBLevelView extends JPanel {
 		
 		JSlider frequencySlider = new JSlider();
 		Hashtable<Integer, JLabel> frequencySliderTable = new Hashtable<Integer, JLabel>();
-		JLabel label5 = new JLabel("Low");
-		label5.setFont(f20);
-		label5.setForeground(Color.decode("#A38F85"));
-		JLabel label6 = new JLabel("Medium");
-		label6.setFont(f20);
-		label6.setForeground(Color.decode("#A38F85"));
-		JLabel label7 = new JLabel("High");
-		label7.setFont(f20);
-		label7.setForeground(Color.decode("#A38F85"));
-		frequencySliderTable.put( new Integer( 2 ), label5 );
-		frequencySliderTable.put( new Integer( 4 ), label6 );
-		frequencySliderTable.put( new Integer( 6 ), label7 );
+		JLabel lowLbl = new JLabel("Low");
+		lowLbl.setFont(f20);
+		lowLbl.setForeground(Color.decode("#A38F85"));
+		JLabel mediumLbl = new JLabel("Medium");
+		mediumLbl.setFont(f20);
+		mediumLbl.setForeground(Color.decode("#A38F85"));
+		JLabel highLbl = new JLabel("High");
+		highLbl.setFont(f20);
+		highLbl.setForeground(Color.decode("#A38F85"));
+		frequencySliderTable.put( new Integer( 2 ), lowLbl );
+		frequencySliderTable.put( new Integer( 4 ), mediumLbl );
+		frequencySliderTable.put( new Integer( 6 ), highLbl );
 		frequencySlider.setMinimum(2);
 		frequencySlider.setMaximum(6);
 		frequencySlider.setMajorTickSpacing(2);
@@ -649,6 +651,7 @@ public class LBLevelView extends JPanel {
 			checkBox.addActionListener(new UpdateTileRangeController(application, level, checkBox));
 		}
 		lvlNameTextField.getDocument().addDocumentListener(new UpdateLevelNameController(application, level, lvlNameTextField));
+		dimensionSlider.addChangeListener(new UpdateDimensionController(application, level, dimensionSlider));
 	}
 
 	/**
