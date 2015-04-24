@@ -12,7 +12,10 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
+import src.levelbuilder.controllers.UpdateOneStarController;
+import src.levelbuilder.controllers.UpdateThreeStarController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
+import src.levelbuilder.controllers.UpdateTwoStarController;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.BoardView;
@@ -183,7 +186,7 @@ public class LBLevelView extends JPanel {
 		Font f14 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 14);
 		redoBtn.setFont(f14);
 		redoBtn.setForeground(Color.white);
-		redoBtn.setBounds(690, 643, 80, 34);
+		redoBtn.setBounds(675, 643, 80, 34);
 		add(redoBtn);
 		
 		BetterButton undoBtn = new BetterButton(Color.decode("#A38F85"), 80, 34, 10);
@@ -192,7 +195,7 @@ public class LBLevelView extends JPanel {
 		undoBtn.setText("Undo");
 		undoBtn.setFont(f14);
 		undoBtn.setForeground(Color.white);
-		undoBtn.setBounds(817, 643, 80, 34);
+		undoBtn.setBounds(815, 643, 80, 34);
 		add(undoBtn);
 		
 		BetterButton saveBtn = new BetterButton(Color.decode("#A38F85"), 40, 40, 10);
@@ -202,7 +205,7 @@ public class LBLevelView extends JPanel {
 		saveBtn.setFocusPainted(false);
 		saveBtn.setFont(f14);
 		saveBtn.setForeground(Color.white);
-		saveBtn.setBounds(891, 120, 40, 40);
+		saveBtn.setBounds(765, 637, 40, 40);
 		add(saveBtn);
 		
 		
@@ -392,7 +395,7 @@ public class LBLevelView extends JPanel {
 		add(frequencySlider);
 		
 		levelNameLbl = new JLabel("Level Name");
-		levelNameLbl.setBounds(680, 120, 180, 41);
+		levelNameLbl.setBounds(615, 120, 350, 41);
 		levelNameLbl.setHorizontalAlignment(JLabel.CENTER);
 		levelNameLbl.setFont(f30);
 		levelNameLbl.setForeground(Color.decode("#A38F85"));
@@ -427,28 +430,34 @@ public class LBLevelView extends JPanel {
 		oneStarTextField = new JTextField();
 		oneStarTextField.setBounds(615, 592, 92, 31);
 		oneStarTextField.setBorder(null);
-		oneStarTextField.setText("1111");
 		oneStarTextField.setFont(f14);
 		oneStarTextField.setForeground(Color.decode("#A38F85"));
 		oneStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		TextPrompt oneStarPrompt = new TextPrompt("1111", oneStarTextField);
+		oneStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		oneStarPrompt.changeStyle(Font.ITALIC);
 		this.add(oneStarTextField);
 		
 		twoStarTextField = new JTextField();
 		twoStarTextField.setBounds(744, 592, 92, 31);
 		twoStarTextField.setBorder(null);
-		twoStarTextField.setText("2222");
 		twoStarTextField.setFont(f14);
 		twoStarTextField.setForeground(Color.decode("#A38F85"));
 		twoStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		TextPrompt twoStarPrompt = new TextPrompt("2222", twoStarTextField);
+		twoStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		twoStarPrompt.changeStyle(Font.ITALIC);
 		this.add(twoStarTextField);
 		
 		threeStarTextField = new JTextField();
 		threeStarTextField.setBounds(873, 592, 92, 31);
 		threeStarTextField.setBorder(null);
-		threeStarTextField.setText("3333");
 		threeStarTextField.setFont(f14);
 		threeStarTextField.setForeground(Color.decode("#A38F85"));
 		threeStarTextField.setHorizontalAlignment(JTextField.CENTER);
+		TextPrompt threeStarPrompt = new TextPrompt("3333", threeStarTextField);
+		threeStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		threeStarPrompt.changeStyle(Font.ITALIC);
 		this.add(threeStarTextField);
 		
 		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
@@ -475,6 +484,9 @@ public class LBLevelView extends JPanel {
 		}
 		lvlNameTextField.getDocument().addDocumentListener(new UpdateLevelNameController(application, level, lvlNameTextField));
 		dimensionSlider.addChangeListener(new UpdateDimensionController(application, level, dimensionSlider));
+		oneStarTextField.getDocument().addDocumentListener(new UpdateOneStarController(application, level, oneStarTextField));
+		twoStarTextField.getDocument().addDocumentListener(new UpdateTwoStarController(application, level, twoStarTextField));
+		threeStarTextField.getDocument().addDocumentListener(new UpdateThreeStarController(application, level, threeStarTextField));
 		
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,application));
