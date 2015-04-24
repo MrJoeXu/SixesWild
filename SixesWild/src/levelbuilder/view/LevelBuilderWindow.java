@@ -27,7 +27,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import src.levelbuilder.controllers.LBCloseGameController;
+import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.SelectLBGameTypeController;
+import src.sixeswildgame.controllers.CloseGameController;
+import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.world.World;
@@ -54,6 +58,9 @@ public class LevelBuilderWindow {
 	protected JButton lightningBtn;
 	protected JButton releaseBtn;
 	protected JButton eliminationBtn;
+	
+	protected JButton closeBtn;
+	protected JButton miniBtn;
 	
 	protected World world;
 	protected int gameType;
@@ -97,20 +104,22 @@ public class LevelBuilderWindow {
 		frame = new JFrame();
 		
 		frame.setTitle("Sixes Wild");
-		frame.setSize(1440, 1020);
+		frame.setSize(1000, 708);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		frame.setUndecorated(true);
 		//System.out.println(frmSixesWild.getToolkit().getScreenSize());
 		//System.out.println(frmSixesWild.getToolkit().getScreenResolution());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(Color.decode("#E5E5E5"));
 		frame.getContentPane().setLayout(null);
+		frame.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.decode("#A38F85")));
 
 		this.mainMenuView = (JPanel) frame.getContentPane();
-		mainMenuView.setPreferredSize(new Dimension(1440, 1020));
+		mainMenuView.setPreferredSize(new Dimension(1000, 708));
 		
-		BetterLabel lbLabel = new BetterLabel(Color.decode("#A38F85"), 301, 89, 10);
-		lbLabel.setBounds(575, 116, 301, 89);
+		BetterLabel lbLabel = new BetterLabel(Color.decode("#A38F85"), 230, 69, 10);
+		lbLabel.setBounds(385, 135, 230, 69);
 		lbLabel.setLayout(null);
 		Icon Builder = new ImageIcon("resources/Level BuilderButton.png");
 		lbLabel.setIcon(Builder);
@@ -120,49 +129,66 @@ public class LevelBuilderWindow {
 		
 		
 		JLabel lblSixeswild = new JLabel("Please Select A Game Type");
-		Font f60 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 60);
-		lblSixeswild.setFont(f60);
-		lblSixeswild.setBounds(354, 298, 750, 82);
+		Font f45 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 45);
+		lblSixeswild.setFont(f45);
+		lblSixeswild.setBounds(223, 229, 590, 61);
 		lblSixeswild.setForeground(Color.decode("#A38F85"));
 		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
 		frame.getContentPane().add(lblSixeswild);
 		
-		puzzleBtn = new BetterButton(Color.decode("#D76262"),271,70,15);
+		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+		
+		puzzleBtn = new BetterButton(Color.decode("#D76262"),200,52,10);
 		puzzleBtn.setBorderPainted(false);
 		puzzleBtn.setFocusPainted(false);
-		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
-		puzzleBtn.setFont(f30);
+		puzzleBtn.setFont(f22);
 		puzzleBtn.setText("Puzzle");
-		puzzleBtn.setBounds(352, 462, 271, 70);
+		puzzleBtn.setBounds(257, 350, 200, 52);
 		puzzleBtn.setForeground(Color.white);
 		frame.getContentPane().add(puzzleBtn);
 		
-		lightningBtn = new BetterButton(Color.decode("#3D7CA2"),271,70,15);
+		lightningBtn = new BetterButton(Color.decode("#3D7CA2"),200,52,10);
 		lightningBtn.setBorderPainted(false);
 		lightningBtn.setFocusPainted(false);
-		lightningBtn.setFont(f30);
+		lightningBtn.setFont(f22);
 		lightningBtn.setText("Lightning");
-		lightningBtn.setBounds(820, 462, 271, 70);
+		lightningBtn.setBounds(543, 350, 200, 52);
 		lightningBtn.setForeground(Color.white);
 		frame.getContentPane().add(lightningBtn);
 		
-		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),271,70,15);
+		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),200,52,10);
 		eliminationBtn.setBorderPainted(false);
 		eliminationBtn.setFocusPainted(false);
-		eliminationBtn.setFont(f30);
+		eliminationBtn.setFont(f22);
 		eliminationBtn.setText("Elimination");
-		eliminationBtn.setBounds(352, 632, 271, 70);
+		eliminationBtn.setBounds(257, 440,200,52);
 		eliminationBtn.setForeground(Color.white);
 		frame.getContentPane().add(eliminationBtn);
 		
-		releaseBtn = new BetterButton(Color.decode("#45D7B3"),271,70,15);
+		releaseBtn = new BetterButton(Color.decode("#45D7B3"),200,52,10);
 		releaseBtn.setBorderPainted(false);
 		releaseBtn.setFocusPainted(false);
-		releaseBtn.setFont(f30);
+		releaseBtn.setFont(f22);
 		releaseBtn.setText("Release");
-		releaseBtn.setBounds(820, 632, 271, 70);
+		releaseBtn.setBounds(543,440,200,52);
 		releaseBtn.setForeground(Color.white);
 		frame.getContentPane().add(releaseBtn);
+		
+		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
+		closeBtn.setBorderPainted(false);
+		closeBtn.setFocusPainted(false);
+		Icon closeIcon = new ImageIcon("resources/close.png");
+		closeBtn.setIcon(closeIcon);
+		closeBtn.setBounds(930, 20, 40, 40);
+		frame.getContentPane().add(closeBtn); 
+		
+		miniBtn = new BetterButton(Color.decode("#50E3C2"),40,40,10);
+		miniBtn.setBorderPainted(false);
+		miniBtn.setFocusPainted(false);
+		Icon minIcon = new ImageIcon("resources/min.png");
+		miniBtn.setIcon(minIcon);
+		miniBtn.setBounds(880, 20, 40, 40);
+		frame.getContentPane().add(miniBtn); 
 	}
 	
 	/**
@@ -173,6 +199,8 @@ public class LevelBuilderWindow {
 		lightningBtn.addActionListener(new SelectLBGameTypeController(this, world, 2));
 		releaseBtn.addActionListener(new SelectLBGameTypeController(this, world, 3));
 		eliminationBtn.addActionListener(new SelectLBGameTypeController(this, world, 4));
+		closeBtn.addActionListener(new LBCloseGameController(world, this));
+		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
 	}
 	
 	/**

@@ -37,7 +37,7 @@ public class UpdateTileRangeController implements ActionListener {
 		level.getTileRange()[application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
 		level.setBoard(new Board(level.getBoard().getDimension()));
 		level.initialize();
-		BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+		BoardView newBoardView = new BoardView(level.getBoard(), 33, 33);
 		
 		application.getLbLevelView().setBoardView(newBoardView);
 		application.getLbLevelView().getBoardPanel().removeAll();
