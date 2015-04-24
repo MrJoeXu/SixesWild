@@ -38,9 +38,14 @@ public class UpdateThreeStarController implements DocumentListener {
 	}
 
 	public void changeThreeStarValue() {
-		int threeStarValue = Integer.parseInt(textField.getText());
-		level.setThreeStarScore(threeStarValue);
-		//System.out.println(level.getThreeStarScore());
+		if (textField.getText().isEmpty()) {
+			level.setThreeStarScore(0);
+		}
+		if (textField.getText().matches("^[0-9]+$")) {
+			int threeStarValue = Integer.parseInt(textField.getText());
+			level.setThreeStarScore(threeStarValue);
+			// System.out.println(level.getThreeStarScore());
+		}
 	}
 
 }

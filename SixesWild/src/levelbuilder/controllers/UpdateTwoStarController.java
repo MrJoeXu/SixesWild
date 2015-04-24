@@ -15,8 +15,8 @@ public class UpdateTwoStarController implements DocumentListener {
 	/**
 	 * 
 	 */
-	public UpdateTwoStarController(LevelBuilderWindow application,
-			Level level, JTextField textField) {
+	public UpdateTwoStarController(LevelBuilderWindow application, Level level,
+			JTextField textField) {
 		this.application = application;
 		this.level = level;
 		this.textField = textField;
@@ -38,9 +38,14 @@ public class UpdateTwoStarController implements DocumentListener {
 	}
 
 	public void changeTwoStarValue() {
-		int twoStarValue = Integer.parseInt(textField.getText());
-		level.setTwoStarScore(twoStarValue);
-		//System.out.println(level.getTwoStarScore());
+		if (textField.getText().isEmpty()) {
+			level.setTwoStarScore(0);
+		}
+		if (textField.getText().matches("^[0-9]+$")) {
+			int twoStarValue = Integer.parseInt(textField.getText());
+			level.setTwoStarScore(twoStarValue);
+			// System.out.println(level.getTwoStarScore());
+		}
 	}
 
 }

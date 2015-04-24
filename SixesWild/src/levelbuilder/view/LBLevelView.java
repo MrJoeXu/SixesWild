@@ -14,6 +14,9 @@ import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateOneStarController;
+import src.levelbuilder.controllers.UpdateRemoveTileController;
+import src.levelbuilder.controllers.UpdateResetBoardController;
+import src.levelbuilder.controllers.UpdateSwapTilesController;
 import src.levelbuilder.controllers.UpdateThreeStarController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.levelbuilder.controllers.UpdateTwoStarController;
@@ -58,6 +61,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JSlider;
 
 import java.awt.Component;
+
 import javax.swing.text.JTextComponent;
 
 public class LBLevelView extends JPanel {
@@ -73,6 +77,9 @@ public class LBLevelView extends JPanel {
 	protected JLabel levelNameLbl;
 	protected JSlider dimensionSlider;
 	protected JTextField timerMinuteTextField;
+	protected JCheckBox checkbxResetBoard;
+	protected JCheckBox checkbxSwapTiles;
+	protected JCheckBox checkbxRemoveTile;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -83,9 +90,9 @@ public class LBLevelView extends JPanel {
 
 	protected JPanel boardPanel;
 	private JTextField timerSecondTextField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField resetBoardTextField;
+	private JTextField swapTilesTextField;
+	private JTextField removeTileTextField;
 
 	/**
 	 * Create the panel.
@@ -380,26 +387,62 @@ public class LBLevelView extends JPanel {
 		Icon moveLock = new ImageIcon("resources/MoveLock.png");
 		Icon moveUnlock = new ImageIcon("resources/MoveUnlock.png");
 
-		JCheckBox checkbxResetBoard = new JCheckBox();
+		checkbxResetBoard = new JCheckBox();
 		checkbxResetBoard.setIcon(moveLock);
 		checkbxResetBoard.setSelectedIcon(moveUnlock);
-		checkbxResetBoard.setSelected(true);
+		checkbxResetBoard.setSelected(false);
 		checkbxResetBoard.setBounds(268, 407, 55, 30);
 		add(checkbxResetBoard);
 
-		JCheckBox checkbxSwapTiles = new JCheckBox();
+		resetBoardTextField = new JTextField();
+		resetBoardTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		resetBoardTextField.setForeground(new Color(163, 143, 133));
+		resetBoardTextField.setFont(null);
+		resetBoardTextField.setBorder(null);
+		resetBoardTextField.setBounds(344, 406, 46, 34);
+		resetBoardTextField.setEnabled(checkbxResetBoard.isSelected());
+		TextPrompt resetBoardPrompt = new TextPrompt("0", resetBoardTextField);
+		resetBoardPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		// resetMovesPrompt.changeStyle(Font.ITALIC);
+		add(resetBoardTextField);
+
+		checkbxSwapTiles = new JCheckBox();
 		checkbxSwapTiles.setIcon(moveLock);
 		checkbxSwapTiles.setSelectedIcon(moveUnlock);
-		checkbxSwapTiles.setSelected(true);
+		checkbxSwapTiles.setSelected(false);
 		checkbxSwapTiles.setBounds(268, 470, 55, 30);
 		add(checkbxSwapTiles);
 
-		JCheckBox checkbxRemoveTile = new JCheckBox();
+		swapTilesTextField = new JTextField();
+		swapTilesTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		swapTilesTextField.setForeground(new Color(163, 143, 133));
+		swapTilesTextField.setFont(null);
+		swapTilesTextField.setBorder(null);
+		swapTilesTextField.setBounds(344, 467, 46, 34);
+		swapTilesTextField.setEnabled(checkbxSwapTiles.isSelected());
+		TextPrompt swapTilesPrompt = new TextPrompt("0", swapTilesTextField);
+		swapTilesPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		// swapTilesPrompt.changeStyle(Font.ITALIC);
+		add(swapTilesTextField);
+
+		checkbxRemoveTile = new JCheckBox();
 		checkbxRemoveTile.setIcon(moveLock);
 		checkbxRemoveTile.setSelectedIcon(moveUnlock);
-		checkbxRemoveTile.setSelected(true);
+		checkbxRemoveTile.setSelected(false);
 		checkbxRemoveTile.setBounds(268, 531, 55, 30);
 		add(checkbxRemoveTile);
+
+		removeTileTextField = new JTextField();
+		removeTileTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		removeTileTextField.setForeground(new Color(163, 143, 133));
+		removeTileTextField.setFont(null);
+		removeTileTextField.setBorder(null);
+		removeTileTextField.setBounds(344, 531, 46, 34);
+		removeTileTextField.setEnabled(checkbxRemoveTile.isSelected());
+		TextPrompt removeTilePrompt = new TextPrompt("0", removeTileTextField);
+		removeTilePrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		// removeTilePrompt.changeStyle(Font.ITALIC);
+		add(removeTileTextField);
 
 		JLabel lblBonusFrequency = new JLabel("Bonus Frequency:");
 		lblBonusFrequency.setFont(f30);
@@ -513,30 +556,6 @@ public class LBLevelView extends JPanel {
 		miniBtn.setIcon(minIcon);
 		miniBtn.setBounds(880, 20, 40, 40);
 		this.add(miniBtn);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setForeground(new Color(163, 143, 133));
-		textField.setFont(null);
-		textField.setBorder(null);
-		textField.setBounds(344, 406, 46, 34);
-		add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setForeground(new Color(163, 143, 133));
-		textField_1.setFont(null);
-		textField_1.setBorder(null);
-		textField_1.setBounds(344, 467, 46, 34);
-		add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setForeground(new Color(163, 143, 133));
-		textField_2.setFont(null);
-		textField_2.setBorder(null);
-		textField_2.setBounds(344, 531, 46, 34);
-		add(textField_2);
 
 		if (application.gameType == 2) {
 			JLabel timerLbl = new JLabel("Timer:");
@@ -552,6 +571,9 @@ public class LBLevelView extends JPanel {
 			timerMinuteTextField.setFont(f14);
 			timerMinuteTextField.setForeground(Color.decode("#A38F85"));
 			timerMinuteTextField.setHorizontalAlignment(JTextField.CENTER);
+			TextPrompt minutePrompt = new TextPrompt("0", timerMinuteTextField);
+			minutePrompt.setHorizontalAlignment(TextPrompt.CENTER);
+			// minutePrompt.changeStyle(Font.ITALIC);
 			add(timerMinuteTextField);
 
 			JLabel minLbl = new JLabel("min");
@@ -566,6 +588,9 @@ public class LBLevelView extends JPanel {
 			timerSecondTextField.setFont(null);
 			timerSecondTextField.setBorder(null);
 			timerSecondTextField.setBounds(362, 660, 55, 34);
+			TextPrompt secondPrompt = new TextPrompt("0", timerSecondTextField);
+			secondPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+			// secondPrompt.changeStyle(Font.ITALIC);
 			add(timerSecondTextField);
 
 			JLabel secLbl = new JLabel("sec");
@@ -597,6 +622,24 @@ public class LBLevelView extends JPanel {
 		threeStarTextField.getDocument().addDocumentListener(
 				new UpdateThreeStarController(application, level,
 						threeStarTextField));
+
+		checkbxResetBoard.addActionListener(new UpdateResetBoardController(
+				application, level, resetBoardTextField, checkbxResetBoard));
+		resetBoardTextField.getDocument().addDocumentListener(
+					new UpdateResetBoardController(application, level,
+							resetBoardTextField, checkbxResetBoard));
+		
+		checkbxSwapTiles.addActionListener(new UpdateSwapTilesController(
+				application, level, swapTilesTextField, checkbxSwapTiles));
+		swapTilesTextField.getDocument().addDocumentListener(
+					new UpdateResetBoardController(application, level,
+							swapTilesTextField, checkbxSwapTiles));
+		
+		checkbxRemoveTile.addActionListener(new UpdateRemoveTileController(
+				application, level, removeTileTextField, checkbxRemoveTile));
+		removeTileTextField.getDocument().addDocumentListener(
+					new UpdateResetBoardController(application, level,
+							removeTileTextField, checkbxRemoveTile));
 
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,
@@ -813,4 +856,140 @@ public class LBLevelView extends JPanel {
 	public void setLevelNameLbl(JLabel levelNameLbl) {
 		this.levelNameLbl = levelNameLbl;
 	}
+
+	/**
+	 * @return the dimensionSlider
+	 */
+	public JSlider getDimensionSlider() {
+		return dimensionSlider;
+	}
+
+	/**
+	 * @param dimensionSlider
+	 *            the dimensionSlider to set
+	 */
+	public void setDimensionSlider(JSlider dimensionSlider) {
+		this.dimensionSlider = dimensionSlider;
+	}
+
+	/**
+	 * @return the timerMinuteTextField
+	 */
+	public JTextField getTimerMinuteTextField() {
+		return timerMinuteTextField;
+	}
+
+	/**
+	 * @param timerMinuteTextField
+	 *            the timerMinuteTextField to set
+	 */
+	public void setTimerMinuteTextField(JTextField timerMinuteTextField) {
+		this.timerMinuteTextField = timerMinuteTextField;
+	}
+
+	/**
+	 * @return the checkbxResetBoard
+	 */
+	public JCheckBox getCheckbxResetBoard() {
+		return checkbxResetBoard;
+	}
+
+	/**
+	 * @param checkbxResetBoard
+	 *            the checkbxResetBoard to set
+	 */
+	public void setCheckbxResetBoard(JCheckBox checkbxResetBoard) {
+		this.checkbxResetBoard = checkbxResetBoard;
+	}
+
+	/**
+	 * @return the closeBtn
+	 */
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	/**
+	 * @param closeBtn
+	 *            the closeBtn to set
+	 */
+	public void setCloseBtn(JButton closeBtn) {
+		this.closeBtn = closeBtn;
+	}
+
+	/**
+	 * @return the miniBtn
+	 */
+	public JButton getMiniBtn() {
+		return miniBtn;
+	}
+
+	/**
+	 * @param miniBtn
+	 *            the miniBtn to set
+	 */
+	public void setMiniBtn(JButton miniBtn) {
+		this.miniBtn = miniBtn;
+	}
+
+	/**
+	 * @return the timerSecondTextField
+	 */
+	public JTextField getTimerSecondTextField() {
+		return timerSecondTextField;
+	}
+
+	/**
+	 * @param timerSecondTextField
+	 *            the timerSecondTextField to set
+	 */
+	public void setTimerSecondTextField(JTextField timerSecondTextField) {
+		this.timerSecondTextField = timerSecondTextField;
+	}
+
+	/**
+	 * @return the resetBoardTextField
+	 */
+	public JTextField getResetBoardTextField() {
+		return resetBoardTextField;
+	}
+
+	/**
+	 * @param resetBoardTextField
+	 *            the resetBoardTextField to set
+	 */
+	public void setResetBoardTextField(JTextField resetBoardTextField) {
+		this.resetBoardTextField = resetBoardTextField;
+	}
+
+	/**
+	 * @return the swapTilesTextField
+	 */
+	public JTextField getSwapTilesTextField() {
+		return swapTilesTextField;
+	}
+
+	/**
+	 * @param swapTilesTextField
+	 *            the swapTilesTextField to set
+	 */
+	public void setSwapTilesTextField(JTextField swapTilesTextField) {
+		this.swapTilesTextField = swapTilesTextField;
+	}
+
+	/**
+	 * @return the removeTileTextField
+	 */
+	public JTextField getRemoveTileTextField() {
+		return removeTileTextField;
+	}
+
+	/**
+	 * @param removeTileTextField
+	 *            the removeTileTextField to set
+	 */
+	public void setRemoveTileTextField(JTextField removeTileTextField) {
+		this.removeTileTextField = removeTileTextField;
+	}
+
 }
