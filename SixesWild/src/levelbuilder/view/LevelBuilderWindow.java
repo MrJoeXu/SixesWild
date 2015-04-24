@@ -211,21 +211,21 @@ public class LevelBuilderWindow {
 		JWindow splash = new JWindow();
 	    BufferedImage splashScreenImg;
 		try {
-			splashScreenImg = ImageIO.read(new File("resources/lbSplashScreen.png"));
+			splashScreenImg = ImageIO.read(new File("resources/swSplashScreen.png"));
 			splash.getContentPane().add(new JLabel(new ImageIcon(splashScreenImg)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	    int width = 500;
-	    int height = 300;
+	    int width = 800;
+	    int height = 800;
 	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (screen.width - width) / 2;
 	    int y = (screen.height - height) / 2;
 	    splash.setBounds(x, y, width, height);
 	    splash.setVisible(true);
 	    try {
-	        Thread.sleep(2000);
+	        Thread.sleep(3000);
 	    } catch (InterruptedException e) {
 	        e.printStackTrace();
 	    }
