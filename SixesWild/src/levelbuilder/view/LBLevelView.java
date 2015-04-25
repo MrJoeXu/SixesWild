@@ -13,6 +13,7 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
+import src.levelbuilder.controllers.UpdateMovesLeftController;
 import src.levelbuilder.controllers.UpdateOneStarController;
 import src.levelbuilder.controllers.UpdateRemoveTileController;
 import src.levelbuilder.controllers.UpdateResetBoardController;
@@ -80,6 +81,7 @@ public class LBLevelView extends JPanel {
 	protected JCheckBox checkbxResetBoard;
 	protected JCheckBox checkbxSwapTiles;
 	protected JCheckBox checkbxRemoveTile;
+	protected JTextField movesLeftTextField;
 	private JTextField lvlNameTextField;
 	private JTextField oneStarTextField;
 	private JTextField twoStarTextField;
@@ -258,11 +260,11 @@ public class LBLevelView extends JPanel {
 				Font.PLAIN, 30);
 		lblLevelName.setFont(f30);
 		lblLevelName.setForeground(Color.decode("#A38F85"));
-		lblLevelName.setBounds(63, 216, 178, 41);
+		lblLevelName.setBounds(63, 180, 178, 41);
 		add(lblLevelName);
 
 		lvlNameTextField = new JTextField();
-		lvlNameTextField.setBounds(268, 221, 210, 34);
+		lvlNameTextField.setBounds(268, 185, 210, 34);
 		lvlNameTextField.setBorder(null);
 		lvlNameTextField.setFont(f14);
 		lvlNameTextField.setForeground(Color.decode("#A38F85"));
@@ -276,7 +278,7 @@ public class LBLevelView extends JPanel {
 		JLabel lblTileRange = new JLabel("Tile Range:");
 		lblTileRange.setFont(f30);
 		lblTileRange.setForeground(Color.decode("#A38F85"));
-		lblTileRange.setBounds(63, 277, 161, 41);
+		lblTileRange.setBounds(63, 241, 161, 41);
 		add(lblTileRange);
 
 		Icon check1Y = new ImageIcon("resources/Check1Y.png");
@@ -294,7 +296,7 @@ public class LBLevelView extends JPanel {
 		rangeOneCheckBox.setIcon(check1N);
 		rangeOneCheckBox.setSelectedIcon(check1Y);
 		rangeOneCheckBox.setSelected(true);
-		rangeOneCheckBox.setBounds(268, 283, 40, 34);
+		rangeOneCheckBox.setBounds(268, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeOneCheckBox);
 		add(rangeOneCheckBox);
 
@@ -302,7 +304,7 @@ public class LBLevelView extends JPanel {
 		rangeTwoCheckBox.setIcon(check2N);
 		rangeTwoCheckBox.setSelectedIcon(check2Y);
 		rangeTwoCheckBox.setSelected(true);
-		rangeTwoCheckBox.setBounds(309, 283, 40, 34);
+		rangeTwoCheckBox.setBounds(309, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeTwoCheckBox);
 		add(rangeTwoCheckBox);
 
@@ -310,7 +312,7 @@ public class LBLevelView extends JPanel {
 		rangeThreeCheckBox.setIcon(check3N);
 		rangeThreeCheckBox.setSelectedIcon(check3Y);
 		rangeThreeCheckBox.setSelected(true);
-		rangeThreeCheckBox.setBounds(350, 283, 40, 34);
+		rangeThreeCheckBox.setBounds(350, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeThreeCheckBox);
 		add(rangeThreeCheckBox);
 
@@ -318,7 +320,7 @@ public class LBLevelView extends JPanel {
 		rangeFourCheckBox.setIcon(check4N);
 		rangeFourCheckBox.setSelectedIcon(check4Y);
 		rangeFourCheckBox.setSelected(true);
-		rangeFourCheckBox.setBounds(391, 283, 40, 34);
+		rangeFourCheckBox.setBounds(391, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeFourCheckBox);
 		add(rangeFourCheckBox);
 
@@ -326,14 +328,14 @@ public class LBLevelView extends JPanel {
 		rangeFiveCheckBox.setIcon(check5N);
 		rangeFiveCheckBox.setSelectedIcon(check5Y);
 		rangeFiveCheckBox.setSelected(true);
-		rangeFiveCheckBox.setBounds(432, 283, 40, 34);
+		rangeFiveCheckBox.setBounds(432, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeFiveCheckBox);
 		add(rangeFiveCheckBox);
 
 		JLabel lblNewLabel = new JLabel("Dimensions:");
 		lblNewLabel.setFont(f30);
 		lblNewLabel.setForeground(Color.decode("#A38F85"));
-		lblNewLabel.setBounds(63, 338, 180, 41);
+		lblNewLabel.setBounds(63, 302, 180, 41);
 		add(lblNewLabel);
 
 		dimensionSlider = new JSlider();
@@ -363,25 +365,25 @@ public class LBLevelView extends JPanel {
 		dimensionSlider.setPaintLabels(true);
 		dimensionSlider.setFont(f14);
 		dimensionSlider.setLabelTable(labelTable);
-		dimensionSlider.setBounds(268, 350, 200, 50);
+		dimensionSlider.setBounds(268, 314, 200, 50);
 		add(dimensionSlider);
 
 		JLabel lblRb = new JLabel("Reset Board:");
 		lblRb.setFont(f30);
 		lblRb.setForeground(Color.decode("#A38F85"));
-		lblRb.setBounds(63, 399, 185, 41);
+		lblRb.setBounds(63, 363, 185, 41);
 		add(lblRb);
 
 		JLabel lblSt = new JLabel("Swap Tiles:");
 		lblSt.setFont(f30);
 		lblSt.setForeground(Color.decode("#A38F85"));
-		lblSt.setBounds(63, 460, 160, 41);
+		lblSt.setBounds(63, 424, 160, 41);
 		add(lblSt);
 
 		JLabel lblRt = new JLabel("Remove Tile:");
 		lblRt.setFont(f30);
 		lblRt.setForeground(Color.decode("#A38F85"));
-		lblRt.setBounds(63, 521, 240, 55);
+		lblRt.setBounds(63, 485, 240, 55);
 		add(lblRt);
 
 		Icon moveLock = new ImageIcon("resources/MoveLock.png");
@@ -391,7 +393,7 @@ public class LBLevelView extends JPanel {
 		checkbxResetBoard.setIcon(moveLock);
 		checkbxResetBoard.setSelectedIcon(moveUnlock);
 		checkbxResetBoard.setSelected(false);
-		checkbxResetBoard.setBounds(268, 407, 55, 30);
+		checkbxResetBoard.setBounds(268, 371, 55, 30);
 		add(checkbxResetBoard);
 
 		resetBoardTextField = new JTextField();
@@ -399,7 +401,7 @@ public class LBLevelView extends JPanel {
 		resetBoardTextField.setForeground(new Color(163, 143, 133));
 		resetBoardTextField.setFont(null);
 		resetBoardTextField.setBorder(null);
-		resetBoardTextField.setBounds(344, 406, 46, 34);
+		resetBoardTextField.setBounds(344, 370, 46, 34);
 		resetBoardTextField.setEnabled(checkbxResetBoard.isSelected());
 		TextPrompt resetBoardPrompt = new TextPrompt("0", resetBoardTextField);
 		resetBoardPrompt.setHorizontalAlignment(TextPrompt.CENTER);
@@ -410,7 +412,7 @@ public class LBLevelView extends JPanel {
 		checkbxSwapTiles.setIcon(moveLock);
 		checkbxSwapTiles.setSelectedIcon(moveUnlock);
 		checkbxSwapTiles.setSelected(false);
-		checkbxSwapTiles.setBounds(268, 470, 55, 30);
+		checkbxSwapTiles.setBounds(268, 434, 55, 30);
 		add(checkbxSwapTiles);
 
 		swapTilesTextField = new JTextField();
@@ -418,7 +420,7 @@ public class LBLevelView extends JPanel {
 		swapTilesTextField.setForeground(new Color(163, 143, 133));
 		swapTilesTextField.setFont(null);
 		swapTilesTextField.setBorder(null);
-		swapTilesTextField.setBounds(344, 467, 46, 34);
+		swapTilesTextField.setBounds(344, 431, 46, 34);
 		swapTilesTextField.setEnabled(checkbxSwapTiles.isSelected());
 		TextPrompt swapTilesPrompt = new TextPrompt("0", swapTilesTextField);
 		swapTilesPrompt.setHorizontalAlignment(TextPrompt.CENTER);
@@ -429,7 +431,7 @@ public class LBLevelView extends JPanel {
 		checkbxRemoveTile.setIcon(moveLock);
 		checkbxRemoveTile.setSelectedIcon(moveUnlock);
 		checkbxRemoveTile.setSelected(false);
-		checkbxRemoveTile.setBounds(268, 531, 55, 30);
+		checkbxRemoveTile.setBounds(268, 495, 55, 30);
 		add(checkbxRemoveTile);
 
 		removeTileTextField = new JTextField();
@@ -437,7 +439,7 @@ public class LBLevelView extends JPanel {
 		removeTileTextField.setForeground(new Color(163, 143, 133));
 		removeTileTextField.setFont(null);
 		removeTileTextField.setBorder(null);
-		removeTileTextField.setBounds(344, 531, 46, 34);
+		removeTileTextField.setBounds(344, 495, 46, 34);
 		removeTileTextField.setEnabled(checkbxRemoveTile.isSelected());
 		TextPrompt removeTilePrompt = new TextPrompt("0", removeTileTextField);
 		removeTilePrompt.setHorizontalAlignment(TextPrompt.CENTER);
@@ -447,7 +449,7 @@ public class LBLevelView extends JPanel {
 		JLabel lblBonusFrequency = new JLabel("Bonus Frequency:");
 		lblBonusFrequency.setFont(f30);
 		lblBonusFrequency.setForeground(Color.decode("#A38F85"));
-		lblBonusFrequency.setBounds(63, 582, 250, 41);
+		lblBonusFrequency.setBounds(63, 546, 250, 41);
 		add(lblBonusFrequency);
 
 		JSlider frequencySlider = new JSlider();
@@ -472,8 +474,25 @@ public class LBLevelView extends JPanel {
 		frequencySlider.setPaintTrack(true);
 		frequencySlider.setPaintLabels(true);
 		frequencySlider.setLabelTable(frequencySliderTable);
-		frequencySlider.setBounds(332, 594, 134, 50);
+		frequencySlider.setBounds(332, 558, 134, 50);
 		add(frequencySlider);
+		
+		JLabel moveLeftLbl = new JLabel("Moves Left:");
+		moveLeftLbl.setFont(f30);
+		moveLeftLbl.setForeground(Color.decode("#A38F85"));
+		moveLeftLbl.setBounds(63, 607, 185, 41);
+		add(moveLeftLbl);
+		
+		movesLeftTextField = new JTextField();
+		movesLeftTextField.setBounds(268, 612, 55, 34);
+		movesLeftTextField.setBorder(null);
+		movesLeftTextField.setFont(f14);
+		movesLeftTextField.setForeground(Color.decode("#A38F85"));
+		movesLeftTextField.setHorizontalAlignment(JTextField.CENTER);
+		TextPrompt movesLeftPrompt = new TextPrompt("0", movesLeftTextField);
+		movesLeftPrompt.setHorizontalAlignment(TextPrompt.CENTER);
+		// minutePrompt.changeStyle(Font.ITALIC);
+		add(movesLeftTextField);
 
 		levelNameLbl = new JLabel("Level Name");
 		levelNameLbl.setBounds(615, 120, 350, 41);
@@ -514,7 +533,7 @@ public class LBLevelView extends JPanel {
 		oneStarTextField.setFont(f14);
 		oneStarTextField.setForeground(Color.decode("#A38F85"));
 		oneStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt oneStarPrompt = new TextPrompt("0", oneStarTextField);
+		TextPrompt oneStarPrompt = new TextPrompt("One Star", oneStarTextField);
 		oneStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		oneStarPrompt.changeStyle(Font.ITALIC);
 		this.add(oneStarTextField);
@@ -525,7 +544,7 @@ public class LBLevelView extends JPanel {
 		twoStarTextField.setFont(f14);
 		twoStarTextField.setForeground(Color.decode("#A38F85"));
 		twoStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt twoStarPrompt = new TextPrompt("0", twoStarTextField);
+		TextPrompt twoStarPrompt = new TextPrompt("Two Star", twoStarTextField);
 		twoStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		twoStarPrompt.changeStyle(Font.ITALIC);
 		this.add(twoStarTextField);
@@ -536,7 +555,7 @@ public class LBLevelView extends JPanel {
 		threeStarTextField.setFont(f14);
 		threeStarTextField.setForeground(Color.decode("#A38F85"));
 		threeStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt threeStarPrompt = new TextPrompt("0", threeStarTextField);
+		TextPrompt threeStarPrompt = new TextPrompt("Three Star", threeStarTextField);
 		threeStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		threeStarPrompt.changeStyle(Font.ITALIC);
 		this.add(threeStarTextField);
@@ -640,6 +659,10 @@ public class LBLevelView extends JPanel {
 		removeTileTextField.getDocument().addDocumentListener(
 					new UpdateResetBoardController(application, level,
 							removeTileTextField, checkbxRemoveTile));
+		
+		movesLeftTextField.getDocument().addDocumentListener(
+				new UpdateMovesLeftController(application, level,
+						movesLeftTextField));
 
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,

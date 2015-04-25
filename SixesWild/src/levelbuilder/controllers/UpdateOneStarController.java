@@ -7,6 +7,11 @@ import javax.swing.event.DocumentListener;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.world.Level;
 
+/**
+ * 
+ * @author tleung
+ *
+ */
 public class UpdateOneStarController implements DocumentListener {
 	protected Level level;
 	protected LevelBuilderWindow application;

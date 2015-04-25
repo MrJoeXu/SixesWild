@@ -4,7 +4,8 @@
 package src.levelbuilder.controllers;
 
 /**
- * @author Halsey
+ * 
+ * @author tleung
  *
  */
 public class UpdateTimeController {

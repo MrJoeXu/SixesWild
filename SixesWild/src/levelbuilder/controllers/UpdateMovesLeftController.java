@@ -12,44 +12,48 @@ import src.sixeswildgame.world.Level;
  * @author tleung
  *
  */
-public class UpdateThreeStarController implements DocumentListener {
+public class UpdateMovesLeftController implements DocumentListener {
 	protected Level level;
 	protected LevelBuilderWindow application;
 	protected JTextField textField;
 
 	/**
-	 * 
+	 * @param level
+	 * @param application
+	 * @param textField
 	 */
-	public UpdateThreeStarController(LevelBuilderWindow application,
+	public UpdateMovesLeftController(LevelBuilderWindow application,
 			Level level, JTextField textField) {
-		this.application = application;
 		this.level = level;
+		this.application = application;
 		this.textField = textField;
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
-		changeThreeStarValue();
+		changeMovesLeftMoves();
+
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
-		changeThreeStarValue();
+		changeMovesLeftMoves();
+
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
-		changeThreeStarValue();
+		changeMovesLeftMoves();
+
 	}
 
-	public void changeThreeStarValue() {
+	public void changeMovesLeftMoves() {
 		if (textField.getText().isEmpty()) {
-			level.setThreeStarScore(0);
+			level.setMovesLeft(0);
 		}
 		if (textField.getText().matches("^[0-9]+$")) {
-			int threeStarValue = Integer.parseInt(textField.getText());
-			level.setThreeStarScore(threeStarValue);
-			// System.out.println(level.getThreeStarScore());
+			int movesLeft = Integer.parseInt(textField.getText());
+			level.setMovesLeft(movesLeft);
 		}
 	}
 

@@ -11,6 +11,11 @@ import javax.swing.event.DocumentListener;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.world.Level;
 
+/**
+ * 
+ * @author tleung
+ *
+ */
 public class UpdateSwapTilesController implements ActionListener,
 		DocumentListener {
 	protected Level level;

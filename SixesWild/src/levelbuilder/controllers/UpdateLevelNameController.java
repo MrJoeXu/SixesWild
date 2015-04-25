@@ -13,7 +13,8 @@ import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.world.Level;
 
 /**
- * @author Tiffany Leung
+ * 
+ * @author tleung
  *
  */
 public class UpdateLevelNameController implements DocumentListener {

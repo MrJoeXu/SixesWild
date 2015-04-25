@@ -14,7 +14,7 @@ import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
 /**
- * @author Tiffany Leung
+ * @author tleung
  * @author Halsey Vandenberg
  *
  */
