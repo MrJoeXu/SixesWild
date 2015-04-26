@@ -15,16 +15,19 @@ import src.sixeswildgame.world.Space;
  * @author Tiffany Leung
  *
  */
-public class ToggleSpaceMove implements MouseListener {
+public class ToggleSpaceMove {
+	/*
 	protected Level level;
 	protected LevelBuilderWindow application;
 	protected SpaceView spaceView;
-
+*/
+	
 	/**
 	 * @param level
 	 * @param application
 	 * @param space
 	 */
+	/*
 	public ToggleSpaceMove(Level level, LevelBuilderWindow application,
 			SpaceView spaceView) {
 		super();
@@ -71,6 +74,6 @@ public class ToggleSpaceMove implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}
+	} */
 
 }

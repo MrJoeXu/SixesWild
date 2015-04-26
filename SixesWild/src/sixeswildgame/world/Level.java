@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 /**
  * @author Halsey
+ * @author Tiffany
  *
  */
 public class Level {
@@ -20,7 +21,6 @@ public class Level {
 	protected int swapTwoTilesMoves;
 	protected int removeTileMoves;
 	
-	//ints
 	protected int id;
 	protected int currentScore;
 	protected int highScore;
@@ -31,6 +31,8 @@ public class Level {
 	protected int bonusFrequency;
 	
 	protected Timer time;
+	protected int minutes;
+	protected int seconds;
 	
 	protected boolean isLocked;
 	protected boolean[] tileRange;
@@ -59,9 +61,7 @@ public class Level {
 			allowedSpecialMoves[i] = true;
 		}
 	}
-	
-	
-	
+
 	/**
 	 * @param board
 	 * @param resetBoardMoves
@@ -76,6 +76,8 @@ public class Level {
 	 * @param movesLeft
 	 * @param bonusFrequency
 	 * @param time
+	 * @param minutes
+	 * @param seconds
 	 * @param isLocked
 	 * @param tileRange
 	 * @param allowedSpecialMoves
@@ -83,8 +85,9 @@ public class Level {
 	public Level(Board board, int resetBoardMoves, int swapTwoTilesMoves,
 			int removeTileMoves, int id, int currentScore, int highScore,
 			int oneStarScore, int twoStarScore, int threeStarScore,
-			int movesLeft, int bonusFrequency, Timer time, boolean isLocked,
-			boolean[] tileRange, boolean[] allowedSpecialMoves) {
+			int movesLeft, int bonusFrequency, Timer time, int minutes,
+			int seconds, boolean isLocked, boolean[] tileRange,
+			boolean[] allowedSpecialMoves) {
 		super();
 		this.board = board;
 		this.resetBoardMoves = resetBoardMoves;
@@ -99,6 +102,8 @@ public class Level {
 		this.movesLeft = movesLeft;
 		this.bonusFrequency = bonusFrequency;
 		this.time = time;
+		this.minutes = minutes;
+		this.seconds = seconds;
 		this.isLocked = isLocked;
 		this.tileRange = tileRange;
 		this.allowedSpecialMoves = allowedSpecialMoves;
@@ -270,14 +275,13 @@ public class Level {
 	public boolean[] getTileRange() {
 		return tileRange;
 	}
+	
 	/**
 	 * @param tileRange the tileRange to set
 	 */
 	public void setTileRange(boolean[] tileRange) {
 		this.tileRange = tileRange;
 	}
-
-
 
 	/**
 	 * @return the resetBoardMoves
@@ -322,17 +326,13 @@ public class Level {
 		return removeTileMoves;
 	}
 
-
-
 	/**
 	 * @param removeTileMoves the removeTileMoves to set
 	 */
 	public void setRemoveTileMoves(int removeTileMoves) {
 		this.removeTileMoves = removeTileMoves;
 	}
-
-
-
+	
 	/**
 	 * @return the allowedSpecialMoves
 	 */
@@ -340,15 +340,39 @@ public class Level {
 		return allowedSpecialMoves;
 	}
 
-
-
 	/**
 	 * @param allowedSpecialMoves the allowedSpecialMoves to set
 	 */
 	public void setAllowedSpecialMoves(boolean[] allowedSpecialMoves) {
 		this.allowedSpecialMoves = allowedSpecialMoves;
 	}
-	
-	
+
+	/**
+	 * @return the minutes
+	 */
+	public int getMinutes() {
+		return minutes;
+	}
+
+	/**
+	 * @param minutes the minutes to set
+	 */
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	/**
+	 * @return the seconds
+	 */
+	public int getSeconds() {
+		return seconds;
+	}
+
+	/**
+	 * @param seconds the seconds to set
+	 */
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
+	}
 	
 }

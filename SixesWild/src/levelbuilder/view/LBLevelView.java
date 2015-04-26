@@ -14,10 +14,12 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
+import src.levelbuilder.controllers.UpdateMinuteController;
 import src.levelbuilder.controllers.UpdateMovesLeftController;
 import src.levelbuilder.controllers.UpdateOneStarController;
 import src.levelbuilder.controllers.UpdateRemoveTileController;
 import src.levelbuilder.controllers.UpdateResetBoardController;
+import src.levelbuilder.controllers.UpdateSecondsController;
 import src.levelbuilder.controllers.UpdateSwapTilesController;
 import src.levelbuilder.controllers.UpdateThreeStarController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
@@ -667,10 +669,19 @@ public class LBLevelView extends JPanel {
 		movesLeftTextField.getDocument().addDocumentListener(
 				new UpdateMovesLeftController(application, level,
 						movesLeftTextField));
-		
+		/*
 		for (int i = 1; i < boardView.getDimension() * boardView.getDimension()) {
 			SpaceView space = boardView.getGrid().get(i);
 			space.setMouseAdapter(new ToggleSpaceMove(level, application, space));
+		} */
+		
+		if (application.getGameType() == 2) {
+		timerMinuteTextField.getDocument().addDocumentListener(
+				new UpdateMinuteController(application, level,
+						timerMinuteTextField));
+		timerSecondTextField.getDocument().addDocumentListener(
+				new UpdateSecondsController(application, level,
+						timerSecondTextField));
 		}
 
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
