@@ -29,7 +29,7 @@ import javax.swing.border.EmptyBorder;
 
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
-import src.levelbuilder.controllers.SelectLBGameTypeController;
+import src.levelbuilder.controllers.LBSelectGameTypeController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
@@ -52,6 +52,7 @@ public class LevelBuilderWindow {
 	protected JFrame frame;
 	protected JPanel mainMenuView;
 	protected LBLevelView lbLevelView;
+	protected LBLevelSelectorView lbLevelSelectorView;
 	
 	//JButtons
 	protected JButton puzzleBtn;
@@ -195,10 +196,10 @@ public class LevelBuilderWindow {
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
-		puzzleBtn.addActionListener(new SelectLBGameTypeController(this, world, 1));
-		lightningBtn.addActionListener(new SelectLBGameTypeController(this, world, 2));
-		releaseBtn.addActionListener(new SelectLBGameTypeController(this, world, 3));
-		eliminationBtn.addActionListener(new SelectLBGameTypeController(this, world, 4));
+		puzzleBtn.addActionListener(new LBSelectGameTypeController(this, world, 1));
+		lightningBtn.addActionListener(new LBSelectGameTypeController(this, world, 2));
+		releaseBtn.addActionListener(new LBSelectGameTypeController(this, world, 3));
+		eliminationBtn.addActionListener(new LBSelectGameTypeController(this, world, 4));
 		closeBtn.addActionListener(new LBCloseGameController(world, this));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
 	}
@@ -298,6 +299,70 @@ public class LevelBuilderWindow {
 	 */
 	public void setMainMenuView(JPanel mainMenuView) {
 		this.mainMenuView = mainMenuView;
+	}
+
+	public LBLevelSelectorView getLbLevelSelectorView() {
+		return lbLevelSelectorView;
+	}
+
+	public void setLbLevelSelectorView(LBLevelSelectorView lbLevelSelectorView) {
+		this.lbLevelSelectorView = lbLevelSelectorView;
+	}
+
+	public JButton getPuzzleBtn() {
+		return puzzleBtn;
+	}
+
+	public void setPuzzleBtn(JButton puzzleBtn) {
+		this.puzzleBtn = puzzleBtn;
+	}
+
+	public JButton getLightningBtn() {
+		return lightningBtn;
+	}
+
+	public void setLightningBtn(JButton lightningBtn) {
+		this.lightningBtn = lightningBtn;
+	}
+
+	public JButton getReleaseBtn() {
+		return releaseBtn;
+	}
+
+	public void setReleaseBtn(JButton releaseBtn) {
+		this.releaseBtn = releaseBtn;
+	}
+
+	public JButton getEliminationBtn() {
+		return eliminationBtn;
+	}
+
+	public void setEliminationBtn(JButton eliminationBtn) {
+		this.eliminationBtn = eliminationBtn;
+	}
+
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	public void setCloseBtn(JButton closeBtn) {
+		this.closeBtn = closeBtn;
+	}
+
+	public JButton getMiniBtn() {
+		return miniBtn;
+	}
+
+	public void setMiniBtn(JButton miniBtn) {
+		this.miniBtn = miniBtn;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
 	}
 	
 	

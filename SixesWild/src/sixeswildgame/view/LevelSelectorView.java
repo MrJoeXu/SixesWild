@@ -5,6 +5,7 @@
 package src.sixeswildgame.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -86,6 +87,7 @@ public class LevelSelectorView extends JPanel{
 	}
 
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
+		setPreferredSize(new Dimension(1000, 708));
 		this.setLayout(null);
 		
 		JLabel titleLable = new JLabel("Please Select a Level");

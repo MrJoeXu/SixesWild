@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.levelbuilder.controllers.SelectLBGameTypeController;
+import src.levelbuilder.controllers.LBSelectGameTypeController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.GameTypeBackController;
 import src.sixeswildgame.controllers.MinimizeGameController;

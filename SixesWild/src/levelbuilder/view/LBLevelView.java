@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBGameTypeBackController;
+import src.levelbuilder.controllers.LBLevelViewBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
@@ -627,7 +628,7 @@ public class LBLevelView extends JPanel {
 	}
 
 	public void initializeControllers() {
-		backBtn.addActionListener(new LBGameTypeBackController(application,
+		backBtn.addActionListener(new LBLevelViewBackController(application,
 				world));
 		for (JCheckBox checkBox : tileRangeCheckBoxes) {
 			checkBox.addActionListener(new UpdateTileRangeController(
