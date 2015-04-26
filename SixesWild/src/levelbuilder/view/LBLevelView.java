@@ -3,6 +3,7 @@ package src.levelbuilder.view;
 /**
  * @author Joe Xu
  * @author Halsey Vandenberg
+ * @author Tiffany Leung
  *
  */
 import javax.imageio.ImageIO;
@@ -21,10 +22,13 @@ import src.levelbuilder.controllers.UpdateSwapTilesController;
 import src.levelbuilder.controllers.UpdateThreeStarController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.levelbuilder.controllers.UpdateTwoStarController;
+import src.levelbuilder.world.ToggleSpaceMove;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.view.SpaceView;
 import src.sixeswildgame.world.Level;
+import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.World;
 
 import javax.swing.JLabel;
@@ -663,6 +667,11 @@ public class LBLevelView extends JPanel {
 		movesLeftTextField.getDocument().addDocumentListener(
 				new UpdateMovesLeftController(application, level,
 						movesLeftTextField));
+		
+		for (int i = 1; i < boardView.getDimension() * boardView.getDimension()) {
+			SpaceView space = boardView.getGrid().get(i);
+			space.setMouseAdapter(new ToggleSpaceMove(level, application, space));
+		}
 
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,

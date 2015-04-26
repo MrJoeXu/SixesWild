@@ -15,7 +15,7 @@ public class Board {
 	
 	protected ArrayList<Space> grid;
 	protected int dimension;
-
+	
 	/**
 	 * @param grid
 	 * @param dimension
@@ -28,6 +28,7 @@ public class Board {
 			for (int j = 0; j < dimension; j++) {
 				Space space = new Space(new Tile(j, i));
 				grid.add(space);
+				
 			}
 		}
 		
