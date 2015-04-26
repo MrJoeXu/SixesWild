@@ -31,7 +31,6 @@ public class SpaceView extends JPanel {
 		this.spaceLength = spaceLength;
 		setPreferredSize(new Dimension(spaceLength, spaceLength));
 		this.tileView = new TileView(space.getTile(), spaceLength);
-		System.out.print(spaceLength);
 
 		if (!isEnabled()) {
 			setBackground(Color.WHITE);
