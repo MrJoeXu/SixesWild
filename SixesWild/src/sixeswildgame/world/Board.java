@@ -26,7 +26,7 @@ public class Board {
 
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
-				Space space = new Space(new Tile(j, i));
+				Space space = new Space(new Tile(i, j));
 				grid.add(space);
 				
 			}

@@ -49,6 +49,8 @@ public class UpdateLevelNameController implements DocumentListener {
 	
 	public void changeLvlNameTitle() {
 		application.getLbLevelView().getLevelNameLbl().setText("\"" + textField.getText() + "\"");
+		if (textField.getText().equals(""))
+			application.getLbLevelView().getLevelNameLbl().setText("Level Name");
 	}
 
 }

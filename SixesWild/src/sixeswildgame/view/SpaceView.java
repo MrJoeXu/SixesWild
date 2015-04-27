@@ -39,7 +39,7 @@ public class SpaceView extends JPanel {
 		this.tileView = new TileView(space.getTile(), spaceLength);
 
 		if (!isEnabled()) {
-			setBackground(Color.WHITE);
+			setBackground(Color.LIGHT_GRAY);
 		}
 
 		else add(tileView);

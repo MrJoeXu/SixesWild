@@ -13,12 +13,15 @@ public class Tile {
 	protected int bonus;
 	protected int row;
 	protected int column;
+	protected int lastValue;
+	protected int lastBonus;
 	
 	protected boolean isSelected;
 	
 	public Tile(int row, int column) {
 		this.row = row;
 		this.column = column;
+		this.lastValue = 0;
 	}
 
 	/**
@@ -35,6 +38,8 @@ public class Tile {
 		this.row = row;
 		this.column = column;
 		this.isSelected = isSelected;
+		this.lastValue = value;
+		this.lastBonus = bonus;
 	}
 
 	/**
@@ -105,6 +110,34 @@ public class Tile {
 	 */
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+
+	/**
+	 * @return the lastValue
+	 */
+	public int getLastValue() {
+		return lastValue;
+	}
+
+	/**
+	 * @param lastValue the lastValue to set
+	 */
+	public void setLastValue(int lastValue) {
+		this.lastValue = lastValue;
+	}
+
+	/**
+	 * @return the lastBonus
+	 */
+	public int getLastBonus() {
+		return lastBonus;
+	}
+
+	/**
+	 * @param lastBonus the lastBonus to set
+	 */
+	public void setLastBonus(int lastBonus) {
+		this.lastBonus = lastBonus;
 	}
 
 	

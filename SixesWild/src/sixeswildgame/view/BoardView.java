@@ -42,6 +42,7 @@ public class BoardView extends JPanel {
 		this.dimension = board.getDimension();
 		this.tileLength = tileLength;
 		this.spaceLength = spaceLength;
+		this.grid = new ArrayList<SpaceView>();
 		
 		this.setLayout(new GridLayout(dimension, dimension));
 		
@@ -50,6 +51,7 @@ public class BoardView extends JPanel {
 				SpaceView spaceView = new SpaceView(board.getGrid().get(i * dimension + j), spaceLength);
 				spaceView.getTileView().setLength(tileLength);
 				this.add(spaceView);
+				grid.add(spaceView);
 			}
 		}
 		

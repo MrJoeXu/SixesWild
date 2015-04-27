@@ -13,6 +13,9 @@ import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBLevelViewBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
+import src.levelbuilder.controllers.RedoController;
+import src.levelbuilder.controllers.TileController;
+import src.levelbuilder.controllers.UndoController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateMinuteController;
@@ -30,6 +33,7 @@ import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.view.SpaceView;
+import src.sixeswildgame.view.TileView;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.World;
@@ -82,6 +86,11 @@ public class LBLevelView extends JPanel {
 	protected Level level;
 	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
+
+	// For undo redo
+	protected ArrayList<Space> toggleMoves;
+	protected int activeIndex;
+		
 	protected JLabel levelNameLbl;
 	protected JSlider dimensionSlider;
 	protected JTextField timerMinuteTextField;
@@ -96,6 +105,8 @@ public class LBLevelView extends JPanel {
 
 	protected JButton closeBtn;
 	protected JButton miniBtn;
+	protected JButton undoBtn;
+	protected JButton redoBtn;
 
 	protected JPanel boardPanel;
 	private JTextField timerSecondTextField;
@@ -118,6 +129,8 @@ public class LBLevelView extends JPanel {
 		this.level = level;
 		this.tileRangeCheckBoxes = new ArrayList<JCheckBox>();
 		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
+		this.toggleMoves = new ArrayList<Space>();
+		this.activeIndex = 0;
 
 		switch (application.gameType) {
 		case 1:
@@ -223,7 +236,7 @@ public class LBLevelView extends JPanel {
 		backBtn.setBounds(30, 20, 65, 40);
 		this.add(backBtn);
 
-		BetterButton redoBtn = new BetterButton(Color.decode("#A38F85"), 80,
+		redoBtn = new BetterButton(Color.decode("#A38F85"), 80,
 				34, 10);
 		redoBtn.setBorderPainted(false);
 		redoBtn.setFocusPainted(false);
@@ -238,7 +251,7 @@ public class LBLevelView extends JPanel {
 		redoBtn.setBounds(675, 643, 80, 34);
 		add(redoBtn);
 
-		BetterButton undoBtn = new BetterButton(Color.decode("#A38F85"), 80,
+		undoBtn = new BetterButton(Color.decode("#A38F85"), 80,
 				34, 10);
 		undoBtn.setBorderPainted(false);
 		undoBtn.setFocusPainted(false);
@@ -688,7 +701,23 @@ public class LBLevelView extends JPanel {
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,
 				application));
+		undoBtn.addActionListener(new UndoController(toggleMoves, application, level));
+		redoBtn.addActionListener(new RedoController(toggleMoves, application, level));
+		
+		for (SpaceView sv : boardView.getGrid() ) {
+			TileView tv = sv.getTileView();
+			tv.addMouseListener(new TileController(tv, level, application));
+		}
 	}
+	
+	public void incrementActiveIndex() {
+		activeIndex++;
+	}
+	
+	public void decrementActiveIndex() {
+		activeIndex--;
+	}
+
 
 	/**
 	 * @return the application
@@ -1036,4 +1065,34 @@ public class LBLevelView extends JPanel {
 		this.removeTileTextField = removeTileTextField;
 	}
 
+	/**
+	 * @return the toggleMoves
+	 */
+	public ArrayList<Space> getToggleMoves() {
+		return toggleMoves;
+	}
+
+	/**
+	 * @param toggleMoves the toggleMoves to set
+	 */
+	public void setToggleMoves(ArrayList<Space> toggleMoves) {
+		this.toggleMoves = toggleMoves;
+	}
+
+	/**
+	 * @return the activeIndex
+	 */
+	public int getActiveIndex() {
+		return activeIndex;
+	}
+
+	/**
+	 * @param activeIndex the activeIndex to set
+	 */
+	public void setActiveIndex(int activeIndex) {
+		this.activeIndex = activeIndex;
+	}
+
+	
+	
 }

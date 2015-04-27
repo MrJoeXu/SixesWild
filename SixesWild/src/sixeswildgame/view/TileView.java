@@ -29,6 +29,8 @@ public class TileView extends JPanel {
 
 	protected Tile tile;
 	protected int bonus;
+	protected JLabel valueLbl;
+	protected JLabel bonusLbl;
 	
 	protected int length;
 	
@@ -44,15 +46,14 @@ public class TileView extends JPanel {
 		this.length = length;
 		setPreferredSize(new Dimension(length,length));
 		
-		Random rand = new Random();
-	    bonus = rand.nextInt(3) + 1;
+	    bonus = tile.getBonus();
 		
-		JLabel valueLbl = new JLabel(Integer.toString(tile.getValue()));
+		valueLbl = new JLabel(Integer.toString(tile.getValue()));
 		valueLbl.setFont(new Font("Avenir Next", Font.PLAIN, 19));
 		valueLbl.setForeground(Color.white);
 		valueLbl.setBounds(19, 12, 12, 26);
 		
-		JLabel bonusLbl = new JLabel();
+		bonusLbl = new JLabel();
 		switch (bonus) {
 		case 1: bonusLbl.setText(""); break;
 		case 2: bonusLbl.setText("x2"); break;
@@ -68,7 +69,6 @@ public class TileView extends JPanel {
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		
 		switch (tile.getValue()) {
 		case 1:
@@ -89,8 +89,13 @@ public class TileView extends JPanel {
 		case 6:
 			g.setColor(Color.decode("#716561"));
 			break;
+		case 0:
+			g.setColor(Color.LIGHT_GRAY);
+			valueLbl.setText("");
+			bonusLbl.setText("");
+			break;
 		default:
-			g.setColor(Color.white);
+			g.setColor(Color.LIGHT_GRAY);
 		}
 		g.fillRoundRect(0, 0, length, length, 10, 10);
 		
