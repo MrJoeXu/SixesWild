@@ -127,7 +127,7 @@ public class Level {
 		    
 		    Random rand2 = new Random();
 					
-			board.getGrid().get(i).setTile(new Tile(values.get(value), rand2.nextInt(3),
+			board.getGrid().get(i).setTile(new Tile(values.get(value), rand2.nextInt(3)+1,
 					tile.getRow(), tile.getColumn(), tile.isSelected));
 			
 		}

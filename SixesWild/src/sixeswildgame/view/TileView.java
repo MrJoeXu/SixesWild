@@ -45,13 +45,9 @@ public class TileView extends JPanel {
 		this.tile = tile;
 		this.length = length;
 		setPreferredSize(new Dimension(length,length));
-		
 	    bonus = tile.getBonus();
 		
 		valueLbl = new JLabel(Integer.toString(tile.getValue()));
-		valueLbl.setFont(new Font("Avenir Next", Font.PLAIN, 19));
-		valueLbl.setForeground(Color.white);
-		valueLbl.setBounds(19, 12, 12, 26);
 		
 		bonusLbl = new JLabel();
 		switch (bonus) {
@@ -59,9 +55,25 @@ public class TileView extends JPanel {
 		case 2: bonusLbl.setText("x2"); break;
 		case 3: bonusLbl.setText("x3"); break;
 		}
-		bonusLbl.setFont(new Font("Avenir Next", Font.PLAIN, 10));
+		
+		
+		
+		
+		if (this.length == 33) {
+			valueLbl.setFont(new Font("Avenir Next", Font.PLAIN, 12));
+			valueLbl.setBounds(13,7,7,16);
+			bonusLbl.setFont(new Font("Avenir Next", Font.PLAIN, 7));
+			bonusLbl.setBounds(21, 21, 8, 10);
+			
+		} else {
+			valueLbl.setFont(new Font("Avenir Next", Font.PLAIN, 19));
+			valueLbl.setBounds(19, 12, 12, 26);	
+			bonusLbl.setFont(new Font("Avenir Next", Font.PLAIN, 10));
+			bonusLbl.setBounds(34, 31, 12, 14);
+		}
+		
+		valueLbl.setForeground(Color.white);
 		bonusLbl.setForeground(Color.white);
-		bonusLbl.setBounds(34, 31, 12, 14);
 		
 		add(valueLbl);
 		add(bonusLbl);
