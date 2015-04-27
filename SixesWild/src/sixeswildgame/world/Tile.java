@@ -21,7 +21,6 @@ public class Tile {
 	public Tile(int row, int column) {
 		this.row = row;
 		this.column = column;
-		this.lastValue = 0;
 	}
 
 	/**

@@ -52,7 +52,6 @@ public class TileController implements MouseListener {
 		Space space = level.getBoard().getGrid().get(row * level.getBoard().getDimension() + column);
 		
 		space.toggleEnabled();
-		if (!space.isEnabled()) tileView.setBackground(Color.LIGHT_GRAY);
 		application.getLbLevelView().getToggleMoves().add(application.getLbLevelView().getActiveIndex(), space);
 		while (application.getLbLevelView().getActiveIndex() + 1 < application.getLbLevelView().getToggleMoves().size()) {
 			application.getLbLevelView().getToggleMoves().remove(application.getLbLevelView().getActiveIndex() + 1);
