@@ -50,7 +50,7 @@ public class Level {
 		this.twoStarScore = 0;
 		this.threeStarScore = 0;
 		this.movesLeft = 10;
-		this.bonusFrequency = 1;
+		this.bonusFrequency = 3;
 		this.isLocked = false;
 		this.tileRange = new boolean[5];
 		for (int i = 0; i < 5; i++) {
@@ -127,7 +127,7 @@ public class Level {
 		    
 		    Random rand2 = new Random();
 					
-			board.getGrid().get(i).setTile(new Tile(values.get(value), rand2.nextInt(3)+1,
+			board.getGrid().get(i).setTile(new Tile(values.get(value), rand2.nextInt(bonusFrequency)+1,
 					tile.getRow(), tile.getColumn(), tile.isSelected));
 			
 		}

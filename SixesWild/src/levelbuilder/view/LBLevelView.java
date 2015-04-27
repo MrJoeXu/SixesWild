@@ -17,6 +17,7 @@ import src.levelbuilder.controllers.RedoController;
 import src.levelbuilder.controllers.TileController;
 import src.levelbuilder.controllers.UndoController;
 import src.levelbuilder.controllers.UpdateDimensionController;
+import src.levelbuilder.controllers.UpdateFrequencyController;
 import src.levelbuilder.controllers.UpdateLevelNameController;
 import src.levelbuilder.controllers.UpdateMinuteController;
 import src.levelbuilder.controllers.UpdateMovesLeftController;
@@ -93,6 +94,7 @@ public class LBLevelView extends JPanel {
 		
 	protected JLabel levelNameLbl;
 	protected JSlider dimensionSlider;
+	protected JSlider frequencySlider;
 	protected JTextField timerMinuteTextField;
 	protected JCheckBox checkbxResetBoard;
 	protected JCheckBox checkbxSwapTiles;
@@ -472,7 +474,7 @@ public class LBLevelView extends JPanel {
 		lblBonusFrequency.setBounds(63, 546, 250, 41);
 		add(lblBonusFrequency);
 
-		JSlider frequencySlider = new JSlider();
+		frequencySlider = new JSlider();
 		Hashtable<Integer, JLabel> frequencySliderTable = new Hashtable<Integer, JLabel>();
 		JLabel lowLbl = new JLabel("Low");
 		lowLbl.setFont(f14);
@@ -652,6 +654,8 @@ public class LBLevelView extends JPanel {
 						lvlNameTextField));
 		dimensionSlider.addChangeListener(new UpdateDimensionController(
 				application, level, dimensionSlider));
+		frequencySlider.addChangeListener(new UpdateFrequencyController(
+				application, level, frequencySlider));
 		oneStarTextField.getDocument().addDocumentListener(
 				new UpdateOneStarController(application, level,
 						oneStarTextField));
