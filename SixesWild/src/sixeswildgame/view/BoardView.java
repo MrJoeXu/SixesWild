@@ -5,10 +5,13 @@ package src.sixeswildgame.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -29,6 +32,9 @@ public class BoardView extends JPanel {
 	protected int tileLength;
 	protected int spaceLength;
 	/**
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 * 
 	 */
 	public BoardView(Board board, int tileLength, int spaceLength) {

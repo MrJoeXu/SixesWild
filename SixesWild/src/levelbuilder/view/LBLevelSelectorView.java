@@ -166,14 +166,14 @@ public class LBLevelSelectorView extends JPanel {
 		LevelButton.setFocusPainted(false);
 		Icon Level = new ImageIcon("resources/LevelSelectorIcon.png");
 		LevelButton.setIcon(Level);
-		LevelButton.setBounds(212, 397, 100, 100);
+		LevelButton.setBounds(212, 437, 100, 100);
 		LevelButton.setForeground(Color.white);
 		this.add(LevelButton);
 		
 		JLabel levelName = new JLabel("Hardest Level");
 		levelName.setFont(f22);
 		levelName.setForeground(Color.decode("#A38F85"));
-		levelName.setBounds(193,511,150,30);
+		levelName.setBounds(193,553,150,30);
 		this.add(levelName);
 		
 		Icon plus = new ImageIcon("resources/Plus.png");
@@ -182,7 +182,7 @@ public class LBLevelSelectorView extends JPanel {
 			NewButton[i].setBorderPainted(false);
 			NewButton[i].setFocusPainted(false);
 			NewButton[i].setIcon(plus);
-			NewButton[i].setBounds(47+165*i, 399, 100, 100);
+			NewButton[i].setBounds(47+165*i, 437, 100, 100);
 			this.add(NewButton[i]);
 		}
 

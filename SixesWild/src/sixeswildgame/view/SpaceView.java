@@ -5,7 +5,10 @@ package src.sixeswildgame.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -23,6 +26,9 @@ public class SpaceView extends JPanel {
 	protected int spaceLength;
 
 	/**
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 * 
 	 */
 	public SpaceView(Space space, int spaceLength) {

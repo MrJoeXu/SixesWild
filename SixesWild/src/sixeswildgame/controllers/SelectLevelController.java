@@ -1,8 +1,10 @@
 package src.sixeswildgame.controllers;
 
 import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import src.sixeswildgame.view.LevelView;
 import src.sixeswildgame.view.SixesWildWindow;
@@ -35,10 +37,15 @@ public class SelectLevelController implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		application.setGameType(gameType);
 		application.setGameLevel(gameLevel);
-		Level level = new Level(new Board(5), 0);
+		Level level = new Level(new Board(9), 0);
 		level.initialize();
-		application.setLevelView(new LevelView(application, world, level));
-		application.getLevelView().setPreferredSize(new Dimension(1440,1020));
+		try {
+			application.setLevelView(new LevelView(application, world, level));
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		application.getLevelView().setPreferredSize(new Dimension(1000,708));
 		application.getFrmSixesWild().setContentPane(application.getLevelView());
 		application.getLevelView().setVisible(true);
 		application.getFrmSixesWild().setTitle("Level");
