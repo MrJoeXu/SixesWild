@@ -43,7 +43,7 @@ public class TileController implements MouseListener {
 	public void mousePressed(MouseEvent me) {
 				
 		Tile tile = tileView.getTile();
-		
+
 		System.out.println(tile.getRow() + ", " + tile.getColumn());
 		
 		int row = tile.getRow();
@@ -60,7 +60,7 @@ public class TileController implements MouseListener {
 		System.out.println("Active Index: " + application.getLbLevelView().getActiveIndex());
 		System.out.println("Moves List Size: " + application.getLbLevelView().getToggleMoves().size());
 		tileView.repaint();
-		
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();
 	}

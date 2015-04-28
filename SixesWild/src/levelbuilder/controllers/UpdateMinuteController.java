@@ -58,6 +58,7 @@ public class UpdateMinuteController implements DocumentListener {
 			level.setMinutes(minutes);
 			//System.out.println(level.getMinutes());
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

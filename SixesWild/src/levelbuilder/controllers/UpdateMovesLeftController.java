@@ -55,6 +55,7 @@ public class UpdateMovesLeftController implements DocumentListener {
 			int movesLeft = Integer.parseInt(textField.getText());
 			level.setMovesLeft(movesLeft);
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

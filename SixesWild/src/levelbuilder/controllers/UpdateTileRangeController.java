@@ -49,7 +49,7 @@ public class UpdateTileRangeController implements ActionListener {
 			TileView tv = sv.getTileView();
 			tv.addMouseListener(new TileController(tv, level, application));
 		}
-		
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();
 	

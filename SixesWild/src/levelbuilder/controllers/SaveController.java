@@ -59,7 +59,7 @@ public class SaveController implements ActionListener {
 		if (application.getGameType() == 3 && !world.getReleaseLevels().contains(level)) world.getReleaseLevels().add(level);
 		if (application.getGameType() == 4 && !world.getEliminationLevels().contains(level)) world.getEliminationLevels().add(level);
 		
-		application.getLbLevelView().getSaveLbl().setText("Level saved.");
+		application.getLbLevelView().getSaveLbl().setText("Level Saved");
 	}
 
 }

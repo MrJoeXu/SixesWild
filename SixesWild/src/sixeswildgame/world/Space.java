@@ -11,6 +11,8 @@ public class Space {
 	
 	protected Tile tile;
 	protected boolean enabled;
+	protected boolean isBucket;
+	protected boolean isSix;
 
 	/**
 	 * 

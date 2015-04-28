@@ -51,6 +51,8 @@ public class UpdateTwoStarController implements DocumentListener {
 			level.setTwoStarScore(twoStarValue);
 			// System.out.println(level.getTwoStarScore());
 		}
+		
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

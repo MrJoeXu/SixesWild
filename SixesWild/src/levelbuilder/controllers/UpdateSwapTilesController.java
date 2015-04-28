@@ -43,6 +43,8 @@ public class UpdateSwapTilesController implements ActionListener,
 
 		level.getAllowedSpecialMoves()[1] = checkBox.isSelected();
 
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
+
 	}
 
 	@Override
@@ -71,6 +73,7 @@ public class UpdateSwapTilesController implements ActionListener,
 			int numSwapTilesMoves = Integer.parseInt(textField.getText());
 			level.setSwapTwoTilesMoves(numSwapTilesMoves);
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

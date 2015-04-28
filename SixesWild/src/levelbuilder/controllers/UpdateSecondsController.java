@@ -46,6 +46,7 @@ public class UpdateSecondsController implements DocumentListener {
 			level.setSeconds(seconds);
 			// System.out.println(level.getThreeStarScore());
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

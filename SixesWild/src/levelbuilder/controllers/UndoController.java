@@ -36,8 +36,6 @@ public class UndoController implements ActionListener {
 		this.level = level;
 	}
 
-
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Space s;
@@ -52,7 +50,7 @@ public class UndoController implements ActionListener {
 		System.out.println("Active Index: " + application.getLbLevelView().getActiveIndex());
 		System.out.println("Moves List Size: " + application.getLbLevelView().getToggleMoves().size());
 		tileView.repaint();
-		application.getLbLevelView().getSaveLbl().setText("");
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();

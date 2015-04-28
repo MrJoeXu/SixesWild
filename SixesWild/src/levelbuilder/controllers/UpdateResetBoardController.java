@@ -43,6 +43,7 @@ public class UpdateResetBoardController implements ActionListener,
 				.setEnabled(checkBox.isSelected());
 		
 		level.getAllowedSpecialMoves()[0] = checkBox.isSelected(); 
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class UpdateResetBoardController implements ActionListener,
 			int numResetBoardMoves = Integer.parseInt(textField.getText());
 			level.setResetBoardMoves(numResetBoardMoves);
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

@@ -51,6 +51,7 @@ public class UpdateThreeStarController implements DocumentListener {
 			level.setThreeStarScore(threeStarValue);
 			// System.out.println(level.getThreeStarScore());
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

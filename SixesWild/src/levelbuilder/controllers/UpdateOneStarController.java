@@ -51,6 +51,7 @@ public class UpdateOneStarController implements DocumentListener {
 			level.setOneStarScore(oneStarValue);
 			//System.out.println(level.getOneStarScore());
 		}
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 }

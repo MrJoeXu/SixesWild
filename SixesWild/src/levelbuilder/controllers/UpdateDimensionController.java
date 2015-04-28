@@ -59,6 +59,7 @@ public class UpdateDimensionController implements ChangeListener {
 				tv.addMouseListener(new TileController(tv, level, application));
 			}
 			//application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 			application.getLbLevelView().repaint();
 			application.getFrame().pack();
 		}

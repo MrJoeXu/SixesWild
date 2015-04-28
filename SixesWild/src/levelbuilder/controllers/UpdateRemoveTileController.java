@@ -42,6 +42,7 @@ public class UpdateRemoveTileController implements ActionListener,
 				.setEnabled(checkBox.isSelected());
 
 		level.getAllowedSpecialMoves()[2] = checkBox.isSelected();
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
 
 	@Override
@@ -74,6 +75,8 @@ public class UpdateRemoveTileController implements ActionListener,
 			int numRemoveTileMoves = Integer.parseInt(textField.getText());
 			level.setRemoveTileMoves(numRemoveTileMoves);
 		}
+		
+		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 
 	}
 

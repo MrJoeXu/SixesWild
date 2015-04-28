@@ -195,10 +195,11 @@ public class LBLevelSelectorView extends JPanel {
 		
 		JScrollPane levelScrollPane = new JScrollPane();
 		levelScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		levelScrollPane.setBounds(100, 432, 800, 200);
+		levelScrollPane.setBounds(100, 432, 800, 250);
 		this.add(levelScrollPane);
 		
 		JPanel levelPane = new JPanel();
+		levelPane.setLayout(null);
 		levelScrollPane.getViewport().add(levelPane);
 		
 		newLevelBtn = new BetterButton(Color.decode("#A38F85"),150,150,0);
@@ -224,7 +225,7 @@ public class LBLevelSelectorView extends JPanel {
 			levelBtn.setBorderPainted(false);
 			levelBtn.setFocusPainted(false);
 			levelBtn.setIcon(levelIcn);
-			levelBtn.setBounds(50+200*i, 10, 150, 150);
+			levelBtn.setBounds(100+200*i, 10, 150, 150);
 			levelBtn.setPreferredSize(new Dimension(150, 150));
 			levelButtons.add(levelBtn);
 			levelPane.add(levelBtn);
