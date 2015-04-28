@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * @author Joe Xu & Halsey
+ * @author Joe Xu 
+ * @author Halsey
+ * @author Tiffany
  *
  */
 
@@ -85,26 +87,38 @@ public class TileView extends JPanel {
 		switch (tile.getValue()) {
 		case 1:
 			g.setColor(Color.decode("#45D7B3"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;
 		case 2:
 			g.setColor(Color.decode("#3D7CA2"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;
 		case 3:
 			g.setColor(Color.decode("#FECA44"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;
 		case 4:
 			g.setColor(Color.decode("#CAA3DC"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;
 		case 5:
 			g.setColor(Color.decode("#D76262"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;			
 		case 6:
 			g.setColor(Color.decode("#716561"));
+			valueLbl.setVisible(true);
+			bonusLbl.setVisible(true);
 			break;
 		case 0:
 			g.setColor(Color.LIGHT_GRAY);
-			valueLbl.setText("");
-			bonusLbl.setText("");
+			valueLbl.setVisible(false);
+			bonusLbl.setVisible(false);
 			break;
 		default:
 			g.setColor(Color.LIGHT_GRAY);
