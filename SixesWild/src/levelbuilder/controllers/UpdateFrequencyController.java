@@ -9,6 +9,8 @@ import javax.swing.event.ChangeListener;
 
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.view.SpaceView;
+import src.sixeswildgame.view.TileView;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
@@ -37,24 +39,36 @@ public class UpdateFrequencyController implements ChangeListener {
 		if (!slider.getValueIsAdjusting()) {
 			int bonusSlide = (int) slider.getValue();
 			switch (bonusSlide) {
-			case 3: level.setBonusFrequency(21); break;
-			case 4: level.setBonusFrequency(12); break;
-			case 5: level.setBonusFrequency(3); break;
+			case 3:
+				level.setBonusFrequency(21);
+				break;
+			case 4:
+				level.setBonusFrequency(12);
+				break;
+			case 5:
+				level.setBonusFrequency(3);
+				break;
 			}
 			level.initialize();
-			
+
 			BoardView newBoardView = new BoardView(level.getBoard(), 33, 33);
-			int length = newBoardView.getDimension()*newBoardView.getTileLength() + 5 * newBoardView.getDimension();
-			int panelX = (350 - length)/2;
-			//System.out.print(panelX);
-			int panelY = (350 - length)/2;
-			//System.out.print(panelY);
+			int length = newBoardView.getDimension()
+					* newBoardView.getTileLength() + 5
+					* newBoardView.getDimension();
+			int panelX = (350 - length) / 2;
+			// System.out.print(panelX);
+			int panelY = (350 - length) / 2;
+			// System.out.print(panelY);
 			newBoardView.setBounds(panelX, panelY, length, length);
-			
+
 			application.getLbLevelView().setBoardView(newBoardView);
 			application.getLbLevelView().getBoardPanel().removeAll();
 			application.getLbLevelView().getBoardPanel().add(newBoardView);
-			//application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			for (SpaceView sv : application.getLbLevelView().getBoardView().getGrid() ) {
+				TileView tv = sv.getTileView();
+				tv.addMouseListener(new TileController(tv, level, application));
+			}
+			// application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			application.getLbLevelView().repaint();
 			application.getFrame().pack();
 		}
