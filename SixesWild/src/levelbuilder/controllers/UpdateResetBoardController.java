@@ -42,7 +42,7 @@ public class UpdateResetBoardController implements ActionListener,
 		application.getLbLevelView().getResetBoardTextField()
 				.setEnabled(checkBox.isSelected());
 		
-		level.getAllowedSpecialMoves()[1] = checkBox.isSelected(); 
+		level.getAllowedSpecialMoves()[0] = checkBox.isSelected(); 
 	}
 
 	@Override

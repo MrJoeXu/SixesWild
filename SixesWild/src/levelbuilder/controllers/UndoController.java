@@ -52,6 +52,7 @@ public class UndoController implements ActionListener {
 		System.out.println("Active Index: " + application.getLbLevelView().getActiveIndex());
 		System.out.println("Moves List Size: " + application.getLbLevelView().getToggleMoves().size());
 		tileView.repaint();
+		application.getLbLevelView().getSaveLbl().setText("");
 		
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();

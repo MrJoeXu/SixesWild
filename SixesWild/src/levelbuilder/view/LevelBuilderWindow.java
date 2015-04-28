@@ -34,6 +34,8 @@ import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
+import src.sixeswildgame.world.Level;
+import src.sixeswildgame.world.PuzzleLevel;
 import src.sixeswildgame.world.World;
 
 import java.awt.GridBagLayout;
@@ -91,8 +93,49 @@ public class LevelBuilderWindow {
 	/**
 	 * Initialize the world.
 	 */
-	private void initializeWorld() {
-		int gameType = 0;
+	private void initializeWorld() {		
+		world = new World();
+
+		File dir = new File("saveddata/custom/puzzle");
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getPuzzleLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/lightning");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getLightningLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/release");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getReleaseLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/elimination");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getEliminationLevels().add(level);
+		  }
+		} else {
+		}
+		
 	}
 
 	/**
@@ -202,6 +245,22 @@ public class LevelBuilderWindow {
 		eliminationBtn.addActionListener(new LBSelectGameTypeController(this, world, 4));
 		closeBtn.addActionListener(new LBCloseGameController(world, this));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
+	}
+	
+	public String getGameTypeName() {
+		
+		switch (gameType) {
+		case 1:
+			return "puzzle";
+		case 2:
+			return "lightning";
+		case 3:
+			return "release";
+		case 4:
+			return "elimination";
+		default:
+			return "Unknown";
+		}
 	}
 	
 	/**

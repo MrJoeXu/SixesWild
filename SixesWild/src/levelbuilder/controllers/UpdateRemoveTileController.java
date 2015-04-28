@@ -41,7 +41,7 @@ public class UpdateRemoveTileController implements ActionListener,
 		application.getLbLevelView().getRemoveTileTextField()
 				.setEnabled(checkBox.isSelected());
 
-		//level.getAllowedSpecialMoves()[3] = checkBox.isSelected();
+		level.getAllowedSpecialMoves()[2] = checkBox.isSelected();
 	}
 
 	@Override

@@ -6,6 +6,7 @@ package src.levelbuilder.controllers;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,23 +26,30 @@ public class LBSelectLevelController implements ActionListener {
 	
 	protected LevelBuilderWindow application;
 	protected World world;
+	protected Level level;
 
 	/**
 	 * 
 	 */
-	public LBSelectLevelController(LevelBuilderWindow application, World world) {
+	public LBSelectLevelController(LevelBuilderWindow application, World world, Level level) {
 		this.application = application;
 		this.world = world;
+		this.level = level;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		Level newCustomLevel = new Level(new Board(9), 0);
-		newCustomLevel.initialize();
+
+		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
+		File file = new File("saveddata/custom/" + application.getGameTypeName() + "/" + nextId + ".txt");
+				
+		if (level == null) {
+			level = new Level(new Board(9), nextId, application.getGameTypeName());
+			level.initialize();
+		}
 		
 		try {
-			application.setLbLevelView(new LBLevelView(application, world, newCustomLevel));
+			application.setLbLevelView(new LBLevelView(application, world, level));
 		} catch (FontFormatException | IOException e1) {
 			e1.printStackTrace();
 		}	

@@ -14,6 +14,7 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBLevelViewBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.RedoController;
+import src.levelbuilder.controllers.SaveController;
 import src.levelbuilder.controllers.TileController;
 import src.levelbuilder.controllers.UndoController;
 import src.levelbuilder.controllers.UpdateDimensionController;
@@ -93,6 +94,7 @@ public class LBLevelView extends JPanel {
 	protected int activeIndex;
 		
 	protected JLabel levelNameLbl;
+	protected JLabel saveLbl;
 	protected JSlider dimensionSlider;
 	protected JSlider frequencySlider;
 	protected JTextField timerMinuteTextField;
@@ -109,6 +111,7 @@ public class LBLevelView extends JPanel {
 	protected JButton miniBtn;
 	protected JButton undoBtn;
 	protected JButton redoBtn;
+	protected JButton saveBtn;
 
 	protected JPanel boardPanel;
 	private JTextField timerSecondTextField;
@@ -263,7 +266,7 @@ public class LBLevelView extends JPanel {
 		undoBtn.setBounds(815, 643, 80, 34);
 		add(undoBtn);
 
-		BetterButton saveBtn = new BetterButton(Color.decode("#A38F85"), 40,
+		saveBtn = new BetterButton(Color.decode("#A38F85"), 40,
 				40, 10);
 		Icon save = new ImageIcon("resources/save.png");
 		saveBtn.setIcon(save);
@@ -273,6 +276,13 @@ public class LBLevelView extends JPanel {
 		saveBtn.setForeground(Color.white);
 		saveBtn.setBounds(765, 637, 40, 40);
 		add(saveBtn);
+		
+		saveLbl = new JLabel("");
+		saveLbl.setBounds(610, 673, 350, 41);
+		saveLbl.setHorizontalAlignment(JLabel.CENTER);
+		saveLbl.setFont(f14);
+		saveLbl.setForeground(Color.decode("#A38F85"));
+		add(saveLbl);
 
 		JLabel lblLevelName = new JLabel("Level Name:");
 		Font f30 = Font.createFont(
@@ -353,6 +363,12 @@ public class LBLevelView extends JPanel {
 		rangeFiveCheckBox.setBounds(432, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeFiveCheckBox);
 		add(rangeFiveCheckBox);
+		
+		int i = 0;
+		for (JCheckBox bx : tileRangeCheckBoxes) {
+			bx.setSelected(level.getTileRange()[i]);
+			i++;
+		}
 
 		JLabel lblNewLabel = new JLabel("Dimensions:");
 		lblNewLabel.setFont(f30);
@@ -388,6 +404,7 @@ public class LBLevelView extends JPanel {
 		dimensionSlider.setFont(f14);
 		dimensionSlider.setLabelTable(labelTable);
 		dimensionSlider.setBounds(268, 314, 200, 50);
+		dimensionSlider.setValue(level.getBoard().getDimension());
 		add(dimensionSlider);
 
 		JLabel lblRb = new JLabel("Reset Board:");
@@ -414,7 +431,7 @@ public class LBLevelView extends JPanel {
 		checkbxResetBoard = new JCheckBox();
 		checkbxResetBoard.setIcon(moveLock);
 		checkbxResetBoard.setSelectedIcon(moveUnlock);
-		checkbxResetBoard.setSelected(false);
+		checkbxResetBoard.setSelected(level.getAllowedSpecialMoves()[0]);
 		checkbxResetBoard.setBounds(268, 371, 55, 30);
 		add(checkbxResetBoard);
 
@@ -425,7 +442,7 @@ public class LBLevelView extends JPanel {
 		resetBoardTextField.setBorder(null);
 		resetBoardTextField.setBounds(344, 370, 46, 34);
 		resetBoardTextField.setEnabled(checkbxResetBoard.isSelected());
-		TextPrompt resetBoardPrompt = new TextPrompt("0", resetBoardTextField);
+		TextPrompt resetBoardPrompt = new TextPrompt(String.valueOf(level.getResetBoardMoves()), resetBoardTextField);
 		resetBoardPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		// resetMovesPrompt.changeStyle(Font.ITALIC);
 		add(resetBoardTextField);
@@ -433,7 +450,7 @@ public class LBLevelView extends JPanel {
 		checkbxSwapTiles = new JCheckBox();
 		checkbxSwapTiles.setIcon(moveLock);
 		checkbxSwapTiles.setSelectedIcon(moveUnlock);
-		checkbxSwapTiles.setSelected(false);
+		checkbxSwapTiles.setSelected(level.getAllowedSpecialMoves()[1]);
 		checkbxSwapTiles.setBounds(268, 434, 55, 30);
 		add(checkbxSwapTiles);
 
@@ -444,7 +461,7 @@ public class LBLevelView extends JPanel {
 		swapTilesTextField.setBorder(null);
 		swapTilesTextField.setBounds(344, 431, 46, 34);
 		swapTilesTextField.setEnabled(checkbxSwapTiles.isSelected());
-		TextPrompt swapTilesPrompt = new TextPrompt("0", swapTilesTextField);
+		TextPrompt swapTilesPrompt = new TextPrompt(String.valueOf(level.getSwapTwoTilesMoves()), swapTilesTextField);
 		swapTilesPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		// swapTilesPrompt.changeStyle(Font.ITALIC);
 		add(swapTilesTextField);
@@ -452,7 +469,7 @@ public class LBLevelView extends JPanel {
 		checkbxRemoveTile = new JCheckBox();
 		checkbxRemoveTile.setIcon(moveLock);
 		checkbxRemoveTile.setSelectedIcon(moveUnlock);
-		checkbxRemoveTile.setSelected(false);
+		checkbxRemoveTile.setSelected(level.getAllowedSpecialMoves()[2]);
 		checkbxRemoveTile.setBounds(268, 495, 55, 30);
 		add(checkbxRemoveTile);
 
@@ -463,7 +480,7 @@ public class LBLevelView extends JPanel {
 		removeTileTextField.setBorder(null);
 		removeTileTextField.setBounds(344, 495, 46, 34);
 		removeTileTextField.setEnabled(checkbxRemoveTile.isSelected());
-		TextPrompt removeTilePrompt = new TextPrompt("0", removeTileTextField);
+		TextPrompt removeTilePrompt = new TextPrompt(String.valueOf(level.getRemoveTileMoves()), removeTileTextField);
 		removeTilePrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		// removeTilePrompt.changeStyle(Font.ITALIC);
 		add(removeTileTextField);
@@ -497,13 +514,18 @@ public class LBLevelView extends JPanel {
 		frequencySlider.setPaintLabels(true);
 		frequencySlider.setLabelTable(frequencySliderTable);
 		frequencySlider.setBounds(332, 558, 134, 50);
+		switch (level.getBonusFrequency()) {
+		case 21: frequencySlider.setValue(3); break;
+		case 12: frequencySlider.setValue(4); break;
+		case 3: frequencySlider.setValue(5); break;
+		}
 		add(frequencySlider);
 		
-		JLabel moveLeftLbl = new JLabel("Moves Left:");
-		moveLeftLbl.setFont(f30);
-		moveLeftLbl.setForeground(Color.decode("#A38F85"));
-		moveLeftLbl.setBounds(63, 607, 185, 41);
-		add(moveLeftLbl);
+		JLabel movesLeftLbl = new JLabel("Moves Left:");
+		movesLeftLbl.setFont(f30);
+		movesLeftLbl.setForeground(Color.decode("#A38F85"));
+		movesLeftLbl.setBounds(63, 607, 185, 41);
+		add(movesLeftLbl);
 		
 		movesLeftTextField = new JTextField();
 		movesLeftTextField.setBounds(268, 612, 55, 34);
@@ -511,16 +533,17 @@ public class LBLevelView extends JPanel {
 		movesLeftTextField.setFont(f14);
 		movesLeftTextField.setForeground(Color.decode("#A38F85"));
 		movesLeftTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt movesLeftPrompt = new TextPrompt("0", movesLeftTextField);
+		TextPrompt movesLeftPrompt = new TextPrompt(String.valueOf(level.getMovesLeft()), movesLeftTextField);
 		movesLeftPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		// minutePrompt.changeStyle(Font.ITALIC);
 		add(movesLeftTextField);
 
-		levelNameLbl = new JLabel("Level Name");
+		levelNameLbl = new JLabel("New Level");
 		levelNameLbl.setBounds(615, 120, 350, 41);
 		levelNameLbl.setHorizontalAlignment(JLabel.CENTER);
 		levelNameLbl.setFont(f30);
 		levelNameLbl.setForeground(Color.decode("#A38F85"));
+		levelNameLbl.setText(level.getName());
 		add(levelNameLbl);
 
 		boardPanel = new JPanel();
@@ -529,7 +552,12 @@ public class LBLevelView extends JPanel {
 		this.add(boardPanel);
 
 		boardView = new BoardView(level.getBoard(), 33, 33);
-		boardView.setPreferredSize(new Dimension(340, 340));
+		int length = boardView.getDimension()*boardView.getTileLength() + 5 * boardView.getDimension();
+		int panelX = (350 - length)/2;
+		//System.out.print(panelX);
+		int panelY = (350 - length)/2;
+		//System.out.print(panelY);
+		boardView.setBounds(panelX, panelY, length, length);
 		boardPanel.add(boardView);
 
 		Icon starIcon = new ImageIcon("resources/lbStar1.png");
@@ -555,7 +583,7 @@ public class LBLevelView extends JPanel {
 		oneStarTextField.setFont(f14);
 		oneStarTextField.setForeground(Color.decode("#A38F85"));
 		oneStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt oneStarPrompt = new TextPrompt("One Star", oneStarTextField);
+		TextPrompt oneStarPrompt = new TextPrompt(String.valueOf(level.getOneStarScore()), oneStarTextField);
 		oneStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		oneStarPrompt.changeStyle(Font.ITALIC);
 		this.add(oneStarTextField);
@@ -566,7 +594,7 @@ public class LBLevelView extends JPanel {
 		twoStarTextField.setFont(f14);
 		twoStarTextField.setForeground(Color.decode("#A38F85"));
 		twoStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt twoStarPrompt = new TextPrompt("Two Star", twoStarTextField);
+		TextPrompt twoStarPrompt = new TextPrompt(String.valueOf(level.getTwoStarScore()), twoStarTextField);
 		twoStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		twoStarPrompt.changeStyle(Font.ITALIC);
 		this.add(twoStarTextField);
@@ -577,7 +605,7 @@ public class LBLevelView extends JPanel {
 		threeStarTextField.setFont(f14);
 		threeStarTextField.setForeground(Color.decode("#A38F85"));
 		threeStarTextField.setHorizontalAlignment(JTextField.CENTER);
-		TextPrompt threeStarPrompt = new TextPrompt("Three Star", threeStarTextField);
+		TextPrompt threeStarPrompt = new TextPrompt(String.valueOf(level.getThreeStarScore()), threeStarTextField);
 		threeStarPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 		threeStarPrompt.changeStyle(Font.ITALIC);
 		this.add(threeStarTextField);
@@ -612,7 +640,7 @@ public class LBLevelView extends JPanel {
 			timerMinuteTextField.setFont(f14);
 			timerMinuteTextField.setForeground(Color.decode("#A38F85"));
 			timerMinuteTextField.setHorizontalAlignment(JTextField.CENTER);
-			TextPrompt minutePrompt = new TextPrompt("0", timerMinuteTextField);
+			TextPrompt minutePrompt = new TextPrompt(String.valueOf(level.getMinutes()), timerMinuteTextField);
 			minutePrompt.setHorizontalAlignment(TextPrompt.CENTER);
 			// minutePrompt.changeStyle(Font.ITALIC);
 			add(timerMinuteTextField);
@@ -629,7 +657,7 @@ public class LBLevelView extends JPanel {
 			timerSecondTextField.setFont(null);
 			timerSecondTextField.setBorder(null);
 			timerSecondTextField.setBounds(362, 660, 55, 34);
-			TextPrompt secondPrompt = new TextPrompt("0", timerSecondTextField);
+			TextPrompt secondPrompt = new TextPrompt(String.valueOf(level.getSeconds()), timerSecondTextField);
 			secondPrompt.setHorizontalAlignment(TextPrompt.CENTER);
 			// secondPrompt.changeStyle(Font.ITALIC);
 			add(timerSecondTextField);
@@ -687,11 +715,6 @@ public class LBLevelView extends JPanel {
 		movesLeftTextField.getDocument().addDocumentListener(
 				new UpdateMovesLeftController(application, level,
 						movesLeftTextField));
-		/*
-		for (int i = 1; i < boardView.getDimension() * boardView.getDimension()) {
-			SpaceView space = boardView.getGrid().get(i);
-			space.setMouseAdapter(new ToggleSpaceMove(level, application, space));
-		} */
 		
 		if (application.getGameType() == 2) {
 		timerMinuteTextField.getDocument().addDocumentListener(
@@ -707,6 +730,7 @@ public class LBLevelView extends JPanel {
 				application));
 		undoBtn.addActionListener(new UndoController(toggleMoves, application, level));
 		redoBtn.addActionListener(new RedoController(toggleMoves, application, level));
+		saveBtn.addActionListener(new SaveController(level, application, world));
 		
 		for (SpaceView sv : boardView.getGrid() ) {
 			TileView tv = sv.getTileView();
@@ -1097,6 +1121,34 @@ public class LBLevelView extends JPanel {
 		this.activeIndex = activeIndex;
 	}
 
+	/**
+	 * @return the saveLbl
+	 */
+	public JLabel getSaveLbl() {
+		return saveLbl;
+	}
+
+	/**
+	 * @param saveLbl the saveLbl to set
+	 */
+	public void setSaveLbl(JLabel saveLbl) {
+		this.saveLbl = saveLbl;
+	}
+
+	/**
+	 * @return the movesLeftTextField
+	 */
+	public JTextField getMovesLeftTextField() {
+		return movesLeftTextField;
+	}
+
+	/**
+	 * @param movesLeftTextField the movesLeftTextField to set
+	 */
+	public void setMovesLeftTextField(JTextField movesLeftTextField) {
+		this.movesLeftTextField = movesLeftTextField;
+	}
+	
 	
 	
 }

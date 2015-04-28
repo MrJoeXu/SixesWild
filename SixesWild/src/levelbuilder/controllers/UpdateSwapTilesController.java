@@ -41,7 +41,7 @@ public class UpdateSwapTilesController implements ActionListener,
 		application.getLbLevelView().getSwapTilesTextField()
 				.setEnabled(checkBox.isSelected());
 
-		level.getAllowedSpecialMoves()[2] = checkBox.isSelected();
+		level.getAllowedSpecialMoves()[1] = checkBox.isSelected();
 
 	}
 

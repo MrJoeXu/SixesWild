@@ -195,6 +195,22 @@ public class SixesWildWindow {
 		
 	}
 	
+	public String getGameTypeName() {
+		
+		switch (gameType) {
+		case 1:
+			return "puzzle";
+		case 2:
+			return "lightning";
+		case 3:
+			return "release";
+		case 4:
+			return "elimination";
+		default:
+			return "Unknown";
+		}
+	}
+	
 	/**
 	 * Launch the application.
 	 */

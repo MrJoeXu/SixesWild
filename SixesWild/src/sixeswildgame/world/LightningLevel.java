@@ -3,6 +3,7 @@
  */
 package src.sixeswildgame.world;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -12,37 +13,22 @@ import javax.swing.Timer;
  *
  */
 public class LightningLevel extends Level {
-	
+
 	/**
 	 * @param board
-	 * @param resetBoardMoves
-	 * @param swapTwoTilesMoves
-	 * @param removeTileMoves
 	 * @param id
-	 * @param currentScore
-	 * @param highScore
-	 * @param oneStarScore
-	 * @param twoStarScore
-	 * @param threeStarScore
-	 * @param movesLeft
-	 * @param bonusFrequency
-	 * @param time
-	 * @param minutes
-	 * @param seconds
-	 * @param isLocked
-	 * @param tileRange
-	 * @param allowedSpecialMoves
+	 * @param gameType
 	 */
-	public LightningLevel(Board board, int resetBoardMoves,
-			int swapTwoTilesMoves, int removeTileMoves, int id,
-			int currentScore, int highScore, int oneStarScore,
-			int twoStarScore, int threeStarScore, int movesLeft,
-			int bonusFrequency, Timer time, int minutes, int seconds,
-			boolean isLocked, boolean[] tileRange, boolean[] allowedSpecialMoves) {
-		super(board, resetBoardMoves, swapTwoTilesMoves, removeTileMoves, id,
-				currentScore, highScore, oneStarScore, twoStarScore, threeStarScore,
-				movesLeft, bonusFrequency, time, minutes, seconds, isLocked, tileRange,
-				allowedSpecialMoves);
+	public LightningLevel(Board board, int id, String gameType) {
+		super(board, id, gameType);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param file
+	 */
+	public LightningLevel(File file) {
+		super(file);
 		// TODO Auto-generated constructor stub
 	}
 

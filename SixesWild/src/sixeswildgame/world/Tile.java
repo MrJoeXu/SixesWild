@@ -40,6 +40,36 @@ public class Tile {
 		this.lastValue = value;
 		this.lastBonus = bonus;
 	}
+	
+	/**
+	 * @param value
+	 * @param bonus
+	 * @param row
+	 * @param column
+	 * @param lastValue
+	 * @param lastBonus
+	 * @param isSelected
+	 */
+	public Tile(int value, int bonus, int row, int column, int lastValue,
+			int lastBonus, boolean isSelected) {
+		super();
+		this.value = value;
+		this.bonus = bonus;
+		this.row = row;
+		this.column = column;
+		this.lastValue = lastValue;
+		this.lastBonus = lastBonus;
+		this.isSelected = isSelected;
+	}
+
+	public String toString() {
+		String tileString = "";
+		
+		tileString += value + "," + bonus + "," + row + "," + column + "," + lastValue + "," 
+				+ lastBonus + "," + isSelected + ",";
+		
+		return tileString;
+	}
 
 	/**
 	 * @return the value

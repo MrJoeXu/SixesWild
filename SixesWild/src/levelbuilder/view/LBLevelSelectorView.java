@@ -4,17 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBGameTypeBackController;
@@ -25,6 +30,9 @@ import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.SixesWildWindow;
+import src.sixeswildgame.world.Board;
+import src.sixeswildgame.world.Level;
+import src.sixeswildgame.world.PuzzleLevel;
 import src.sixeswildgame.world.World;
 
 public class LBLevelSelectorView extends JPanel {
@@ -38,12 +46,10 @@ public class LBLevelSelectorView extends JPanel {
 	protected JButton eliminationBtn;
 	protected JButton releaseBtn;
 	
-	protected JButton LevelButton;
-	protected JButton NewButton[] = new JButton[5];
-	
-	
-	
+	protected JButton newLevelBtn;
+	protected ArrayList<JButton> levelButtons;
 	protected JLabel titleLable;
+	protected int numLevels;
 	
 	protected LevelBuilderWindow application;
 	protected World world;
@@ -51,12 +57,13 @@ public class LBLevelSelectorView extends JPanel {
 	public LBLevelSelectorView(LevelBuilderWindow application, World world) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
 		this.world = world;
+		this.levelButtons = new ArrayList<JButton>();
 		initialize();
 	}
 
 	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
-		initializeView();
 		initializeModel();
+		initializeView();
 		initializeController();
 	}
 
@@ -66,14 +73,39 @@ public class LBLevelSelectorView extends JPanel {
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,application));
 		
-		for (int i=2; i<=4; i++) {
-			NewButton[i].addActionListener(new LBSelectLevelController(application, world));
+		newLevelBtn.addActionListener(new LBSelectLevelController(application, world, null));
+		
+		Level level;
+		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
+		int i = 0;
+		
+		for (JButton b : levelButtons) {
+			switch (application.getGameType()) {
+			case 1:
+				level = world.getPuzzleLevels().get(i);
+				break;
+			case 2:
+				level = world.getLightningLevels().get(i);
+				break;
+			case 3:
+				level = world.getReleaseLevels().get(i);
+				break;
+			case 4:
+				level = world.getEliminationLevels().get(i);
+				break;
+			default:
+				level = new Level(new Board(9), nextId, application.getGameTypeName());
+			}
+			b.addActionListener(new LBSelectLevelController(application, world, level));
+			i++;
 		}
 		
 	}
 
 	private void initializeModel() {
-		// TODO Auto-generated method stub
+		
+		numLevels = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
+		System.out.println("NumLevels: " + numLevels);
 		
 	}
 
@@ -161,29 +193,66 @@ public class LBLevelSelectorView extends JPanel {
 		lbLabel.setVerticalAlignment(BetterLabel.CENTER);
 		this.add(lbLabel);
 		
-		LevelButton = new BetterButton(Color.decode("#A38F85"),100,100,10);
-		LevelButton.setBorderPainted(false);
-		LevelButton.setFocusPainted(false);
-		Icon Level = new ImageIcon("resources/LevelSelectorIcon.png");
-		LevelButton.setIcon(Level);
-		LevelButton.setBounds(212, 437, 100, 100);
-		LevelButton.setForeground(Color.white);
-		this.add(LevelButton);
+		JScrollPane levelScrollPane = new JScrollPane();
+		levelScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		levelScrollPane.setBounds(100, 432, 800, 200);
+		this.add(levelScrollPane);
 		
-		JLabel levelName = new JLabel("Hardest Level");
-		levelName.setFont(f22);
-		levelName.setForeground(Color.decode("#A38F85"));
-		levelName.setBounds(193,553,150,30);
-		this.add(levelName);
+		JPanel levelPane = new JPanel();
+		levelScrollPane.getViewport().add(levelPane);
 		
+		newLevelBtn = new BetterButton(Color.decode("#A38F85"),150,150,0);
+		newLevelBtn.setBorderPainted(false);
+		newLevelBtn.setFocusPainted(false);
+		Icon levelIcn = new ImageIcon("resources/LevelSelectorIcon.png");
 		Icon plus = new ImageIcon("resources/Plus.png");
-		for (int i=2; i<=4; i++) {
-			NewButton[i] = new BetterButton (Color.decode("#9B9B9B"),100,100,10);
-			NewButton[i].setBorderPainted(false);
-			NewButton[i].setFocusPainted(false);
-			NewButton[i].setIcon(plus);
-			NewButton[i].setBounds(47+165*i, 437, 100, 100);
-			this.add(NewButton[i]);
+		newLevelBtn.setIcon(plus);
+		newLevelBtn.setBounds(50, 50, 150, 150);
+		newLevelBtn.setPreferredSize(new Dimension(150, 150));
+		newLevelBtn.setForeground(Color.white);
+		levelPane.add(newLevelBtn);
+		
+		JLabel newLevelName = new JLabel("New Level");
+		newLevelName.setFont(f22);
+		newLevelName.setForeground(Color.decode("#A38F85"));
+		newLevelName.setBounds(50, 210, 150, 30);
+		levelPane.add(newLevelName);
+		
+		for (int i = 0; i < numLevels; i++) {
+			
+			JButton levelBtn = new BetterButton (Color.decode("#9B9B9B"),150,150,0);
+			levelBtn.setBorderPainted(false);
+			levelBtn.setFocusPainted(false);
+			levelBtn.setIcon(levelIcn);
+			levelBtn.setBounds(50+200*i, 10, 150, 150);
+			levelBtn.setPreferredSize(new Dimension(150, 150));
+			levelButtons.add(levelBtn);
+			levelPane.add(levelBtn);
+			
+			String name;
+			
+			switch (application.getGameType()) {
+			case 1:
+				name = world.getPuzzleLevels().get(i).getName();
+				break;
+			case 2:
+				name = world.getLightningLevels().get(i).getName();
+				break;
+			case 3:
+				name = world.getReleaseLevels().get(i).getName();
+				break;
+			case 4:
+				name = world.getEliminationLevels().get(i).getName();
+				break;
+			default:
+				name = "Unknown";
+			}
+			
+			JLabel levelName = new JLabel(name);
+			levelName.setFont(f22);
+			levelName.setForeground(Color.decode("#A38F85"));
+			levelName.setBounds(70 + 150*i, 270, 150, 30);
+			levelPane.add(levelName);
 		}
 
 		

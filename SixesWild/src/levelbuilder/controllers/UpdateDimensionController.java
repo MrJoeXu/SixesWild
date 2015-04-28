@@ -11,6 +11,8 @@ import javax.swing.event.ChangeListener;
 
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.view.SpaceView;
+import src.sixeswildgame.view.TileView;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
@@ -52,6 +54,10 @@ public class UpdateDimensionController implements ChangeListener {
 			application.getLbLevelView().setBoardView(newBoardView);
 			application.getLbLevelView().getBoardPanel().removeAll();
 			application.getLbLevelView().getBoardPanel().add(newBoardView);
+			for (SpaceView sv : application.getLbLevelView().getBoardView().getGrid() ) {
+				TileView tv = sv.getTileView();
+				tv.addMouseListener(new TileController(tv, level, application));
+			}
 			//application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			application.getLbLevelView().repaint();
 			application.getFrame().pack();

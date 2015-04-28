@@ -20,6 +20,18 @@ public class Space {
 		this.enabled = true;
 	}
 
+	/**
+	 * @param tile
+	 * @param enabled
+	 */
+	public Space(Tile tile, boolean enabled) {
+		super();
+		this.tile = tile;
+		this.enabled = enabled;
+	}
+
+
+
 	public void toggleEnabled() {
 		enabled = !enabled;
 		if (!enabled) {
@@ -30,6 +42,14 @@ public class Space {
 			tile.setValue(tile.getLastValue());
 			tile.setBonus(tile.getLastBonus());
 		}
+	}
+	
+	public String toString() {
+		String spaceString = "";
+		
+		spaceString += tile.toString() + enabled + ",";
+		
+		return spaceString;
 	}
 
 	/**

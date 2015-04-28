@@ -40,14 +40,8 @@ public class LBSelectGameTypeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		application.setGameType(gameType);
-		/*Level newCustomLevel = new Level(new Board(9), 0);
-		newCustomLevel.initialize();
-		try {
-			application.setLbLevelView(new LBLevelView(application, world, newCustomLevel));
-		} catch (FontFormatException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		
+		System.out.println("GT: " + gameType);
 		
 		try {
 			application.setLbLevelSelectorView(new LBLevelSelectorView(application, world));
@@ -56,7 +50,6 @@ public class LBSelectGameTypeController implements ActionListener {
 			e1.printStackTrace();
 		}
 		application.getFrame().setContentPane(application.getLbLevelSelectorView());
-		application.setGameType(gameType);
 		application.getLbLevelSelectorView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");
 		application.getFrame().pack();

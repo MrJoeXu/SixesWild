@@ -3,8 +3,16 @@
  */
 package src.sixeswildgame.world;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 import javax.swing.Timer;
 
@@ -29,6 +37,7 @@ public class Level {
 	protected int threeStarScore;
 	protected int movesLeft;
 	protected int bonusFrequency;
+	protected String name;
 	
 	protected Timer time;
 	protected int minutes;
@@ -38,7 +47,9 @@ public class Level {
 	protected boolean[] tileRange;
 	protected boolean[] allowedSpecialMoves;
 	
-	public Level(Board board, int id) {
+	protected File file;
+	
+	public Level(Board board, int id, String gameType) {
 		this.board = board;
 		this.id = id;
 		this.resetBoardMoves = 0;
@@ -60,53 +71,89 @@ public class Level {
 		for (int i = 0; i < 3; i++) {
 			allowedSpecialMoves[i] = true;
 		}
+		this.name = "Level " + id;
+		this.file = new File("saveddata/custom/" + gameType + "/" + id + ".txt");
 	}
+	
+	public Level(File file) {
+		this.file = file;
+		this.tileRange = new boolean[5];
+		for (int i = 0; i < 5; i++) {
+			tileRange[i] = true;
+		}
+		this.allowedSpecialMoves = new boolean[3];
+		for (int i = 0; i < 3; i++) {
+			allowedSpecialMoves[i] = true;
+		}
+	
+		// stores input stream
+        InputStream is;
 
-	/**
-	 * @param board
-	 * @param resetBoardMoves
-	 * @param swapTwoTilesMoves
-	 * @param removeTileMoves
-	 * @param id
-	 * @param currentScore
-	 * @param highScore
-	 * @param oneStarScore
-	 * @param twoStarScore
-	 * @param threeStarScore
-	 * @param movesLeft
-	 * @param bonusFrequency
-	 * @param time
-	 * @param minutes
-	 * @param seconds
-	 * @param isLocked
-	 * @param tileRange
-	 * @param allowedSpecialMoves
-	 */
-	public Level(Board board, int resetBoardMoves, int swapTwoTilesMoves,
-			int removeTileMoves, int id, int currentScore, int highScore,
-			int oneStarScore, int twoStarScore, int threeStarScore,
-			int movesLeft, int bonusFrequency, Timer time, int minutes,
-			int seconds, boolean isLocked, boolean[] tileRange,
-			boolean[] allowedSpecialMoves) {
-		super();
-		this.board = board;
-		this.resetBoardMoves = resetBoardMoves;
-		this.swapTwoTilesMoves = swapTwoTilesMoves;
-		this.removeTileMoves = removeTileMoves;
-		this.id = id;
-		this.currentScore = currentScore;
-		this.highScore = highScore;
-		this.oneStarScore = oneStarScore;
-		this.twoStarScore = twoStarScore;
-		this.threeStarScore = threeStarScore;
-		this.movesLeft = movesLeft;
-		this.bonusFrequency = bonusFrequency;
-		this.time = time;
-		this.minutes = minutes;
-		this.seconds = seconds;
-		this.isLocked = isLocked;
-		this.tileRange = tileRange;
-		this.allowedSpecialMoves = allowedSpecialMoves;
+        try {
+
+            // sets input stream as given file
+            is = new FileInputStream( file );
+
+            Scanner scan = new Scanner(is);
+            String[] array;
+
+            String line = scan.nextLine();
+
+            if (line.contains(",")) {
+
+                array = line.split(",");
+
+            } else array = line.split("\t");
+
+            Object[] data = new Object[array.length];
+
+            for (int i = 0; i < array.length; i++) data[i] = array[i];
+
+            this.resetBoardMoves = Integer.parseInt((String) data[0]);
+            this.swapTwoTilesMoves = Integer.parseInt((String) data[1]);
+            this.removeTileMoves = Integer.parseInt((String) data[2]);
+            this.id = Integer.parseInt((String) data[3]);
+            this.currentScore = Integer.parseInt((String) data[4]);
+            this.highScore = Integer.parseInt((String) data[5]);
+            this.oneStarScore = Integer.parseInt((String) data[6]);
+            this.twoStarScore = Integer.parseInt((String) data[7]);
+            this.threeStarScore = Integer.parseInt((String) data[8]);
+            this.movesLeft = Integer.parseInt((String) data[9]);
+            this.bonusFrequency = Integer.parseInt((String) data[10]);
+            this.name = (String) data[11];
+            this.minutes = Integer.parseInt((String) data[12]);
+            this.seconds = Integer.parseInt((String) data[13]);
+            this.isLocked = Boolean.parseBoolean((String) data[14]);
+
+    		//tileRange
+    		for (int i = 0; i < 5; i++) {
+    			this.tileRange[i] = Boolean.parseBoolean((String) data[15+i]);
+    		}
+    		
+    		//allowedSpecialMoves
+    		for (int i = 0; i < 3; i++) {
+    			this.allowedSpecialMoves[i] = Boolean.parseBoolean((String) data[20+i]);
+    		}
+    		
+    		int dimension = Integer.parseInt((String) data[23]);
+    		System.out.println("Dimension: " + dimension);
+    		System.out.println((String) data[29]);
+    		this.board = new Board(dimension);
+
+    		for (int i = 0; i < dimension * dimension; i++) {
+				Space space = new Space(new Tile(Integer.parseInt((String) data[24+i*8]), Integer.parseInt((String) data[25+i*8]),
+						Integer.parseInt((String) data[26+i*8]), 
+						Integer.parseInt((String) data[27+i*8]),
+						Integer.parseInt((String) data[28+i*8]), 
+						Integer.parseInt((String) data[29+i*8]),
+						Boolean.parseBoolean((String) data[30+i*8])), Boolean.parseBoolean((String) data[31+i*8]));
+				board.getGrid().set(i, space);
+    		}
+          
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
 	}
 
 	public void initialize() {
@@ -136,6 +183,65 @@ public class Level {
 	
 	public void hasWon() {
 		
+	}
+
+	public void save(String gameType) {
+				
+		String levelString = toString();
+		
+		try {
+
+			file = new File("saveddata/custom/" + gameType + "/" + id + ".txt");
+			 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(levelString);
+			bw.close();
+			
+			System.out.println(levelString);
+			System.out.println("Saved.");
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String toString() {
+		String levelString = "";
+		
+		//Special Moves
+		levelString += resetBoardMoves + "," + swapTwoTilesMoves + "," + removeTileMoves + ",";
+		
+		//More
+		levelString += id + "," + currentScore + "," + highScore + "," + oneStarScore + "," + twoStarScore + ","
+				+ threeStarScore + "," + movesLeft + "," + bonusFrequency + "," + name + ",";
+		
+		//Time
+		levelString += minutes + "," + seconds + ",";
+		
+		//locked
+		levelString += isLocked + ",";
+		
+		//tileRange
+		for (int i = 0; i < 5; i++) {
+			levelString += tileRange[i] + ",";
+		}
+		
+		//allowedSpecialMoves
+		for (int i = 0; i < 3; i++) {
+			levelString += allowedSpecialMoves[i] + ",";
+		}
+		
+		levelString += board.getDimension() + ",";
+
+		for (Space sp : board.getGrid()) levelString += sp.toString();
+		
+		return levelString;
 	}
 	
 	//Getters and Setters
@@ -376,5 +482,21 @@ public class Level {
 	public void setSeconds(int seconds) {
 		this.seconds = seconds;
 	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	
 }
