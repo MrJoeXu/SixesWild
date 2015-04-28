@@ -58,9 +58,6 @@ public class TileView extends JPanel {
 		case 3: bonusLbl.setText("x3"); break;
 		}
 		
-		
-		
-		
 		if (this.length == 33) {
 			valueLbl.setFont(new Font("Avenir Next", Font.PLAIN, 12));
 			valueLbl.setBounds(13,7,7,16);
