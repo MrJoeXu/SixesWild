@@ -113,12 +113,12 @@ public class TileView extends JPanel {
 			bonusLbl.setVisible(true);
 			break;
 		case 0:
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(Color.decode("#9B9B9B"));
 			valueLbl.setVisible(false);
 			bonusLbl.setVisible(false);
 			break;
 		default:
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(Color.decode("#9B9B9B"));
 		}
 		g.fillRoundRect(0, 0, length, length, 10, 10);
 		

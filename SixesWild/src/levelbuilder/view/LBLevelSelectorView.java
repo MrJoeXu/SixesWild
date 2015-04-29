@@ -193,41 +193,48 @@ public class LBLevelSelectorView extends JPanel {
 		lbLabel.setVerticalAlignment(BetterLabel.CENTER);
 		this.add(lbLabel);
 		
-		JScrollPane levelScrollPane = new JScrollPane();
-		levelScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		levelScrollPane.setBounds(100, 432, 800, 250);
-		this.add(levelScrollPane);
-		
 		JPanel levelPane = new JPanel();
 		levelPane.setLayout(null);
-		levelScrollPane.getViewport().add(levelPane);
+		levelPane.setPreferredSize(new Dimension(850, 200));
+		levelPane.setBackground(Color.decode("#D8D8D8"));
 		
-		newLevelBtn = new BetterButton(Color.decode("#A38F85"),150,150,0);
+		JScrollPane levelScrollPane = new JScrollPane();
+		levelScrollPane.setBorder(null);
+		levelScrollPane.setBackground(Color.decode("#D8D8D8"));
+		levelScrollPane.getHorizontalScrollBar().setUI(new BetterScrollBar());
+		levelScrollPane.setViewportView(levelPane);
+		levelScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		levelScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		levelScrollPane.setBounds(138, 407, 700, 200);
+		this.add(levelScrollPane);
+	
+		
+		newLevelBtn = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
 		newLevelBtn.setBorderPainted(false);
 		newLevelBtn.setFocusPainted(false);
-		Icon levelIcn = new ImageIcon("resources/LevelSelectorIcon.png");
+		
 		Icon plus = new ImageIcon("resources/Plus.png");
 		newLevelBtn.setIcon(plus);
-		newLevelBtn.setBounds(50, 50, 150, 150);
-		newLevelBtn.setPreferredSize(new Dimension(150, 150));
+		newLevelBtn.setBounds(62, 25, 100, 100);
 		newLevelBtn.setForeground(Color.white);
 		levelPane.add(newLevelBtn);
 		
 		JLabel newLevelName = new JLabel("New Level");
 		newLevelName.setFont(f22);
-		newLevelName.setForeground(Color.decode("#A38F85"));
-		newLevelName.setBounds(50, 210, 150, 30);
+		newLevelName.setForeground(Color.decode("#9B9B9B"));
+		newLevelName.setBounds(60, 142, 150, 30);
 		levelPane.add(newLevelName);
 		
 		for (int i = 0; i < numLevels; i++) {
-			
-			JButton levelBtn = new BetterButton (Color.decode("#9B9B9B"),150,150,0);
+			Icon levelIcn = new ImageIcon("resources/LevelSelectorIcon.png");
+			JButton levelBtn = new BetterButton (Color.decode("#A38F85"),100,100,10);
 			levelBtn.setBorderPainted(false);
 			levelBtn.setFocusPainted(false);
 			levelBtn.setIcon(levelIcn);
-			levelBtn.setBounds(100+200*i, 10, 150, 150);
+			levelBtn.setBounds(227+165*i, 27, 100, 100);
 			levelBtn.setPreferredSize(new Dimension(150, 150));
 			levelButtons.add(levelBtn);
+			levelPane.setPreferredSize(new Dimension(350+i*165, 200));
 			levelPane.add(levelBtn);
 			
 			String name;
@@ -252,7 +259,7 @@ public class LBLevelSelectorView extends JPanel {
 			JLabel levelName = new JLabel(name);
 			levelName.setFont(f22);
 			levelName.setForeground(Color.decode("#A38F85"));
-			levelName.setBounds(70 + 150*i, 270, 150, 30);
+			levelName.setBounds(243 + 165*i, 142, 150, 30);
 			levelPane.add(levelName);
 		}
 
