@@ -30,8 +30,7 @@ public class Board {
 				grid.add(space);
 				
 			}
-		}
-		
+		}	
 	}
 
 	/**
@@ -62,6 +61,7 @@ public class Board {
 		this.dimension = dimension;
 	}
 	
-	
-
+	public Tile getTile (int row, int col) {
+		return this.grid.get(row*dimension + col).getTile();
+	}
 }

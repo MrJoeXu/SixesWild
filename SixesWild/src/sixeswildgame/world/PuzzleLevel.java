@@ -116,8 +116,8 @@ public class PuzzleLevel extends Level {
 		
 	}
 
-	public void hasWon() {
-		
+	public boolean hasWon() {
+		return false;
 	}
 
 }

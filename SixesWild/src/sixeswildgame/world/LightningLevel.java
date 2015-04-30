@@ -5,7 +5,6 @@ package src.sixeswildgame.world;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.Timer;
 
 /**
@@ -32,8 +31,13 @@ public class LightningLevel extends Level {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void hasWon() {
-		
+	public boolean hasWon() {
+		if (time.getDelay() <= 0) {
+			if (super.getCurrentScore() > super.getOneStarScore()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

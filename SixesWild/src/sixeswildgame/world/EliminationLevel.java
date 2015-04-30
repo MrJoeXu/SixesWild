@@ -32,8 +32,8 @@ public class EliminationLevel extends Level {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void hasWon() {
-		
+	public boolean hasWon() {
+		return false;
 	}
 
 }

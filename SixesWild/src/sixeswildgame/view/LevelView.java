@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -22,7 +21,10 @@ import javax.swing.SwingConstants;
 
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.LevelBackController;
+import src.sixeswildgame.controllers.MakeMoveController;
 import src.sixeswildgame.controllers.MinimizeGameController;
+import src.sixeswildgame.world.Board;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
 
 /**
@@ -51,10 +53,10 @@ public class LevelView extends JPanel{
 	
 	protected World world;
 	protected SixesWildWindow application;
-	protected src.sixeswildgame.world.Level level;
+	protected Level level;
 	
 	
-	public LevelView(SixesWildWindow application, World world, src.sixeswildgame.world.Level level) throws FileNotFoundException, FontFormatException, IOException {
+	public LevelView(SixesWildWindow application, World world, Level level) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
 		this.world = world;
 		this.level = level;
@@ -62,21 +64,22 @@ public class LevelView extends JPanel{
 	}
 	
 	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
-		initializeView();
 		initializeModel();
-		initializeController();
+		initializeView();
+		initializeControllers();
 	}
 
-	private void initializeController() {
+	private void initializeControllers() {
 		backBtn.addActionListener(new LevelBackController(world, application));
 		closeBtn.addActionListener(new CloseGameController(world, application));
 		miniBtn.addActionListener(new MinimizeGameController(world,application));
 		
+		for (SpaceView sv : boardView.getGrid()) sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level));
 	}
 
 	private void initializeModel() {
-		// TODO Auto-generated method stub
-		
+		this.level = new Level(new Board(9), 0, "puzzle");
+		level.initialize();
 	}
 
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {

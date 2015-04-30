@@ -22,7 +22,6 @@ import javax.swing.Timer;
  *
  */
 public class Level {
-	
 	protected Board board;
 	
 	protected int resetBoardMoves;
@@ -46,6 +45,9 @@ public class Level {
 	protected boolean isLocked;
 	protected boolean[] tileRange;
 	protected boolean[] allowedSpecialMoves;
+	
+	protected Move move;
+	protected boolean isMakingMove;
 	
 	protected File file;
 	
@@ -185,8 +187,8 @@ public class Level {
 		
 	}
 	
-	public void hasWon() {
-		
+	public boolean hasWon() {
+		return false;
 	}
 
 	public void save(String gameType) {
@@ -500,7 +502,34 @@ public class Level {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	/**
+	 * @return the move
+	 */
+	public Move getMove() {
+		return move;
+	}
+
+	/**
+	 * @param move the move to set
+	 */
+	public void setMove(Move move) {
+		this.move = move;
+	}
+
+	/**
+	 * @return the isMakingMove
+	 */
+	public boolean isMakingMove() {
+		return isMakingMove;
+	}
+
+	/**
+	 * @param isMakingMove the isMakingMove to set
+	 */
+	public void setMakingMove(boolean isMakingMove) {
+		this.isMakingMove = isMakingMove;
+	}	
 	
 	
 }
