@@ -74,7 +74,7 @@ public class LevelView extends JPanel{
 		closeBtn.addActionListener(new CloseGameController(world, application));
 		miniBtn.addActionListener(new MinimizeGameController(world,application));
 		
-		for (SpaceView sv : boardView.getGrid()) sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level));
+	//	for (SpaceView sv : boardView.getGrid()) sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level));
 	}
 
 	private void initializeModel() {

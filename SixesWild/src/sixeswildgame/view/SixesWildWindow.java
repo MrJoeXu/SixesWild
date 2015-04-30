@@ -35,6 +35,7 @@ import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.controllers.SelectGameTypeController;
 import src.sixeswildgame.controllers.StartController;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
 
 /**
@@ -85,6 +86,47 @@ public class SixesWildWindow {
 	 * Initialize the model.
 	 */
 	private void initializeModel() {
+		world = new World();
+
+		File dir = new File("saveddata/custom/puzzle");
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getPuzzleLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/lightning");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getLightningLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/release");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getReleaseLevels().add(level);
+		  }
+		} else {
+		}
+		
+		dir = new File("saveddata/custom/elimination");
+		directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getEliminationLevels().add(level);
+		  }
+		} else {
+		}
 		
 		
 	}

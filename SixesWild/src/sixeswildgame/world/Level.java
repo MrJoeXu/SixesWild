@@ -190,7 +190,6 @@ public class Level {
 	public boolean hasWon() {
 		return false;
 	}
-
 	public void save(String gameType) {
 				
 		String levelString = toString();

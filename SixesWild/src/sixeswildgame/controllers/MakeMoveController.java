@@ -62,8 +62,6 @@ public class MakeMoveController implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		if (level.getMove().isValid()) level.getMove().doMove(level);
 		
-		
-		
 	}
 
 }

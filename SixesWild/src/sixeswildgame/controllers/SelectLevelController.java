@@ -19,26 +19,20 @@ import src.sixeswildgame.world.World;
 public class SelectLevelController implements ActionListener{
 	protected World world;
 	protected SixesWildWindow application;
-	protected int gameType;
-	protected int gameLevel;
+	protected Level level;
 	
 
 	/**
 	 * 
 	 */
-	public SelectLevelController (SixesWildWindow application, World world, int gameType, int gameLevel) {
+	public SelectLevelController (SixesWildWindow application, World world, Level level) {
 		this.application = application;
 		this.world = world;
-		this.gameType = gameType;
-		this.gameLevel = gameLevel;
+		this.level = level;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		application.setGameType(gameType);
-		application.setGameLevel(gameLevel);
-		Level level = new Level(new Board(9), 0, application.getGameTypeName());
-		level.initialize();
 		try {
 			application.setLevelView(new LevelView(application, world, level));
 		} catch (FontFormatException | IOException e) {
@@ -48,7 +42,7 @@ public class SelectLevelController implements ActionListener{
 		application.getLevelView().setPreferredSize(new Dimension(1000,708));
 		application.getFrmSixesWild().setContentPane(application.getLevelView());
 		application.getLevelView().setVisible(true);
-		application.getFrmSixesWild().setTitle("Level");
+		application.getFrmSixesWild().setTitle(level.getName());
 		application.getFrmSixesWild().pack();
 		application.getFrmSixesWild().repaint();
 	}

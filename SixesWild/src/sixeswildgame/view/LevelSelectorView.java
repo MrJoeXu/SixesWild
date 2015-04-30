@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.LevelSelectorBackController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.controllers.SelectLevelController;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
 
 /**
@@ -74,10 +76,29 @@ public class LevelSelectorView extends JPanel{
 		closeBtn.addActionListener(new CloseGameController(world, application));
 		miniBtn.addActionListener(new MinimizeGameController(world,application));
 		
-		LevelBtn1.addActionListener(new SelectLevelController(application, world, application.getGameType(), 1));
-		LevelBtn2.addActionListener(new SelectLevelController(application, world, application.getGameType(), 2));
-		LevelBtn3.addActionListener(new SelectLevelController(application, world, application.getGameType(), 3));
-		LevelBtn4.addActionListener(new SelectLevelController(application, world, application.getGameType(), 4));
+		ArrayList<Level> levels;
+		
+		switch (application.getGameType()) {
+		case 1:
+			levels = world.getPuzzleLevels();
+			break;
+		case 2:
+			levels = world.getLightningLevels();
+			break;
+		case 3:
+			levels = world.getReleaseLevels();
+			break;
+		case 4:
+			levels = world.getEliminationLevels();
+			break;
+			default:
+				levels = new ArrayList<Level>(null);
+		}
+		
+		LevelBtn1.addActionListener(new SelectLevelController(application, world, levels.get(0)));
+		LevelBtn2.addActionListener(new SelectLevelController(application, world, null));
+		LevelBtn3.addActionListener(new SelectLevelController(application, world, null));
+		LevelBtn4.addActionListener(new SelectLevelController(application, world, null));
 		
 	}
 
