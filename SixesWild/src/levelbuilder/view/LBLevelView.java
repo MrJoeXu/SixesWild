@@ -14,6 +14,7 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBLevelViewBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.RedoController;
+import src.levelbuilder.controllers.ReleaseController;
 import src.levelbuilder.controllers.SaveController;
 import src.levelbuilder.controllers.TileController;
 import src.levelbuilder.controllers.UndoController;
@@ -89,7 +90,7 @@ public class LBLevelView extends JPanel {
 	protected ArrayList<JCheckBox> tileRangeCheckBoxes;
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
 
-	// For undo redo
+	// For undo, redo
 	protected ArrayList<Space> toggleMoves;
 	protected int activeIndex;
 
@@ -118,6 +119,11 @@ public class LBLevelView extends JPanel {
 	private JTextField resetBoardTextField;
 	private JTextField swapTilesTextField;
 	private JTextField removeTileTextField;
+	
+	protected boolean isPlacingSix;
+	protected boolean isPlacingBucket;
+	protected JCheckBox rangeSixCheckBox;
+	protected JCheckBox bucketCheckBox;
 
 	/**
 	 * Create the panel.
@@ -136,6 +142,8 @@ public class LBLevelView extends JPanel {
 		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
 		this.toggleMoves = new ArrayList<Space>();
 		this.activeIndex = 0;
+		this.isPlacingSix = false;
+		this.isPlacingBucket = false;
 
 		switch (application.gameType) {
 		case 1:
@@ -360,6 +368,26 @@ public class LBLevelView extends JPanel {
 		rangeFiveCheckBox.setBounds(432, 247, 40, 34);
 		tileRangeCheckBoxes.add(rangeFiveCheckBox);
 		add(rangeFiveCheckBox);
+		
+		rangeSixCheckBox = new JCheckBox();
+		rangeSixCheckBox.setIcon(check1N);
+		rangeSixCheckBox.setSelectedIcon(check1Y);
+		rangeSixCheckBox.setSelected(false);
+		rangeSixCheckBox.setBounds(575, 247, 40, 34);
+		if (application.getGameType() == 3) add(rangeSixCheckBox);
+		
+		bucketCheckBox = new JCheckBox();
+		bucketCheckBox.setIcon(check2N);
+		bucketCheckBox.setSelectedIcon(check2Y);
+		bucketCheckBox.setSelected(false);
+		bucketCheckBox.setBounds(575, 287, 40, 34);
+		if (application.getGameType() == 3) add(bucketCheckBox);
+		
+		JLabel releaseLabel = new JLabel("Select to Edit:");
+		releaseLabel.setFont(f14);
+		releaseLabel.setForeground(Color.decode("#A38F85"));
+		releaseLabel.setBounds(525, 200, 180, 41);
+		if (application.getGameType() == 3) add(releaseLabel);
 
 		int i = 0;
 		for (JCheckBox bx : tileRangeCheckBoxes) {
@@ -755,6 +783,9 @@ public class LBLevelView extends JPanel {
 			TileView tv = sv.getTileView();
 			tv.addMouseListener(new TileController(tv, level, application));
 		}
+		
+		rangeSixCheckBox.addActionListener(new ReleaseController(application, 0, rangeSixCheckBox));
+		bucketCheckBox.addActionListener(new ReleaseController(application, 1, bucketCheckBox));
 	}
 
 	public void incrementActiveIndex() {
@@ -1169,6 +1200,146 @@ public class LBLevelView extends JPanel {
 	 */
 	public void setMovesLeftTextField(JTextField movesLeftTextField) {
 		this.movesLeftTextField = movesLeftTextField;
+	}
+
+	/**
+	 * @return the frequencySlider
+	 */
+	public JSlider getFrequencySlider() {
+		return frequencySlider;
+	}
+
+	/**
+	 * @param frequencySlider the frequencySlider to set
+	 */
+	public void setFrequencySlider(JSlider frequencySlider) {
+		this.frequencySlider = frequencySlider;
+	}
+
+	/**
+	 * @return the checkbxSwapTiles
+	 */
+	public JCheckBox getCheckbxSwapTiles() {
+		return checkbxSwapTiles;
+	}
+
+	/**
+	 * @param checkbxSwapTiles the checkbxSwapTiles to set
+	 */
+	public void setCheckbxSwapTiles(JCheckBox checkbxSwapTiles) {
+		this.checkbxSwapTiles = checkbxSwapTiles;
+	}
+
+	/**
+	 * @return the checkbxRemoveTile
+	 */
+	public JCheckBox getCheckbxRemoveTile() {
+		return checkbxRemoveTile;
+	}
+
+	/**
+	 * @param checkbxRemoveTile the checkbxRemoveTile to set
+	 */
+	public void setCheckbxRemoveTile(JCheckBox checkbxRemoveTile) {
+		this.checkbxRemoveTile = checkbxRemoveTile;
+	}
+
+	/**
+	 * @return the undoBtn
+	 */
+	public JButton getUndoBtn() {
+		return undoBtn;
+	}
+
+	/**
+	 * @param undoBtn the undoBtn to set
+	 */
+	public void setUndoBtn(JButton undoBtn) {
+		this.undoBtn = undoBtn;
+	}
+
+	/**
+	 * @return the redoBtn
+	 */
+	public JButton getRedoBtn() {
+		return redoBtn;
+	}
+
+	/**
+	 * @param redoBtn the redoBtn to set
+	 */
+	public void setRedoBtn(JButton redoBtn) {
+		this.redoBtn = redoBtn;
+	}
+
+	/**
+	 * @return the saveBtn
+	 */
+	public JButton getSaveBtn() {
+		return saveBtn;
+	}
+
+	/**
+	 * @param saveBtn the saveBtn to set
+	 */
+	public void setSaveBtn(JButton saveBtn) {
+		this.saveBtn = saveBtn;
+	}
+
+	/**
+	 * @return the isPlacingSix
+	 */
+	public boolean isPlacingSix() {
+		return isPlacingSix;
+	}
+
+	/**
+	 * @param isPlacingSix the isPlacingSix to set
+	 */
+	public void setPlacingSix(boolean isPlacingSix) {
+		this.isPlacingSix = isPlacingSix;
+	}
+
+	/**
+	 * @return the isPlacingBucket
+	 */
+	public boolean isPlacingBucket() {
+		return isPlacingBucket;
+	}
+
+	/**
+	 * @param isPlacingBucket the isPlacingBucket to set
+	 */
+	public void setPlacingBucket(boolean isPlacingBucket) {
+		this.isPlacingBucket = isPlacingBucket;
+	}
+
+	/**
+	 * @return the rangeSixCheckBox
+	 */
+	public JCheckBox getRangeSixCheckBox() {
+		return rangeSixCheckBox;
+	}
+
+	/**
+	 * @param rangeSixCheckBox the rangeSixCheckBox to set
+	 */
+	public void setRangeSixCheckBox(JCheckBox rangeSixCheckBox) {
+		this.rangeSixCheckBox = rangeSixCheckBox;
+	}
+
+	/**
+	 * @return the bucketCheckBox
+	 */
+	public JCheckBox getBucketCheckBox() {
+		return bucketCheckBox;
+	}
+
+	/**
+	 * @param bucketCheckBox the bucketCheckBox to set
+	 */
+	public void setBucketCheckBox(JCheckBox bucketCheckBox) {
+		this.bucketCheckBox = bucketCheckBox;
 	}
 
 }

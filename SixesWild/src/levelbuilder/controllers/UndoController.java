@@ -46,9 +46,16 @@ public class UndoController implements ActionListener {
 		s.toggleEnabled();
 		application.getLbLevelView().decrementActiveIndex();
 
-		if (!s.isEnabled()) tileView.setBackground(Color.LIGHT_GRAY);
+		if (!s.isEnabled()) {
+			s.getTile().setValue(s.getReleaseStates().get(s.getActiveIndex() - 1));;
+		}
+		
+		s.printReleaseStates();
+		s.decrementActiveIndex();
+		
 		System.out.println("Active Index: " + application.getLbLevelView().getActiveIndex());
 		System.out.println("Moves List Size: " + application.getLbLevelView().getToggleMoves().size());
+		
 		tileView.repaint();
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		

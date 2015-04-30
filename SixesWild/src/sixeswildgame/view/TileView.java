@@ -47,7 +47,7 @@ public class TileView extends JPanel {
 		this.tile = tile;
 		this.length = length;
 		setPreferredSize(new Dimension(length,length));
-	    bonus = tile.getBonus();
+	    this.bonus = tile.getBonus();
 		
 		valueLbl = new JLabel(Integer.toString(tile.getValue()));
 		
@@ -84,37 +84,50 @@ public class TileView extends JPanel {
 		switch (tile.getValue()) {
 		case 1:
 			g.setColor(Color.decode("#45D7B3"));
+			valueLbl.setText("1");
 			valueLbl.setVisible(true);
 			bonusLbl.setVisible(true);
 			break;
 		case 2:
 			g.setColor(Color.decode("#3D7CA2"));
+			valueLbl.setText("2");
 			valueLbl.setVisible(true);
 			bonusLbl.setVisible(true);
 			break;
 		case 3:
 			g.setColor(Color.decode("#FECA44"));
+			valueLbl.setText("3");
 			valueLbl.setVisible(true);
 			bonusLbl.setVisible(true);
 			break;
 		case 4:
 			g.setColor(Color.decode("#CAA3DC"));
+			valueLbl.setText("4");
 			valueLbl.setVisible(true);
 			bonusLbl.setVisible(true);
 			break;
 		case 5:
 			g.setColor(Color.decode("#D76262"));
+			valueLbl.setText("5");
 			valueLbl.setVisible(true);
 			bonusLbl.setVisible(true);
 			break;			
 		case 6:
 			g.setColor(Color.decode("#716561"));
+			valueLbl.setText("6");
 			valueLbl.setVisible(true);
-			bonusLbl.setVisible(true);
+			bonusLbl.setVisible(false);
 			break;
+		//disabled
 		case 0:
 			g.setColor(Color.decode("#9B9B9B"));
 			valueLbl.setVisible(false);
+			bonusLbl.setVisible(false);
+			break;
+		//bucket
+		case 7:
+			g.setColor(Color.decode("#33CCFF"));
+			valueLbl.setText("7");
 			bonusLbl.setVisible(false);
 			break;
 		default:

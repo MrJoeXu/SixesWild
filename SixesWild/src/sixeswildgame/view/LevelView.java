@@ -79,7 +79,7 @@ public class LevelView extends JPanel{
 
 	private void initializeModel() {
 		this.level = new Level(new Board(9), 0, "puzzle");
-		level.initialize();
+		level.initialize(1);
 	}
 
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {

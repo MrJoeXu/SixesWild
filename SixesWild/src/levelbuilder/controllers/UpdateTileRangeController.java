@@ -38,7 +38,7 @@ public class UpdateTileRangeController implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		level.getTileRange()[application.getLbLevelView().getTileRangeCheckBoxes().indexOf(checkBox)] = checkBox.isSelected();
 		level.setBoard(new Board(level.getBoard().getDimension()));
-		level.initialize();
+		level.initialize(application.getGameType());
 		BoardView newBoardView = new BoardView(level.getBoard(), 33, 33);
 		
 		application.getLbLevelView().setBoardView(newBoardView);

@@ -45,7 +45,7 @@ public class LBSelectLevelController implements ActionListener {
 				
 		if (level == null) {
 			level = new Level(new Board(9), nextId, application.getGameTypeName());
-			level.initialize();
+			level.initialize(application.getGameType());
 		}
 		
 		try {

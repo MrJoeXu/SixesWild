@@ -37,6 +37,7 @@ public class Level {
 	protected int movesLeft;
 	protected int bonusFrequency;
 	protected String name;
+	protected int gameType;
 	
 	protected Timer time;
 	protected int minutes;
@@ -158,7 +159,7 @@ public class Level {
         }
 	}
 
-	public void initialize() {
+	public void initialize(int gameType) {
 		this.board = new Board(board.dimension);
 		
 		for (int i = 0; i < board.getDimension()*board.getDimension(); i++) {
@@ -169,7 +170,7 @@ public class Level {
 				if (getTileRange()[j]) {
 					values.add(j + 1);
 				}
-			values.add(6);
+			if (gameType != 3) values.add(6);
 			
 			Random rand = new Random();
 		    int value = rand.nextInt(values.size());

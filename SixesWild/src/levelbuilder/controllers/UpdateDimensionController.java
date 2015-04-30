@@ -41,7 +41,7 @@ public class UpdateDimensionController implements ChangeListener {
 			int dimension = (int) slider.getValue();
 			level.getBoard().setDimension(dimension);
 			level.setBoard(new Board(level.getBoard().getDimension()));
-			level.initialize();
+			level.initialize(application.getGameType());
 
 			BoardView newBoardView = new BoardView(level.getBoard(), 33, 33);
 			int length = newBoardView.getDimension()*newBoardView.getTileLength() + 5 * newBoardView.getDimension();

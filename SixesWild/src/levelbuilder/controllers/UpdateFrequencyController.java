@@ -49,7 +49,7 @@ public class UpdateFrequencyController implements ChangeListener {
 				level.setBonusFrequency(3);
 				break;
 			}
-			level.initialize();
+			level.initialize(application.getGameType());
 
 			BoardView newBoardView = new BoardView(level.getBoard(), 33, 33);
 			int length = newBoardView.getDimension()

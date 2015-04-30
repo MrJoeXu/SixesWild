@@ -52,13 +52,39 @@ public class TileController implements MouseListener {
 		Space space = level.getBoard().getGrid().get(row * level.getBoard().getDimension() + column);
 		
 		space.toggleEnabled();
+		
+		if (!space.isEnabled()) {
+			if (application.getLbLevelView().isPlacingSix()) {
+				space.getTile().setValue(6);
+				space.getTile().setBonus(1);
+				space.getReleaseStates().add(6);
+				space.incrementActiveIndex();
+			}
+			else if (application.getLbLevelView().isPlacingBucket()) {
+				space.getTile().setValue(7);
+				space.getReleaseStates().add(7);
+				space.incrementActiveIndex();
+			}
+			else {
+				space.getTile().setValue(0);
+				space.getReleaseStates().add(0);
+				space.incrementActiveIndex();
+			}
+		}
+		
+		else {
+			space.getReleaseStates().add(tile.getValue());
+			space.incrementActiveIndex();
+		}
+		
+		space.printReleaseStates();
+		
 		application.getLbLevelView().getToggleMoves().add(application.getLbLevelView().getActiveIndex(), space);
 		while (application.getLbLevelView().getActiveIndex() + 1 < application.getLbLevelView().getToggleMoves().size()) {
 			application.getLbLevelView().getToggleMoves().remove(application.getLbLevelView().getActiveIndex() + 1);
 		}
 		application.getLbLevelView().incrementActiveIndex();
-		System.out.println("Active Index: " + application.getLbLevelView().getActiveIndex());
-		System.out.println("Moves List Size: " + application.getLbLevelView().getToggleMoves().size());
+		
 		tileView.repaint();
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		application.getLbLevelView().repaint();
