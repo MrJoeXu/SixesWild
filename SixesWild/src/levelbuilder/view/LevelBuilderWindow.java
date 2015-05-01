@@ -76,6 +76,7 @@ public class LevelBuilderWindow {
 	protected World world;
 	protected int gameType;
 	protected boolean soundEnabled;
+	protected Clip musicClip;
 	
 	/**
 	 * Create the application.
@@ -102,17 +103,15 @@ public class LevelBuilderWindow {
 		if (soundEnabled) {
 			try {
 			    File f = new File("resources/SixesWildMenu.wav");
-			    AudioInputStream stream;
 			    AudioFormat format;
 			    DataLine.Info info;
-			    Clip clip;
 
-			    stream = AudioSystem.getAudioInputStream(f);
-			    format = stream.getFormat();
+			    AudioInputStream musicStream = AudioSystem.getAudioInputStream(f);
+			    format = musicStream.getFormat();
 			    info = new DataLine.Info(Clip.class, format);
-			    clip = (Clip) AudioSystem.getLine(info);
-			    clip.open(stream);
-			    clip.start();
+			    musicClip = (Clip) AudioSystem.getLine(info);
+			    musicClip.open(musicStream);
+			    musicClip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
 			catch (Exception e1) {
 			    
@@ -496,7 +495,19 @@ public class LevelBuilderWindow {
 	public void setSoundEnabled(boolean soundEnabled) {
 		this.soundEnabled = soundEnabled;
 	}
-	
-	
+
+	/**
+	 * @return the musicStream
+	 */
+	public Clip getMusicClip() {
+		return musicClip;
+	}
+
+	/**
+	 * @param musicStream the musicStream to set
+	 */
+	public void setMusicStream(Clip musicClip) {
+		this.musicClip = musicClip;
+	}
 
 }

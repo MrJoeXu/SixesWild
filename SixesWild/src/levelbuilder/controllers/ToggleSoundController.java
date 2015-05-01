@@ -6,6 +6,7 @@ package src.levelbuilder.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -34,26 +35,15 @@ public class ToggleSoundController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		application.toggleSound();
-		
 		if (application.isSoundEnabled()) {
 			try {
-			    File f = new File("resources/4.wav");
-			    AudioInputStream stream;
-			    AudioFormat format;
-			    DataLine.Info info;
-			    Clip clip;
-
-			    stream = AudioSystem.getAudioInputStream(f);
-			    format = stream.getFormat();
-			    info = new DataLine.Info(Clip.class, format);
-			    clip = (Clip) AudioSystem.getLine(info);
-			    clip.open(stream);
-			    clip.start();
+				application.getMusicClip().loop(Clip.LOOP_CONTINUOUSLY);
 			}
 			catch (Exception e1) {
 			    
 			}
-		}
+		} else
+			application.getMusicClip().stop();
 	}
 
 }
