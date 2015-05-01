@@ -51,10 +51,10 @@ public class LevelSelectorView extends JPanel{
 	protected JButton closeBtn;
 	protected JButton miniBtn;
 	
-	protected JButton LevelBtn1;
-	protected JButton LevelBtn2;
-	protected JButton LevelBtn3;
-	protected JButton LevelBtn4;
+	protected JButton levelBtn1;
+	protected JButton levelBtn2;
+	protected JButton levelBtn3;
+	protected JButton levelBtn4;
 	
 	protected JLabel star1, star2, star3;
 	
@@ -95,10 +95,10 @@ public class LevelSelectorView extends JPanel{
 				levels = new ArrayList<Level>(null);
 		}
 		
-		LevelBtn1.addActionListener(new SelectLevelController(application, world, levels.get(0)));
-		LevelBtn2.addActionListener(new SelectLevelController(application, world, null));
-		LevelBtn3.addActionListener(new SelectLevelController(application, world, null));
-		LevelBtn4.addActionListener(new SelectLevelController(application, world, null));
+		levelBtn1.addActionListener(new SelectLevelController(application, world, levels.get(0)));
+		levelBtn2.addActionListener(new SelectLevelController(application, world, null));
+		levelBtn3.addActionListener(new SelectLevelController(application, world, null));
+		levelBtn4.addActionListener(new SelectLevelController(application, world, null));
 		
 	}
 
@@ -167,41 +167,41 @@ public class LevelSelectorView extends JPanel{
 		
 		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
 		
-		LevelBtn1 = new BetterButton(Color.decode("#D76262"),100,100,10);
-		LevelBtn1.setBorderPainted(false);
-		LevelBtn1.setFocusPainted(false);
-		LevelBtn1.setFont(f40);
-		LevelBtn1.setText("1");
-		LevelBtn1.setBounds(355, 245, 100, 100);
-		LevelBtn1.setForeground(Color.white);
-		this.add(LevelBtn1);
+		levelBtn1 = new BetterButton(Color.decode("#D76262"),100,100,10);
+		levelBtn1.setBorderPainted(false);
+		levelBtn1.setFocusPainted(false);
+		levelBtn1.setFont(f40);
+		levelBtn1.setText("1");
+		levelBtn1.setBounds(355, 245, 100, 100);
+		levelBtn1.setForeground(Color.white);
+		this.add(levelBtn1);
 		
-		LevelBtn2 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
-		LevelBtn2.setBorderPainted(false);
-		LevelBtn2.setFocusPainted(false);
-		LevelBtn2.setFont(f40);
-		LevelBtn2.setText("2");
-		LevelBtn2.setBounds(545, 247, 100, 100);
-		LevelBtn2.setForeground(Color.white);
-		this.add(LevelBtn2);
+		levelBtn2 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
+		levelBtn2.setBorderPainted(false);
+		levelBtn2.setFocusPainted(false);
+		levelBtn2.setFont(f40);
+		levelBtn2.setText("2");
+		levelBtn2.setBounds(545, 247, 100, 100);
+		levelBtn2.setForeground(Color.white);
+		this.add(levelBtn2);
 		
-		LevelBtn3 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
-		LevelBtn3.setBorderPainted(false);
-		LevelBtn3.setFocusPainted(false);
-		LevelBtn3.setFont(f40);
-		LevelBtn3.setText("3");
-		LevelBtn3.setBounds(355, 445, 100, 100);
-		LevelBtn3.setForeground(Color.white);
-		this.add(LevelBtn3);
+		levelBtn3 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
+		levelBtn3.setBorderPainted(false);
+		levelBtn3.setFocusPainted(false);
+		levelBtn3.setFont(f40);
+		levelBtn3.setText("3");
+		levelBtn3.setBounds(355, 445, 100, 100);
+		levelBtn3.setForeground(Color.white);
+		this.add(levelBtn3);
 		
-		LevelBtn4 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
-		LevelBtn4.setBorderPainted(false);
-		LevelBtn4.setFocusPainted(false);
-		LevelBtn4.setFont(f40);
-		LevelBtn4.setText("4");
-		LevelBtn4.setBounds(545, 447, 100, 100);
-		LevelBtn4.setForeground(Color.white);
-		this.add(LevelBtn4);
+		levelBtn4 = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
+		levelBtn4.setBorderPainted(false);
+		levelBtn4.setFocusPainted(false);
+		levelBtn4.setFont(f40);
+		levelBtn4.setText("4");
+		levelBtn4.setBounds(545, 447, 100, 100);
+		levelBtn4.setForeground(Color.white);
+		this.add(levelBtn4);
 		
 		Icon yellowStarIcon = new ImageIcon("resources/YellowStar.png");
 		Icon greyStarIcon = new ImageIcon("resources/GreyStar.png");

@@ -47,7 +47,7 @@ public class LBLevelSelectorView extends JPanel {
 	protected JButton lightningBtn;
 	protected JButton eliminationBtn;
 	protected JButton releaseBtn;
-	protected JButton deleteLevelBtn;
+	protected BetterButton deleteLevelBtn;
 	protected BetterButton buildLevelBtn;
 	
 	protected JButton newLevelBtn;
@@ -173,14 +173,6 @@ public class LBLevelSelectorView extends JPanel {
 		lightningBtn.setBounds(400, 315, 200, 52);
 		lightningBtn.setForeground(Color.white);
 		
-		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),200, 52, 10);
-		eliminationBtn.setBorderPainted(false);
-		eliminationBtn.setFocusPainted(false);
-		eliminationBtn.setFont(f22);
-		eliminationBtn.setText("Elimination");
-		eliminationBtn.setBounds(400, 315, 200, 52);
-		eliminationBtn.setForeground(Color.white);
-		
 		releaseBtn = new BetterButton(Color.decode("#45D7B3"),200, 52, 10);
 		releaseBtn.setBorderPainted(false);
 		releaseBtn.setFocusPainted(false);
@@ -188,6 +180,14 @@ public class LBLevelSelectorView extends JPanel {
 		releaseBtn.setText("Release");
 		releaseBtn.setBounds(400, 315, 200, 52);
 		releaseBtn.setForeground(Color.white);
+		
+		eliminationBtn = new BetterButton(Color.decode("#65ABD5"),200, 52, 10);
+		eliminationBtn.setBorderPainted(false);
+		eliminationBtn.setFocusPainted(false);
+		eliminationBtn.setFont(f22);
+		eliminationBtn.setText("Elimination");
+		eliminationBtn.setBounds(400, 315, 200, 52);
+		eliminationBtn.setForeground(Color.white);
 
 		Icon build = new ImageIcon("resources/Leave.png");
 		buildLevelBtn = new BetterButton(Color.decode("#50E3C2"),50, 50, 10);
@@ -198,11 +198,6 @@ public class LBLevelSelectorView extends JPanel {
 		buildLevelBtn.setForeground(Color.white);
 		this.add(buildLevelBtn);
 		
-		if (application.getGameType() == 1) { this.add(puzzleBtn);}
-		if (application.getGameType() == 2) { this.add(lightningBtn);} 
-		if (application.getGameType() == 3) { this.add(releaseBtn); }
-		if (application.getGameType() == 4) { this.add(eliminationBtn);} 
-		
 		Icon delete = new ImageIcon("resources/Trash.png");
 		deleteLevelBtn = new BetterButton(Color.decode("#D76262"),50, 50, 10);
 		deleteLevelBtn.setBorderPainted(false);
@@ -211,10 +206,32 @@ public class LBLevelSelectorView extends JPanel {
 		deleteLevelBtn.setBounds(425, 624, 50, 50);
 		this.add(deleteLevelBtn);
 		
+		if (application.getGameType() == 1) { 
+			this.add(puzzleBtn);
+			buildLevelBtn.setCol(Color.decode("#D76262"));
+			deleteLevelBtn.setCol(Color.decode("#D76262"));
+			}
+		if (application.getGameType() == 2) { 
+			this.add(lightningBtn);
+			buildLevelBtn.setCol(Color.decode("#3D7CA2"));
+			deleteLevelBtn.setCol(Color.decode("#3D7CA2"));
+			} 
+		if (application.getGameType() == 3) { 
+			this.add(releaseBtn);
+			buildLevelBtn.setCol(Color.decode("#45D7B3"));
+			deleteLevelBtn.setCol(Color.decode("#45D7B3"));
+			}
+		if (application.getGameType() == 4) { 
+			this.add(eliminationBtn);
+			buildLevelBtn.setCol(Color.decode("#65ABD5"));
+			deleteLevelBtn.setCol(Color.decode("#65ABD5"));
+			} 
+		
+		
 		pleaseLabel = new JLabel("Please select a level.");
 		pleaseLabel.setFont(f14);
 		pleaseLabel.setForeground(Color.decode("#9B9B9B"));
-		pleaseLabel.setBounds(390, 680, 150, 30);
+		pleaseLabel.setBounds(435, 670, 150, 30);
 		this.add(pleaseLabel);
 		pleaseLabel.setVisible(false);
 		
@@ -408,7 +425,7 @@ public class LBLevelSelectorView extends JPanel {
 	/**
 	 * @param deleteLevelBtn the deleteLevelBtn to set
 	 */
-	public void setDeleteLevelBtn(JButton deleteLevelBtn) {
+	public void setDeleteLevelBtn(BetterButton deleteLevelBtn) {
 		this.deleteLevelBtn = deleteLevelBtn;
 	}
 

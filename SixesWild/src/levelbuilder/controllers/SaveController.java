@@ -50,7 +50,14 @@ public class SaveController implements ActionListener {
 		if (!view.getTwoStarTextField().getText().equals("")) level.setTwoStarScore(Integer.parseInt(view.getTwoStarTextField().getText()));
 		if (!view.getThreeStarTextField().getText().equals("")) level.setThreeStarScore(Integer.parseInt(view.getThreeStarTextField().getText()));
 		
-		if (!view.getMovesLeftTextField().getText().equals("")) level.setMovesLeft(Integer.parseInt(view.getMovesLeftTextField().getText()));
+		if (application.getGameType() != 2) {
+			if (!view.getMovesLeftTextField().getText().equals("")) level.setMovesLeft(Integer.parseInt(view.getMovesLeftTextField().getText()));
+		}
+		
+		if (application.getGameType() == 2) {
+			if (!view.getTimerMinuteTextField().getText().equals("")) level.setMinutes(Integer.parseInt(view.getMovesLeftTextField().getText()));
+			if (!view.getTimerSecondTextField().getText().equals("")) level.setSeconds(Integer.parseInt(view.getMovesLeftTextField().getText()));
+		}
 		
 		level.save(application.getGameTypeName());
 		

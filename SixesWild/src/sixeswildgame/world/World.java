@@ -82,6 +82,20 @@ public class World {
 		this.eliminationLevels = eliminationLevels;
 	}
 
-	
+	public ArrayList<Level> getLevels(int gameType) {
+		
+		switch(gameType) {
+		case 1:
+			return puzzleLevels;
+		case 2: 
+			return lightningLevels;
+		case 3:
+			return releaseLevels;
+		case 4:
+			return eliminationLevels;
+			default:
+				return null;
+		}
+	}
 	
 }

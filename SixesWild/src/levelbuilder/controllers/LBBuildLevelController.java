@@ -43,6 +43,8 @@ public class LBBuildLevelController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
+		if (world.getLevels(application.getGameType()).size() > 0) nextId = 
+				world.getLevels(application.getGameType()).get(world.getLevels(application.getGameType()).size()-1).getId() + 1;
 		File file = new File("saveddata/custom/" + application.getGameTypeName() + "/" + nextId + ".txt");
 		
 		if (type == 0) {
