@@ -529,7 +529,36 @@ public class Level {
 	 */
 	public void setMakingMove(boolean isMakingMove) {
 		this.isMakingMove = isMakingMove;
+	}
+
+	/**
+	 * @return the gameType
+	 */
+	public int getGameType() {
+		return gameType;
+	}
+
+	/**
+	 * @param gameType the gameType to set
+	 */
+	public void setGameType(int gameType) {
+		this.gameType = gameType;
+	}
+
+	/**
+	 * @return the file
+	 */
+	public File getFile() {
+		return file;
+	}
+
+	/**
+	 * @param file the file to set
+	 */
+	public void setFile(File file) {
+		this.file = file;
 	}	
+	
 	
 	
 }

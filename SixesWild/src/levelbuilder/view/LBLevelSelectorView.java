@@ -21,10 +21,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import src.levelbuilder.controllers.DeleteLevelController;
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
-import src.levelbuilder.controllers.LBSelectLevelController;
+import src.levelbuilder.controllers.LBBuildLevelController;
+import src.levelbuilder.controllers.SelectLevelController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
@@ -45,11 +47,15 @@ public class LBLevelSelectorView extends JPanel {
 	protected JButton lightningBtn;
 	protected JButton eliminationBtn;
 	protected JButton releaseBtn;
+	protected JButton deleteLevelBtn;
+	protected BetterButton buildLevelBtn;
 	
 	protected JButton newLevelBtn;
 	protected ArrayList<JButton> levelButtons;
 	protected JLabel titleLable;
 	protected int numLevels;
+	protected Level selectedLevel;
+	protected JLabel pleaseLabel;
 	
 	protected LevelBuilderWindow application;
 	protected World world;
@@ -73,7 +79,10 @@ public class LBLevelSelectorView extends JPanel {
 		closeBtn.addActionListener(new LBCloseGameController(world, application));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,application));
 		
-		newLevelBtn.addActionListener(new LBSelectLevelController(application, world, null));
+		newLevelBtn.addActionListener(new LBBuildLevelController(application, world, null, 0));
+		deleteLevelBtn.addActionListener(new DeleteLevelController(world, application, selectedLevel));
+		
+		buildLevelBtn.addActionListener(new LBBuildLevelController(application, world, selectedLevel, 1));
 		
 		Level level;
 		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
@@ -96,7 +105,7 @@ public class LBLevelSelectorView extends JPanel {
 			default:
 				level = new Level(new Board(9), nextId, application.getGameTypeName());
 			}
-			b.addActionListener(new LBSelectLevelController(application, world, level));
+			b.addMouseListener(new SelectLevelController(b, application, level));
 			i++;
 		}
 		
@@ -145,6 +154,8 @@ public class LBLevelSelectorView extends JPanel {
 		this.add(miniBtn); 
 		
 		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+		Font f25 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 25);
+		Font f14 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 14);
 		
 		puzzleBtn = new BetterButton(Color.decode("#D76262"),200, 52, 10);
 		puzzleBtn.setBorderPainted(false);
@@ -177,11 +188,41 @@ public class LBLevelSelectorView extends JPanel {
 		releaseBtn.setText("Release");
 		releaseBtn.setBounds(400, 315, 200, 52);
 		releaseBtn.setForeground(Color.white);
+
+		buildLevelBtn = new BetterButton(Color.decode("#FFFF99"),200, 52, 10);
+		buildLevelBtn.setBorderPainted(false);
+		buildLevelBtn.setFocusPainted(false);
+		buildLevelBtn.setFont(f22);
+		buildLevelBtn.setText("Build");
+		buildLevelBtn.setBounds(400, 620, 200, 52);
+		buildLevelBtn.setForeground(Color.white);
+		this.add(buildLevelBtn);
 		
-		if (application.getGameType() == 1) { this.add(puzzleBtn); }
-		if (application.getGameType() == 2) { this.add(lightningBtn); }
-		if (application.getGameType() == 3) { this.add(releaseBtn); }
-		if (application.getGameType() == 4) { this.add(eliminationBtn); }
+		if (application.getGameType() == 1) { this.add(puzzleBtn);
+		buildLevelBtn.setCol(Color.decode("#D76262"));
+		if (application.getGameType() == 2) { this.add(lightningBtn); 
+		buildLevelBtn.setCol(Color.decode("#3D7CA2"));}
+		}
+		if (application.getGameType() == 3) { this.add(releaseBtn); 
+		buildLevelBtn.setCol(Color.decode("#45D7B3"));}
+		if (application.getGameType() == 4) { this.add(eliminationBtn); 
+		buildLevelBtn.setCol(Color.decode("#65ABD5"));}
+		
+		Icon min = new ImageIcon("resources/min.png");
+		deleteLevelBtn = new BetterButton(Color.decode("#9B9B9B"),52, 52, 10);
+		deleteLevelBtn.setBorderPainted(false);
+		deleteLevelBtn.setFocusPainted(false);
+		deleteLevelBtn.setIcon(min);
+		deleteLevelBtn.setBounds(850, 407, 52, 52);
+		deleteLevelBtn.setForeground(Color.white);
+		this.add(deleteLevelBtn);
+		
+		pleaseLabel = new JLabel("Please select a level.");
+		pleaseLabel.setFont(f14);
+		pleaseLabel.setForeground(Color.decode("#9B9B9B"));
+		pleaseLabel.setBounds(390, 680, 150, 30);
+		this.add(pleaseLabel);
+		pleaseLabel.setVisible(false);
 		
 		BetterLabel lbLabel = new BetterLabel(Color.decode("#A38F85"), 230, 69,
 				10);
@@ -208,7 +249,6 @@ public class LBLevelSelectorView extends JPanel {
 		levelScrollPane.setBounds(138, 407, 700, 200);
 		this.add(levelScrollPane);
 	
-		
 		newLevelBtn = new BetterButton(Color.decode("#9B9B9B"),100,100,10);
 		newLevelBtn.setBorderPainted(false);
 		newLevelBtn.setFocusPainted(false);
@@ -265,4 +305,245 @@ public class LBLevelSelectorView extends JPanel {
 
 		
 	}
+
+	/**
+	 * @return the closeBtn
+	 */
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	/**
+	 * @param closeBtn the closeBtn to set
+	 */
+	public void setCloseBtn(JButton closeBtn) {
+		this.closeBtn = closeBtn;
+	}
+
+	/**
+	 * @return the miniBtn
+	 */
+	public JButton getMiniBtn() {
+		return miniBtn;
+	}
+
+	/**
+	 * @param miniBtn the miniBtn to set
+	 */
+	public void setMiniBtn(JButton miniBtn) {
+		this.miniBtn = miniBtn;
+	}
+
+	/**
+	 * @return the backBtn
+	 */
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	/**
+	 * @param backBtn the backBtn to set
+	 */
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
+	}
+
+	/**
+	 * @return the puzzleBtn
+	 */
+	public JButton getPuzzleBtn() {
+		return puzzleBtn;
+	}
+
+	/**
+	 * @param puzzleBtn the puzzleBtn to set
+	 */
+	public void setPuzzleBtn(JButton puzzleBtn) {
+		this.puzzleBtn = puzzleBtn;
+	}
+
+	/**
+	 * @return the lightningBtn
+	 */
+	public JButton getLightningBtn() {
+		return lightningBtn;
+	}
+
+	/**
+	 * @param lightningBtn the lightningBtn to set
+	 */
+	public void setLightningBtn(JButton lightningBtn) {
+		this.lightningBtn = lightningBtn;
+	}
+
+	/**
+	 * @return the eliminationBtn
+	 */
+	public JButton getEliminationBtn() {
+		return eliminationBtn;
+	}
+
+	/**
+	 * @param eliminationBtn the eliminationBtn to set
+	 */
+	public void setEliminationBtn(JButton eliminationBtn) {
+		this.eliminationBtn = eliminationBtn;
+	}
+
+	/**
+	 * @return the releaseBtn
+	 */
+	public JButton getReleaseBtn() {
+		return releaseBtn;
+	}
+
+	/**
+	 * @param releaseBtn the releaseBtn to set
+	 */
+	public void setReleaseBtn(JButton releaseBtn) {
+		this.releaseBtn = releaseBtn;
+	}
+
+	/**
+	 * @return the deleteLevelBtn
+	 */
+	public JButton getDeleteLevelBtn() {
+		return deleteLevelBtn;
+	}
+
+	/**
+	 * @param deleteLevelBtn the deleteLevelBtn to set
+	 */
+	public void setDeleteLevelBtn(JButton deleteLevelBtn) {
+		this.deleteLevelBtn = deleteLevelBtn;
+	}
+
+	/**
+	 * @return the buildLevelBtn
+	 */
+	public JButton getBuildLevelBtn() {
+		return buildLevelBtn;
+	}
+
+	/**
+	 * @param buildLevelBtn the buildLevelBtn to set
+	 */
+	public void setBuildLevelBtn(BetterButton buildLevelBtn) {
+		this.buildLevelBtn = buildLevelBtn;
+	}
+
+	/**
+	 * @return the newLevelBtn
+	 */
+	public JButton getNewLevelBtn() {
+		return newLevelBtn;
+	}
+
+	/**
+	 * @param newLevelBtn the newLevelBtn to set
+	 */
+	public void setNewLevelBtn(JButton newLevelBtn) {
+		this.newLevelBtn = newLevelBtn;
+	}
+
+	/**
+	 * @return the levelButtons
+	 */
+	public ArrayList<JButton> getLevelButtons() {
+		return levelButtons;
+	}
+
+	/**
+	 * @param levelButtons the levelButtons to set
+	 */
+	public void setLevelButtons(ArrayList<JButton> levelButtons) {
+		this.levelButtons = levelButtons;
+	}
+
+	/**
+	 * @return the titleLable
+	 */
+	public JLabel getTitleLable() {
+		return titleLable;
+	}
+
+	/**
+	 * @param titleLable the titleLable to set
+	 */
+	public void setTitleLable(JLabel titleLable) {
+		this.titleLable = titleLable;
+	}
+
+	/**
+	 * @return the numLevels
+	 */
+	public int getNumLevels() {
+		return numLevels;
+	}
+
+	/**
+	 * @param numLevels the numLevels to set
+	 */
+	public void setNumLevels(int numLevels) {
+		this.numLevels = numLevels;
+	}
+
+	/**
+	 * @return the selectedLevel
+	 */
+	public Level getSelectedLevel() {
+		return selectedLevel;
+	}
+
+	/**
+	 * @param selectedLevel the selectedLevel to set
+	 */
+	public void setSelectedLevel(Level selectedLevel) {
+		this.selectedLevel = selectedLevel;
+	}
+
+	/**
+	 * @return the application
+	 */
+	public LevelBuilderWindow getApplication() {
+		return application;
+	}
+
+	/**
+	 * @param application the application to set
+	 */
+	public void setApplication(LevelBuilderWindow application) {
+		this.application = application;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
+	}
+
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	/**
+	 * @return the pleaseLabel
+	 */
+	public JLabel getPleaseLabel() {
+		return pleaseLabel;
+	}
+
+	/**
+	 * @param pleaseLabel the pleaseLabel to set
+	 */
+	public void setPleaseLabel(JLabel pleaseLabel) {
+		this.pleaseLabel = pleaseLabel;
+	}
+	
+	
+	
 }

@@ -134,7 +134,7 @@ public class LBLevelView extends JPanel {
 	 */
 	public LBLevelView(LevelBuilderWindow application, World world, Level level)
 			throws FileNotFoundException, FontFormatException, IOException {
-
+		
 		this.application = application;
 		this.world = world;
 		this.level = level;
@@ -173,6 +173,7 @@ public class LBLevelView extends JPanel {
 
 	public void initializeView() throws FileNotFoundException,
 			FontFormatException, IOException {
+		
 		setPreferredSize(new Dimension(1000, 708));
 		this.setLayout(null);
 
