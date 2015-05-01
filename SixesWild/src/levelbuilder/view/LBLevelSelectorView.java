@@ -231,7 +231,7 @@ public class LBLevelSelectorView extends JPanel {
 		pleaseLabel = new JLabel("Please select a level.");
 		pleaseLabel.setFont(f14);
 		pleaseLabel.setForeground(Color.decode("#9B9B9B"));
-		pleaseLabel.setBounds(435, 670, 150, 30);
+		pleaseLabel.setBounds(435, 675, 150, 30);
 		this.add(pleaseLabel);
 		pleaseLabel.setVisible(false);
 		

@@ -49,10 +49,10 @@ public class SelectLevelController implements MouseListener {
 			color = Color.decode("#3D7CA2");
 			break;
 		case 3:
-			color = Color.decode("#65ABD5");
+			color = Color.decode("#45D7B3");
 			break;
 		case 4:
-			color = Color.decode("#45D7B3");
+			color = Color.decode("#65ABD5");
 			break;
 			default:
 				color = Color.decode("#D76262");
@@ -69,7 +69,7 @@ public class SelectLevelController implements MouseListener {
 			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
 				if (!btn.equals(button)) btn.setBorder(null);
 			}
-			button.setBorder(BorderFactory.createLineBorder(color, 3, true));
+			button.setBorder(BorderFactory.createLineBorder(color, 4, true));
 			application.getLbLevelSelectorView().getPleaseLabel().setVisible(false);
 			System.out.println(application.getLbLevelSelectorView().getSelectedLevel().getName());
 		}
@@ -99,7 +99,7 @@ public class SelectLevelController implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		button.setBorder(BorderFactory.createLineBorder(color, 2, true));;
+		button.setBorder(BorderFactory.createLineBorder(color, 3, true));;
 		button.setBorderPainted(true);
 		button.repaint();
 		application.getFrame().pack();
