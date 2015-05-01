@@ -432,7 +432,7 @@ public class LBLevelSelectorView extends JPanel {
 	/**
 	 * @return the buildLevelBtn
 	 */
-	public JButton getBuildLevelBtn() {
+	public BetterButton getBuildLevelBtn() {
 		return buildLevelBtn;
 	}
 

@@ -69,7 +69,7 @@ public class SelectLevelController implements MouseListener {
 			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
 				if (!btn.equals(button)) btn.setBorder(null);
 			}
-			button.setBorder(BorderFactory.createLineBorder(color, 4, true));
+			button.setBorder(BorderFactory.createLineBorder(color, 5, true));
 			application.getLbLevelSelectorView().getPleaseLabel().setVisible(false);
 			System.out.println(application.getLbLevelSelectorView().getSelectedLevel().getName());
 		}

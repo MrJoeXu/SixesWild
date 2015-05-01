@@ -8,6 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.view.SpaceView;
@@ -99,13 +101,16 @@ public class TileController implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		tileView.setBorder(BorderFactory.createLineBorder(application.getLbLevelSelectorView().getBuildLevelBtn().getCol(), 3, true));
+		tileView.repaint();
+		application.getFrame().pack();
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		tileView.setBorder(null);
+		tileView.repaint();
+		application.getFrame().pack();
 		
 	}
 
