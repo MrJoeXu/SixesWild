@@ -80,4 +80,21 @@ public class Move {
 	    Tile tile = new Tile(values.get(value),frequency,0, col, false);
 	    return tile;
 	}
+
+	public boolean isAdjacent(Tile add) {
+		if (tiles.contains(add)) return false;
+		Tile test = tiles.get(tiles.size()-1);
+		
+		if (test.getColumn() == add.getColumn()) {
+			if ((test.getRow()+1 == add.getRow()) || (test.getRow()-1 == add.getRow()))
+				return true;
+		}
+		
+		else if (test.getRow() == add.getRow()) {
+			if ((test.getColumn()+1 == add.getColumn()) || (test.getColumn()-1 == add.getColumn()))
+				return true;
+		}
+		
+		return false;
+	}
 }

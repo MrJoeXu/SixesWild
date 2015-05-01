@@ -56,9 +56,17 @@ public class MakeMoveController implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		tileView.setBorder(BorderFactory.createLineBorder(application.getGameTypeColor(), 3, true));
+		if (level.isMakingMove()) {
+			if (level.getMove().isAdjacent(tileView.getTile())) {
+				level.getMove().addTile(tileView.getTile());
+				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+				tileView.repaint();
+			}
+		}
+		else {
+			tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
 		tileView.repaint();
-		if (level.isMakingMove()) level.getMove().addTile(tileView.getTile());
+		}
 	}
 
 	@Override
