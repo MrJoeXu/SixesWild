@@ -253,6 +253,22 @@ public class SixesWildWindow {
 		}
 	}
 	
+	public Color getGameTypeColor() {
+		
+		switch (gameType) {
+		case 1:
+			return Color.decode("#D76262");
+		case 2:
+			return Color.decode("#3D7CA2");
+		case 3:
+			return Color.decode("#45D7B3");
+		case 4:
+			return Color.decode("#65ABD5");
+		default:
+			return Color.white;
+		}
+	}
+	
 	/**
 	 * Launch the application.
 	 */

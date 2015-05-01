@@ -515,6 +515,7 @@ public class Level {
 	 */
 	public void setMove(Move move) {
 		this.move = move;
+		this.isMakingMove = true;
 	}
 
 	/**
@@ -557,8 +558,10 @@ public class Level {
 	 */
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	public void decrementMoves() {
+		
+		this.movesLeft--;
 	}	
-	
-	
-	
 }

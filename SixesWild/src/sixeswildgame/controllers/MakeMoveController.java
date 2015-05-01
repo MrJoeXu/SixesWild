@@ -12,8 +12,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.view.LevelView;
+import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.view.SpaceView;
 import src.sixeswildgame.view.TileView;
 import src.sixeswildgame.world.Board;
@@ -30,13 +34,16 @@ public class MakeMoveController implements MouseListener{
 
 	protected TileView tileView;
 	protected Level level;
+	protected SixesWildWindow application;
 	
-	public MakeMoveController(TileView tileView, Level level) {
+	public MakeMoveController(TileView tileView, Level level, SixesWildWindow application) {
 		this.tileView = tileView;
 		this.level = level;
+		this.application = application;
 	}
 	
 	public void mousePressed(MouseEvent me) {
+		Tile tile = tileView.getTile();
 		Move newMove = new Move(tileView.getTile());
 		level.setMove(newMove);
 	}
@@ -49,19 +56,19 @@ public class MakeMoveController implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		if (!level.isMakingMove()) tileView.setBackground(Color.GREEN);
-		
+		tileView.setBorder(BorderFactory.createLineBorder(application.getGameTypeColor(), 3, true));
+		tileView.repaint();
+		if (level.isMakingMove()) level.getMove().addTile(tileView.getTile());
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		if (!level.isMakingMove()) tileView.setBackground(Color.BLACK);
+		if (!level.isMakingMove()) tileView.setBorder(null);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		if (level.getMove().isValid()) level.getMove().doMove(level);
-		
+		level.getMove().doMove(level);
+		level.setMakingMove(false);
 	}
-
 }

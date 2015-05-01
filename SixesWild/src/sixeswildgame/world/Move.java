@@ -36,8 +36,11 @@ public class Move {
 	
 	
 	public boolean doMove (Level lv) {
-		if (!this.isValid())
+		if (!this.isValid()) {
+			lv.decrementMoves();
 			return false;
+		}
+		
 		else {
 			ArrayList<Tile> newTiles;
 			newTiles = new ArrayList<Tile>();
@@ -49,7 +52,6 @@ public class Move {
 			
 			fallDown(lv, newTiles);
 			lv.setCurrentScore(lv.getCurrentScore() + (tiles.size() * mult));
-			lv.setMovesLeft(lv.getMovesLeft()-1);
 			return true;
 		}
 	}

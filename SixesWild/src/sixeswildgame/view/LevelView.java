@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ import src.sixeswildgame.controllers.MakeMoveController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
+import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.World;
 
 /**
@@ -73,8 +75,9 @@ public class LevelView extends JPanel{
 		backBtn.addActionListener(new LevelBackController(world, application));
 		closeBtn.addActionListener(new CloseGameController(world, application));
 		miniBtn.addActionListener(new MinimizeGameController(world,application));
-		
-	//	for (SpaceView sv : boardView.getGrid()) sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level));
+		for (SpaceView sv : boardView.getGrid()) {
+			sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level, application));
+		}
 	}
 
 	private void initializeModel() {
@@ -182,7 +185,7 @@ public class LevelView extends JPanel{
 		threeStarLbl.setBounds(29, 38, 60, 60);
 		starPanel.add(threeStarLbl);
 		
-		BoardView boardView = new BoardView(level.getBoard(),50,50);
+		boardView = new BoardView(level.getBoard(),50,50); 
 		int length = boardView.getDimension()*boardView.getTileLength() + 5 * boardView.getDimension();
 		int panelX = (1000 - length)/2;
 		int panelY = (708 - length)/2;
