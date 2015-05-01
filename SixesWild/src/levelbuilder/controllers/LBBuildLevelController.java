@@ -10,6 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+
 import src.levelbuilder.view.LBLevelSelectorView;
 import src.levelbuilder.view.LBLevelView;
 import src.levelbuilder.view.LevelBuilderWindow;
@@ -41,6 +47,26 @@ public class LBBuildLevelController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if (application.isSoundEnabled()) {
+			try {
+			    File f = new File("resources/open.wav");
+			    AudioInputStream stream;
+			    AudioFormat format;
+			    DataLine.Info info;
+			    Clip clip;
+
+			    stream = AudioSystem.getAudioInputStream(f);
+			    format = stream.getFormat();
+			    info = new DataLine.Info(Clip.class, format);
+			    clip = (Clip) AudioSystem.getLine(info);
+			    clip.open(stream);
+			    clip.start();
+			}
+			catch (Exception e1) {
+			    
+			}
+		}
 
 		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
 		if (world.getLevels(application.getGameType()).size() > 0) nextId = 

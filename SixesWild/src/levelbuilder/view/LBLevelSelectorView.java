@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +28,7 @@ import src.levelbuilder.controllers.LBGameTypeBackController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.LBBuildLevelController;
 import src.levelbuilder.controllers.SelectLevelController;
+import src.levelbuilder.controllers.ToggleSoundController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
@@ -59,6 +61,7 @@ public class LBLevelSelectorView extends JPanel {
 	
 	protected LevelBuilderWindow application;
 	protected World world;
+	protected JCheckBox toggleSoundCheckBox;
 
 	public LBLevelSelectorView(LevelBuilderWindow application, World world) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
@@ -83,6 +86,7 @@ public class LBLevelSelectorView extends JPanel {
 		deleteLevelBtn.addActionListener(new DeleteLevelController(world, application, selectedLevel));
 		
 		buildLevelBtn.addActionListener(new LBBuildLevelController(application, world, selectedLevel, 1));
+		toggleSoundCheckBox.addActionListener(new ToggleSoundController(application));
 		
 		Level level;
 		int nextId = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
@@ -156,6 +160,15 @@ public class LBLevelSelectorView extends JPanel {
 		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
 		Font f25 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 25);
 		Font f14 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 14);
+		
+		Icon sound = new ImageIcon("resources/sound.png");
+		Icon mute = new ImageIcon("resources/mute.png");
+		toggleSoundCheckBox = new JCheckBox();
+		toggleSoundCheckBox.setIcon(mute);
+		toggleSoundCheckBox.setSelectedIcon(sound);
+		toggleSoundCheckBox.setSelected(application.isSoundEnabled());
+		toggleSoundCheckBox.setBounds(650, 140, 52, 52);
+		this.add(toggleSoundCheckBox);
 		
 		puzzleBtn = new BetterButton(Color.decode("#D76262"),200, 52, 10);
 		puzzleBtn.setBorderPainted(false);

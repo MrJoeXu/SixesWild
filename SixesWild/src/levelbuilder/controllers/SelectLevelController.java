@@ -67,7 +67,9 @@ public class SelectLevelController implements MouseListener {
 		if (selected) {
 			application.getLbLevelSelectorView().setSelectedLevel(level);
 			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
-				if (!btn.equals(button)) btn.setBorder(null);
+				if (!btn.equals(button)) {
+					btn.setBorder(null);
+				}
 			}
 			button.setBorder(BorderFactory.createLineBorder(color, 5, true));
 			application.getLbLevelSelectorView().getPleaseLabel().setVisible(false);
@@ -99,16 +101,18 @@ public class SelectLevelController implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		button.setBorder(BorderFactory.createLineBorder(color, 3, true));;
+		if (!selected) {
+		button.setBorder(BorderFactory.createLineBorder(color, 3, true));
 		button.setBorderPainted(true);
 		button.repaint();
 		application.getFrame().pack();
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (!selected) {
-			button.setBorder(null);;
+			button.setBorder(null);
 			button.repaint();
 			application.getFrame().pack();
 		}

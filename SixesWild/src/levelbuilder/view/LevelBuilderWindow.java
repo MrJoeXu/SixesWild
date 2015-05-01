@@ -14,11 +14,17 @@ import java.awt.SplashScreen;
 import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,6 +36,7 @@ import javax.swing.border.EmptyBorder;
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.LBSelectGameTypeController;
+import src.levelbuilder.controllers.ToggleSoundController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
@@ -64,9 +71,11 @@ public class LevelBuilderWindow {
 	
 	protected JButton closeBtn;
 	protected JButton miniBtn;
+	protected JCheckBox toggleSoundCheckBox;
 	
 	protected World world;
 	protected int gameType;
+	protected boolean soundEnabled;
 	
 	/**
 	 * Create the application.
@@ -75,6 +84,7 @@ public class LevelBuilderWindow {
 	 * @throws FileNotFoundException 
 	 */
 	public LevelBuilderWindow() throws FileNotFoundException, FontFormatException, IOException {
+		this.soundEnabled = true;
 		initialize();
 	}
 	
@@ -88,6 +98,27 @@ public class LevelBuilderWindow {
 		initializeWorld();
 		initializeView();
 		initializeControllers();
+		
+		if (soundEnabled) {
+			try {
+			    File f = new File("resources/SixesWildMenu.wav");
+			    AudioInputStream stream;
+			    AudioFormat format;
+			    DataLine.Info info;
+			    Clip clip;
+
+			    stream = AudioSystem.getAudioInputStream(f);
+			    format = stream.getFormat();
+			    info = new DataLine.Info(Clip.class, format);
+			    clip = (Clip) AudioSystem.getLine(info);
+			    clip.open(stream);
+			    clip.start();
+			}
+			catch (Exception e1) {
+			    
+			}
+		}
+		
 	}
 	
 	/**
@@ -181,6 +212,15 @@ public class LevelBuilderWindow {
 		frame.getContentPane().add(lblSixeswild);
 		
 		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+		Icon sound = new ImageIcon("resources/sound.png");
+		Icon mute = new ImageIcon("resources/mute.png");
+		
+		toggleSoundCheckBox = new JCheckBox();
+		toggleSoundCheckBox.setIcon(mute);
+		toggleSoundCheckBox.setSelectedIcon(sound);
+		toggleSoundCheckBox.setSelected(soundEnabled);
+		toggleSoundCheckBox.setBounds(650, 140, 52, 52);
+		frame.getContentPane().add(toggleSoundCheckBox);
 		
 		puzzleBtn = new BetterButton(Color.decode("#D76262"),200,52,10);
 		puzzleBtn.setBorderPainted(false);
@@ -245,6 +285,7 @@ public class LevelBuilderWindow {
 		eliminationBtn.addActionListener(new LBSelectGameTypeController(this, world, 4));
 		closeBtn.addActionListener(new LBCloseGameController(world, this));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
+		toggleSoundCheckBox.addActionListener(new ToggleSoundController(this));
 	}
 	
 	public String getGameTypeName() {
@@ -422,6 +463,38 @@ public class LevelBuilderWindow {
 
 	public void setWorld(World world) {
 		this.world = world;
+	}
+	
+	public void toggleSound() {
+		soundEnabled = !soundEnabled;
+	}
+
+	/**
+	 * @return the toggleSoundCheckBox
+	 */
+	public JCheckBox getToggleSoundCheckBox() {
+		return toggleSoundCheckBox;
+	}
+
+	/**
+	 * @param toggleSoundCheckBox the toggleSoundCheckBox to set
+	 */
+	public void setToggleSoundCheckBox(JCheckBox toggleSoundCheckBox) {
+		this.toggleSoundCheckBox = toggleSoundCheckBox;
+	}
+
+	/**
+	 * @return the soundEnabled
+	 */
+	public boolean isSoundEnabled() {
+		return soundEnabled;
+	}
+
+	/**
+	 * @param soundEnabled the soundEnabled to set
+	 */
+	public void setSoundEnabled(boolean soundEnabled) {
+		this.soundEnabled = soundEnabled;
 	}
 	
 	

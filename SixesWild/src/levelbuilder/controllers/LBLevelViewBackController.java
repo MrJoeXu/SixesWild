@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+
 import src.levelbuilder.view.LBLevelSelectorView;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.SixesWildWindow;
@@ -31,6 +37,26 @@ public class LBLevelViewBackController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if (application.isSoundEnabled()) {
+			try {
+			    File f = new File("resources/1.wav");
+			    AudioInputStream stream;
+			    AudioFormat format;
+			    DataLine.Info info;
+			    Clip clip;
+
+			    stream = AudioSystem.getAudioInputStream(f);
+			    format = stream.getFormat();
+			    info = new DataLine.Info(Clip.class, format);
+			    clip = (Clip) AudioSystem.getLine(info);
+			    clip.open(stream);
+			    clip.start();
+			}
+			catch (Exception e1) {
+			    
+			}
+		}
 		
 		try {
 			application.setLbLevelSelectorView(new LBLevelSelectorView(application, world));

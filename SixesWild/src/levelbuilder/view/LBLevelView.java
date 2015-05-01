@@ -17,6 +17,7 @@ import src.levelbuilder.controllers.RedoController;
 import src.levelbuilder.controllers.ReleaseController;
 import src.levelbuilder.controllers.SaveController;
 import src.levelbuilder.controllers.TileController;
+import src.levelbuilder.controllers.ToggleSoundController;
 import src.levelbuilder.controllers.UndoController;
 import src.levelbuilder.controllers.UpdateDimensionController;
 import src.levelbuilder.controllers.UpdateFrequencyController;
@@ -124,6 +125,7 @@ public class LBLevelView extends JPanel {
 	protected boolean isPlacingBucket;
 	protected JCheckBox rangeSixCheckBox;
 	protected JCheckBox bucketCheckBox;
+	protected JCheckBox toggleSoundCheckBox;
 
 	/**
 	 * Create the panel.
@@ -186,6 +188,15 @@ public class LBLevelView extends JPanel {
 		lbLabel.setHorizontalAlignment(BetterLabel.CENTER);
 		lbLabel.setVerticalAlignment(BetterLabel.CENTER);
 		this.add(lbLabel);
+		
+		Icon sound = new ImageIcon("resources/sound.png");
+		Icon mute = new ImageIcon("resources/mute.png");
+		toggleSoundCheckBox = new JCheckBox();
+		toggleSoundCheckBox.setIcon(mute);
+		toggleSoundCheckBox.setSelectedIcon(sound);
+		toggleSoundCheckBox.setSelected(application.isSoundEnabled());
+		toggleSoundCheckBox.setBounds(650, 73, 52, 52);
+		this.add(toggleSoundCheckBox);
 
 		Font f22 = Font.createFont(
 				Font.TRUETYPE_FONT,
@@ -787,6 +798,7 @@ public class LBLevelView extends JPanel {
 		
 		rangeSixCheckBox.addActionListener(new ReleaseController(application, 0, rangeSixCheckBox));
 		bucketCheckBox.addActionListener(new ReleaseController(application, 1, bucketCheckBox));
+		toggleSoundCheckBox.addActionListener(new ToggleSoundController(application));
 	}
 
 	public void incrementActiveIndex() {
