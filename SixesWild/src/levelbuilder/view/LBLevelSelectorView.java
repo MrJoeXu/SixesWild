@@ -189,32 +189,26 @@ public class LBLevelSelectorView extends JPanel {
 		releaseBtn.setBounds(400, 315, 200, 52);
 		releaseBtn.setForeground(Color.white);
 
-		buildLevelBtn = new BetterButton(Color.decode("#FFFF99"),200, 52, 10);
+		Icon build = new ImageIcon("resources/Leave.png");
+		buildLevelBtn = new BetterButton(Color.decode("#50E3C2"),50, 50, 10);
 		buildLevelBtn.setBorderPainted(false);
 		buildLevelBtn.setFocusPainted(false);
-		buildLevelBtn.setFont(f22);
-		buildLevelBtn.setText("Build");
-		buildLevelBtn.setBounds(400, 620, 200, 52);
+		buildLevelBtn.setIcon(build);
+		buildLevelBtn.setBounds(525, 624, 50, 50);
 		buildLevelBtn.setForeground(Color.white);
 		this.add(buildLevelBtn);
 		
-		if (application.getGameType() == 1) { this.add(puzzleBtn);
-		buildLevelBtn.setCol(Color.decode("#D76262"));
-		if (application.getGameType() == 2) { this.add(lightningBtn); 
-		buildLevelBtn.setCol(Color.decode("#3D7CA2"));}
-		}
-		if (application.getGameType() == 3) { this.add(releaseBtn); 
-		buildLevelBtn.setCol(Color.decode("#45D7B3"));}
-		if (application.getGameType() == 4) { this.add(eliminationBtn); 
-		buildLevelBtn.setCol(Color.decode("#65ABD5"));}
+		if (application.getGameType() == 1) { this.add(puzzleBtn);}
+		if (application.getGameType() == 2) { this.add(lightningBtn);} 
+		if (application.getGameType() == 3) { this.add(releaseBtn); }
+		if (application.getGameType() == 4) { this.add(eliminationBtn);} 
 		
-		Icon min = new ImageIcon("resources/min.png");
-		deleteLevelBtn = new BetterButton(Color.decode("#9B9B9B"),52, 52, 10);
+		Icon delete = new ImageIcon("resources/Trash.png");
+		deleteLevelBtn = new BetterButton(Color.decode("#D76262"),50, 50, 10);
 		deleteLevelBtn.setBorderPainted(false);
 		deleteLevelBtn.setFocusPainted(false);
-		deleteLevelBtn.setIcon(min);
-		deleteLevelBtn.setBounds(850, 407, 52, 52);
-		deleteLevelBtn.setForeground(Color.white);
+		deleteLevelBtn.setIcon(delete);
+		deleteLevelBtn.setBounds(425, 624, 50, 50);
 		this.add(deleteLevelBtn);
 		
 		pleaseLabel = new JLabel("Please select a level.");
@@ -236,7 +230,7 @@ public class LBLevelSelectorView extends JPanel {
 		
 		JPanel levelPane = new JPanel();
 		levelPane.setLayout(null);
-		levelPane.setPreferredSize(new Dimension(850, 200));
+		levelPane.setPreferredSize(new Dimension(700, 200));
 		levelPane.setBackground(Color.decode("#D8D8D8"));
 		
 		JScrollPane levelScrollPane = new JScrollPane();
