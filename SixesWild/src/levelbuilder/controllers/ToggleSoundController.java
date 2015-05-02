@@ -25,13 +25,17 @@ public class ToggleSoundController implements ActionListener {
 	protected LevelBuilderWindow application;
 
 	/**
+	 * Creates new ToggleSoundController with application
 	 * @param application
 	 */
 	public ToggleSoundController(LevelBuilderWindow application) {
 		super();
 		this.application = application;
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		application.toggleSound();

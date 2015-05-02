@@ -18,7 +18,7 @@ import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.World;
 
 /**
- * @author Halsey
+ * @author Halsey Vandenberg
  *
  */
 public class LBGameTypeBackController implements ActionListener {
@@ -27,13 +27,19 @@ public class LBGameTypeBackController implements ActionListener {
 	protected World world;
 
 	/**
+	 * Creates a LBGameTypeBackController with specified application and world
 	 * 
+	 * @param application
+	 * @param world
 	 */
 	public LBGameTypeBackController(LevelBuilderWindow application, World world) {
 		this.application = application;
 		this.world = world;
 	}
-
+	
+	/**
+	 * Returns back to Level Builder Main Menu
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

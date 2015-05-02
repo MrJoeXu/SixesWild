@@ -30,55 +30,65 @@ import src.sixeswildgame.world.World;
  * 
  */
 public class LBSelectGameTypeController implements ActionListener {
-	
+
 	protected LevelBuilderWindow application;
 	protected World world;
 	protected int gameType;
 
 	/**
+	 * Creates new LBSelectGameTypeController with specified application, world,
+	 * and gameType
 	 * 
+	 * @param application
+	 * @param world
+	 * @param gameType
 	 */
-	public LBSelectGameTypeController(LevelBuilderWindow application, World world, int gameType) {
+	public LBSelectGameTypeController(LevelBuilderWindow application,
+			World world, int gameType) {
 		this.application = application;
 		this.world = world;
 		this.gameType = gameType;
 	}
 
+	/**
+	 * Opens a new Level Builder LevelSelectorView with selected game type
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (application.isSoundEnabled()) {
 			try {
-			    File f = new File("resources/4.wav");
-			    AudioInputStream stream;
-			    AudioFormat format;
-			    DataLine.Info info;
-			    Clip clip;
+				File f = new File("resources/4.wav");
+				AudioInputStream stream;
+				AudioFormat format;
+				DataLine.Info info;
+				Clip clip;
 
-			    stream = AudioSystem.getAudioInputStream(f);
-			    format = stream.getFormat();
-			    info = new DataLine.Info(Clip.class, format);
-			    clip = (Clip) AudioSystem.getLine(info);
-			    clip.open(stream);
-			    clip.start();
-			}
-			catch (Exception e1) {
-			    
+				stream = AudioSystem.getAudioInputStream(f);
+				format = stream.getFormat();
+				info = new DataLine.Info(Clip.class, format);
+				clip = (Clip) AudioSystem.getLine(info);
+				clip.open(stream);
+				clip.start();
+			} catch (Exception e1) {
+
 			}
 		}
-		
+
 		application.setGameType(gameType);
-		
+
 		System.out.println("GT: " + gameType);
-		
+
 		try {
-			application.setLbLevelSelectorView(new LBLevelSelectorView(application, world));
+			application.setLbLevelSelectorView(new LBLevelSelectorView(
+					application, world));
 		} catch (FontFormatException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		application.getFrame().setContentPane(application.getLbLevelSelectorView());
+
+		application.getFrame().setContentPane(
+				application.getLbLevelSelectorView());
 		application.getLbLevelSelectorView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");
 		application.getFrame().pack();

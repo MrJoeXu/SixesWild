@@ -22,7 +22,7 @@ import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
 /**
- * @author tleung
+ * @author Tiffany
  * @author Halsey Vandenberg
  *
  */
@@ -32,7 +32,10 @@ public class UpdateTileRangeController implements ActionListener {
 	protected JCheckBox checkBox;
 	
 	/**
-	 * 
+	 * Creates new UpdateTileRangeController with specified application, level, and checkBox
+	 * @param application
+	 * @param level
+	 * @param checkBox
 	 */
 	public UpdateTileRangeController(LevelBuilderWindow application, Level level, JCheckBox checkBox) {
 		this.application = application;
@@ -40,6 +43,10 @@ public class UpdateTileRangeController implements ActionListener {
 		this.checkBox = checkBox;
 
 	}
+	
+	/**
+	 * Sets the Tile value to appear or not appear on the Board preview
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		

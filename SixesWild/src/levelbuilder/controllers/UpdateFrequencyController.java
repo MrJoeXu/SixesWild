@@ -32,7 +32,12 @@ public class UpdateFrequencyController implements ChangeListener {
 	protected JSlider slider;
 
 	/**
+	 * Creates new UpdateFrequecnyController with specified application, level,
+	 * and slider
 	 * 
+	 * @param application
+	 * @param level
+	 * @param slider
 	 */
 	public UpdateFrequencyController(LevelBuilderWindow application,
 			Level level, JSlider slider) {
@@ -41,30 +46,32 @@ public class UpdateFrequencyController implements ChangeListener {
 		this.slider = slider;
 	}
 
+	/**
+	 * Updates the preview with the specified bonus frequency from slider
+	 */
 	@Override
 	public void stateChanged(ChangeEvent ce) {
 		if (!slider.getValueIsAdjusting()) {
-			
+
 			if (application.isSoundEnabled()) {
 				try {
-				    File f = new File("resources/2.wav");
-				    AudioInputStream stream;
-				    AudioFormat format;
-				    DataLine.Info info;
-				    Clip clip;
+					File f = new File("resources/2.wav");
+					AudioInputStream stream;
+					AudioFormat format;
+					DataLine.Info info;
+					Clip clip;
 
-				    stream = AudioSystem.getAudioInputStream(f);
-				    format = stream.getFormat();
-				    info = new DataLine.Info(Clip.class, format);
-				    clip = (Clip) AudioSystem.getLine(info);
-				    clip.open(stream);
-				    clip.start();
-				}
-				catch (Exception e1) {
-				    
+					stream = AudioSystem.getAudioInputStream(f);
+					format = stream.getFormat();
+					info = new DataLine.Info(Clip.class, format);
+					clip = (Clip) AudioSystem.getLine(info);
+					clip.open(stream);
+					clip.start();
+				} catch (Exception e1) {
+
 				}
 			}
-			
+
 			int bonusSlide = (int) slider.getValue();
 			switch (bonusSlide) {
 			case 3:
@@ -92,12 +99,14 @@ public class UpdateFrequencyController implements ChangeListener {
 			application.getLbLevelView().setBoardView(newBoardView);
 			application.getLbLevelView().getBoardPanel().removeAll();
 			application.getLbLevelView().getBoardPanel().add(newBoardView);
-			for (SpaceView sv : application.getLbLevelView().getBoardView().getGrid() ) {
+			for (SpaceView sv : application.getLbLevelView().getBoardView()
+					.getGrid()) {
 				TileView tv = sv.getTileView();
 				tv.addMouseListener(new TileController(tv, level, application));
 			}
 			// application.getLbLevelView().getBoardPanel().setAlignmentY(JComponent.CENTER_ALIGNMENT);
-			application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
+			application.getLbLevelView().getSaveLbl()
+					.setText("Unsaved Changes");
 			application.getLbLevelView().repaint();
 			application.getFrame().pack();
 		}

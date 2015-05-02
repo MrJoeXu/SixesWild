@@ -15,7 +15,7 @@ import src.sixeswildgame.world.Level;
 
 /**
  * 
- * @author tleung
+ * @author Tiffany
  *
  */
 public class UpdateMinuteController implements DocumentListener {
@@ -24,39 +24,56 @@ public class UpdateMinuteController implements DocumentListener {
 	protected JTextField textField;
 
 	/**
+	 * Creates a new UpdateMinuteController with specified application, level,
+	 * and textField
 	 * 
+	 * @param application
+	 * @param level
+	 * @param textField
 	 */
-	public UpdateMinuteController(LevelBuilderWindow application,
-			Level level, JTextField textField) {
+	public UpdateMinuteController(LevelBuilderWindow application, Level level,
+			JTextField textField) {
 		this.application = application;
 		this.level = level;
 		this.textField = textField;
 	}
 
+	/**
+	 * Sets the minutes of the count down time
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
 		changeMinutesValue();
 	}
 
+	/**
+	 * Sets the minutes of the count down time
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
 		changeMinutesValue();
 	}
-
+	
+	/**
+	 * Sets the minutes of the count down time
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
 		changeMinutesValue();
 	}
-
+	
+	/**
+	 * Sets the minutes of the count down time
+	 */
 	public void changeMinutesValue() {
 		if (textField.getText().isEmpty()) {
 			level.setMinutes(0);
-			//System.out.println(level.getMinutes());
+			// System.out.println(level.getMinutes());
 		}
 		if (textField.getText().matches("^[0-9]+$")) {
 			int minutes = Integer.parseInt(textField.getText());
 			level.setMinutes(minutes);
-			//System.out.println(level.getMinutes());
+			// System.out.println(level.getMinutes());
 		}
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}

@@ -24,7 +24,7 @@ import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 
 /**
- * @author tleung
+ * @author Tiffany
  *
  */
 public class UpdateDimensionController implements ChangeListener {
@@ -33,7 +33,10 @@ public class UpdateDimensionController implements ChangeListener {
 	protected JSlider slider;
 
 	/**
-	 * 
+	 * Creates new UpdateDimensionController with specified application, level, and slider 
+	 * @param application
+	 * @param level
+	 * @param slider
 	 */
 	public UpdateDimensionController(LevelBuilderWindow application,
 			Level level, JSlider slider) {
@@ -41,7 +44,10 @@ public class UpdateDimensionController implements ChangeListener {
 		this.level = level;
 		this.slider = slider;
 	}
-
+	
+	/**
+	 * Updates the preview board with specified dimension from slider
+	 */
 	@Override
 	public void stateChanged(ChangeEvent ce) {
 		if (!slider.getValueIsAdjusting()) {

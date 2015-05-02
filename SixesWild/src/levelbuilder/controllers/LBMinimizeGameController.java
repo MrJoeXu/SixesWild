@@ -17,16 +17,26 @@ import src.sixeswildgame.world.World;
  *
  */
 
-public class LBMinimizeGameController implements ActionListener{
+public class LBMinimizeGameController implements ActionListener {
 
 	World world;
 	LevelBuilderWindow application;
-	
+
+	/**
+	 * Creates a new LBMinimizeGameController with specified world and
+	 * application
+	 * 
+	 * @param world
+	 * @param application
+	 */
 	public LBMinimizeGameController(World world, LevelBuilderWindow application) {
 		this.world = world;
 		this.application = application;
 	}
 
+	/**
+	 * Minimizes the Level Builder window
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		application.getFrame().setState(JFrame.ICONIFIED);

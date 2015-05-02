@@ -18,7 +18,12 @@ public class UpdateThreeStarController implements DocumentListener {
 	protected JTextField textField;
 
 	/**
+	 * Creates new UpdateThreeStarController with specified application, level,
+	 * and textField
 	 * 
+	 * @param application
+	 * @param level
+	 * @param textField
 	 */
 	public UpdateThreeStarController(LevelBuilderWindow application,
 			Level level, JTextField textField) {
@@ -27,21 +32,33 @@ public class UpdateThreeStarController implements DocumentListener {
 		this.textField = textField;
 	}
 
+	/**
+	 * Sets the three star value threshold
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
 		changeThreeStarValue();
 	}
 
+	/**
+	 * Sets the three star value threshold
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
 		changeThreeStarValue();
 	}
 
+	/**
+	 * Sets the three star value threshold
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
 		changeThreeStarValue();
 	}
 
+	/**
+	 * Sets the three star value threshold
+	 */
 	public void changeThreeStarValue() {
 		if (textField.getText().isEmpty()) {
 			level.setThreeStarScore(0);

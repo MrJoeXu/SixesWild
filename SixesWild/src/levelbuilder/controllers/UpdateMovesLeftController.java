@@ -18,6 +18,9 @@ public class UpdateMovesLeftController implements DocumentListener {
 	protected JTextField textField;
 
 	/**
+	 * Creates new UpdateMovesLeftController with specified application, level,
+	 * and textField
+	 * 
 	 * @param level
 	 * @param application
 	 * @param textField
@@ -28,25 +31,37 @@ public class UpdateMovesLeftController implements DocumentListener {
 		this.application = application;
 		this.textField = textField;
 	}
-
+	
+	/**
+	 * Sets the moves left
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
 		changeMovesLeftMoves();
 
 	}
-
+	
+	/**
+	 * Sets the moves left
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
 		changeMovesLeftMoves();
 
 	}
-
+	
+	/**
+	 * Sets the moves left
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
 		changeMovesLeftMoves();
 
 	}
-
+	
+	/**
+	 * Sets the moves left
+	 */
 	public void changeMovesLeftMoves() {
 		if (textField.getText().isEmpty()) {
 			level.setMovesLeft(0);

@@ -19,7 +19,7 @@ import src.sixeswildgame.world.Level;
 
 /**
  * 
- * @author tleung
+ * @author Tiffany
  *
  */
 public class UpdateRemoveTileController implements ActionListener,
@@ -30,6 +30,9 @@ public class UpdateRemoveTileController implements ActionListener,
 	protected JCheckBox checkBox;
 
 	/**
+	 * Creates new UpdateRemoveTileController with specified application, level,
+	 * textField, and checkBox
+	 * 
 	 * @param level
 	 * @param application
 	 * @param textField
@@ -41,55 +44,69 @@ public class UpdateRemoveTileController implements ActionListener,
 		this.textField = textField;
 		this.checkBox = checkBox;
 	}
-
+	
+	/**
+	 * Enables remove tile special moves in custom level
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		
+
 		if (application.isSoundEnabled()) {
 			try {
-			    File f = new File("resources/2.wav");
-			    AudioInputStream stream;
-			    AudioFormat format;
-			    DataLine.Info info;
-			    Clip clip;
+				File f = new File("resources/2.wav");
+				AudioInputStream stream;
+				AudioFormat format;
+				DataLine.Info info;
+				Clip clip;
 
-			    stream = AudioSystem.getAudioInputStream(f);
-			    format = stream.getFormat();
-			    info = new DataLine.Info(Clip.class, format);
-			    clip = (Clip) AudioSystem.getLine(info);
-			    clip.open(stream);
-			    clip.start();
-			}
-			catch (Exception e1) {
-			    
+				stream = AudioSystem.getAudioInputStream(f);
+				format = stream.getFormat();
+				info = new DataLine.Info(Clip.class, format);
+				clip = (Clip) AudioSystem.getLine(info);
+				clip.open(stream);
+				clip.start();
+			} catch (Exception e1) {
+
 			}
 		}
-		
+
 		application.getLbLevelView().getRemoveTileTextField()
 				.setEnabled(checkBox.isSelected());
 
 		level.getAllowedSpecialMoves()[2] = checkBox.isSelected();
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
-
+	
+	/**
+	 * Sets the number of remove tile special moves
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
 		changeNumRemoveTileMoves();
 
 	}
-
+	
+	/**
+	 * Sets the number of remove tile special moves
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
 		changeNumRemoveTileMoves();
 
 	}
 
+	/**
+	 * Sets the number of remove tile special moves
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
 		changeNumRemoveTileMoves();
 
 	}
-
+	
+	/**
+	 * Sets the number of remove tile special moves
+	 */
 	public void changeNumRemoveTileMoves() {
 		/*
 		 * for (int i = 0; i < textField.getText().length(); i++) {
@@ -97,12 +114,12 @@ public class UpdateRemoveTileController implements ActionListener,
 		 */
 		if (textField.getText().isEmpty()) {
 			level.setRemoveTileMoves(0);
-		} 
+		}
 		if (textField.getText().matches("^[0-9]+$")) {
 			int numRemoveTileMoves = Integer.parseInt(textField.getText());
 			level.setRemoveTileMoves(numRemoveTileMoves);
 		}
-		
+
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 
 	}

@@ -27,7 +27,7 @@ import src.sixeswildgame.world.World;
  *
  */
 public class SelectLevelController implements MouseListener {
-	
+
 	protected JButton button;
 	protected LevelBuilderWindow application;
 	protected Level level;
@@ -35,18 +35,21 @@ public class SelectLevelController implements MouseListener {
 	protected Color color;
 
 	/**
+	 * Creates a new SelectLevelController with specified button, application,
+	 * and level
+	 * 
 	 * @param world
 	 * @param application
 	 * @param level
 	 */
-	public SelectLevelController(JButton button, LevelBuilderWindow application,
-			Level level) {
+	public SelectLevelController(JButton button,
+			LevelBuilderWindow application, Level level) {
 		super();
 		this.button = button;
 		this.application = application;
 		this.level = level;
 		this.selected = false;
-		
+
 		switch (application.getGameType()) {
 		case 1:
 			color = Color.decode("#D76262");
@@ -60,105 +63,116 @@ public class SelectLevelController implements MouseListener {
 		case 4:
 			color = Color.decode("#65ABD5");
 			break;
-			default:
-				color = Color.decode("#D76262");
+		default:
+			color = Color.decode("#D76262");
 		}
-		
-	}
 
+	}
+	
+	/**
+	 * Opens Level to be built
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
 		selected = !selected;
-		
+
 		if (selected) {
 
 			if (application.isSoundEnabled()) {
 				try {
-				    File f = new File("resources/4.wav");
-				    AudioInputStream stream;
-				    AudioFormat format;
-				    DataLine.Info info;
-				    Clip clip;
+					File f = new File("resources/4.wav");
+					AudioInputStream stream;
+					AudioFormat format;
+					DataLine.Info info;
+					Clip clip;
 
-				    stream = AudioSystem.getAudioInputStream(f);
-				    format = stream.getFormat();
-				    info = new DataLine.Info(Clip.class, format);
-				    clip = (Clip) AudioSystem.getLine(info);
-				    clip.open(stream);
-				    clip.start();
-				}
-				catch (Exception e1) {
-				    
+					stream = AudioSystem.getAudioInputStream(f);
+					format = stream.getFormat();
+					info = new DataLine.Info(Clip.class, format);
+					clip = (Clip) AudioSystem.getLine(info);
+					clip.open(stream);
+					clip.start();
+				} catch (Exception e1) {
+
 				}
 			}
-			
+
 			application.getLbLevelSelectorView().setSelectedLevel(level);
-			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
+			for (JButton btn : application.getLbLevelSelectorView()
+					.getLevelButtons()) {
 				if (!btn.equals(button)) {
 					btn.setBorder(null);
 				}
 			}
 			button.setBorder(BorderFactory.createLineBorder(color, 5, true));
-			application.getLbLevelSelectorView().getPleaseLabel().setVisible(false);
-			System.out.println(application.getLbLevelSelectorView().getSelectedLevel().getName());
+			application.getLbLevelSelectorView().getPleaseLabel()
+					.setVisible(false);
+			System.out.println(application.getLbLevelSelectorView()
+					.getSelectedLevel().getName());
 		}
-		
+
 		else {
-			
 
 			if (application.isSoundEnabled()) {
 				try {
-				    File f = new File("resources/1.wav");
-				    AudioInputStream stream;
-				    AudioFormat format;
-				    DataLine.Info info;
-				    Clip clip;
+					File f = new File("resources/1.wav");
+					AudioInputStream stream;
+					AudioFormat format;
+					DataLine.Info info;
+					Clip clip;
 
-				    stream = AudioSystem.getAudioInputStream(f);
-				    format = stream.getFormat();
-				    info = new DataLine.Info(Clip.class, format);
-				    clip = (Clip) AudioSystem.getLine(info);
-				    clip.open(stream);
-				    clip.start();
-				}
-				catch (Exception e1) {
-				    
+					stream = AudioSystem.getAudioInputStream(f);
+					format = stream.getFormat();
+					info = new DataLine.Info(Clip.class, format);
+					clip = (Clip) AudioSystem.getLine(info);
+					clip.open(stream);
+					clip.start();
+				} catch (Exception e1) {
+
 				}
 			}
-			
+
 			application.getLbLevelSelectorView().setSelectedLevel(null);
-			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
-				if (!btn.equals(button)) btn.setBorder(null);
+			for (JButton btn : application.getLbLevelSelectorView()
+					.getLevelButtons()) {
+				if (!btn.equals(button))
+					btn.setBorder(null);
 			}
 			button.setBorder(null);
 		}
-		
+
 		button.repaint();
 		application.getFrame().pack();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
+	
+	/**
+	 * Shows a border on button 
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (!selected) {
-		button.setBorder(BorderFactory.createLineBorder(color, 3, true));
-		button.setBorderPainted(true);
-		button.repaint();
-		application.getFrame().pack();
+			button.setBorder(BorderFactory.createLineBorder(color, 3, true));
+			button.setBorderPainted(true);
+			button.repaint();
+			application.getFrame().pack();
 		}
 	}
 
+	/**
+	 * Removes border on button
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (!selected) {
