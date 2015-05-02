@@ -125,7 +125,7 @@ public class LevelView extends JPanel{
 		
 		
 		
-		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,20);
+		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,15);
 		resetBoardBtn.setBorderPainted(false);
 		resetBoardBtn.setFocusPainted(false);
 		Icon Reset = new ImageIcon("resources/Reset.png");
