@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -24,6 +25,7 @@ import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.LevelBackController;
 import src.sixeswildgame.controllers.MakeMoveController;
 import src.sixeswildgame.controllers.MinimizeGameController;
+import src.sixeswildgame.controllers.SelectSpecialMoveController;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Space;
@@ -45,9 +47,9 @@ public class LevelView extends JPanel{
 	protected JLabel movesLeft;
 	protected JLabel timesLeft;
 	
-	protected JButton resetBoardBtn;
-	protected JButton removeTileBtn;
-	protected JButton swapTilesBtn;
+	protected JCheckBox resetBoardCheckBox;
+	protected JCheckBox removeTileCheckBox;
+	protected JCheckBox swapTilesCheckBox;
 	
 	protected JButton backBtn;
 	protected JButton closeBtn;
@@ -57,11 +59,19 @@ public class LevelView extends JPanel{
 	protected SixesWildWindow application;
 	protected Level level;
 	
+	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
+	protected boolean isResetBoard;
+	protected boolean isSwapTwoTiles;
+	protected boolean isRemoveTile;
 	
 	public LevelView(SixesWildWindow application, World world, Level level) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
 		this.world = world;
 		this.level = level;
+		this.isResetBoard = false;
+		this.isSwapTwoTiles = false;
+		this.isRemoveTile = false;
+		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
 		initialize();
 	}
 	
@@ -75,6 +85,13 @@ public class LevelView extends JPanel{
 		backBtn.addActionListener(new LevelBackController(world, application));
 		closeBtn.addActionListener(new CloseGameController(world, application));
 		miniBtn.addActionListener(new MinimizeGameController(world,application));
+		
+		int i = 0;
+		for (JCheckBox cb : specialMovesCheckBoxes) {
+			cb.addActionListener(new SelectSpecialMoveController(application, level, cb, i));
+			i++;
+		}
+		
 		for (SpaceView sv : boardView.getGrid()) {
 			sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level, application));
 		}
@@ -109,32 +126,36 @@ public class LevelView extends JPanel{
 		this.add(backBtn); 
 		
 		Font f15 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 15);
-		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),150,40,10);
-		resetBoardBtn.setBorderPainted(false);
-		resetBoardBtn.setText("Reset Board: 0");
-		resetBoardBtn.setFont(f15);
-		resetBoardBtn.setForeground(Color.white);
-		resetBoardBtn.setFocusPainted(false);
-		resetBoardBtn.setBounds(814, 265, 150,40);
-		this.add(resetBoardBtn); 
+		resetBoardCheckBox = new JCheckBox();
+		resetBoardCheckBox.setBorderPainted(false);
+		resetBoardCheckBox.setText("Reset Board");
+		resetBoardCheckBox.setFont(f15);
+		resetBoardCheckBox.setForeground(Color.BLACK);
+		resetBoardCheckBox.setFocusPainted(false);
+		resetBoardCheckBox.setBounds(814, 265, 150,40);
+		this.add(resetBoardCheckBox); 
 		
-		removeTileBtn = new BetterButton(Color.decode("#45D7B3"),150,40,10);
-		removeTileBtn.setBorderPainted(false);
-		removeTileBtn.setText("Remove Tile: 0");
-		removeTileBtn.setFont(f15);
-		removeTileBtn.setForeground(Color.white);
-		removeTileBtn.setFocusPainted(false);
-		removeTileBtn.setBounds(814, 333, 150,40);
-		this.add(removeTileBtn); 
+		removeTileCheckBox = new JCheckBox();
+		removeTileCheckBox.setBorderPainted(false);
+		removeTileCheckBox.setText("Remove Tile");
+		removeTileCheckBox.setFont(f15);
+		removeTileCheckBox.setForeground(Color.BLACK);
+		removeTileCheckBox.setFocusPainted(false);
+		removeTileCheckBox.setBounds(814, 333, 150,40);
+		this.add(removeTileCheckBox); 
 		
-		swapTilesBtn = new BetterButton(Color.decode("#FF9D8F"),150,40,10);
-		swapTilesBtn.setBorderPainted(false);
-		swapTilesBtn.setText("Swap 2 Tiles: 0");
-		swapTilesBtn.setFont(f15);
-		swapTilesBtn.setForeground(Color.white);
-		swapTilesBtn.setFocusPainted(false);
-		swapTilesBtn.setBounds(814, 403, 150,40);
-		this.add(swapTilesBtn); 
+		swapTilesCheckBox = new JCheckBox();
+		swapTilesCheckBox.setBorderPainted(false);
+		swapTilesCheckBox.setText("Swap Two Tiles");
+		swapTilesCheckBox.setFont(f15);
+		swapTilesCheckBox.setForeground(Color.BLACK);
+		swapTilesCheckBox.setFocusPainted(false);
+		swapTilesCheckBox.setBounds(814, 403, 150,40);
+		this.add(swapTilesCheckBox);
+		
+		specialMovesCheckBoxes.add(resetBoardCheckBox);
+		specialMovesCheckBoxes.add(swapTilesCheckBox);
+		specialMovesCheckBoxes.add(removeTileCheckBox);
 		
 		Font f18 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 18);
 		movesLeft = new BetterLabel(Color.decode("#D76262"),166,47,10);
@@ -143,7 +164,7 @@ public class LevelView extends JPanel{
 		movesLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		movesLeft.setForeground(Color.white);
 		movesLeft.setBounds(250, 635, 166, 47);
-		this.add(movesLeft); 
+		this.add(movesLeft);
 		
 			timesLeft = new BetterLabel(Color.decode("#D76262"),166,47,10);
 			timesLeft.setText("Timess Left: " + level.getTime());
@@ -213,4 +234,292 @@ public class LevelView extends JPanel{
 		this.add(miniBtn); 
 	}
 
+	/**
+	 * @return the scoreLbl
+	 */
+	public JLabel getScoreLbl() {
+		return scoreLbl;
+	}
+
+	/**
+	 * @param scoreLbl the scoreLbl to set
+	 */
+	public void setScoreLbl(JLabel scoreLbl) {
+		this.scoreLbl = scoreLbl;
+	}
+
+	/**
+	 * @return the timerLbl
+	 */
+	public JLabel getTimerLbl() {
+		return timerLbl;
+	}
+
+	/**
+	 * @param timerLbl the timerLbl to set
+	 */
+	public void setTimerLbl(JLabel timerLbl) {
+		this.timerLbl = timerLbl;
+	}
+
+	/**
+	 * @return the oneStarLbl
+	 */
+	public JLabel getOneStarLbl() {
+		return oneStarLbl;
+	}
+
+	/**
+	 * @param oneStarLbl the oneStarLbl to set
+	 */
+	public void setOneStarLbl(JLabel oneStarLbl) {
+		this.oneStarLbl = oneStarLbl;
+	}
+
+	/**
+	 * @return the twoStarLbl
+	 */
+	public JLabel getTwoStarLbl() {
+		return twoStarLbl;
+	}
+
+	/**
+	 * @param twoStarLbl the twoStarLbl to set
+	 */
+	public void setTwoStarLbl(JLabel twoStarLbl) {
+		this.twoStarLbl = twoStarLbl;
+	}
+
+	/**
+	 * @return the threeStarLbl
+	 */
+	public JLabel getThreeStarLbl() {
+		return threeStarLbl;
+	}
+
+	/**
+	 * @param threeStarLbl the threeStarLbl to set
+	 */
+	public void setThreeStarLbl(JLabel threeStarLbl) {
+		this.threeStarLbl = threeStarLbl;
+	}
+
+	/**
+	 * @return the movesLeft
+	 */
+	public JLabel getMovesLeft() {
+		return movesLeft;
+	}
+
+	/**
+	 * @param movesLeft the movesLeft to set
+	 */
+	public void setMovesLeft(JLabel movesLeft) {
+		this.movesLeft = movesLeft;
+	}
+
+	/**
+	 * @return the timesLeft
+	 */
+	public JLabel getTimesLeft() {
+		return timesLeft;
+	}
+
+	/**
+	 * @param timesLeft the timesLeft to set
+	 */
+	public void setTimesLeft(JLabel timesLeft) {
+		this.timesLeft = timesLeft;
+	}
+
+	/**
+	 * @return the resetBoardCheckBox
+	 */
+	public JCheckBox getResetBoardCheckBox() {
+		return resetBoardCheckBox;
+	}
+
+	/**
+	 * @param resetBoardCheckBox the resetBoardCheckBox to set
+	 */
+	public void setResetBoardCheckBox(JCheckBox resetBoardCheckBox) {
+		this.resetBoardCheckBox = resetBoardCheckBox;
+	}
+
+	/**
+	 * @return the removeTileCheckBox
+	 */
+	public JCheckBox getRemoveTileCheckBox() {
+		return removeTileCheckBox;
+	}
+
+	/**
+	 * @param removeTileCheckBox the removeTileCheckBox to set
+	 */
+	public void setRemoveTileCheckBox(JCheckBox removeTileCheckBox) {
+		this.removeTileCheckBox = removeTileCheckBox;
+	}
+
+	/**
+	 * @return the swapTilesCheckBox
+	 */
+	public JCheckBox getSwapTilesCheckBox() {
+		return swapTilesCheckBox;
+	}
+
+	/**
+	 * @param swapTilesCheckBox the swapTilesCheckBox to set
+	 */
+	public void setSwapTilesCheckBox(JCheckBox swapTilesCheckBox) {
+		this.swapTilesCheckBox = swapTilesCheckBox;
+	}
+
+	/**
+	 * @return the backBtn
+	 */
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	/**
+	 * @param backBtn the backBtn to set
+	 */
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
+	}
+
+	/**
+	 * @return the closeBtn
+	 */
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	/**
+	 * @param closeBtn the closeBtn to set
+	 */
+	public void setCloseBtn(JButton closeBtn) {
+		this.closeBtn = closeBtn;
+	}
+
+	/**
+	 * @return the miniBtn
+	 */
+	public JButton getMiniBtn() {
+		return miniBtn;
+	}
+
+	/**
+	 * @param miniBtn the miniBtn to set
+	 */
+	public void setMiniBtn(JButton miniBtn) {
+		this.miniBtn = miniBtn;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
+	}
+
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	/**
+	 * @return the application
+	 */
+	public SixesWildWindow getApplication() {
+		return application;
+	}
+
+	/**
+	 * @param application the application to set
+	 */
+	public void setApplication(SixesWildWindow application) {
+		this.application = application;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public Level getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
+	/**
+	 * @return the specialMovesCheckBoxes
+	 */
+	public ArrayList<JCheckBox> getSpecialMovesCheckBoxes() {
+		return specialMovesCheckBoxes;
+	}
+
+	/**
+	 * @param specialMovesCheckBoxes the specialMovesCheckBoxes to set
+	 */
+	public void setSpecialMovesCheckBoxes(
+			ArrayList<JCheckBox> specialMovesCheckBoxes) {
+		this.specialMovesCheckBoxes = specialMovesCheckBoxes;
+	}
+
+	/**
+	 * @return the isResetBoard
+	 */
+	public boolean isResetBoard() {
+		return isResetBoard;
+	}
+
+	/**
+	 * @param isResetBoard the isResetBoard to set
+	 */
+	public void setResetBoard(boolean isResetBoard) {
+		this.isResetBoard = isResetBoard;
+	}
+
+	/**
+	 * @return the isSwapTwoTiles
+	 */
+	public boolean isSwapTwoTiles() {
+		return isSwapTwoTiles;
+	}
+
+	/**
+	 * @param isSwapTwoTiles the isSwapTwoTiles to set
+	 */
+	public void setSwapTwoTiles(boolean isSwapTwoTiles) {
+		this.isSwapTwoTiles = isSwapTwoTiles;
+	}
+
+	/**
+	 * @return the isRemoveTile
+	 */
+	public boolean isRemoveTile() {
+		return isRemoveTile;
+	}
+
+	/**
+	 * @param isRemoveTile the isRemoveTile to set
+	 */
+	public void setRemoveTile(boolean isRemoveTile) {
+		this.isRemoveTile = isRemoveTile;
+	}
+
+	/**
+	 * @param boardView the boardView to set
+	 */
+	public void setBoardView(BoardView boardView) {
+		this.boardView = boardView;
+	}
+	
 }

@@ -24,6 +24,7 @@ import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Move;
 import src.sixeswildgame.world.Space;
+import src.sixeswildgame.world.SwapTwoTilesMove;
 import src.sixeswildgame.world.Tile;
 
 /**
@@ -43,7 +44,28 @@ public class MakeMoveController implements MouseListener{
 	}
 	
 	public void mousePressed(MouseEvent me) {
-		if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
+		
+		if (application.getLevelView().isSwapTwoTiles()) {
+			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
+				Tile tile = tileView.getTile();
+				Move newMove = new SwapTwoTilesMove(tileView.getTile());
+				level.setMove(newMove);
+				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+				tileView.repaint();
+			}
+		}
+		
+		else if (application.getLevelView().isRemoveTile()) {
+			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
+				Tile tile = tileView.getTile();
+				Move newMove = new Move(tileView.getTile());
+				level.setMove(newMove);
+				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+				tileView.repaint();
+			}
+		}
+		
+		else if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
 			Tile tile = tileView.getTile();
 			Move newMove = new Move(tileView.getTile());
 			level.setMove(newMove);
