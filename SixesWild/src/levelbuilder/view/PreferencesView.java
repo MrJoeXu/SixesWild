@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import src.levelbuilder.controllers.AdjustMusicController;
+import src.levelbuilder.controllers.AdjustSoundController;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.world.Tile;
 
@@ -44,6 +46,7 @@ public class PreferencesView extends JPanel  {
 		setPreferredSize(new Dimension(200, 200));
 		
 		initializeView();
+		initializeControllers();
 		
 	}
 
@@ -73,27 +76,46 @@ public class PreferencesView extends JPanel  {
 		musicSlider = new JSlider();
 		musicSlider.setMinimum(0);
 		musicSlider.setMaximum(10);
-		musicSlider.setMajorTickSpacing(2);
 		musicSlider.setBorder(null);
-		musicSlider.setPaintTicks(true);
-		musicSlider.setPaintTrack(true);
-		musicSlider.setPaintLabels(true);
-		musicSlider.setFont(f22);
-		musicSlider.setBounds(10, 65, 150, 50);
+		musicSlider.setBounds(5, 40, 150, 30);
 		musicSlider.setBackground(Color.decode("#A38F85"));
 		musicSlider.setValue(application.getMusicVolume());
 		add(musicSlider);
 		
 		JLabel musicLabel = new JLabel("Music Volume:");
-		musicLabel.setBounds(5, 5, 150, 50);
+		musicLabel.setBounds(5, 5, 150, 30);
 		musicLabel.setBackground(Color.decode("#A38F85"));
 		musicLabel.setLayout(null);
 		musicLabel.setFont(f16);
-		musicLabel.setHorizontalAlignment(BetterLabel.CENTER);
+		musicLabel.setHorizontalAlignment(BetterLabel.LEFT);
 		musicLabel.setVerticalAlignment(BetterLabel.CENTER);
 		musicLabel.setForeground(Color.WHITE);
 		add(musicLabel);
 		
+		soundSlider = new JSlider();
+		soundSlider.setMinimum(0);
+		soundSlider.setMaximum(10);
+		soundSlider.setBorder(null);
+		soundSlider.setBounds(5, 115, 150, 30);
+		soundSlider.setBackground(Color.decode("#A38F85"));
+		soundSlider.setValue(application.getSoundVolume());
+		add(soundSlider);
+		
+		JLabel soundLabel = new JLabel("Sound Volume:");
+		soundLabel.setBounds(5, 80, 150, 30);
+		soundLabel.setBackground(Color.decode("#A38F85"));
+		soundLabel.setLayout(null);
+		soundLabel.setFont(f16);
+		soundLabel.setHorizontalAlignment(BetterLabel.LEFT);
+		soundLabel.setVerticalAlignment(BetterLabel.CENTER);
+		soundLabel.setForeground(Color.WHITE);
+		add(soundLabel);
+		
+	}
+	
+	public void initializeControllers() {
+		//soundSlider.addChangeListener(new AdjustSoundController(application));
+		//musicSlider.addChangeListener(new AdjustMusicController(application));
 	}
 	
 	protected void paintComponent(Graphics g) {

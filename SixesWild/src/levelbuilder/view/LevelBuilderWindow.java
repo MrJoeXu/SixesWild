@@ -282,6 +282,7 @@ public class LevelBuilderWindow {
 		miniBtn.setBounds(880, 20, 40, 40);
 		frame.getContentPane().add(miniBtn);
 		
+		/*
 		preferencesBtn = new BetterButton(Color.decode("#D76262"),52,52,10);
 		preferencesBtn.setIcon(closeIcon);
 		preferencesBtn.setBorderPainted(false);
@@ -295,6 +296,7 @@ public class LevelBuilderWindow {
 		preferencesView.setVisible(false);
 		preferencesView.setBounds(767, 140, 200, 200);
 		frame.getContentPane().add(preferencesView);
+		*/
 		
 	}
 	
