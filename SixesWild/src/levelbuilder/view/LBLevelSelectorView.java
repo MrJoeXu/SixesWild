@@ -167,7 +167,7 @@ public class LBLevelSelectorView extends JPanel {
 		toggleSoundCheckBox.setIcon(mute);
 		toggleSoundCheckBox.setSelectedIcon(sound);
 		toggleSoundCheckBox.setSelected(application.isSoundEnabled());
-		toggleSoundCheckBox.setBounds(650, 140, 52, 52);
+		toggleSoundCheckBox.setBounds(825, 20, 45, 40);
 		this.add(toggleSoundCheckBox);
 		
 		puzzleBtn = new BetterButton(Color.decode("#D76262"),200, 52, 10);

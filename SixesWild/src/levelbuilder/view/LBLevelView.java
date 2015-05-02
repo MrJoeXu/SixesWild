@@ -195,7 +195,7 @@ public class LBLevelView extends JPanel {
 		toggleSoundCheckBox.setIcon(mute);
 		toggleSoundCheckBox.setSelectedIcon(sound);
 		toggleSoundCheckBox.setSelected(application.isSoundEnabled());
-		toggleSoundCheckBox.setBounds(650, 73, 52, 52);
+		toggleSoundCheckBox.setBounds(825, 20, 45, 40);
 		this.add(toggleSoundCheckBox);
 
 		Font f22 = Font.createFont(
@@ -203,7 +203,19 @@ public class LBLevelView extends JPanel {
 				new FileInputStream(new File(
 						"resources/avenir-next-regular.ttf"))).deriveFont(
 				Font.PLAIN, 22);
+		
+		Font f20 = Font.createFont(
+				Font.TRUETYPE_FONT,
+				new FileInputStream(new File(
+						"resources/avenir-next-regular.ttf"))).deriveFont(
+				Font.PLAIN, 20);
 
+		Font f10 = Font.createFont(
+				Font.TRUETYPE_FONT,
+				new FileInputStream(new File(
+						"resources/avenir-next-regular.ttf"))).deriveFont(
+				Font.PLAIN, 10);
+		
 		BetterButton puzzleBtn = new BetterButton(Color.decode("#D76262"), 200,
 				52, 10);
 		puzzleBtn.setBorderPainted(false);
@@ -381,25 +393,43 @@ public class LBLevelView extends JPanel {
 		tileRangeCheckBoxes.add(rangeFiveCheckBox);
 		add(rangeFiveCheckBox);
 		
+		Icon BucketIconUncheck = new ImageIcon("resources/BucketIconUnselect.png");
+		Icon BucketIconCheck = new ImageIcon("resources/BucketIconSelect.png");
+		Icon RangeSixIconUncheck = new ImageIcon("resources/Range6Uncheck.png");
+		Icon RangeSixIconCheck = new ImageIcon("resources/Range6Check.png");
+		
+		
 		rangeSixCheckBox = new JCheckBox();
-		rangeSixCheckBox.setIcon(check1N);
-		rangeSixCheckBox.setSelectedIcon(check1Y);
+		rangeSixCheckBox.setIcon(RangeSixIconUncheck);
+		rangeSixCheckBox.setSelectedIcon(RangeSixIconCheck);
 		rangeSixCheckBox.setSelected(false);
-		rangeSixCheckBox.setBounds(575, 247, 40, 34);
+		rangeSixCheckBox.setBounds(528, 466, 40, 34);
 		if (application.getGameType() == 3) add(rangeSixCheckBox);
 		
 		bucketCheckBox = new JCheckBox();
-		bucketCheckBox.setIcon(check2N);
-		bucketCheckBox.setSelectedIcon(check2Y);
+		bucketCheckBox.setIcon(BucketIconUncheck);
+		bucketCheckBox.setSelectedIcon(BucketIconCheck);
 		bucketCheckBox.setSelected(false);
-		bucketCheckBox.setBounds(575, 287, 40, 34);
+		bucketCheckBox.setBounds(528, 402, 40, 34);
 		if (application.getGameType() == 3) add(bucketCheckBox);
 		
-		JLabel releaseLabel = new JLabel("Select to Edit:");
-		releaseLabel.setFont(f14);
+		JLabel releaseLabel = new JLabel("Click To Set:");
+		releaseLabel.setFont(f20);
 		releaseLabel.setForeground(Color.decode("#A38F85"));
-		releaseLabel.setBounds(525, 200, 180, 41);
+		releaseLabel.setBounds(494, 365, 120, 27);
 		if (application.getGameType() == 3) add(releaseLabel);
+		
+		JLabel bucketLabel = new JLabel("Bucket");
+		bucketLabel.setFont(f14);
+		bucketLabel.setForeground(Color.decode("#A38F85"));
+		bucketLabel.setBounds(528, 438, 47, 19);
+		if (application.getGameType() == 3) add(bucketLabel);
+		
+		JLabel sixLabel = new JLabel("Wild 6");
+		sixLabel.setFont(f14);
+		sixLabel.setForeground(Color.decode("#A38F85"));
+		sixLabel.setBounds(528, 505, 42, 14);
+		if (application.getGameType() == 3) add(sixLabel);
 
 		int i = 0;
 		for (JCheckBox bx : tileRangeCheckBoxes) {

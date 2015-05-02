@@ -220,14 +220,14 @@ public class LevelBuilderWindow {
 		frame.getContentPane().add(lblSixeswild);
 		
 		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
+
 		Icon sound = new ImageIcon("resources/sound.png");
 		Icon mute = new ImageIcon("resources/mute.png");
-		
 		toggleSoundCheckBox = new JCheckBox();
 		toggleSoundCheckBox.setIcon(mute);
 		toggleSoundCheckBox.setSelectedIcon(sound);
-		toggleSoundCheckBox.setSelected(soundEnabled);
-		toggleSoundCheckBox.setBounds(650, 140, 52, 52);
+		toggleSoundCheckBox.setSelected(this.isSoundEnabled());
+		toggleSoundCheckBox.setBounds(825, 20, 45, 40);
 		frame.getContentPane().add(toggleSoundCheckBox);
 		
 		puzzleBtn = new BetterButton(Color.decode("#D76262"),200,52,10);
@@ -315,8 +315,8 @@ public class LevelBuilderWindow {
 		closeBtn.addActionListener(new LBCloseGameController(world, this));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
 		toggleSoundCheckBox.addActionListener(new ToggleSoundController(this));
-		preferencesBtn.addActionListener(new PreferencesController(this, preferencesView, preferencesBtn,
-				closeIcon, openIcon));
+		//preferencesBtn.addActionListener(new PreferencesController(this, preferencesView, preferencesBtn,
+		//		closeIcon, openIcon));
 	}
 	
 	public String getGameTypeName() {
