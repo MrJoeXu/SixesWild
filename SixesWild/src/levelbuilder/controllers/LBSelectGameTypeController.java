@@ -49,7 +49,7 @@ public class LBSelectGameTypeController implements ActionListener {
 		
 		if (application.isSoundEnabled()) {
 			try {
-			    File f = new File("resources/open.wav");
+			    File f = new File("resources/4.wav");
 			    AudioInputStream stream;
 			    AudioFormat format;
 			    DataLine.Info info;

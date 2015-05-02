@@ -7,7 +7,13 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.BorderFactory;
 
 import src.levelbuilder.view.LevelBuilderWindow;
@@ -43,6 +49,26 @@ public class TileController implements MouseListener {
 	}
 
 	public void mousePressed(MouseEvent me) {
+		
+		if (application.isSoundEnabled()) {
+			try {
+			    File f = new File("resources/2.wav");
+			    AudioInputStream stream;
+			    AudioFormat format;
+			    DataLine.Info info;
+			    Clip clip;
+
+			    stream = AudioSystem.getAudioInputStream(f);
+			    format = stream.getFormat();
+			    info = new DataLine.Info(Clip.class, format);
+			    clip = (Clip) AudioSystem.getLine(info);
+			    clip.open(stream);
+			    clip.start();
+			}
+			catch (Exception e1) {
+			    
+			}
+		}
 				
 		Tile tile = tileView.getTile();
 

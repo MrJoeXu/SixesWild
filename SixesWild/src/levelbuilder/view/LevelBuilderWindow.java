@@ -111,7 +111,7 @@ public class LevelBuilderWindow {
 			    info = new DataLine.Info(Clip.class, format);
 			    musicClip = (Clip) AudioSystem.getLine(info);
 			    musicClip.open(musicStream);
-			    musicClip.loop(Clip.LOOP_CONTINUOUSLY);
+			    musicClip.loop(Clip.LOOP_CONTINUOUSLY); 
 			}
 			catch (Exception e1) {
 			    

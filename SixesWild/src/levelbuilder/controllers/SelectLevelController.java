@@ -8,7 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
@@ -62,9 +68,31 @@ public class SelectLevelController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
 		selected = !selected;
 		
 		if (selected) {
+
+			if (application.isSoundEnabled()) {
+				try {
+				    File f = new File("resources/4.wav");
+				    AudioInputStream stream;
+				    AudioFormat format;
+				    DataLine.Info info;
+				    Clip clip;
+
+				    stream = AudioSystem.getAudioInputStream(f);
+				    format = stream.getFormat();
+				    info = new DataLine.Info(Clip.class, format);
+				    clip = (Clip) AudioSystem.getLine(info);
+				    clip.open(stream);
+				    clip.start();
+				}
+				catch (Exception e1) {
+				    
+				}
+			}
+			
 			application.getLbLevelSelectorView().setSelectedLevel(level);
 			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
 				if (!btn.equals(button)) {
@@ -77,6 +105,28 @@ public class SelectLevelController implements MouseListener {
 		}
 		
 		else {
+			
+
+			if (application.isSoundEnabled()) {
+				try {
+				    File f = new File("resources/1.wav");
+				    AudioInputStream stream;
+				    AudioFormat format;
+				    DataLine.Info info;
+				    Clip clip;
+
+				    stream = AudioSystem.getAudioInputStream(f);
+				    format = stream.getFormat();
+				    info = new DataLine.Info(Clip.class, format);
+				    clip = (Clip) AudioSystem.getLine(info);
+				    clip.open(stream);
+				    clip.start();
+				}
+				catch (Exception e1) {
+				    
+				}
+			}
+			
 			application.getLbLevelSelectorView().setSelectedLevel(null);
 			for (JButton btn : application.getLbLevelSelectorView().getLevelButtons()) {
 				if (!btn.equals(button)) btn.setBorder(null);
