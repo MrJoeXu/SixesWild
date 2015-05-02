@@ -69,7 +69,7 @@ public class MakeMoveController implements MouseListener{
 			Tile tile = tileView.getTile();
 			Move newMove = new Move(tileView.getTile());
 			level.setMove(newMove);
-			tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+			tileView.setBorder(BorderFactory.createLineBorder(Color.decode("#FF9D7B"), 5, true));
 			tileView.repaint();
 		}
 	}
@@ -86,7 +86,7 @@ public class MakeMoveController implements MouseListener{
 			if (level.getMove().isAdjacent(tileView.getTile())) {
 				if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {
 					level.getMove().addTile(tileView.getTile());
-					tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+					tileView.setBorder(BorderFactory.createLineBorder(Color.decode("#FF9D7B"), 5, true));
 					tileView.repaint();
 				}
 			}
@@ -100,7 +100,7 @@ public class MakeMoveController implements MouseListener{
 		}
 		else {
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)){
-				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
+				tileView.setBorder(BorderFactory.createLineBorder(Color.decode("#FF9D7B"), 3, true));
 				tileView.repaint();
 			}
 		}
