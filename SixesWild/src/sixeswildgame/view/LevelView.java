@@ -47,7 +47,7 @@ public class LevelView extends JPanel{
 	protected JLabel movesLeft;
 	protected JLabel timesLeft;
 	
-	protected JCheckBox resetBoardCheckBox;
+	protected BetterButton resetBoardBtn;
 	protected JCheckBox removeTileCheckBox;
 	protected JCheckBox swapTilesCheckBox;
 	
@@ -60,7 +60,6 @@ public class LevelView extends JPanel{
 	protected Level level;
 	
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
-	protected boolean isResetBoard;
 	protected boolean isSwapTwoTiles;
 	protected boolean isRemoveTile;
 	
@@ -68,7 +67,6 @@ public class LevelView extends JPanel{
 		this.application = application;
 		this.world = world;
 		this.level = level;
-		this.isResetBoard = false;
 		this.isSwapTwoTiles = false;
 		this.isRemoveTile = false;
 		this.specialMovesCheckBoxes = new ArrayList<JCheckBox>();
@@ -126,14 +124,12 @@ public class LevelView extends JPanel{
 		this.add(backBtn); 
 		
 		Font f15 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 15);
-		resetBoardCheckBox = new JCheckBox();
-		resetBoardCheckBox.setBorderPainted(false);
-		resetBoardCheckBox.setText("Reset Board");
-		resetBoardCheckBox.setFont(f15);
-		resetBoardCheckBox.setForeground(Color.BLACK);
-		resetBoardCheckBox.setFocusPainted(false);
-		resetBoardCheckBox.setBounds(814, 265, 150,40);
-		this.add(resetBoardCheckBox); 
+		resetBoardBtn = new BetterButton(Color.decode("#EC7665"),65,40,10);
+		resetBoardBtn.setBorderPainted(false);
+		resetBoardBtn.setFocusPainted(false);
+		resetBoardBtn.setIcon(backIcon);
+		resetBoardBtn.setBounds(814, 265, 150,40);
+		this.add(backBtn); 
 		
 		removeTileCheckBox = new JCheckBox();
 		removeTileCheckBox.setBorderPainted(false);
@@ -153,7 +149,6 @@ public class LevelView extends JPanel{
 		swapTilesCheckBox.setBounds(814, 403, 150,40);
 		this.add(swapTilesCheckBox);
 		
-		specialMovesCheckBoxes.add(resetBoardCheckBox);
 		specialMovesCheckBoxes.add(swapTilesCheckBox);
 		specialMovesCheckBoxes.add(removeTileCheckBox);
 		
@@ -335,15 +330,15 @@ public class LevelView extends JPanel{
 	/**
 	 * @return the resetBoardCheckBox
 	 */
-	public JCheckBox getResetBoardCheckBox() {
-		return resetBoardCheckBox;
+	public BetterButton getResetBoardCheckBox() {
+		return resetBoardBtn;
 	}
 
 	/**
 	 * @param resetBoardCheckBox the resetBoardCheckBox to set
 	 */
-	public void setResetBoardCheckBox(JCheckBox resetBoardCheckBox) {
-		this.resetBoardCheckBox = resetBoardCheckBox;
+	public void setResetBoardCheckBox(BetterButton resetBoardBtn) {
+		this.resetBoardBtn = resetBoardBtn;
 	}
 
 	/**
@@ -471,20 +466,6 @@ public class LevelView extends JPanel{
 	public void setSpecialMovesCheckBoxes(
 			ArrayList<JCheckBox> specialMovesCheckBoxes) {
 		this.specialMovesCheckBoxes = specialMovesCheckBoxes;
-	}
-
-	/**
-	 * @return the isResetBoard
-	 */
-	public boolean isResetBoard() {
-		return isResetBoard;
-	}
-
-	/**
-	 * @param isResetBoard the isResetBoard to set
-	 */
-	public void setResetBoard(boolean isResetBoard) {
-		this.isResetBoard = isResetBoard;
 	}
 
 	/**

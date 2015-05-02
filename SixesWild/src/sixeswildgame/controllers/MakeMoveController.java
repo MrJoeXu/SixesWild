@@ -28,7 +28,7 @@ import src.sixeswildgame.world.SwapTwoTilesMove;
 import src.sixeswildgame.world.Tile;
 
 /**
- * @author Matthew
+ * @author Matthew, havandenberg
  *
  */
 public class MakeMoveController implements MouseListener{
