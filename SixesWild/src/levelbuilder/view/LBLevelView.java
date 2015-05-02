@@ -32,7 +32,6 @@ import src.levelbuilder.controllers.UpdateSwapTilesController;
 import src.levelbuilder.controllers.UpdateThreeStarController;
 import src.levelbuilder.controllers.UpdateTileRangeController;
 import src.levelbuilder.controllers.UpdateTwoStarController;
-import src.levelbuilder.world.ToggleSpaceMove;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.BoardView;
