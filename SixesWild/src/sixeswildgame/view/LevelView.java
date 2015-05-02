@@ -123,31 +123,55 @@ public class LevelView extends JPanel{
 		backBtn.setBounds(30, 20, 65, 40);
 		this.add(backBtn); 
 		
-		Font f15 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 15);
-		resetBoardBtn = new BetterButton(Color.decode("#EC7665"),65,40,10);
+		
+		
+		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,20);
 		resetBoardBtn.setBorderPainted(false);
 		resetBoardBtn.setFocusPainted(false);
-		resetBoardBtn.setIcon(backIcon);
-		resetBoardBtn.setBounds(814, 265, 150,40);
-		this.add(backBtn); 
+		Icon Reset = new ImageIcon("resources/Reset.png");
+		resetBoardBtn.setIcon(Reset);
+		resetBoardBtn.setBounds(814, 217, 65,65);
+		this.add(resetBoardBtn); 
 		
+		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
+		
+		JLabel resetBoardCount = new JLabel("10");
+		resetBoardCount.setFont(f40);
+		resetBoardCount.setBounds(900, 226, 50, 55);
+		resetBoardCount.setForeground(Color.decode("#3D7CA2"));
+		this.add(resetBoardCount);
+		
+		
+		Icon remove = new ImageIcon("resources/Remove.png");
+		Icon removeSelect = new ImageIcon("resources/RemoveSelect.png");
 		removeTileCheckBox = new JCheckBox();
-		removeTileCheckBox.setBorderPainted(false);
-		removeTileCheckBox.setText("Remove Tile");
-		removeTileCheckBox.setFont(f15);
-		removeTileCheckBox.setForeground(Color.BLACK);
-		removeTileCheckBox.setFocusPainted(false);
-		removeTileCheckBox.setBounds(814, 333, 150,40);
-		this.add(removeTileCheckBox); 
+		removeTileCheckBox.setIcon(remove);
+		removeTileCheckBox.setSelectedIcon(removeSelect);
+		removeTileCheckBox.setSelected(this.isRemoveTile);
+		removeTileCheckBox.setBounds(810, 321, 70, 65);
+		this.add(removeTileCheckBox);
 		
+		JLabel removeCount = new JLabel("10");
+		removeCount.setFont(f40);
+		removeCount.setBounds(900, 328, 50, 55);
+		removeCount.setForeground(Color.decode("#45D7B3"));
+		this.add(removeCount);
+		
+		
+		Icon swap = new ImageIcon("resources/Swap.png");
+		Icon swapSelect = new ImageIcon("resources/SwapSelect.png");
 		swapTilesCheckBox = new JCheckBox();
-		swapTilesCheckBox.setBorderPainted(false);
-		swapTilesCheckBox.setText("Swap Two Tiles");
-		swapTilesCheckBox.setFont(f15);
-		swapTilesCheckBox.setForeground(Color.BLACK);
-		swapTilesCheckBox.setFocusPainted(false);
-		swapTilesCheckBox.setBounds(814, 403, 150,40);
+		swapTilesCheckBox.setIcon(swap);
+		swapTilesCheckBox.setSelectedIcon(swapSelect);
+		swapTilesCheckBox.setSelected(this.isSwapTwoTiles);
+		swapTilesCheckBox.setBounds(810, 427, 70, 65);
 		this.add(swapTilesCheckBox);
+		
+		JLabel swapCount = new JLabel("10");
+		swapCount.setFont(f40);
+		swapCount.setBounds(900, 431, 50, 55);
+		swapCount.setForeground(Color.decode("#FF9D8F"));
+		this.add(swapCount);
 		
 		specialMovesCheckBoxes.add(swapTilesCheckBox);
 		specialMovesCheckBoxes.add(removeTileCheckBox);
