@@ -15,6 +15,7 @@ public class Space {
 	protected boolean enabled;
 	protected ArrayList<Integer> releaseStates;
 	protected int activeIndex;
+	protected boolean isMarked;
 
 	/**
 	 * 
@@ -46,6 +47,14 @@ public class Space {
 			tile.setValue(tile.getLastValue());
 			tile.setBonus(tile.getLastBonus());
 		}
+	}
+	
+	public void setIsMarked(boolean set) {
+		this.isMarked = set;
+	}
+	
+	public boolean getIsMarked (){
+		return this.isMarked;
 	}
 	
 	public String toString() {

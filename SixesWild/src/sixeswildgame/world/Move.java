@@ -34,10 +34,13 @@ public class Move {
 		this.tiles.add(tl);
 	}
 	
+	public Tile removeLast() {
+		return tiles.remove(tiles.size()-1);
+	}
 	
 	public boolean doMove (Level lv) {
+		lv.decrementMoves();
 		if (!this.isValid()) {
-			lv.decrementMoves();
 			return false;
 		}
 		
@@ -56,8 +59,11 @@ public class Move {
 		}
 	}
 	
-	private void fallDown (Level lv, ArrayList<Tile> tiles) {
-		// TODO
+	private void fallDown (Level lv, ArrayList<Tile> nwTiles) {
+		for (int i = 0; i < this.tiles.size(); i++) {
+			lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
+			
+		}
 	}
 	
 	private Tile makeTile (Level lv, int col) {
@@ -83,6 +89,7 @@ public class Move {
 
 	public boolean isAdjacent(Tile add) {
 		if (tiles.contains(add)) return false;
+		
 		Tile test = tiles.get(tiles.size()-1);
 		
 		if (test.getColumn() == add.getColumn()) {
@@ -94,7 +101,10 @@ public class Move {
 			if ((test.getColumn()+1 == add.getColumn()) || (test.getColumn()-1 == add.getColumn()))
 				return true;
 		}
-		
 		return false;
+	}
+	
+	public ArrayList<Tile> getTiles() {
+		return tiles;
 	}
 }

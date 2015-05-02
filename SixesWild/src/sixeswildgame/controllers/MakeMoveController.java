@@ -43,9 +43,13 @@ public class MakeMoveController implements MouseListener{
 	}
 	
 	public void mousePressed(MouseEvent me) {
-		Tile tile = tileView.getTile();
-		Move newMove = new Move(tileView.getTile());
-		level.setMove(newMove);
+		if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
+			Tile tile = tileView.getTile();
+			Move newMove = new Move(tileView.getTile());
+			level.setMove(newMove);
+			tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+			tileView.repaint();
+		}
 	}
 
 	@Override
@@ -56,22 +60,33 @@ public class MakeMoveController implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		if (level.isMakingMove()) {
+		if (level.isMakingMove()) {				
 			if (level.getMove().isAdjacent(tileView.getTile())) {
-				level.getMove().addTile(tileView.getTile());
-				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
-				tileView.repaint();
+				if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {
+					level.getMove().addTile(tileView.getTile());
+					tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
+					tileView.repaint();
+				}
+			}
+			
+			else if (level.getMove().getTiles().get(level.getMove().getTiles().size()-2).equals(tileView.getTile())) {
+				Tile temp = level.getMove().removeLast();
+				int dimension = level.getBoard().getDimension();
+				application.getLevelView().getBoardView().getGrid().get(temp.getRow()*dimension + temp.getColumn()).getTileView().setBorder(null);
+				application.getLevelView().getBoardView().getGrid().get(temp.getRow()*dimension + temp.getColumn()).getTileView().repaint();
 			}
 		}
 		else {
-			tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
-		tileView.repaint();
+			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)){
+				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
+				tileView.repaint();
+			}
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		if (!level.isMakingMove()) tileView.setBorder(null);
+		if (!level.isMakingMove())  tileView.setBorder(null);
 	}
 
 	@Override

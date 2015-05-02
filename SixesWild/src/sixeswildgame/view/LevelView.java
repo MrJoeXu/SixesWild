@@ -79,6 +79,10 @@ public class LevelView extends JPanel{
 			sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level, application));
 		}
 	}
+	
+	public BoardView getBoardView() {
+		return this.boardView;
+	}
 
 	private void initializeModel() {
 		this.level = new Level(new Board(9), 0, "puzzle");
