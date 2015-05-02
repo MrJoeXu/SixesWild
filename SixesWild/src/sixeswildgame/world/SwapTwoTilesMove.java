@@ -11,11 +11,13 @@ import java.util.ArrayList;
  */
 public class SwapTwoTilesMove extends Move {
 
-	public SwapTwoTilesMove(Tile tl) {
-		super(tl);
+	
+	
+	public SwapTwoTilesMove(Tile tl, Level lv) {
+		super(tl, lv);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public boolean isValid(){
 		return true;

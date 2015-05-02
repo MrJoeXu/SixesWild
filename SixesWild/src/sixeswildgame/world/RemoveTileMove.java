@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 public class RemoveTileMove extends Move {
 
-	public RemoveTileMove(Tile tl) {
-		super(tl);
-		
+	public RemoveTileMove(Tile tl, Level lv) {
+		super(tl, lv);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
