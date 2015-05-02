@@ -12,61 +12,86 @@ import java.util.Random;
  */
 public class Move {
 	protected ArrayList<Tile> tiles;
-	protected Level level; 
-	
-	public Move(Tile tl) {
+	protected Level level;
+
+	public Move(Tile tl, Level lv) {
 		this.tiles = new ArrayList<Tile>();
 		tiles.add(tl);
+		this.level = lv;
 	}
-	
+
 	// Move must add to 6 to be valid
-	public boolean isValid(){
+	public boolean isValid() {
 		int sum = 0;
-		for (int i = 0; i < tiles.size(); i++){
+		for (int i = 0; i < tiles.size(); i++) {
 			if (tiles.get(i).getValue() == 6)
 				return false;
 			sum = sum + tiles.get(i).getValue();
 		}
-		return (sum == 6);		
+		return (sum == 6);
 	}
-	
+
 	public void addTile(Tile tl) {
 		this.tiles.add(tl);
 	}
-	
+
 	public Tile removeLast() {
-		return tiles.remove(tiles.size()-1);
+		return tiles.remove(tiles.size() - 1);
 	}
-	
-	public boolean doMove (Level lv) {
+
+	public boolean doMove(Level lv) {
 		lv.decrementMoves();
 		if (!this.isValid()) {
 			return false;
 		}
-		
+
 		else {
 			ArrayList<Tile> newTiles;
 			newTiles = new ArrayList<Tile>();
-			int mult = 10; 
-			for (int i = 0; i < tiles.size(); i++) { 
+			int mult = 10;
+			for (int i = 0; i < tiles.size(); i++) {
 				newTiles.add(makeTile(lv, tiles.get(i).getColumn()));
 				mult = mult * tiles.get(i).getBonus();
 			}
-			
+
 			fallDown(lv, newTiles);
 			lv.setCurrentScore(lv.getCurrentScore() + (tiles.size() * mult));
 			return true;
 		}
 	}
-	
-	private void fallDown (Level lv, ArrayList<Tile> nwTiles) {
+
+	private void fallDown(Level lv, ArrayList<Tile> nwTiles) {
+		for (int i = 0; i < this.tiles.size(); i++) {
+			for (int j = i + 1; j < this.tiles.size() - 1; j++) {
+				if (tiles.get(i).getRow() > this.tiles.get(j).getRow()) {
+					Tile temp = tiles.get(i);
+					tiles.set(j, tiles.get(i));
+					tiles.set(i, temp);
+				}
+			}
+		}
+		
+		for (int m = 0; m < level.getBoard().getGrid().size(); m++) {
+			Tile test = level.getBoard().getGrid().get(m).getTile();
+			System.out.println("Gets to tile: " + m);
+		}
+		
 		for (int i = 0; i < this.tiles.size(); i++) {
 			lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
-			
+			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
+				if (j > 0) {
+					lv.getBoard().setTile(j,this.tiles.get(i).getColumn(), level.getBoard().getSpace((j - 1),this.tiles.get(i).getColumn()).getTile());
+				} 
+				
+				else {
+					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
+					System.out.println("This happened");
+				}
+			}
 		}
 	}
-	
-	private Tile makeTile (Level lv, int col) {
+
+	private Tile makeTile(Level lv, int col) {
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (int j = 0; j < 5; j++) {
 			if (lv.getTileRange()[j]) {
@@ -74,36 +99,40 @@ public class Move {
 			}
 		}
 		values.add(6);
-		
+
 		Random rand = new Random();
 		int value = rand.nextInt(values.size());
-	    
-	    Random rand2 = new Random();
-	    
-	    int frequency = rand2.nextInt(lv.bonusFrequency)+1;
-	    if (values.get(value) == 6) frequency = 0;
-	    
-	    Tile tile = new Tile(values.get(value),frequency,0, col, false);
-	    return tile;
+
+		Random rand2 = new Random();
+
+		int frequency = rand2.nextInt(lv.bonusFrequency) + 1;
+		if (values.get(value) == 6)
+			frequency = 0;
+
+		Tile tile = new Tile(values.get(value), frequency, 0, col, false);
+		return tile;
 	}
 
 	public boolean isAdjacent(Tile add) {
-		if (tiles.contains(add)) return false;
-		
-		Tile test = tiles.get(tiles.size()-1);
-		
+		if (tiles.contains(add))
+			return false;
+
+		Tile test = tiles.get(tiles.size() - 1);
+
 		if (test.getColumn() == add.getColumn()) {
-			if ((test.getRow()+1 == add.getRow()) || (test.getRow()-1 == add.getRow()))
+			if ((test.getRow() + 1 == add.getRow())
+					|| (test.getRow() - 1 == add.getRow()))
 				return true;
 		}
-		
+
 		else if (test.getRow() == add.getRow()) {
-			if ((test.getColumn()+1 == add.getColumn()) || (test.getColumn()-1 == add.getColumn()))
+			if ((test.getColumn() + 1 == add.getColumn())
+					|| (test.getColumn() - 1 == add.getColumn()))
 				return true;
 		}
 		return false;
 	}
-	
+
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}

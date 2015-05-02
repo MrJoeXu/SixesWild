@@ -64,4 +64,9 @@ public class Board {
 	public Space getSpace (int row, int col) {
 		return this.grid.get(row*dimension + col);
 	}
+	
+	public void setTile(int row, int col, Tile tl){
+		Tile temp = new Tile (tl.getValue(), tl.getBonus(), row, col, false);
+		this.getSpace(row,col).setTile(temp);
+	}
 }
