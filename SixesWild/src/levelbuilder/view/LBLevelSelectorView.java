@@ -238,7 +238,7 @@ public class LBLevelSelectorView extends JPanel {
 			this.add(eliminationBtn);
 			buildLevelBtn.setCol(Color.decode("#65ABD5"));
 			deleteLevelBtn.setCol(Color.decode("#65ABD5"));
-			} 
+			}
 		
 		
 		pleaseLabel = new JLabel("Please select a level.");

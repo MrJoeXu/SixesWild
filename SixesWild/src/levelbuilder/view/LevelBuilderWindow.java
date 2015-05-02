@@ -36,6 +36,7 @@ import javax.swing.border.EmptyBorder;
 import src.levelbuilder.controllers.LBCloseGameController;
 import src.levelbuilder.controllers.LBMinimizeGameController;
 import src.levelbuilder.controllers.LBSelectGameTypeController;
+import src.levelbuilder.controllers.PreferencesController;
 import src.levelbuilder.controllers.ToggleSoundController;
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.MinimizeGameController;
@@ -72,11 +73,16 @@ public class LevelBuilderWindow {
 	protected JButton closeBtn;
 	protected JButton miniBtn;
 	protected JCheckBox toggleSoundCheckBox;
+	protected BetterButton preferencesBtn;
 	
 	protected World world;
 	protected int gameType;
 	protected boolean soundEnabled;
+	protected boolean preferencesEnabled;
 	protected Clip musicClip;
+	protected PreferencesView preferencesView;
+	protected int musicVolume;
+	protected int soundVolume;
 	
 	/**
 	 * Create the application.
@@ -86,6 +92,9 @@ public class LevelBuilderWindow {
 	 */
 	public LevelBuilderWindow() throws FileNotFoundException, FontFormatException, IOException {
 		this.soundEnabled = true;
+		this.preferencesEnabled = false;
+		this.musicVolume = 5;
+		this.soundVolume = 5;
 		initialize();
 	}
 	
@@ -271,13 +280,32 @@ public class LevelBuilderWindow {
 		Icon minIcon = new ImageIcon("resources/min.png");
 		miniBtn.setIcon(minIcon);
 		miniBtn.setBounds(880, 20, 40, 40);
-		frame.getContentPane().add(miniBtn); 
+		frame.getContentPane().add(miniBtn);
+		
+		preferencesBtn = new BetterButton(Color.decode("#D76262"),52,52,10);
+		preferencesBtn.setIcon(closeIcon);
+		preferencesBtn.setBorderPainted(false);
+		preferencesBtn.setFocusPainted(false);
+		preferencesBtn.setSelectedIcon(minIcon);
+		preferencesBtn.setSelected(preferencesEnabled);
+		preferencesBtn.setBounds(715, 140, 52, 52);
+		frame.getContentPane().add(preferencesBtn);
+		
+		preferencesView = new PreferencesView(this);
+		preferencesView.setVisible(false);
+		preferencesView.setBounds(767, 140, 200, 200);
+		frame.getContentPane().add(preferencesView);
+		
 	}
 	
 	/**
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
+		
+		Icon openIcon = new ImageIcon("resources/close.png");
+		Icon closeIcon = new ImageIcon("resources/min.png");
+		
 		puzzleBtn.addActionListener(new LBSelectGameTypeController(this, world, 1));
 		lightningBtn.addActionListener(new LBSelectGameTypeController(this, world, 2));
 		releaseBtn.addActionListener(new LBSelectGameTypeController(this, world, 3));
@@ -285,6 +313,8 @@ public class LevelBuilderWindow {
 		closeBtn.addActionListener(new LBCloseGameController(world, this));
 		miniBtn.addActionListener(new LBMinimizeGameController(world,this));
 		toggleSoundCheckBox.addActionListener(new ToggleSoundController(this));
+		preferencesBtn.addActionListener(new PreferencesController(this, preferencesView, preferencesBtn,
+				closeIcon, openIcon));
 	}
 	
 	public String getGameTypeName() {
@@ -467,6 +497,10 @@ public class LevelBuilderWindow {
 	public void toggleSound() {
 		soundEnabled = !soundEnabled;
 	}
+	
+	public void togglePreferences() {
+		preferencesEnabled = !preferencesEnabled;
+	}
 
 	/**
 	 * @return the toggleSoundCheckBox
@@ -508,6 +542,83 @@ public class LevelBuilderWindow {
 	 */
 	public void setMusicStream(Clip musicClip) {
 		this.musicClip = musicClip;
+	}
+
+	/**
+	 * @return the preferencesView
+	 */
+	public PreferencesView getPreferencesView() {
+		return preferencesView;
+	}
+
+	/**
+	 * @param preferencesView the preferencesView to set
+	 */
+	public void setPreferencesView(PreferencesView preferencesView) {
+		this.preferencesView = preferencesView;
+	}
+
+	/**
+	 * @param musicClip the musicClip to set
+	 */
+	public void setMusicClip(Clip musicClip) {
+		this.musicClip = musicClip;
+	}
+
+	/**
+	 * @return the musicVolume
+	 */
+	public int getMusicVolume() {
+		return musicVolume;
+	}
+
+	/**
+	 * @param musicVolume the musicVolume to set
+	 */
+	public void setMusicVolume(int musicVolume) {
+		this.musicVolume = musicVolume;
+	}
+
+	/**
+	 * @return the soundVolume
+	 */
+	public int getSoundVolume() {
+		return soundVolume;
+	}
+
+	/**
+	 * @param soundVolume the soundVolume to set
+	 */
+	public void setSoundVolume(int soundVolume) {
+		this.soundVolume = soundVolume;
+	}
+
+	/**
+	 * @return the preferencesCheckBox
+	 */
+	public JButton getPreferencesCheckBox() {
+		return preferencesBtn;
+	}
+
+	/**
+	 * @param preferencesCheckBox the preferencesCheckBox to set
+	 */
+	public void setPreferencesCheckBox(BetterButton preferencesCheckBox) {
+		this.preferencesBtn = preferencesCheckBox;
+	}
+
+	/**
+	 * @return the preferencesEnabled
+	 */
+	public boolean isPreferencesEnabled() {
+		return preferencesEnabled;
+	}
+
+	/**
+	 * @param preferencesEnabled the preferencesEnabled to set
+	 */
+	public void setPreferencesEnabled(boolean preferencesEnabled) {
+		this.preferencesEnabled = preferencesEnabled;
 	}
 
 }

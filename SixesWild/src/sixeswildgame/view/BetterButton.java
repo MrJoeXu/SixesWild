@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.JButton;
 
-public class BetterButton extends JButton{
+public class BetterButton extends JButton {
 	Color col;
 	int width;
 	int height;
