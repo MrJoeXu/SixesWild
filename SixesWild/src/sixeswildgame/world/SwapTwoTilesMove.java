@@ -10,8 +10,6 @@ import java.util.ArrayList;
  *
  */
 public class SwapTwoTilesMove extends Move {
-
-	
 	
 	public SwapTwoTilesMove(Tile tl, Level lv) {
 		super(tl, lv);
@@ -35,6 +33,13 @@ public class SwapTwoTilesMove extends Move {
 	
 	@Override
 	public boolean doMove (Level lv) {
+		Tile tile1 = lv.getMove().getTiles().get(0);
+		Tile tile2 = lv.getMove().getTiles().get(1);
+		
+		lv.getBoard().getGrid().get(tile1.getRow() * lv.getBoard().getDimension() + tile1.getColumn()).setTile(tile2);
+		lv.getBoard().getGrid().get(tile2.getRow() * lv.getBoard().getDimension() + tile2.getColumn()).setTile(tile1);
+		
+		lv.decrementMoves();
 		return true;
 	}
 

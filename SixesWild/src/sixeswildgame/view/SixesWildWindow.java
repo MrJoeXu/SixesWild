@@ -69,7 +69,7 @@ public class SixesWildWindow {
 	 * Create the application.
 	 * @throws IOException 
 	 * @throws FontFormatException 
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	public SixesWildWindow() throws FileNotFoundException, FontFormatException, IOException {
 		initialize();

@@ -23,6 +23,7 @@ import src.sixeswildgame.view.TileView;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Move;
+import src.sixeswildgame.world.RemoveTileMove;
 import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.SwapTwoTilesMove;
 import src.sixeswildgame.world.Tile;
@@ -46,10 +47,19 @@ public class MakeMoveController implements MouseListener{
 	public void mousePressed(MouseEvent me) {
 		
 		if (application.getLevelView().isSwapTwoTiles()) {
-			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
-				Tile tile = tileView.getTile();
-				Move newMove = new SwapTwoTilesMove(tileView.getTile(), level);
-				level.setMove(newMove);
+			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {
+				if (level.getMove() == null) {
+					Move newMove = new SwapTwoTilesMove(tileView.getTile(), level);
+					level.setMove(newMove);
+				}
+				
+				else if (level.getMove().getTiles().size() == 0) {
+					level.getMove().addTile(tileView.getTile());
+				}
+				
+				else if (level.getMove().getTiles().size() == 1) {
+					level.getMove().doMove(level);
+				}
 				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
 				tileView.repaint();
 			}
@@ -57,11 +67,9 @@ public class MakeMoveController implements MouseListener{
 		
 		else if (application.getLevelView().isRemoveTile()) {
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
-				Tile tile = tileView.getTile();
-				Move newMove = new Move(tileView.getTile(), level);
+				Move newMove = new RemoveTileMove(tileView.getTile(), level);
 				level.setMove(newMove);
-				tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
-				tileView.repaint();
+				level.getMove().doMove(level);
 			}
 		}
 		

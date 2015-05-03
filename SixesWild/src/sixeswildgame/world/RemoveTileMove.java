@@ -10,29 +10,20 @@ import java.util.ArrayList;
  *
  */
 public class RemoveTileMove extends Move {
+	
+	protected Tile tile;
+	protected Level level;
 
 	public RemoveTileMove(Tile tl, Level lv) {
 		super(tl, lv);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean isValid(){
-		return true;
-	}
-	
-	@Override
-	public void addTile(Tile tl) {
-		this.tiles.add(tl);
-	}
-	
-	@Override
-	public Tile removeLast() {
-		return tiles.remove(tiles.size()-1);
+		this.tile = tl;
+		this.level = level;
 	}
 	
 	@Override
 	public boolean doMove (Level lv) {
+		lv.getMove().getTiles().remove(tile);
+		lv.decrementMoves();
 		return true;
 	}
 		
