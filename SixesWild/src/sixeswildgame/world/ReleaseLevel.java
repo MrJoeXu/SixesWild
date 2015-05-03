@@ -33,7 +33,10 @@ public class ReleaseLevel extends Level{
 	}
 
 	public boolean hasWon() {
-		return false;
+		for (int i = 0; i < this.getBoard().getGrid().size(); i++) {
+			if (this.getBoard().getGrid().get(i).getTile().getValue() == 6)
+					return false;
+		}
+		return true;
 	}
-
 }

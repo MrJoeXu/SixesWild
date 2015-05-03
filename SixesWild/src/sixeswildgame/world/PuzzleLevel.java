@@ -117,7 +117,8 @@ public class PuzzleLevel extends Level {
 	}
 
 	public boolean hasWon() {
-		return false;
+		if (this.getCurrentScore() > this.getOneStarScore())
+			return true;
+		else return false;
 	}
-
 }

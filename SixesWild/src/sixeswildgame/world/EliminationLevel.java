@@ -37,7 +37,13 @@ public class EliminationLevel extends Level {
 	 * Returns true if all the tiles in the Board are marked
 	 */
 	public boolean hasWon() {
-		return false;
+		for (int i = 0; i < this.getBoard().getGrid().size(); i++) {
+			if ((this.getBoard().getGrid().get(i).getTile().getValue() != 6) && 
+					(this.getBoard().getGrid().get(i).getTile().getValue() != 0)) {
+				if (!(this.getBoard().getGrid().get(i).getIsMarked()))
+					return false;
+			}
+		}
+		return true;
 	}
-
 }
