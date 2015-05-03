@@ -38,6 +38,7 @@ import src.sixeswildgame.world.World;
 public class LevelView extends JPanel{
 
 	protected BoardView boardView;
+	protected JPanel boardPanel;
 	
 	protected JLabel scoreLbl;
 	protected JLabel timerLbl;
@@ -122,9 +123,7 @@ public class LevelView extends JPanel{
 		backBtn.setIcon(backIcon);
 		backBtn.setBounds(30, 20, 65, 40);
 		this.add(backBtn); 
-		
-		
-		
+	
 		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,15);
 		resetBoardBtn.setBorderPainted(false);
 		resetBoardBtn.setFocusPainted(false);
@@ -229,12 +228,17 @@ public class LevelView extends JPanel{
 		threeStarLbl.setBounds(29, 38, 60, 60);
 		starPanel.add(threeStarLbl);
 		
+		boardPanel = new JPanel();
+		
 		boardView = new BoardView(level.getBoard(),50,50); 
 		int length = boardView.getDimension()*boardView.getTileLength() + 5 * boardView.getDimension();
 		int panelX = (1000 - length)/2;
 		int panelY = (708 - length)/2;
 		boardView.setBounds(panelX, panelY, length, length);
-		this.add(boardView);
+		boardPanel.setBounds(panelX, panelY, length, length);
+		// boardPanel.setBackground(Color.decode("#D4D4D4"));
+		this.add(boardPanel);
+		boardPanel.add(boardView);
 		
 		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
 		closeBtn.setBorderPainted(false);
@@ -526,5 +530,35 @@ public class LevelView extends JPanel{
 	public void setBoardView(BoardView boardView) {
 		this.boardView = boardView;
 	}
+
+	/**
+	 * @return the boardPanel
+	 */
+	public JPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	/**
+	 * @param boardPanel the boardPanel to set
+	 */
+	public void setBoardPanel(JPanel boardPanel) {
+		this.boardPanel = boardPanel;
+	}
+
+	/**
+	 * @return the resetBoardBtn
+	 */
+	public BetterButton getResetBoardBtn() {
+		return resetBoardBtn;
+	}
+
+	/**
+	 * @param resetBoardBtn the resetBoardBtn to set
+	 */
+	public void setResetBoardBtn(BetterButton resetBoardBtn) {
+		this.resetBoardBtn = resetBoardBtn;
+	}
+	
+	
 	
 }

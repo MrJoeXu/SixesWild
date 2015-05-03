@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 
+import src.levelbuilder.controllers.TileController;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.view.LevelView;
@@ -77,7 +78,7 @@ public class MakeMoveController implements MouseListener{
 			Tile tile = tileView.getTile();
 			Move newMove = new Move(tileView.getTile(), level);
 			level.setMove(newMove);
-			tileView.setBorder(BorderFactory.createLineBorder(Color.decode("#FF9D7B"), 5, true));
+			tileView.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, true));
 			tileView.repaint();
 		}
 	}
@@ -108,7 +109,7 @@ public class MakeMoveController implements MouseListener{
 		}
 		else {
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)){
-				tileView.setBorder(BorderFactory.createLineBorder(Color.decode("#FF9D7B"), 3, true));
+				tileView.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3, true));
 				tileView.repaint();
 			}
 		}
@@ -121,7 +122,31 @@ public class MakeMoveController implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		
 		level.getMove().doMove(level);
+		
 		level.setMakingMove(false);
+		
+		BoardView newBoardView = new BoardView(level.getBoard(), 50, 50);
+		int length = newBoardView.getDimension()*newBoardView.getTileLength() + 5 * newBoardView.getDimension();
+		int panelX = (1000 - length)/2;
+		int panelY = (708 - length)/2;
+		newBoardView.setBounds(panelX, panelY, length, length);
+
+		application.getLevelView().setBoardView(newBoardView);
+		application.getLevelView().getBoardPanel().removeAll();
+		application.getLevelView().getBoardPanel().add(newBoardView);
+		
+		for (SpaceView sv : application.getLevelView().getBoardView()
+				.getGrid()) {
+			TileView tv = sv.getTileView();
+			tv.addMouseListener(new MakeMoveController(tv, level, application));
+		}
+		
+		application.getLevelView().getBoardView().setVisible(true);
+		
+		application.getLevelView().repaint();
+		application.getFrmSixesWild().pack();
+		
 	}
 }
