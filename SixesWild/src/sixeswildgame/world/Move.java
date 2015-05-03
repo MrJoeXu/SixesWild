@@ -71,11 +71,6 @@ public class Move {
 			}
 		}
 		
-		for (int m = 0; m < level.getBoard().getGrid().size(); m++) {
-			Tile test = level.getBoard().getGrid().get(m).getTile();
-			System.out.println("Gets to tile: " + m);
-		}
-		
 		for (int i = 0; i < this.tiles.size(); i++) {
 			lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
 			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
@@ -85,7 +80,6 @@ public class Move {
 				
 				else {
 					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
-					System.out.println("This happened");
 				}
 			}
 		}
