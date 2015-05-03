@@ -75,7 +75,6 @@ public class LevelView extends JPanel{
 	}
 	
 	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
-		initializeModel();
 		initializeView();
 		initializeControllers();
 	}
@@ -100,20 +99,16 @@ public class LevelView extends JPanel{
 		return this.boardView;
 	}
 
-	private void initializeModel() {
-		this.level = new Level(new Board(9), 0, "puzzle");
-		level.initialize(1);
-	}
-
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		this.setPreferredSize(new Dimension (1000,708));
 		this.setLayout(null);
 		
-		scoreLbl = new JLabel("Score: 0000");
-		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
-		scoreLbl.setFont(f30);
-		scoreLbl.setBounds(418, 37, 164, 41);
+		scoreLbl = new JLabel("0");
+		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
+		scoreLbl.setFont(f40);
+		scoreLbl.setBounds(458, 37, 164, 41);
 		scoreLbl.setForeground(Color.decode("#D76262"));
+		scoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(scoreLbl);
 		
 		backBtn = new BetterButton(Color.decode("#EC7665"),65,40,10);
@@ -132,14 +127,13 @@ public class LevelView extends JPanel{
 		resetBoardBtn.setBounds(814, 217, 65,65);
 		this.add(resetBoardBtn); 
 		
-		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
+		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
 		
-		JLabel resetBoardCount = new JLabel("10");
-		resetBoardCount.setFont(f40);
+		JLabel resetBoardCount = new JLabel(String.valueOf(level.getResetBoardMoves()));
+		resetBoardCount.setFont(f30);
 		resetBoardCount.setBounds(900, 226, 50, 55);
 		resetBoardCount.setForeground(Color.decode("#3D7CA2"));
 		this.add(resetBoardCount);
-		
 		
 		Icon remove = new ImageIcon("resources/Remove.png");
 		Icon removeSelect = new ImageIcon("resources/RemoveSelect.png");
@@ -150,12 +144,11 @@ public class LevelView extends JPanel{
 		removeTileCheckBox.setBounds(810, 321, 70, 65);
 		this.add(removeTileCheckBox);
 		
-		JLabel removeCount = new JLabel("10");
-		removeCount.setFont(f40);
+		JLabel removeCount = new JLabel(String.valueOf(level.getRemoveTileMoves()));
+		removeCount.setFont(f30);
 		removeCount.setBounds(900, 328, 50, 55);
 		removeCount.setForeground(Color.decode("#45D7B3"));
 		this.add(removeCount);
-		
 		
 		Icon swap = new ImageIcon("resources/Swap.png");
 		Icon swapSelect = new ImageIcon("resources/SwapSelect.png");
@@ -166,8 +159,8 @@ public class LevelView extends JPanel{
 		swapTilesCheckBox.setBounds(810, 427, 70, 65);
 		this.add(swapTilesCheckBox);
 		
-		JLabel swapCount = new JLabel("10");
-		swapCount.setFont(f40);
+		JLabel swapCount = new JLabel(String.valueOf(level.getSwapTwoTilesMoves()));
+		swapCount.setFont(f30);
 		swapCount.setBounds(900, 431, 50, 55);
 		swapCount.setForeground(Color.decode("#FF9D8F"));
 		this.add(swapCount);
@@ -192,41 +185,47 @@ public class LevelView extends JPanel{
 			timesLeft.setBounds(584, 635, 166, 47);
 			this.add(timesLeft); 
 		
-		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"),120, 273,40);
+		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"), 120, 273,40);
 		starPanel.setLayout(null);
 		starPanel.setBounds(63, 218, 120, 273);
 		this.add(starPanel); 
 		
-		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
-		ImageIcon secondYellowStar = new ImageIcon("resources/Star 2.png");
 		ImageIcon secondGreyStar = new ImageIcon("resources/Star2g.png");
-		ImageIcon thirdYellowStar = new ImageIcon("resources/Star 3.png");
 		ImageIcon thirdtGreyStar = new ImageIcon("resources/Star3g.png");
 		
 		oneStarLbl = new JLabel();
-		if (level.getCurrentScore() < level.getOneStarScore()) {
-			oneStarLbl.setIcon(firstGreyStar);
-		}
-		else { oneStarLbl.setIcon(firstYellowStar); }
-		oneStarLbl.setBounds(41, 198, 36, 36);
+		oneStarLbl.setIcon(firstGreyStar);
+		oneStarLbl.setBounds(41, 198, 40, 40);
 		starPanel.add(oneStarLbl);
 		
+		JLabel oneScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
+		oneScoreLbl.setFont(f30);
+		oneScoreLbl.setBounds(100, 204, 100, 55);
+		oneScoreLbl.setForeground(Color.decode("#FECA44"));
+		this.add(oneScoreLbl);
+		
 		twoStarLbl = new JLabel();
-		if (level.getCurrentScore() < level.getTwoStarScore()) {
-			twoStarLbl.setIcon(secondGreyStar);
-		}
-		else { twoStarLbl.setIcon(secondYellowStar); }
+		twoStarLbl.setIcon(secondGreyStar);
 		twoStarLbl.setBounds(34, 123, 50, 50);
 		starPanel.add(twoStarLbl);
 		
+		JLabel twoScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
+		twoScoreLbl.setFont(f30);
+		twoScoreLbl.setBounds(100, 127, 100, 55);
+		twoScoreLbl.setForeground(Color.decode("#FECA44"));
+		this.add(twoScoreLbl);
+		
 		threeStarLbl = new JLabel();
-		if (level.getCurrentScore() < level.getThreeStarScore()) {
-			threeStarLbl.setIcon(thirdtGreyStar);
-		}
-		else { threeStarLbl.setIcon(thirdYellowStar); }
+		threeStarLbl.setIcon(thirdtGreyStar);
 		threeStarLbl.setBounds(29, 38, 60, 60);
 		starPanel.add(threeStarLbl);
+		
+		JLabel threeScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
+		threeScoreLbl.setFont(f30);
+		threeScoreLbl.setBounds(100, 204, 100, 55);
+		threeScoreLbl.setForeground(Color.decode("#FECA44"));
+		this.add(threeScoreLbl);
 		
 		boardPanel = new JPanel();
 		
@@ -236,7 +235,6 @@ public class LevelView extends JPanel{
 		int panelY = (708 - length)/2;
 		boardView.setBounds(panelX, panelY, length, length);
 		boardPanel.setBounds(panelX, panelY, length, length);
-		// boardPanel.setBackground(Color.decode("#D4D4D4"));
 		this.add(boardPanel);
 		boardPanel.add(boardView);
 		
@@ -255,6 +253,22 @@ public class LevelView extends JPanel{
 		miniBtn.setIcon(minIcon);
 		miniBtn.setBounds(880, 20, 40, 40);
 		this.add(miniBtn); 
+	}
+	
+	public void updateLevelInfo() {
+
+		ImageIcon firstYellowStar = new ImageIcon("resources/Star 1.png");
+		ImageIcon secondYellowStar = new ImageIcon("resources/Star 2.png");
+		ImageIcon thirdYellowStar = new ImageIcon("resources/Star 3.png");
+		
+		scoreLbl.setText(String.valueOf(level.getCurrentScore()));
+		
+		if (level.getCurrentScore() > level.getOneStarScore()) oneStarLbl.setIcon(firstYellowStar);
+		if (level.getCurrentScore() > level.getTwoStarScore()) twoStarLbl.setIcon(secondYellowStar);
+		if (level.getCurrentScore() > level.getThreeStarScore()) threeStarLbl.setIcon(thirdYellowStar);
+		
+		movesLeft.setText("Moves Left: " + String.valueOf(level.getMovesLeft()));
+		
 	}
 
 	/**
