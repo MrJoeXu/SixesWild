@@ -68,14 +68,15 @@ public class Move {
 		else {
 			ArrayList<Tile> newTiles;
 			newTiles = new ArrayList<Tile>();
-			int mult = 10;
+			int mult = 10 * tiles.size();
 			for (int i = 0; i < tiles.size(); i++) {
 				newTiles.add(makeTile(lv, tiles.get(i).getColumn()));
-				mult = mult + tiles.get(i).getBonus();
+				System.out.println("Bonus is: " + tiles.get(i).getBonus());
+				mult = mult * tiles.get(i).getBonus();
 			}
 
 			fallDown(lv, newTiles);
-			lv.setCurrentScore(lv.getCurrentScore() + (tiles.size() * mult));
+			lv.setCurrentScore(lv.getCurrentScore() + mult);
 			return true;
 		}
 	}
