@@ -20,7 +20,11 @@ public class Move {
 		this.level = lv;
 	}
 
-	// Move must add to 6 to be valid
+	/**
+	 * Returns true if move adds to 6
+	 * 
+	 * @return
+	 */
 	public boolean isValid() {
 		int sum = 0;
 		for (int i = 0; i < tiles.size(); i++) {
@@ -31,14 +35,30 @@ public class Move {
 		return (sum == 6);
 	}
 
+	/**
+	 * Adds give Tile
+	 * 
+	 * @param tl
+	 */
 	public void addTile(Tile tl) {
 		this.tiles.add(tl);
 	}
 
+	/**
+	 * Removes and returns the last Tile
+	 * 
+	 * @return
+	 */
 	public Tile removeLast() {
 		return tiles.remove(tiles.size() - 1);
 	}
 
+	/**
+	 * Does the move and returns true if the move was valid
+	 * 
+	 * @param lv
+	 * @return
+	 */
 	public boolean doMove(Level lv) {
 		lv.decrementMoves();
 		if (!this.isValid()) {
@@ -60,6 +80,13 @@ public class Move {
 		}
 	}
 
+	/**
+	 * Allows the tiles to fall down per gravity and adds new Tiles to replace
+	 * Tiles that have fallen down
+	 * 
+	 * @param lv
+	 * @param nwTiles
+	 */
 	protected void fallDown(Level lv, ArrayList<Tile> nwTiles) {
 		System.out.println("First Value: " + this.tiles.get(0).getValue());
 		for (int i = 0; i < this.tiles.size(); i++) {
@@ -72,26 +99,42 @@ public class Move {
 			}
 		}
 		System.out.println("First Value: " + this.tiles.get(0).getValue());
-		
+
 		for (int i = 0; i < this.tiles.size(); i++) {
-			lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
+			lv.getBoard()
+					.getSpace(this.tiles.get(i).getRow(),
+							this.tiles.get(i).getColumn()).setIsMarked(true);
 			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
 				if (j > 0) {
-					while (!(level.getBoard().getSpace((j - 1), this.tiles.get(i).getColumn()).isEnabled()))
-					{ 
+					while (!(level.getBoard().getSpace((j - 1),
+							this.tiles.get(i).getColumn()).isEnabled())) {
 						System.out.println("Testing j: " + j);
 						j--;
 					}
-					lv.getBoard().setTile(j,this.tiles.get(i).getColumn(), level.getBoard().getSpace((j - 1),this.tiles.get(i).getColumn()).getTile());
-				} 
-				
+					lv.getBoard().setTile(
+							j,
+							this.tiles.get(i).getColumn(),
+							level.getBoard()
+									.getSpace((j - 1),
+											this.tiles.get(i).getColumn())
+									.getTile());
+				}
+
 				else {
-					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
+					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(),
+							nwTiles.get(i));
 				}
 			}
 		}
 	}
 
+	/**
+	 * Makes a new Tile given level and column
+	 * 
+	 * @param lv
+	 * @param col
+	 * @return
+	 */
 	private Tile makeTile(Level lv, int col) {
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (int j = 0; j < 5; j++) {
@@ -114,6 +157,12 @@ public class Move {
 		return tile;
 	}
 
+	/**
+	 * Returns true is the Tile is adjacent to most recently added Tile
+	 * 
+	 * @param add
+	 * @return
+	 */
 	public boolean isAdjacent(Tile add) {
 		if (tiles.contains(add))
 			return false;
@@ -134,6 +183,11 @@ public class Move {
 		return false;
 	}
 
+	/**
+	 * Returns this Tiles
+	 * 
+	 * @return
+	 */
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}

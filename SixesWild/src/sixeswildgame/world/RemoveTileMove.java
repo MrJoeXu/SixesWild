@@ -13,13 +13,21 @@ public class RemoveTileMove extends Move {
 	
 	protected Tile tile;
 	protected Level level;
-
+	
+	/**
+	 * Creates new RemoveTileMove with specified tile and level
+	 * @param tl
+	 * @param lv
+	 */
 	public RemoveTileMove(Tile tl, Level lv) {
 		super(tl, lv);
 		this.tile = tl;
 		this.level = level;
 	}
 	
+	/**
+	 * Removes the selected Tile
+	 */
 	@Override
 	public boolean doMove (Level lv) {
 		int mult = 10 * tile.getBonus();

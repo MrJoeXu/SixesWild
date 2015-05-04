@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class Space {
-	
+
 	protected Tile tile;
 	protected boolean enabled;
 	protected ArrayList<Integer> releaseStates;
@@ -18,7 +18,9 @@ public class Space {
 	protected boolean isMarked;
 
 	/**
+	 * Creates new Space with specified Tile
 	 * 
+	 * @param tile
 	 */
 	public Space(Tile tile) {
 		this.tile = tile;
@@ -29,6 +31,8 @@ public class Space {
 	}
 
 	/**
+	 * Creates new Space with specified Tile and isEnabled
+	 * 
 	 * @param tile
 	 * @param enabled
 	 */
@@ -41,6 +45,9 @@ public class Space {
 		releaseStates.add(tile.getValue());
 	}
 
+	/**
+	 * Toggles the isEnabled of Tile
+	 */
 	public void toggleEnabled() {
 		enabled = !enabled;
 		if (enabled) {
@@ -48,15 +55,21 @@ public class Space {
 			tile.setBonus(tile.getLastBonus());
 		}
 	}
-	
+
+	/**
+	 * Returns each Tile and the respective isEnabled of Space as a string
+	 */
 	public String toString() {
 		String spaceString = "";
-		
+
 		spaceString += tile.toString() + enabled + ",";
-		
+
 		return spaceString;
 	}
-	
+
+	/**
+	 * Prints release states
+	 */
 	public void printReleaseStates() {
 		String s = "";
 		for (int i : releaseStates) {
@@ -65,11 +78,17 @@ public class Space {
 		System.out.println("Release States: " + s);
 		System.out.println("Active Index: " + activeIndex);
 	}
-	
+
+	/**
+	 * Increments the index
+	 */
 	public void incrementActiveIndex() {
 		activeIndex++;
 	}
 
+	/**
+	 * Decrements the index
+	 */
 	public void decrementActiveIndex() {
 		activeIndex--;
 	}
@@ -82,7 +101,8 @@ public class Space {
 	}
 
 	/**
-	 * @param tile the tile to set
+	 * @param tile
+	 *            the tile to set
 	 */
 	public void setTile(Tile tile) {
 		this.tile = tile;
@@ -96,7 +116,8 @@ public class Space {
 	}
 
 	/**
-	 * @param enabled the enabled to set
+	 * @param enabled
+	 *            the enabled to set
 	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -110,7 +131,8 @@ public class Space {
 	}
 
 	/**
-	 * @param releaseStates the releaseStates to set
+	 * @param releaseStates
+	 *            the releaseStates to set
 	 */
 	public void setReleaseStates(ArrayList<Integer> releaseStates) {
 		this.releaseStates = releaseStates;
@@ -124,18 +146,28 @@ public class Space {
 	}
 
 	/**
-	 * @param activeIndex the activeIndex to set
+	 * @param activeIndex
+	 *            the activeIndex to set
 	 */
 	public void setActiveIndex(int activeIndex) {
 		this.activeIndex = activeIndex;
 	}
 
+	/**
+	 * 
+	 * @return isMarked
+	 */
 	public boolean isMarked() {
 		return isMarked;
 	}
 
+	/**
+	 * 
+	 * @param set
+	 *            the set to set
+	 */
 	public void setIsMarked(boolean set) {
 		this.isMarked = set;
 	}
-	
+
 }

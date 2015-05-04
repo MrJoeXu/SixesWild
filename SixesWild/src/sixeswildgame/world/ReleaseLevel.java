@@ -12,30 +12,36 @@ import javax.swing.Timer;
  * @author Halsey
  *
  */
-public class ReleaseLevel extends Level{
+public class ReleaseLevel extends Level {
 
 	/**
+	 * Creates new ReleaseLevel with specified board, id, and gameType
+	 * 
 	 * @param board
 	 * @param id
 	 * @param gameType
 	 */
 	public ReleaseLevel(Board board, int id, String gameType) {
 		super(board, id, gameType);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
+	 * Creates new ReleaseLevel with specified file
+	 * 
 	 * @param file
 	 */
 	public ReleaseLevel(File file) {
 		super(file);
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * Returns true if all 6's are in their respective buckets
+	 * @return
+	 */
 	public boolean hasWon() {
 		for (int i = 0; i < this.getBoard().getGrid().size(); i++) {
 			if (this.getBoard().getGrid().get(i).getTile().getValue() == 6)
-					return false;
+				return false;
 		}
 		return true;
 	}

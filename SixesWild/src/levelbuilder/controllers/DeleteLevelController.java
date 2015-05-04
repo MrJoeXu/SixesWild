@@ -27,12 +27,15 @@ import src.sixeswildgame.world.World;
  *
  */
 public class DeleteLevelController implements ActionListener {
-	
+
 	protected World world;
 	protected LevelBuilderWindow application;
 	protected Level level;
 
 	/**
+	 * Creates new DeleteLevelController with specified world, application, and
+	 * world
+	 * 
 	 * @param world
 	 * @param application
 	 * @param level
@@ -44,32 +47,34 @@ public class DeleteLevelController implements ActionListener {
 		this.application = application;
 		this.level = level;
 	}
-
+	
+	/**
+	 * Deletes the selected custom level
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (application.isSoundEnabled()) {
 			try {
-			    File f = new File("resources/close.wav");
-			    AudioInputStream stream;
-			    AudioFormat format;
-			    DataLine.Info info;
-			    Clip clip;
+				File f = new File("resources/close.wav");
+				AudioInputStream stream;
+				AudioFormat format;
+				DataLine.Info info;
+				Clip clip;
 
-			    stream = AudioSystem.getAudioInputStream(f);
-			    format = stream.getFormat();
-			    info = new DataLine.Info(Clip.class, format);
-			    clip = (Clip) AudioSystem.getLine(info);
-			    clip.open(stream);
-			    clip.start();
-			}
-			catch (Exception e1) {
-			    
+				stream = AudioSystem.getAudioInputStream(f);
+				format = stream.getFormat();
+				info = new DataLine.Info(Clip.class, format);
+				clip = (Clip) AudioSystem.getLine(info);
+				clip.open(stream);
+				clip.start();
+			} catch (Exception e1) {
+
 			}
 		}
-		
+
 		ArrayList<Level> levels;
-		
+
 		switch (application.getGameType()) {
 		case 1:
 			levels = world.getPuzzleLevels();
@@ -83,42 +88,48 @@ public class DeleteLevelController implements ActionListener {
 		case 4:
 			levels = world.getEliminationLevels();
 			break;
-			default:
-				levels = new ArrayList<Level>();
+		default:
+			levels = new ArrayList<Level>();
 		}
-		
+
 		levels.remove(application.getLbLevelSelectorView().getSelectedLevel());
-		
+
 		System.out.println("Num Levels: " + levels.size());
-		
-		//File f = new File("saveddata/custom/" + application.getLbLevelSelectorView().getSelectedLevel().getGameType() +
-				//"/" + application.getLbLevelSelectorView().getSelectedLevel().getId() + ".txt");
-		//f.delete();
-		
-		try{
-			 
-    		File file = application.getLbLevelSelectorView().getSelectedLevel().getFile();
- 
-    		if(file.delete()){
-    			System.out.println(file.getName() + " is deleted!");
-    		}else{
-    			System.out.println("Delete operation is failed.");
-    		}
- 
-    	}catch(Exception e1){
- 
-    		e1.printStackTrace();
- 
-    	}
-		
+
+		// File f = new File("saveddata/custom/" +
+		// application.getLbLevelSelectorView().getSelectedLevel().getGameType()
+		// +
+		// "/" + application.getLbLevelSelectorView().getSelectedLevel().getId()
+		// + ".txt");
+		// f.delete();
+
 		try {
-			application.setLbLevelSelectorView(new LBLevelSelectorView(application, world));
+
+			File file = application.getLbLevelSelectorView().getSelectedLevel()
+					.getFile();
+
+			if (file.delete()) {
+				System.out.println(file.getName() + " is deleted!");
+			} else {
+				System.out.println("Delete operation is failed.");
+			}
+
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
+
+		}
+
+		try {
+			application.setLbLevelSelectorView(new LBLevelSelectorView(
+					application, world));
 		} catch (FontFormatException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		application.getFrame().setContentPane(application.getLbLevelSelectorView());
+
+		application.getFrame().setContentPane(
+				application.getLbLevelSelectorView());
 		application.getLbLevelSelectorView().setVisible(true);
 		application.getFrame().setTitle("Level Builder");
 		application.getFrame().pack();

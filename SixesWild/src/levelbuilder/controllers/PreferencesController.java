@@ -20,7 +20,7 @@ import src.sixeswildgame.view.BetterButton;
  *
  */
 public class PreferencesController implements ActionListener {
-	
+
 	protected LevelBuilderWindow application;
 	protected PreferencesView preferencesView;
 	protected BetterButton preferencesBtn;
@@ -28,6 +28,9 @@ public class PreferencesController implements ActionListener {
 	protected Icon openIcon;
 
 	/**
+	 * Creates new PreferencesController with specified application,
+	 * preferencesView, preferencesBtn, closeIcon2, and openIcon2
+	 * 
 	 * @param application
 	 * @param preferencesView
 	 * @param preferencesBtn
@@ -44,16 +47,18 @@ public class PreferencesController implements ActionListener {
 		this.closeIcon = closeIcon2;
 		this.openIcon = openIcon2;
 	}
-
+	
+	/**
+	 * Displays the preferences
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		application.togglePreferences();
-		
+
 		if (application.isPreferencesEnabled()) {
 			preferencesBtn.setIcon(closeIcon);
 			preferencesBtn.setCol(Color.decode("#50E3C2"));
-		}
-		else {
+		} else {
 			preferencesBtn.setIcon(openIcon);
 			preferencesBtn.setCol(Color.decode("#D76262"));
 		}

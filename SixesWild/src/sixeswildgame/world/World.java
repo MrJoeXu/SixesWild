@@ -10,14 +10,14 @@ import java.util.ArrayList;
  *
  */
 public class World {
-	
+
 	protected ArrayList<Level> puzzleLevels;
 	protected ArrayList<Level> lightningLevels;
 	protected ArrayList<Level> releaseLevels;
 	protected ArrayList<Level> eliminationLevels;
-	
+
 	/**
-	 * 
+	 * Creates new World
 	 */
 	public World() {
 		puzzleLevels = new ArrayList<Level>();
@@ -34,7 +34,8 @@ public class World {
 	}
 
 	/**
-	 * @param puzzleLevels the puzzleLevels to set
+	 * @param puzzleLevels
+	 *            the puzzleLevels to set
 	 */
 	public void setPuzzleLevels(ArrayList<Level> puzzleLevels) {
 		this.puzzleLevels = puzzleLevels;
@@ -48,7 +49,8 @@ public class World {
 	}
 
 	/**
-	 * @param lightningLevels the lightningLevels to set
+	 * @param lightningLevels
+	 *            the lightningLevels to set
 	 */
 	public void setLightningLevels(ArrayList<Level> lightningLevels) {
 		this.lightningLevels = lightningLevels;
@@ -62,7 +64,8 @@ public class World {
 	}
 
 	/**
-	 * @param releaseLevels the releaseLevels to set
+	 * @param releaseLevels
+	 *            the releaseLevels to set
 	 */
 	public void setReleaseLevels(ArrayList<Level> releaseLevels) {
 		this.releaseLevels = releaseLevels;
@@ -76,26 +79,33 @@ public class World {
 	}
 
 	/**
-	 * @param eliminationLevels the eliminationLevels to set
+	 * @param eliminationLevels
+	 *            the eliminationLevels to set
 	 */
 	public void setEliminationLevels(ArrayList<Level> eliminationLevels) {
 		this.eliminationLevels = eliminationLevels;
 	}
 
+	/**
+	 * Returns the levels of the given game type
+	 * 
+	 * @param gameType
+	 * @return
+	 */
 	public ArrayList<Level> getLevels(int gameType) {
-		
-		switch(gameType) {
+
+		switch (gameType) {
 		case 1:
 			return puzzleLevels;
-		case 2: 
+		case 2:
 			return lightningLevels;
 		case 3:
 			return releaseLevels;
 		case 4:
 			return eliminationLevels;
-			default:
-				return null;
+		default:
+			return null;
 		}
 	}
-	
+
 }

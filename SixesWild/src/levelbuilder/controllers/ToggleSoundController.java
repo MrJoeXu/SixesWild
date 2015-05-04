@@ -21,20 +21,21 @@ import src.levelbuilder.view.LevelBuilderWindow;
  *
  */
 public class ToggleSoundController implements ActionListener {
-	
+
 	protected LevelBuilderWindow application;
 
 	/**
 	 * Creates new ToggleSoundController with application
+	 * 
 	 * @param application
 	 */
 	public ToggleSoundController(LevelBuilderWindow application) {
 		super();
 		this.application = application;
 	}
-	
+
 	/**
-	 * 
+	 * Toggles the sound to on/off
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -42,9 +43,8 @@ public class ToggleSoundController implements ActionListener {
 		if (application.isSoundEnabled()) {
 			try {
 				application.getMusicClip().loop(Clip.LOOP_CONTINUOUSLY);
-			}
-			catch (Exception e1) {
-			    
+			} catch (Exception e1) {
+
 			}
 		} else
 			application.getMusicClip().stop();

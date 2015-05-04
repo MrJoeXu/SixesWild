@@ -18,13 +18,18 @@ public class AdjustMusicController implements ChangeListener {
 	protected LevelBuilderWindow application;
 	
 	/**
+	 * Creates new AdjustMusicController with specified application
+	 * 
 	 * @param application
 	 */
 	public AdjustMusicController(LevelBuilderWindow application) {
 		super();
 		this.application = application;
 	}
-
+	
+	/**
+	 * Adjusts the volume of the music
+	 */
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		FloatControl gainControl = 

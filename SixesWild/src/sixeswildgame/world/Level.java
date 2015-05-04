@@ -220,42 +220,48 @@ public class Level {
 	}
 
 	/**
-	 * Returns false because each Game Type has a distinct way of winning
+	 * Returns true depending on Game Type winning specifications
 	 * 
 	 */
 	public boolean hasWon(int gameType) {
-		
+
 		switch (gameType) {
 		case 1:
 			if (this.getCurrentScore() > this.getOneStarScore()) {
 				isLocked = false;
 				return true;
-			}
-			else return false;
+			} else
+				return false;
 		case 2:
 			if (minutes == 0 && seconds == 0) {
 				if (currentScore > oneStarScore) {
 					isLocked = false;
 					return true;
 				}
-			}
-			else return false;
+			} else
+				return false;
 			break;
 		case 3:
-			
+
 			break;
 		case 4:
 			boolean win = true;
-			for (Space sp : board.getGrid()) win = sp.isMarked();
+			for (Space sp : board.getGrid())
+				win = sp.isMarked();
 			return win;
-			default:
-				return false;
+		default:
+			return false;
 		}
-		
+
 		return false;
 
 	}
 
+	/**
+	 * Saves level with specified game type
+	 * 
+	 * @param gameType
+	 */
 	public void save(String gameType) {
 
 		String levelString = toString();
@@ -281,23 +287,32 @@ public class Level {
 			e.printStackTrace();
 		}
 	}
-	
-	public void decrementTime(){
+
+	/**
+	 * Decrements the time
+	 */
+	public void decrementTime() {
 		if (seconds == 0) {
 			minutes--;
 			seconds = 59;
-		}
-		else seconds--;
+		} else
+			seconds--;
 	}
-	
-	public void incrementTime(){
+
+	/**
+	 * Increments the time
+	 */
+	public void incrementTime() {
 		if (seconds == 59) {
 			minutes++;
 			seconds = 0;
-		}
-		else seconds++;
+		} else
+			seconds++;
 	}
 
+	/**
+	 * Converts level variables to string
+	 */
 	public String toString() {
 		String levelString = "";
 
@@ -358,6 +373,8 @@ public class Level {
 	}
 
 	/**
+	 * Sets this
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -679,7 +696,8 @@ public class Level {
 	}
 
 	/**
-	 * @param sttMove the sttMove to set
+	 * @param sttMove
+	 *            the sttMove to set
 	 */
 	public void setSttMove(SwapTwoTilesMove sttMove) {
 		this.sttMove = sttMove;
@@ -693,11 +711,11 @@ public class Level {
 	}
 
 	/**
-	 * @param rtMove the rtMove to set
+	 * @param rtMove
+	 *            the rtMove to set
 	 */
 	public void setRtMove(RemoveTileMove rtMove) {
 		this.rtMove = rtMove;
 	}
-	
-	
+
 }

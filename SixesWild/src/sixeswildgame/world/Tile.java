@@ -8,22 +8,24 @@ package src.sixeswildgame.world;
  *
  */
 public class Tile {
-	
+
 	protected int value;
 	protected int bonus;
 	protected int row;
 	protected int column;
 	protected int lastValue;
 	protected int lastBonus;
-	
+
 	protected boolean isSelected;
-	
+
 	public Tile(int row, int column) {
 		this.row = row;
 		this.column = column;
 	}
 
 	/**
+	 * Creates new Tile with specified value, bonus, row, column, and isSelected
+	 * 
 	 * @param value
 	 * @param bonus
 	 * @param row
@@ -40,8 +42,11 @@ public class Tile {
 		this.lastValue = value;
 		this.lastBonus = bonus;
 	}
-	
+
 	/**
+	 * Creates new Tile with specified value, bonus, row, column, lastValue,
+	 * lastBonus, and isSelected
+	 * 
 	 * @param value
 	 * @param bonus
 	 * @param row
@@ -62,12 +67,15 @@ public class Tile {
 		this.isSelected = isSelected;
 	}
 
+	/**
+	 * Returns the variables of Tile as a string
+	 */
 	public String toString() {
 		String tileString = "";
-		
-		tileString += value + "," + bonus + "," + row + "," + column + "," + lastValue + "," 
-				+ lastBonus + "," + isSelected + ",";
-		
+
+		tileString += value + "," + bonus + "," + row + "," + column + ","
+				+ lastValue + "," + lastBonus + "," + isSelected + ",";
+
 		return tileString;
 	}
 
@@ -79,7 +87,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
 	public void setValue(int value) {
 		this.value = value;
@@ -93,7 +102,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param bonus the bonus to set
+	 * @param bonus
+	 *            the bonus to set
 	 */
 	public void setBonus(int bonus) {
 		this.bonus = bonus;
@@ -107,7 +117,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param row the row to set
+	 * @param row
+	 *            the row to set
 	 */
 	public void setRow(int row) {
 		this.row = row;
@@ -121,7 +132,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param column the column to set
+	 * @param column
+	 *            the column to set
 	 */
 	public void setColumn(int column) {
 		this.column = column;
@@ -135,7 +147,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param isSelected the isSelected to set
+	 * @param isSelected
+	 *            the isSelected to set
 	 */
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
@@ -149,7 +162,8 @@ public class Tile {
 	}
 
 	/**
-	 * @param lastValue the lastValue to set
+	 * @param lastValue
+	 *            the lastValue to set
 	 */
 	public void setLastValue(int lastValue) {
 		this.lastValue = lastValue;
@@ -163,12 +177,11 @@ public class Tile {
 	}
 
 	/**
-	 * @param lastBonus the lastBonus to set
+	 * @param lastBonus
+	 *            the lastBonus to set
 	 */
 	public void setLastBonus(int lastBonus) {
 		this.lastBonus = lastBonus;
 	}
-
-	
 
 }

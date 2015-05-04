@@ -14,21 +14,21 @@ import javax.swing.Timer;
 public class LightningLevel extends Level {
 
 	/**
+	 * Creates new LightningLevel with specified board, id, and gameType
 	 * @param board
 	 * @param id
 	 * @param gameType
 	 */
 	public LightningLevel(Board board, int id, String gameType) {
 		super(board, id, gameType);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
+	 * Creates new LightningLevel with specified file
 	 * @param file
 	 */
 	public LightningLevel(File file) {
 		super(file);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean hasWon() {
