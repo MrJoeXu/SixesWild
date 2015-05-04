@@ -71,7 +71,7 @@ public class Move {
 			int mult = 10;
 			for (int i = 0; i < tiles.size(); i++) {
 				newTiles.add(makeTile(lv, tiles.get(i).getColumn()));
-				mult = mult * tiles.get(i).getBonus();
+				mult = mult + tiles.get(i).getBonus();
 			}
 
 			fallDown(lv, newTiles);
