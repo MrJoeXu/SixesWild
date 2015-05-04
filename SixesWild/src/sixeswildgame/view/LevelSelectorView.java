@@ -96,7 +96,7 @@ public class LevelSelectorView extends JPanel{
 		}
 		
 		levelBtn1.addActionListener(new SelectLevelController(application, world, levels.get(0)));
-		levelBtn2.addActionListener(new SelectLevelController(application, world, levels.get(1)));
+		levelBtn2.addActionListener(new SelectLevelController(application, world, null));
 		levelBtn3.addActionListener(new SelectLevelController(application, world, null));
 		levelBtn4.addActionListener(new SelectLevelController(application, world, null));
 		

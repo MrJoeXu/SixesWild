@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,11 +22,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import src.sixeswildgame.controllers.CloseGameController;
 import src.sixeswildgame.controllers.LevelBackController;
 import src.sixeswildgame.controllers.MakeMoveController;
 import src.sixeswildgame.controllers.MinimizeGameController;
+import src.sixeswildgame.controllers.ResetBoardController;
 import src.sixeswildgame.controllers.SelectSpecialMoveController;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
@@ -33,6 +37,7 @@ import src.sixeswildgame.world.World;
 
 /**
  * @author Joe Xu
+ * @author Halsey
  *
  */
 public class LevelView extends JPanel{
@@ -41,12 +46,13 @@ public class LevelView extends JPanel{
 	protected JPanel boardPanel;
 	
 	protected JLabel scoreLbl;
+	protected JLabel nameLbl;
 	protected JLabel timerLbl;
 	protected JLabel oneStarLbl;
 	protected JLabel twoStarLbl;
 	protected JLabel threeStarLbl;
 	protected JLabel movesLeft;
-	protected JLabel timesLeft;
+	protected JLabel timeLeft;
 	protected JLabel resetBoardCountLbl;
 	protected JLabel removeTileCountLbl;
 	protected JLabel swapTilesCountLbl;
@@ -66,6 +72,7 @@ public class LevelView extends JPanel{
 	protected ArrayList<JCheckBox> specialMovesCheckBoxes;
 	protected boolean isSwapTwoTiles;
 	protected boolean isRemoveTile;
+	protected Timer timer;
 	
 	public LevelView(SixesWildWindow application, World world, Level level) throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
@@ -80,12 +87,32 @@ public class LevelView extends JPanel{
 	public void initialize() throws FileNotFoundException, FontFormatException, IOException {
 		initializeView();
 		initializeControllers();
+		
+		timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if (application.getGameType() == 2) {
+					level.decrementTime();
+					if (level.getMinutes() <= 0 && level.getSeconds() <= 0) level.hasWon(application.getGameType());
+				}
+				else {
+					level.incrementTime();
+				}
+				
+				int seconds = level.getSeconds();
+				int minutes = level.getMinutes();
+				
+				timeLeft.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
+			    }
+			});
+		timer.start();
+		
 	}
 
 	private void initializeControllers() {
-		backBtn.addActionListener(new LevelBackController(world, application));
+		backBtn.addActionListener(new LevelBackController(world, application, level));
 		closeBtn.addActionListener(new CloseGameController(world, application));
-		miniBtn.addActionListener(new MinimizeGameController(world,application));
+		miniBtn.addActionListener(new MinimizeGameController(world, application));
+		resetBoardBtn.addActionListener(new ResetBoardController(application, level));
 		
 		int i = 0;
 		for (JCheckBox cb : specialMovesCheckBoxes) {
@@ -106,10 +133,17 @@ public class LevelView extends JPanel{
 		this.setPreferredSize(new Dimension (1000,708));
 		this.setLayout(null);
 		
-		scoreLbl = new JLabel("0");
+		nameLbl = new JLabel(level.getName());
 		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
+		nameLbl.setFont(f40);
+		nameLbl.setBounds(258, 37, 464, 41);
+		nameLbl.setForeground(Color.decode("#D76262"));
+		nameLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(nameLbl);
+		
+		scoreLbl = new JLabel("0");
 		scoreLbl.setFont(f40);
-		scoreLbl.setBounds(458, 37, 164, 41);
+		scoreLbl.setBounds(418, 635, 164, 41);
 		scoreLbl.setForeground(Color.decode("#D76262"));
 		scoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(scoreLbl);
@@ -178,16 +212,16 @@ public class LevelView extends JPanel{
 		movesLeft.setFont(f18);
 		movesLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		movesLeft.setForeground(Color.white);
-		movesLeft.setBounds(250, 635, 166, 47);
+		movesLeft.setBounds(220, 635, 166, 47);
 		this.add(movesLeft);
 		
-			timesLeft = new BetterLabel(Color.decode("#D76262"),166,47,10);
-			timesLeft.setText("Timess Left: " + level.getTime());
-			timesLeft.setFont(f18);
-			timesLeft.setHorizontalAlignment(SwingConstants.CENTER);
-			timesLeft.setForeground(Color.white);
-			timesLeft.setBounds(584, 635, 166, 47);
-			this.add(timesLeft); 
+		timeLeft = new BetterLabel(Color.decode("#D76262"),166,47,10);
+		timeLeft.setText(String.format("%02d", level.getMinutes()) + ":" + String.format("%02d", level.getSeconds()));
+		timeLeft.setFont(f18);
+		timeLeft.setHorizontalAlignment(SwingConstants.CENTER);
+		timeLeft.setForeground(Color.white);
+		timeLeft.setBounds(614, 635, 166, 47);
+		this.add(timeLeft); 
 		
 		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"), 120, 300, 40);
 		starPanel.setLayout(null);
@@ -201,24 +235,24 @@ public class LevelView extends JPanel{
 		oneStarLbl = new BetterLabel(Color.decode("#D8D8D8"), 120, 300, 40);
 		oneStarLbl = new JLabel();
 		oneStarLbl.setIcon(firstGreyStar);
-		oneStarLbl.setBounds(38, 220, 40, 40);
+		oneStarLbl.setBounds(42, 220, 40, 40);
 		starPanel.add(oneStarLbl);
 		
 		BetterLabel oneScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
-		oneScoreLbl.setText(String.valueOf(level.getThreeStarScore()));
+		oneScoreLbl.setText(String.valueOf(level.getOneStarScore()));
 		oneScoreLbl.setFont(f20);
-		oneScoreLbl.setBounds(37, 263, 50, 20);
+		oneScoreLbl.setBounds(35, 263, 50, 20);
 		oneScoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		oneScoreLbl.setForeground(Color.BLACK);
 		starPanel.add(oneScoreLbl);
 		
 		twoStarLbl = new JLabel();
 		twoStarLbl.setIcon(secondGreyStar);
-		twoStarLbl.setBounds(42, 135, 50, 50);
+		twoStarLbl.setBounds(35, 135, 50, 50);
 		starPanel.add(twoStarLbl);
 		
 		BetterLabel twoScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
-		twoScoreLbl.setText(String.valueOf(level.getThreeStarScore()));
+		twoScoreLbl.setText(String.valueOf(level.getTwoStarScore()));
 		twoScoreLbl.setFont(f20);
 		twoScoreLbl.setBounds(35, 188, 50, 20);
 		twoScoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,7 +261,7 @@ public class LevelView extends JPanel{
 		
 		threeStarLbl = new JLabel();
 		threeStarLbl.setIcon(thirdGreyStar);
-		threeStarLbl.setBounds(24, 20, 80, 80);
+		threeStarLbl.setBounds(25, 20, 80, 80);
 		starPanel.add(threeStarLbl);
 		
 		BetterLabel threeScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
@@ -274,9 +308,9 @@ public class LevelView extends JPanel{
 		
 		scoreLbl.setText(String.valueOf(level.getCurrentScore()));
 		
-		if (level.getCurrentScore() > level.getOneStarScore()) oneStarLbl.setIcon(firstYellowStar);
-		if (level.getCurrentScore() > level.getTwoStarScore()) twoStarLbl.setIcon(secondYellowStar);
-		if (level.getCurrentScore() > level.getThreeStarScore()) threeStarLbl.setIcon(thirdYellowStar);
+		if (level.getCurrentScore() >= level.getOneStarScore()) oneStarLbl.setIcon(firstYellowStar);
+		if (level.getCurrentScore() >= level.getTwoStarScore()) twoStarLbl.setIcon(secondYellowStar);
+		if (level.getCurrentScore() >= level.getThreeStarScore()) threeStarLbl.setIcon(thirdYellowStar);
 		
 		movesLeft.setText("Moves Left: " + String.valueOf(level.getMovesLeft()));
 		
@@ -370,14 +404,14 @@ public class LevelView extends JPanel{
 	 * @return the timesLeft
 	 */
 	public JLabel getTimesLeft() {
-		return timesLeft;
+		return timeLeft;
 	}
 
 	/**
 	 * @param timesLeft the timesLeft to set
 	 */
 	public void setTimesLeft(JLabel timesLeft) {
-		this.timesLeft = timesLeft;
+		this.timeLeft = timesLeft;
 	}
 
 	/**

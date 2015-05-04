@@ -39,7 +39,7 @@ public class SelectSpecialMoveController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (specialMove == 0) {
+		if (specialMove == 0 && level.getSttMove() == null) {
 			application.getLevelView().setSwapTwoTiles(
 					!application.getLevelView().isSwapTwoTiles());
 			if (checkBox.isSelected()) {
@@ -49,7 +49,7 @@ public class SelectSpecialMoveController implements ActionListener {
 			}
 		}
 
-		else if (specialMove == 1) {
+		else if (specialMove == 1 && level.getSttMove() == null) {
 			application.getLevelView().setRemoveTile(
 					!application.getLevelView().isRemoveTile());
 			if (checkBox.isSelected()) {

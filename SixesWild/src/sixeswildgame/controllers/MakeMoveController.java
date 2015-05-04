@@ -47,7 +47,7 @@ public class MakeMoveController implements MouseListener{
 	
 	public void mousePressed(MouseEvent me) {
 		
-		if (application.getLevelView().isSwapTwoTiles()) {
+		if (application.getLevelView().isSwapTwoTiles() && level.getSwapTwoTilesMoves() > 0) {
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {
 				if (level.getSttMove() == null) {
 					SwapTwoTilesMove newMove = new SwapTwoTilesMove(tileView.getTile(), level);
@@ -56,24 +56,26 @@ public class MakeMoveController implements MouseListener{
 					tileView.repaint();
 				}
 				
-				else if (level.getSttMove().getTiles().size() == 0) {
-					level.getSttMove().addTile(tileView.getTile());
-					tileView.setBorder(BorderFactory.createLineBorder(Color.black, 5, true));
-					tileView.repaint();
-				}
-				
-				else if (level.getSttMove().getTiles().size() == 1) {
+				else {
+					level.getSttMove().setTile2(tileView.getTile());
 					level.getSttMove().doMove(level);
 					updateBoard();
+					level.setSttMove(null);
+					application.getLevelView().getSwapTilesCheckBox()
+					.setSelected(false);
+					application.getLevelView().setSwapTwoTiles(false);
 				}
 			}
 		}
 		
-		else if (application.getLevelView().isRemoveTile()) {
+		else if (application.getLevelView().isRemoveTile() && level.getRemoveTileMoves() > 0) {
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
-				Move newMove = new Move(tileView.getTile(), level);
+				RemoveTileMove newMove = new RemoveTileMove(tileView.getTile(), level);
 				newMove.doMove(level);
 				updateBoard();
+				application.getLevelView().getRemoveTileCheckBox()
+				.setSelected(false);
+				application.getLevelView().setRemoveTile(false);
 			}
 		}
 		
@@ -120,7 +122,14 @@ public class MakeMoveController implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		if (!level.isMakingMove())  tileView.setBorder(null);
+		
+		boolean notSwap = true;
+		if (level.getSttMove() != null) {
+			if (tileView.getTile().equals(level.getSttMove().getTile1())) notSwap = false;
+		}
+		
+		
+		if (!level.isMakingMove() && notSwap) tileView.setBorder(null);
 	}
 
 	@Override
@@ -134,7 +143,7 @@ public class MakeMoveController implements MouseListener{
 	
 	public void updateBoard() {
 		if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
-			level.hasWon();
+			level.hasWon(application.getGameType());
 			return;
 		}
 		
@@ -150,7 +159,6 @@ public class MakeMoveController implements MouseListener{
 		application.getLevelView().getBoardPanel().removeAll();
 		application.getLevelView().getBoardPanel().add(newBoardView);
 		
-		application.getLevelView().getResetBoardCountLbl().setText(String.valueOf(level.getResetBoardMoves()));
 		application.getLevelView().getSwapTilesCountLbl().setText(String.valueOf(level.getSwapTwoTilesMoves()));
 		application.getLevelView().getRemoveTileCountLbl().setText(String.valueOf(level.getRemoveTileMoves()));
 		

@@ -40,7 +40,7 @@ public class EliminationLevel extends Level {
 		for (int i = 0; i < this.getBoard().getGrid().size(); i++) {
 			if ((this.getBoard().getGrid().get(i).getTile().getValue() != 6) && 
 					(this.getBoard().getGrid().get(i).getTile().getValue() != 0)) {
-				if (!(this.getBoard().getGrid().get(i).getIsMarked()))
+				if (!(this.getBoard().getGrid().get(i).isMarked()))
 					return false;
 			}
 		}

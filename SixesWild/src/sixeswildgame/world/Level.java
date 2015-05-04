@@ -39,7 +39,6 @@ public class Level {
 	protected String name;
 	protected int gameType;
 
-	protected Timer time;
 	protected int minutes;
 	protected int seconds;
 
@@ -74,6 +73,8 @@ public class Level {
 		this.threeStarScore = 0;
 		this.movesLeft = 10;
 		this.bonusFrequency = 3;
+		this.minutes = 0;
+		this.seconds = 0;
 		this.isLocked = false;
 		this.tileRange = new boolean[5];
 		for (int i = 0; i < 5; i++) {
@@ -222,8 +223,37 @@ public class Level {
 	 * Returns false because each Game Type has a distinct way of winning
 	 * 
 	 */
-	public boolean hasWon() {
+	public boolean hasWon(int gameType) {
+		
+		switch (gameType) {
+		case 1:
+			if (this.getCurrentScore() > this.getOneStarScore()) {
+				isLocked = false;
+				return true;
+			}
+			else return false;
+		case 2:
+			if (minutes == 0 && seconds == 0) {
+				if (currentScore > oneStarScore) {
+					isLocked = false;
+					return true;
+				}
+			}
+			else return false;
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			boolean win = true;
+			for (Space sp : board.getGrid()) win = sp.isMarked();
+			return win;
+			default:
+				return false;
+		}
+		
 		return false;
+
 	}
 
 	public void save(String gameType) {
@@ -250,6 +280,22 @@ public class Level {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void decrementTime(){
+		if (seconds == 0) {
+			minutes--;
+			seconds = 59;
+		}
+		else seconds--;
+	}
+	
+	public void incrementTime(){
+		if (seconds == 59) {
+			minutes++;
+			seconds = 0;
+		}
+		else seconds++;
 	}
 
 	public String toString() {
@@ -422,21 +468,6 @@ public class Level {
 	 */
 	public void setBonusFrequency(int bonusFrequency) {
 		this.bonusFrequency = bonusFrequency;
-	}
-
-	/**
-	 * @return the time
-	 */
-	public Timer getTime() {
-		return time;
-	}
-
-	/**
-	 * @param time
-	 *            the time to set
-	 */
-	public void setTime(Timer time) {
-		this.time = time;
 	}
 
 	/**

@@ -49,14 +49,6 @@ public class Space {
 		}
 	}
 	
-	public void setIsMarked(boolean set) {
-		this.isMarked = set;
-	}
-	
-	public boolean getIsMarked (){
-		return this.isMarked;
-	}
-	
 	public String toString() {
 		String spaceString = "";
 		
@@ -136,6 +128,14 @@ public class Space {
 	 */
 	public void setActiveIndex(int activeIndex) {
 		this.activeIndex = activeIndex;
+	}
+
+	public boolean isMarked() {
+		return isMarked;
+	}
+
+	public void setIsMarked(boolean set) {
+		this.isMarked = set;
 	}
 	
 }

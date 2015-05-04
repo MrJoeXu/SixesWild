@@ -127,8 +127,7 @@ public class SixesWildWindow {
 		  }
 		} else {
 		}
-		
-		
+
 	}
 
 	/**

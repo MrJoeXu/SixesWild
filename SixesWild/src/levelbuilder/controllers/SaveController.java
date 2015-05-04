@@ -103,10 +103,10 @@ public class SaveController implements ActionListener {
 
 		if (application.getGameType() == 2) {
 			if (!view.getTimerMinuteTextField().getText().equals(""))
-				level.setMinutes(Integer.parseInt(view.getMovesLeftTextField()
+				level.setMinutes(Integer.parseInt(view.getTimerMinuteTextField()
 						.getText()));
 			if (!view.getTimerSecondTextField().getText().equals(""))
-				level.setSeconds(Integer.parseInt(view.getMovesLeftTextField()
+				level.setSeconds(Integer.parseInt(view.getTimerSecondTextField()
 						.getText()));
 		}
 

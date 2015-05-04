@@ -118,7 +118,6 @@ public class LBLevelSelectorView extends JPanel {
 	private void initializeModel() {
 		
 		numLevels = new File("saveddata/custom/" + application.getGameTypeName()).listFiles().length;
-		System.out.println("NumLevels: " + numLevels);
 		
 	}
 

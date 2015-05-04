@@ -60,7 +60,7 @@ public class Move {
 		}
 	}
 
-	private void fallDown(Level lv, ArrayList<Tile> nwTiles) {
+	protected void fallDown(Level lv, ArrayList<Tile> nwTiles) {
 		System.out.println("First Value: " + this.tiles.get(0).getValue());
 		for (int i = 0; i < this.tiles.size(); i++) {
 			for (int j = i + 1; j < this.tiles.size() - 1; j++) {
@@ -77,8 +77,7 @@ public class Move {
 			lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
 			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
 				if (j > 0) {
-					while ((level.getBoard().getSpace((j - 1),this.tiles.get(i).getColumn()).getTile().getValue() == 0) || 
-							  (level.getBoard().getSpace((j - 1),this.tiles.get(i).getColumn()).getTile().getValue() == 7))
+					while (!(level.getBoard().getSpace((j - 1), this.tiles.get(i).getColumn()).isEnabled()))
 					{ 
 						System.out.println("Testing j: " + j);
 						j--;

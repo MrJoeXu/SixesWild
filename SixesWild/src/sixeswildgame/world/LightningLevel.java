@@ -32,7 +32,7 @@ public class LightningLevel extends Level {
 	}
 
 	public boolean hasWon() {
-		if (time.getDelay() <= 0) {
+		if (minutes == 0 && seconds == 0) {
 			if (super.getCurrentScore() > super.getOneStarScore()) {
 				return true;
 			}
