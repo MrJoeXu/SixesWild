@@ -47,6 +47,9 @@ public class LevelView extends JPanel{
 	protected JLabel threeStarLbl;
 	protected JLabel movesLeft;
 	protected JLabel timesLeft;
+	protected JLabel resetBoardCountLbl;
+	protected JLabel removeTileCountLbl;
+	protected JLabel swapTilesCountLbl;
 	
 	protected BetterButton resetBoardBtn;
 	protected JCheckBox removeTileCheckBox;
@@ -128,12 +131,13 @@ public class LevelView extends JPanel{
 		this.add(resetBoardBtn); 
 		
 		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
+		Font f20 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 20);
 		
-		JLabel resetBoardCount = new JLabel(String.valueOf(level.getResetBoardMoves()));
-		resetBoardCount.setFont(f30);
-		resetBoardCount.setBounds(900, 226, 50, 55);
-		resetBoardCount.setForeground(Color.decode("#3D7CA2"));
-		this.add(resetBoardCount);
+		resetBoardCountLbl = new JLabel(String.valueOf(level.getResetBoardMoves()));
+		resetBoardCountLbl.setFont(f30);
+		resetBoardCountLbl.setBounds(900, 226, 50, 55);
+		resetBoardCountLbl.setForeground(Color.decode("#3D7CA2"));
+		this.add(resetBoardCountLbl);
 		
 		Icon remove = new ImageIcon("resources/Remove.png");
 		Icon removeSelect = new ImageIcon("resources/RemoveSelect.png");
@@ -144,11 +148,11 @@ public class LevelView extends JPanel{
 		removeTileCheckBox.setBounds(810, 321, 70, 65);
 		this.add(removeTileCheckBox);
 		
-		JLabel removeCount = new JLabel(String.valueOf(level.getRemoveTileMoves()));
-		removeCount.setFont(f30);
-		removeCount.setBounds(900, 328, 50, 55);
-		removeCount.setForeground(Color.decode("#45D7B3"));
-		this.add(removeCount);
+		removeTileCountLbl = new JLabel(String.valueOf(level.getRemoveTileMoves()));
+		removeTileCountLbl.setFont(f30);
+		removeTileCountLbl.setBounds(900, 328, 50, 55);
+		removeTileCountLbl.setForeground(Color.decode("#45D7B3"));
+		this.add(removeTileCountLbl);
 		
 		Icon swap = new ImageIcon("resources/Swap.png");
 		Icon swapSelect = new ImageIcon("resources/SwapSelect.png");
@@ -159,11 +163,11 @@ public class LevelView extends JPanel{
 		swapTilesCheckBox.setBounds(810, 427, 70, 65);
 		this.add(swapTilesCheckBox);
 		
-		JLabel swapCount = new JLabel(String.valueOf(level.getSwapTwoTilesMoves()));
-		swapCount.setFont(f30);
-		swapCount.setBounds(900, 431, 50, 55);
-		swapCount.setForeground(Color.decode("#FF9D8F"));
-		this.add(swapCount);
+		swapTilesCountLbl = new JLabel(String.valueOf(level.getSwapTwoTilesMoves()));
+		swapTilesCountLbl.setFont(f30);
+		swapTilesCountLbl.setBounds(900, 431, 50, 55);
+		swapTilesCountLbl.setForeground(Color.decode("#FF9D8F"));
+		this.add(swapTilesCountLbl);
 		
 		specialMovesCheckBoxes.add(swapTilesCheckBox);
 		specialMovesCheckBoxes.add(removeTileCheckBox);
@@ -185,47 +189,54 @@ public class LevelView extends JPanel{
 			timesLeft.setBounds(584, 635, 166, 47);
 			this.add(timesLeft); 
 		
-		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"), 120, 273,40);
+		BetterLabel starPanel = new BetterLabel(Color.decode("#D8D8D8"), 120, 300, 40);
 		starPanel.setLayout(null);
-		starPanel.setBounds(63, 218, 120, 273);
+		starPanel.setBounds(50, 200, 120, 400);
 		this.add(starPanel); 
 		
 		ImageIcon firstGreyStar = new ImageIcon("resources/Star1g.png");
 		ImageIcon secondGreyStar = new ImageIcon("resources/Star2g.png");
-		ImageIcon thirdtGreyStar = new ImageIcon("resources/Star3g.png");
+		ImageIcon thirdGreyStar = new ImageIcon("resources/Star3g.png");
 		
+		oneStarLbl = new BetterLabel(Color.decode("#D8D8D8"), 120, 300, 40);
 		oneStarLbl = new JLabel();
 		oneStarLbl.setIcon(firstGreyStar);
-		oneStarLbl.setBounds(41, 198, 40, 40);
+		oneStarLbl.setBounds(38, 220, 40, 40);
 		starPanel.add(oneStarLbl);
 		
-		JLabel oneScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
-		oneScoreLbl.setFont(f30);
-		oneScoreLbl.setBounds(100, 204, 100, 55);
-		oneScoreLbl.setForeground(Color.decode("#FECA44"));
-		this.add(oneScoreLbl);
+		BetterLabel oneScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
+		oneScoreLbl.setText(String.valueOf(level.getThreeStarScore()));
+		oneScoreLbl.setFont(f20);
+		oneScoreLbl.setBounds(37, 263, 50, 20);
+		oneScoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		oneScoreLbl.setForeground(Color.BLACK);
+		starPanel.add(oneScoreLbl);
 		
 		twoStarLbl = new JLabel();
 		twoStarLbl.setIcon(secondGreyStar);
-		twoStarLbl.setBounds(34, 123, 50, 50);
+		twoStarLbl.setBounds(42, 135, 50, 50);
 		starPanel.add(twoStarLbl);
 		
-		JLabel twoScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
-		twoScoreLbl.setFont(f30);
-		twoScoreLbl.setBounds(100, 127, 100, 55);
-		twoScoreLbl.setForeground(Color.decode("#FECA44"));
-		this.add(twoScoreLbl);
+		BetterLabel twoScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
+		twoScoreLbl.setText(String.valueOf(level.getThreeStarScore()));
+		twoScoreLbl.setFont(f20);
+		twoScoreLbl.setBounds(35, 188, 50, 20);
+		twoScoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		twoScoreLbl.setForeground(Color.BLACK);
+		starPanel.add(twoScoreLbl);
 		
 		threeStarLbl = new JLabel();
-		threeStarLbl.setIcon(thirdtGreyStar);
-		threeStarLbl.setBounds(29, 38, 60, 60);
+		threeStarLbl.setIcon(thirdGreyStar);
+		threeStarLbl.setBounds(24, 20, 80, 80);
 		starPanel.add(threeStarLbl);
 		
-		JLabel threeScoreLbl = new JLabel(String.valueOf(level.getOneStarScore()));
-		threeScoreLbl.setFont(f30);
-		threeScoreLbl.setBounds(100, 204, 100, 55);
-		threeScoreLbl.setForeground(Color.decode("#FECA44"));
-		this.add(threeScoreLbl);
+		BetterLabel threeScoreLbl = new BetterLabel(Color.decode("#D8D8D8"), 50, 20, 10);
+		threeScoreLbl.setText(String.valueOf(level.getThreeStarScore()));
+		threeScoreLbl.setFont(f20);
+		threeScoreLbl.setBounds(35, 103, 50, 20);
+		threeScoreLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		threeScoreLbl.setForeground(Color.BLACK);
+		starPanel.add(threeScoreLbl);
 		
 		boardPanel = new JPanel();
 		
@@ -572,7 +583,47 @@ public class LevelView extends JPanel{
 	public void setResetBoardBtn(BetterButton resetBoardBtn) {
 		this.resetBoardBtn = resetBoardBtn;
 	}
-	
-	
+
+	/**
+	 * @return the resetBoardCountLbl
+	 */
+	public JLabel getResetBoardCountLbl() {
+		return resetBoardCountLbl;
+	}
+
+	/**
+	 * @param resetBoardCountLbl the resetBoardCountLbl to set
+	 */
+	public void setResetBoardCountLbl(JLabel resetBoardCountLbl) {
+		this.resetBoardCountLbl = resetBoardCountLbl;
+	}
+
+	/**
+	 * @return the removeTileCountLbl
+	 */
+	public JLabel getRemoveTileCountLbl() {
+		return removeTileCountLbl;
+	}
+
+	/**
+	 * @param removeTileCountLbl the removeTileCountLbl to set
+	 */
+	public void setRemoveTileCountLbl(JLabel removeTileCountLbl) {
+		this.removeTileCountLbl = removeTileCountLbl;
+	}
+
+	/**
+	 * @return the swapTilesCountLbl
+	 */
+	public JLabel getSwapTilesCountLbl() {
+		return swapTilesCountLbl;
+	}
+
+	/**
+	 * @param swapTilesCountLbl the swapTilesCountLbl to set
+	 */
+	public void setSwapTilesCountLbl(JLabel swapTilesCountLbl) {
+		this.swapTilesCountLbl = swapTilesCountLbl;
+	}
 	
 }

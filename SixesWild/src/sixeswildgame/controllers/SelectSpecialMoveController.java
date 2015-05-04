@@ -39,7 +39,28 @@ public class SelectSpecialMoveController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if (specialMove == 0) {
+			application.getLevelView().setSwapTwoTiles(
+					!application.getLevelView().isSwapTwoTiles());
+			if (checkBox.isSelected()) {
+				application.getLevelView().getRemoveTileCheckBox()
+						.setSelected(false);
+				application.getLevelView().setRemoveTile(false);
+			}
+		}
+
+		else if (specialMove == 1) {
+			application.getLevelView().setRemoveTile(
+					!application.getLevelView().isRemoveTile());
+			if (checkBox.isSelected()) {
+				application.getLevelView().getSwapTilesCheckBox()
+						.setSelected(false);
+				application.getLevelView().setSwapTwoTiles(false);
+			}
+		}
 		
+		application.getLevelView().repaint();
+		application.getFrmSixesWild().pack();
 	}
 
 }

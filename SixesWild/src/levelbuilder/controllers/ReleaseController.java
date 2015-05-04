@@ -99,9 +99,6 @@ public class ReleaseController implements ActionListener {
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 		application.getLbLevelView().repaint();
 		application.getFrame().pack();
-
-		System.out.println(application.getLbLevelView().isPlacingSix());
-		System.out.println(application.getLbLevelView().isPlacingBucket());
 	}
 
 }

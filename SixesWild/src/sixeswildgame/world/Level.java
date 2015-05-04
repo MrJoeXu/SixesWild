@@ -48,6 +48,8 @@ public class Level {
 	protected boolean[] allowedSpecialMoves;
 
 	protected Move move;
+	protected SwapTwoTilesMove sttMove;
+	protected RemoveTileMove rtMove;
 	protected boolean isMakingMove;
 
 	protected File file;
@@ -637,4 +639,34 @@ public class Level {
 
 		this.movesLeft--;
 	}
+
+	/**
+	 * @return the sttMove
+	 */
+	public SwapTwoTilesMove getSttMove() {
+		return sttMove;
+	}
+
+	/**
+	 * @param sttMove the sttMove to set
+	 */
+	public void setSttMove(SwapTwoTilesMove sttMove) {
+		this.sttMove = sttMove;
+	}
+
+	/**
+	 * @return the rtMove
+	 */
+	public RemoveTileMove getRtMove() {
+		return rtMove;
+	}
+
+	/**
+	 * @param rtMove the rtMove to set
+	 */
+	public void setRtMove(RemoveTileMove rtMove) {
+		this.rtMove = rtMove;
+	}
+	
+	
 }

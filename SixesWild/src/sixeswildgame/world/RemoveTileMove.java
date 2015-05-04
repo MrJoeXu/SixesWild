@@ -22,8 +22,12 @@ public class RemoveTileMove extends Move {
 	
 	@Override
 	public boolean doMove (Level lv) {
-		lv.getMove().getTiles().remove(tile);
-		lv.decrementMoves();
+		
+		Tile tile = lv.getMove().getTiles().get(0);
+		
+		//lv.getBoard().getGrid().get(tile.getRow() * lv.getBoard().getDimension() + tile.getColumn()).remove(tile);
+		
+		lv.setRemoveTileMoves(lv.getRemoveTileMoves() - 1);
 		return true;
 	}
 		
