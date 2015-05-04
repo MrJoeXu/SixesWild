@@ -155,14 +155,6 @@ public class LevelView extends JPanel{
 		backBtn.setIcon(backIcon);
 		backBtn.setBounds(30, 20, 65, 40);
 		this.add(backBtn); 
-	
-		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,15);
-		resetBoardBtn.setBorderPainted(false);
-		resetBoardBtn.setFocusPainted(false);
-		Icon Reset = new ImageIcon("resources/Reset.png");
-		resetBoardBtn.setIcon(Reset);
-		resetBoardBtn.setBounds(814, 217, 65,65);
-		this.add(resetBoardBtn); 
 		
 		Font f30 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 30);
 		Font f20 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 20);
@@ -172,6 +164,24 @@ public class LevelView extends JPanel{
 		resetBoardCountLbl.setBounds(900, 226, 50, 55);
 		resetBoardCountLbl.setForeground(Color.decode("#3D7CA2"));
 		this.add(resetBoardCountLbl);
+	
+		resetBoardBtn = new BetterButton(Color.decode("#3D7CA2"),65,65,15);
+		resetBoardBtn.setBorderPainted(false);
+		resetBoardBtn.setFocusPainted(false);
+		Icon Reset = new ImageIcon("resources/Reset.png");
+		resetBoardBtn.setIcon(Reset);
+		resetBoardBtn.setBounds(814, 217, 65,65);
+		if (!level.getAllowedSpecialMoves()[0]) {
+			resetBoardBtn.setEnabled(false);
+			resetBoardCountLbl.setForeground(Color.decode("#D8D8D8"));
+		}
+		this.add(resetBoardBtn); 
+
+		removeTileCountLbl = new JLabel(String.valueOf(level.getRemoveTileMoves()));
+		removeTileCountLbl.setFont(f30);
+		removeTileCountLbl.setBounds(900, 328, 50, 55);
+		removeTileCountLbl.setForeground(Color.decode("#45D7B3"));
+		this.add(removeTileCountLbl);
 		
 		Icon remove = new ImageIcon("resources/Remove.png");
 		Icon removeSelect = new ImageIcon("resources/RemoveSelect.png");
@@ -180,13 +190,17 @@ public class LevelView extends JPanel{
 		removeTileCheckBox.setSelectedIcon(removeSelect);
 		removeTileCheckBox.setSelected(this.isRemoveTile);
 		removeTileCheckBox.setBounds(810, 321, 70, 65);
+		if (!level.getAllowedSpecialMoves()[1]) {
+			removeTileCheckBox.setEnabled(false);
+			removeTileCountLbl.setForeground(Color.decode("#D8D8D8"));
+		}
 		this.add(removeTileCheckBox);
-		
-		removeTileCountLbl = new JLabel(String.valueOf(level.getRemoveTileMoves()));
-		removeTileCountLbl.setFont(f30);
-		removeTileCountLbl.setBounds(900, 328, 50, 55);
-		removeTileCountLbl.setForeground(Color.decode("#45D7B3"));
-		this.add(removeTileCountLbl);
+
+		swapTilesCountLbl = new JLabel(String.valueOf(level.getSwapTwoTilesMoves()));
+		swapTilesCountLbl.setFont(f30);
+		swapTilesCountLbl.setBounds(900, 431, 50, 55);
+		swapTilesCountLbl.setForeground(Color.decode("#FF9D8F"));
+		this.add(swapTilesCountLbl);
 		
 		Icon swap = new ImageIcon("resources/Swap.png");
 		Icon swapSelect = new ImageIcon("resources/SwapSelect.png");
@@ -195,13 +209,12 @@ public class LevelView extends JPanel{
 		swapTilesCheckBox.setSelectedIcon(swapSelect);
 		swapTilesCheckBox.setSelected(this.isSwapTwoTiles);
 		swapTilesCheckBox.setBounds(810, 427, 70, 65);
+		if (!level.getAllowedSpecialMoves()[2]) {
+			swapTilesCheckBox.setEnabled(false);
+			swapTilesCountLbl.setForeground(Color.decode("#D8D8D8"));
+		}
 		this.add(swapTilesCheckBox);
 		
-		swapTilesCountLbl = new JLabel(String.valueOf(level.getSwapTwoTilesMoves()));
-		swapTilesCountLbl.setFont(f30);
-		swapTilesCountLbl.setBounds(900, 431, 50, 55);
-		swapTilesCountLbl.setForeground(Color.decode("#FF9D8F"));
-		this.add(swapTilesCountLbl);
 		
 		specialMovesCheckBoxes.add(swapTilesCheckBox);
 		specialMovesCheckBoxes.add(removeTileCheckBox);

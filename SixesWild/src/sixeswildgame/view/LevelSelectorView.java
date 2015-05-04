@@ -166,8 +166,8 @@ public class LevelSelectorView extends JPanel{
 		if (application.getGameType() == 4) { this.add(eliminationBtn); }
 		
 		Font f40 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 40);
-		
-		levelBtn1 = new BetterButton(Color.decode("#D76262"),100,100,10);
+				
+		levelBtn1 = new BetterButton(application.getGameTypeColor(),100,100,10);
 		levelBtn1.setBorderPainted(false);
 		levelBtn1.setFocusPainted(false);
 		levelBtn1.setFont(f40);

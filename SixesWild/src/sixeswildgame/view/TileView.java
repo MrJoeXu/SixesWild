@@ -133,6 +133,7 @@ public class TileView extends JPanel {
 		default:
 			g.setColor(Color.decode("#9B9B9B"));
 		}
+		
 		g.fillRoundRect(0, 0, length, length, 10, 10);
 		
 		

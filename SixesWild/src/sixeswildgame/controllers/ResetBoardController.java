@@ -3,11 +3,14 @@
  */
 package src.sixeswildgame.controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
 
 import src.sixeswildgame.view.BoardView;
 import src.sixeswildgame.view.SixesWildWindow;
@@ -93,6 +96,10 @@ public class ResetBoardController implements ActionListener {
 					.getGrid()) {
 				TileView tv = sv.getTileView();
 				tv.addMouseListener(new MakeMoveController(tv, level, application));
+				if (sv.getSpace().isMarked()) {
+					tv.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+					tv.repaint();
+				}
 			}
 			
 			application.getLevelView().getBoardView().setVisible(true);

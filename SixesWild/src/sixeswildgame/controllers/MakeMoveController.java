@@ -130,12 +130,17 @@ public class MakeMoveController implements MouseListener{
 		
 		
 		if (!level.isMakingMove() && notSwap) tileView.setBorder(null);
+		
+		if (level.getBoard().getSpace(tileView.getTile().getRow(), tileView.getTile().getColumn()).isMarked()) {
+			tileView.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+			tileView.repaint();
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		
-		if (!application.getLevelView().isRemoveTile() && !application.getLevelView().isSwapTwoTiles()) 
+		if (level.isMakingMove() && !application.getLevelView().isRemoveTile() && !application.getLevelView().isSwapTwoTiles()) 
 			level.getMove().doMove(level);
 			updateBoard();
 		
@@ -143,7 +148,9 @@ public class MakeMoveController implements MouseListener{
 	
 	public void updateBoard() {
 		if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
-			level.hasWon(application.getGameType());
+			if (level.hasWon(application.getGameType())) {
+				
+			};
 			return;
 		}
 		
@@ -166,6 +173,11 @@ public class MakeMoveController implements MouseListener{
 				.getGrid()) {
 			TileView tv = sv.getTileView();
 			tv.addMouseListener(new MakeMoveController(tv, level, application));
+
+			if (sv.getSpace().isMarked()) {
+				tv.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+				tv.repaint();
+			}
 		}
 		
 		application.getLevelView().getBoardView().setVisible(true);
