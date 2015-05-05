@@ -1,5 +1,5 @@
 /**
- * 
+ * Move class accounts for making moves
  */
 package src.sixeswildgame.world;
 
@@ -175,6 +175,11 @@ public class Move {
 			System.out.println("Finished Row: " + tiles.get(0).getRow() + " Column: " + tiles.get(0).getColumn());
 	}
 	
+	/**
+	 * Purpose: releases a six from its position
+	 * @param lv
+	 * @param tl
+	 */
 	protected void releaseSix (Level lv, Tile tl) {
 		System.out.println("SixRelease called with Tile: " + tl.getRow() + ", " + tl.getColumn());
 		Move newMove = new Move(tl, lv, 5);
@@ -184,6 +189,12 @@ public class Move {
 		newMove.fallDown(lv, tileArray);
 	}
 	
+	/**
+	 * Purpose: return true if the tile is a 6 and the tile below it is a 7
+	 * @param lv
+	 * @param tl
+	 * @return
+	 */
 	protected boolean sixAboveSeven(Level lv, Tile tl) {
 		if (tl.getValue() == 6){
 			if (lv.getBoard().getSpace
