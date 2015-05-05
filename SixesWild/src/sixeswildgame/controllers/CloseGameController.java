@@ -14,16 +14,25 @@ import src.sixeswildgame.world.World;
  *
  */
 
-public class CloseGameController implements ActionListener{
+public class CloseGameController implements ActionListener {
 
 	World world;
 	SixesWildWindow application;
-	
+
+	/**
+	 * Creates new CloseGameController with specified world and application
+	 * 
+	 * @param world
+	 * @param application
+	 */
 	public CloseGameController(World world, SixesWildWindow application) {
 		this.world = world;
 		this.application = application;
 	}
-
+	
+	/**
+	 * Exits SixesWildWindow
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.exit(0);

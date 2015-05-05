@@ -20,11 +20,19 @@ public class GameTypeBackController implements ActionListener {
 	World world;
 	SixesWildWindow application;
 	
+	/**
+	 * Creates new GameTypeBackController with specified world and application
+	 * @param world
+	 * @param application
+	 */
 	public GameTypeBackController(World world, SixesWildWindow application) {
 		this.world = world;
 		this.application = application;
 	}
 
+	/**
+	 * Returns back to SixesWild main menu
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	

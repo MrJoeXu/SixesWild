@@ -16,13 +16,16 @@ import src.sixeswildgame.world.Level;
  *
  */
 public class SelectSpecialMoveController implements ActionListener {
-	
+
 	protected SixesWildWindow application;
 	protected Level level;
 	protected JCheckBox checkBox;
 	protected int specialMove;
 
 	/**
+	 * Creates new SelectSpecialMoveController with specified application,
+	 * level, checkBox, and specialMove
+	 * 
 	 * @param application
 	 * @param level
 	 * @param checkBox
@@ -37,6 +40,10 @@ public class SelectSpecialMoveController implements ActionListener {
 		this.specialMove = specialMove;
 	}
 
+	/**
+	 * Selects either the swap two tiles or remove tile special move to be used
+	 * in the Level
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (specialMove == 0 && level.getSttMove() == null) {
@@ -58,7 +65,7 @@ public class SelectSpecialMoveController implements ActionListener {
 				application.getLevelView().setSwapTwoTiles(false);
 			}
 		}
-		
+
 		application.getLevelView().repaint();
 		application.getFrmSixesWild().pack();
 	}
