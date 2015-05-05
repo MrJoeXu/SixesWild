@@ -17,7 +17,6 @@ public class TestBackControllers extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {
 		LevelBuilderWindow application = new LevelBuilderWindow();
-		World world;
 
 		application.getPuzzleBtn().doClick();
 

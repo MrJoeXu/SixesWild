@@ -9,16 +9,17 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 
+import junit.framework.TestCase;
+import src.sixeswildgame.controllers.SelectGameTypeController;
 import src.sixeswildgame.controllers.StartController;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.World;
-import junit.framework.TestCase;
 
 /**
  * @author Tiffany
  *
  */
-public class TestStartController extends TestCase {
+public class TestSelectGameTypeController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException, IOException {
 		SixesWildWindow application = new SixesWildWindow();
 		World world = application.getWorld();
@@ -28,5 +29,12 @@ public class TestStartController extends TestCase {
 		sc.actionPerformed(null);
 		assertTrue(application.getGameTypeView().isVisible());
 		
+		//JButton puzzleBtn = application.getGameTypeView().getPuzzleBtn();
+		
+		SelectGameTypeController controller = new SelectGameTypeController(application, world, 1);
+		controller.actionPerformed(null);
+		assertEquals(1, application.getGameType());
+		
+		assertTrue(application.getLevelSelectorView().isVisible());
 	}
 }

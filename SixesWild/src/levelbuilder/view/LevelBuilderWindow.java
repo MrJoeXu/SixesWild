@@ -91,7 +91,7 @@ public class LevelBuilderWindow {
 	 * @throws FileNotFoundException 
 	 */
 	public LevelBuilderWindow() throws FileNotFoundException, FontFormatException, IOException {
-		this.soundEnabled = false;
+		this.soundEnabled = true;
 		this.preferencesEnabled = false;
 		this.musicVolume = 5;
 		this.soundVolume = 5;

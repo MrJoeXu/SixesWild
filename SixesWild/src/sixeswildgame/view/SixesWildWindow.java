@@ -387,7 +387,47 @@ public class SixesWildWindow {
 		this.levelView = levelView;
 	}
 
-	//Getters and Setters
+	/**
+	 * @return the closeBtn
+	 */
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	/**
+	 * @param closeBtn the closeBtn to set
+	 */
+	public void setCloseBtn(JButton closeBtn) {
+		this.closeBtn = closeBtn;
+	}
+
+	/**
+	 * @return the miniBtn
+	 */
+	public JButton getMiniBtn() {
+		return miniBtn;
+	}
+
+	/**
+	 * @param miniBtn the miniBtn to set
+	 */
+	public void setMiniBtn(JButton miniBtn) {
+		this.miniBtn = miniBtn;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
+	}
+
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
+	}
 	
 
 }
