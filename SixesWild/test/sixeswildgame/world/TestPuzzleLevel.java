@@ -20,12 +20,12 @@ public class TestPuzzleLevel extends TestCase {
 	PuzzleLevel tpl = new PuzzleLevel(tb,1,"2");
 	
 	@Test
-	public void testLightningLevelConstructor() {
+	public void testPuzzleLevelConstructor() {
 		assertEquals(tb,tpl.getBoard());
 		assertEquals(1,tpl.getId());
 	}
 	
-	public void testHasWonLighning() {
+	public void testHasWonPuzzle() {
 		tpl.setOneStarScore(1);
 		tpl.setCurrentScore(2);
 		assertEquals(true, tpl.hasWon());

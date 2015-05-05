@@ -13,7 +13,7 @@ import src.sixeswildgame.world.Tile;
 
 public class TestTile extends TestCase{
 	Board tb = new Board(9);
-	Tile tt = new Tile(5,2,9,8,false);
+	Tile tt = new Tile(5,2,9,8,3,1,false);
 
 	@Test
 	public void testsetngetRow() {
@@ -30,5 +30,14 @@ public class TestTile extends TestCase{
 		tt.setSelected(true);
 		assertEquals(true, tt.isSelected());
 	}
+	
+	public void testSetnGetLastValue(){
+		tt.setLastValue(2);
+		assertEquals(2, tt.getLastValue());
+	}
 
+	public void testSetnGetLastBonus(){
+		tt.setLastBonus(0);
+		assertEquals(0, tt.getLastBonus());
+	}
 }
