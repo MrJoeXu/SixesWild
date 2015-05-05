@@ -40,12 +40,23 @@ public class MakeMoveController implements MouseListener{
 	protected Level level;
 	protected SixesWildWindow application;
 	
+	/**
+	 * Initializes new Controller
+	 * 
+	 * @param tileView
+	 * @param level
+	 * @param application
+	 */
 	public MakeMoveController(TileView tileView, Level level, SixesWildWindow application) {
 		this.tileView = tileView;
 		this.level = level;
 		this.application = application;
 	}
 	
+	/**
+	 * Mouse pressed extended from Mouse Listener
+	 * 
+	 */
 	public void mousePressed(MouseEvent me) {
 		
 		if (application.getLevelView().isSwapTwoTiles() && level.getSwapTwoTilesMoves() > 0) {
@@ -88,13 +99,18 @@ public class MakeMoveController implements MouseListener{
 		}
 	}
 
-	@Override
+	/**
+	 * Mouse clicked is never used but the stub is needed
+	 * 
+	 */
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	/**
+	 * Mouse entered called when mouse enters a tile view
+	 */
 	public void mouseEntered(MouseEvent arg0) {
 		if (level.isMakingMove()) {				
 			if (level.getMove().isAdjacent(tileView.getTile())) {
@@ -120,7 +136,10 @@ public class MakeMoveController implements MouseListener{
 		}
 	}
 
-	@Override
+	/**
+	 * Mouse exited called when mouse exits a tileview
+	 * 
+	 */
 	public void mouseExited(MouseEvent arg0) {
 		
 		boolean notSwap = true;
@@ -136,6 +155,9 @@ public class MakeMoveController implements MouseListener{
 		}
 	}
 
+	/**
+	 * Mouse released indicates a move is made
+	 */
 	public void mouseReleased(MouseEvent arg0) {
 		
 		if (level.isMakingMove() && !application.getLevelView().isRemoveTile() && !application.getLevelView().isSwapTwoTiles()) 
@@ -144,6 +166,9 @@ public class MakeMoveController implements MouseListener{
 		
 	}
 	
+	/**
+	 * Updates the board view according to move made
+	 */
 	public void updateBoard() {
 		if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
 			if (level.hasWon(application.getGameType())) {
