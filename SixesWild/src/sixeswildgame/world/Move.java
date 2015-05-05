@@ -91,7 +91,7 @@ public class Move {
 	 * @param lv
 	 * @param nwTiles
 	 */
-	protected void fallDown(Level lv, ArrayList<Tile> nwTiles) {
+	public void fallDown(Level lv, ArrayList<Tile> nwTiles) {
 		boolean flag = true;
 		for (int v = 0; v < tiles.size(); v++)
 		while (flag) {
