@@ -1,6 +1,7 @@
 package test.sixeswildgame.controllers;
 
 import java.awt.FontFormatException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -12,6 +13,11 @@ import src.sixeswildgame.controllers.StartController;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.World;
 
+/**
+ * 
+ * @author Tiffany
+ *
+ */
 public class TestGameTypeBackController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {

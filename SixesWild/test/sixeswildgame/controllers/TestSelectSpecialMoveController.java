@@ -17,6 +17,11 @@ import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
 
+/**
+ * 
+ * @author Tiffany
+ *
+ */
 public class TestSelectSpecialMoveController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {

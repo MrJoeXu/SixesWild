@@ -11,6 +11,11 @@ import src.sixeswildgame.controllers.StartController;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.World;
 
+/**
+ * 
+ * @author Tiffany
+ *
+ */
 public class TestLevelSelectorBackController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {
