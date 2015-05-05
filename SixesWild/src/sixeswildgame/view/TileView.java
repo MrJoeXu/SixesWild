@@ -37,7 +37,8 @@ public class TileView extends JPanel {
 	protected int length;
 	
 	/**
-	 * Create the panel.
+	 * Creates new TileView with specified tile and length
+	 * 
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 * @throws FileNotFoundException 
@@ -78,6 +79,9 @@ public class TileView extends JPanel {
 		add(bonusLbl);
 	}
 	
+	/**
+	 * Creates a better looking TileView
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -139,28 +143,73 @@ public class TileView extends JPanel {
 		
 	}
 
+	/**
+	 * @return the tile
+	 */
 	public Tile getTile() {
 		return tile;
 	}
 
+	/**
+	 * @param tile the tile to set
+	 */
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
 
-	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
-	}
-
+	/**
+	 * @return the bonus
+	 */
 	public int getBonus() {
 		return bonus;
 	}
 
+	/**
+	 * @param bonus the bonus to set
+	 */
 	public void setBonus(int bonus) {
 		this.bonus = bonus;
-	} 
+	}
 
+	/**
+	 * @return the valueLbl
+	 */
+	public JLabel getValueLbl() {
+		return valueLbl;
+	}
+
+	/**
+	 * @param valueLbl the valueLbl to set
+	 */
+	public void setValueLbl(JLabel valueLbl) {
+		this.valueLbl = valueLbl;
+	}
+
+	/**
+	 * @return the bonusLbl
+	 */
+	public JLabel getBonusLbl() {
+		return bonusLbl;
+	}
+
+	/**
+	 * @param bonusLbl the bonusLbl to set
+	 */
+	public void setBonusLbl(JLabel bonusLbl) {
+		this.bonusLbl = bonusLbl;
+	}
+
+	/**
+	 * @return the length
+	 */
+	public int getLength() {
+		return length;
+	}
+
+	/**
+	 * @param length the length to set
+	 */
+	public void setLength(int length) {
+		this.length = length;
+	}
 }

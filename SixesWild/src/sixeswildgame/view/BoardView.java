@@ -31,11 +31,12 @@ public class BoardView extends JPanel {
 	
 	protected int tileLength;
 	protected int spaceLength;
+	
 	/**
-	 * @throws IOException 
-	 * @throws FontFormatException 
-	 * @throws FileNotFoundException 
-	 * 
+	 * Creates new BoardView with specified board, t
+	 * @param board
+	 * @param tileLength
+	 * @param spaceLength
 	 */
 	public BoardView(Board board, int tileLength, int spaceLength) {
 		this.board = board;
