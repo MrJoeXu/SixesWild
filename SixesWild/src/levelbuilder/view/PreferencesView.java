@@ -28,51 +28,54 @@ import src.sixeswildgame.world.Tile;
  * @author Halsey
  *
  */
-public class PreferencesView extends JPanel  {
-	
+public class PreferencesView extends JPanel {
+
 	protected LevelBuilderWindow application;
 	protected JSlider musicSlider;
 	protected JSlider soundSlider;
-	
+
 	/**
+	 * Creates PreferencesView with specified application
+	 * 
 	 * @param application
 	 * @param musicSlider
 	 * @param soundSlider
 	 */
-	public PreferencesView(LevelBuilderWindow application) throws FileNotFoundException,
-			FontFormatException, IOException {
+	public PreferencesView(LevelBuilderWindow application)
+			throws FileNotFoundException, FontFormatException, IOException {
 		super();
 		this.application = application;
 		setPreferredSize(new Dimension(200, 200));
-		
+
 		initializeView();
 		initializeControllers();
-		
+
 	}
 
 	/**
-	 * Create the panel.
-	 * @throws IOException 
-	 * @throws FontFormatException 
-	 * @throws FileNotFoundException 
+	 * Initializes view 
+	 * 
+	 * @throws IOException
+	 * @throws FontFormatException
+	 * @throws FileNotFoundException
 	 */
 	public void initializeView() throws FileNotFoundException,
-	FontFormatException, IOException {
-		
+			FontFormatException, IOException {
+
 		this.setLayout(null);
-		
+
 		Font f22 = Font.createFont(
 				Font.TRUETYPE_FONT,
 				new FileInputStream(new File(
 						"resources/avenir-next-regular.ttf"))).deriveFont(
 				Font.PLAIN, 22);
-		
+
 		Font f16 = Font.createFont(
 				Font.TRUETYPE_FONT,
 				new FileInputStream(new File(
 						"resources/avenir-next-regular.ttf"))).deriveFont(
 				Font.PLAIN, 16);
-		
+
 		musicSlider = new JSlider();
 		musicSlider.setMinimum(0);
 		musicSlider.setMaximum(10);
@@ -81,7 +84,7 @@ public class PreferencesView extends JPanel  {
 		musicSlider.setBackground(Color.decode("#A38F85"));
 		musicSlider.setValue(application.getMusicVolume());
 		add(musicSlider);
-		
+
 		JLabel musicLabel = new JLabel("Music Volume:");
 		musicLabel.setBounds(5, 5, 150, 30);
 		musicLabel.setBackground(Color.decode("#A38F85"));
@@ -91,7 +94,7 @@ public class PreferencesView extends JPanel  {
 		musicLabel.setVerticalAlignment(BetterLabel.CENTER);
 		musicLabel.setForeground(Color.WHITE);
 		add(musicLabel);
-		
+
 		soundSlider = new JSlider();
 		soundSlider.setMinimum(0);
 		soundSlider.setMaximum(10);
@@ -100,7 +103,7 @@ public class PreferencesView extends JPanel  {
 		soundSlider.setBackground(Color.decode("#A38F85"));
 		soundSlider.setValue(application.getSoundVolume());
 		add(soundSlider);
-		
+
 		JLabel soundLabel = new JLabel("Sound Volume:");
 		soundLabel.setBounds(5, 80, 150, 30);
 		soundLabel.setBackground(Color.decode("#A38F85"));
@@ -110,14 +113,22 @@ public class PreferencesView extends JPanel  {
 		soundLabel.setVerticalAlignment(BetterLabel.CENTER);
 		soundLabel.setForeground(Color.WHITE);
 		add(soundLabel);
-		
+
 	}
-	
+
+	/**
+	 * Initializes controllers
+	 */
 	public void initializeControllers() {
-		//soundSlider.addChangeListener(new AdjustSoundController(application));
-		//musicSlider.addChangeListener(new AdjustMusicController(application));
+		// soundSlider.addChangeListener(new
+		// AdjustSoundController(application));
+		// musicSlider.addChangeListener(new
+		// AdjustMusicController(application));
 	}
-	
+
+	/**
+	 * Creates a better looking JButton
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.decode("#9B9B9B"));

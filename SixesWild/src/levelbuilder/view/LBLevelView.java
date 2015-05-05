@@ -127,7 +127,7 @@ public class LBLevelView extends JPanel {
 	protected JCheckBox toggleSoundCheckBox;
 
 	/**
-	 * Create the panel.
+	 * Creates new LBLevelView with specified application, world, and level
 	 * 
 	 * @throws IOException
 	 * @throws FontFormatException
@@ -166,12 +166,18 @@ public class LBLevelView extends JPanel {
 		initialize();
 	}
 
+	/**
+	 * Initializes LBLevelSelectorView
+	 */
 	public void initialize() throws FileNotFoundException, FontFormatException,
 			IOException {
 		initializeView();
 		initializeControllers();
 	}
 
+	/**
+	 * Initializes view of LBLevelSelectorView
+	 */
 	public void initializeView() throws FileNotFoundException,
 			FontFormatException, IOException {
 		
@@ -754,6 +760,9 @@ public class LBLevelView extends JPanel {
 		}
 	}
 
+	/**
+	 * Initializes controllers of LBLevelSelectorView
+	 */
 	public void initializeControllers() {
 		backBtn.addActionListener(new LBLevelViewBackController(application,
 				world));
@@ -829,11 +838,17 @@ public class LBLevelView extends JPanel {
 		bucketCheckBox.addActionListener(new ReleaseController(application, 1, bucketCheckBox));
 		toggleSoundCheckBox.addActionListener(new ToggleSoundController(application));
 	}
-
+	
+	/**
+	 * Increments the active index
+	 */
 	public void incrementActiveIndex() {
 		activeIndex++;
 	}
 
+	/**
+	 * Decrements the active index
+	 */
 	public void decrementActiveIndex() {
 		activeIndex--;
 	}
