@@ -6,6 +6,7 @@ package src.sixeswildgame.world;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 /**
  * @author Matthew
  *
@@ -13,11 +14,13 @@ import java.util.Random;
 public class Move {
 	protected ArrayList<Tile> tiles;
 	protected Level level;
+	int gameType;
 
-	public Move(Tile tl, Level lv) {
+	public Move(Tile tl, Level lv, int game) {
 		this.tiles = new ArrayList<Tile>();
 		tiles.add(tl);
 		this.level = lv;
+		this.gameType = game;
 	}
 
 	/**
@@ -71,7 +74,6 @@ public class Move {
 			int mult = 10 * tiles.size();
 			for (int i = 0; i < tiles.size(); i++) {
 				newTiles.add(makeTile(lv, tiles.get(i).getColumn()));
-				System.out.println("Bonus is: " + tiles.get(i).getBonus());
 				mult = mult * tiles.get(i).getBonus();
 			}
 
@@ -91,7 +93,6 @@ public class Move {
 	protected void fallDown(Level lv, ArrayList<Tile> nwTiles) {
 		boolean flag = true;
 		for (int v = 0; v < tiles.size(); v++)
-			System.out.print (" " + tiles.get(v).getValue() + ",");
 		while (flag) {
 			flag = false;
 			for (int j = 0; j < this.tiles.size() - 1; j++) {
@@ -156,6 +157,24 @@ public class Move {
 				}
 			}
 		}
+		
+		
+		if ((this.gameType == 3) && (!lv.hasWon(3))) {
+			for (int i = 0; i < lv.getBoard().getGrid().size(); i++){
+				if (lv.getBoard().getGrid().get(i).getTile().getValue() == 6){
+					if (i < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension())) {
+						if (lv.getBoard().getGrid().get(i + lv.getBoard().getDimension()).getTile().getValue() == 7) {
+							Move newMove = new Move(lv.getBoard().getGrid().get(i).getTile(), lv, this.gameType);
+							ArrayList<Tile> tileArray = new ArrayList<Tile>();
+							Tile tl = newMove.makeTile(lv, newMove.getTiles().get(0).getColumn());
+							tileArray.add(tl);
+							newMove.fallDown(lv, tileArray);
+						}
+					}
+				}
+					
+			}
+		}
 	}
 
 	/**
@@ -165,14 +184,15 @@ public class Move {
 	 * @param col
 	 * @return
 	 */
-	private Tile makeTile(Level lv, int col) {
+	public Tile makeTile(Level lv, int col) {
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (int j = 0; j < 5; j++) {
 			if (lv.getTileRange()[j]) {
 				values.add(j + 1);
 			}
 		}
-		values.add(6);
+		if (gameType != 3)
+			values.add(6);
 
 		Random rand = new Random();
 		int value = rand.nextInt(values.size());

@@ -90,6 +90,7 @@ public class TileController implements MouseListener {
 		if (!space.isEnabled()) {
 			if (application.getLbLevelView().isPlacingSix()) {
 				space.getTile().setValue(6);
+				space.getTile().setLastValue(6);
 				space.getTile().setBonus(1);
 				space.getReleaseStates().add(6);
 				space.incrementActiveIndex();

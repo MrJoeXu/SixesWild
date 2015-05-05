@@ -20,8 +20,8 @@ public class SwapTwoTilesMove extends Move {
 	 * @param tl
 	 * @param lv
 	 */
-	public SwapTwoTilesMove(Tile tl, Level lv) {
-		super(tl, lv);
+	public SwapTwoTilesMove(Tile tl, Level lv, int gt) {
+		super(tl, lv, gt);
 		this.tile1 = tl;
 	}
 	

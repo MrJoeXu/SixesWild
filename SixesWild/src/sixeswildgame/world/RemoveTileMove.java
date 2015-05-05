@@ -19,8 +19,8 @@ public class RemoveTileMove extends Move {
 	 * @param tl
 	 * @param lv
 	 */
-	public RemoveTileMove(Tile tl, Level lv) {
-		super(tl, lv);
+	public RemoveTileMove(Tile tl, Level lv, int type) {
+		super(tl, lv, type);
 		this.tile = tl;
 		this.level = level;
 	}
@@ -32,7 +32,8 @@ public class RemoveTileMove extends Move {
 	public boolean doMove (Level lv) {
 		int mult = 10 * tile.getBonus();
 		ArrayList<Tile> tileArray = new ArrayList<Tile>();
-		tileArray.add(tile);
+		Tile tl = super.makeTile(lv, tile.getColumn());
+		tileArray.add(tl);
 		fallDown(lv, tileArray);
 		lv.setCurrentScore(lv.getCurrentScore() + mult);
 		lv.setRemoveTileMoves(lv.getRemoveTileMoves() - 1);

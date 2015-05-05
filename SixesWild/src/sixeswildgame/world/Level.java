@@ -229,6 +229,7 @@ public class Level {
 		case 1:
 			if (this.getCurrentScore() > this.getOneStarScore()) {
 				isLocked = false;
+				System.out.println("You won!");
 				return true;
 			} else
 				return false;
@@ -236,18 +237,23 @@ public class Level {
 			if (minutes == 0 && seconds == 0) {
 				if (currentScore > oneStarScore) {
 					isLocked = false;
+					System.out.println("You won!");
 					return true;
 				}
 			} else
 				return false;
 			break;
 		case 3:
+			for (int i = 0; i < board.getGrid().size(); i++)
+				if (board.getGrid().get(i).getTile().getValue()==6) return false;
 
-			break;
+			System.out.println("You won!");
+			return true;
 		case 4:
 			boolean win = true;
 			for (Space sp : board.getGrid())
 				win = sp.isMarked();
+			System.out.println("You won!");
 			return win;
 		default:
 			return false;
@@ -264,6 +270,10 @@ public class Level {
 	 */
 	public void save(String gameType) {
 
+		for (int i = 0; i < this.board.getGrid().size(); i++) {
+			if (this.board.getGrid().get(i).getTile().getValue() == 6)
+				this.board.getGrid().get(i).setEnabled(true);
+		}
 		String levelString = toString();
 
 		try {
