@@ -177,6 +177,14 @@ public class Level {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		for (int i = 0; i < this.board.getGrid().size(); i++) {
+			if (this.board.getGrid().get(i).getTile().getValue() == 6)
+				this.board.getGrid().get(i).setEnabled(true);
+			if (!this.board.getGrid().get(i).isEnabled())
+				System.out.println("Setting " + i + " to enabled");
+				this.board.getGrid().get(i).setIsMarked(true);
+		}
 	}
 
 	/**
@@ -216,7 +224,6 @@ public class Level {
 									tile.isSelected));
 
 		}
-
 	}
 
 	/**
@@ -224,12 +231,10 @@ public class Level {
 	 * 
 	 */
 	public boolean hasWon(int gameType) {
-
 		switch (gameType) {
 		case 1:
 			if (this.getCurrentScore() > this.getOneStarScore()) {
 				isLocked = false;
-				System.out.println("You won!");
 				return true;
 			} else
 				return false;
@@ -237,7 +242,6 @@ public class Level {
 			if (minutes == 0 && seconds == 0) {
 				if (currentScore > oneStarScore) {
 					isLocked = false;
-					System.out.println("You won!");
 					return true;
 				}
 			} else
@@ -246,21 +250,18 @@ public class Level {
 		case 3:
 			for (int i = 0; i < board.getGrid().size(); i++)
 				if (board.getGrid().get(i).getTile().getValue()==6) return false;
-
-			System.out.println("You won!");
 			return true;
 		case 4:
 			boolean win = true;
-			for (Space sp : board.getGrid())
+			for (int i = 0; i < board.getGrid().size(); i++) {
+				Space sp = board.getGrid().get(i);
 				win = sp.isMarked();
-			System.out.println("You won!");
+			}
 			return win;
 		default:
 			return false;
 		}
-
 		return false;
-
 	}
 
 	/**
@@ -269,13 +270,6 @@ public class Level {
 	 * @param gameType
 	 */
 	public void save(String gameType) {
-
-		for (int i = 0; i < this.board.getGrid().size(); i++) {
-			if (this.board.getGrid().get(i).getTile().getValue() == 6)
-				this.board.getGrid().get(i).setEnabled(true);
-			if (!this.board.getGrid().get(i).isEnabled())
-				this.board.getGrid().get(i).setIsMarked(true);
-		}
 		String levelString = toString();
 
 		try {

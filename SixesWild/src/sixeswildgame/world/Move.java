@@ -75,6 +75,7 @@ public class Move {
 			for (int i = 0; i < tiles.size(); i++) {
 				newTiles.add(makeTile(lv, tiles.get(i).getColumn()));
 				mult = mult * tiles.get(i).getBonus();
+				lv.getBoard().getSpace(this.tiles.get(i).getRow(), this.tiles.get(i).getColumn()).setIsMarked(true);
 			}
 
 			fallDown(lv, newTiles);
@@ -106,9 +107,6 @@ public class Move {
 		}		
 
 		for (int i = 0; i < this.tiles.size(); i++) {
-			lv.getBoard()
-					.getSpace(this.tiles.get(i).getRow(),
-							this.tiles.get(i).getColumn()).setIsMarked(true);
 			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
 				if(!(level.getBoard().getSpace((j), this.tiles.get(i).getColumn()).isEnabled())) {	
 					continue;
