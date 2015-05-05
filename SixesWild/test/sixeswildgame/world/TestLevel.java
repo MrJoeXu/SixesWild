@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import src.sixeswildgame.world.Board;
-import src.sixeswildgame.world.LightningLevel;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Move;
 import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.Tile;
@@ -18,7 +18,7 @@ public class TestLevel extends TestCase{
 	Tile tt = new Tile(5,2,9,9,3,1,false);
 	private boolean enabled;
 	Space ts = new Space(tt, enabled);
-	LightningLevel tll = new LightningLevel(tb,1,"1");
+	Level tll = new Level(tb,1,"1");
 	
 	@Test
 	public void testSetnGetHighScore() {

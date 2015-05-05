@@ -15,11 +15,7 @@ import javax.sound.sampled.DataLine;
 
 import src.levelbuilder.view.LBLevelView;
 import src.levelbuilder.view.LevelBuilderWindow;
-import src.sixeswildgame.world.EliminationLevel;
 import src.sixeswildgame.world.Level;
-import src.sixeswildgame.world.LightningLevel;
-import src.sixeswildgame.world.PuzzleLevel;
-import src.sixeswildgame.world.ReleaseLevel;
 import src.sixeswildgame.world.World;
 
 /**

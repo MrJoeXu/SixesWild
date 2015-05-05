@@ -15,7 +15,6 @@ import javax.sound.sampled.DataLine;
 import src.levelbuilder.view.LBLevelSelectorView;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.SixesWildWindow;
-import src.sixeswildgame.world.PuzzleLevel;
 import src.sixeswildgame.world.World;
 
 /**

@@ -43,7 +43,6 @@ import src.sixeswildgame.controllers.MinimizeGameController;
 import src.sixeswildgame.view.BetterButton;
 import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.world.Level;
-import src.sixeswildgame.world.PuzzleLevel;
 import src.sixeswildgame.world.World;
 
 import java.awt.GridBagLayout;

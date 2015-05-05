@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import src.sixeswildgame.world.Board;
-import src.sixeswildgame.world.LightningLevel;
+import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Space;
 import src.sixeswildgame.world.SwapTwoTilesMove;
 import src.sixeswildgame.world.Tile;
@@ -19,7 +19,7 @@ public class TestSwapTwoTiles extends TestCase{
 	private boolean enabled;
 	Space ts1 = new Space(tt1, enabled);
 	Space ts2 = new Space(tt2,enabled);
-	LightningLevel tll = new LightningLevel(tb,1,"2");
+	Level tll = new Level(tb,1,"2");
 	SwapTwoTilesMove tsttm = new SwapTwoTilesMove(tt1,tll,1);
 
 	@Test

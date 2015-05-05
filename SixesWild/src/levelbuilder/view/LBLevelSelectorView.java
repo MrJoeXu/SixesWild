@@ -36,7 +36,6 @@ import src.sixeswildgame.view.BetterLabel;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
-import src.sixeswildgame.world.PuzzleLevel;
 import src.sixeswildgame.world.World;
 
 public class LBLevelSelectorView extends JPanel {
