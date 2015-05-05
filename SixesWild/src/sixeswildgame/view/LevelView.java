@@ -362,7 +362,6 @@ public class LevelView extends JPanel {
 		// Marks marked spaces as gray
 		for (SpaceView sv : this.getBoardView().getGrid()) {
 			TileView tv = sv.getTileView();
-			tv.addMouseListener(new MakeMoveController(tv, level, application));
 			if (sv.getSpace().isMarked() && application.getGameType() == 4) {
 				tv.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
 				tv.repaint();
