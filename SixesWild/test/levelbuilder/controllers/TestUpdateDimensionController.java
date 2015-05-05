@@ -7,6 +7,11 @@ import java.io.IOException;
 import junit.framework.TestCase;
 import src.levelbuilder.view.LevelBuilderWindow;
 
+/**
+ * 
+ * @author Tiffany
+ *
+ */
 public class TestUpdateDimensionController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {

@@ -4,16 +4,15 @@ import java.awt.FontFormatException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.TestCase;
 import src.levelbuilder.view.LevelBuilderWindow;
-import src.sixeswildgame.world.World;
+import junit.framework.TestCase;
 
 /**
  * 
  * @author Tiffany
  *
  */
-public class TestUpdateLevelNameController extends TestCase {
+public class TestTileRangeController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {
 		LevelBuilderWindow application = new LevelBuilderWindow();
@@ -23,12 +22,12 @@ public class TestUpdateLevelNameController extends TestCase {
 		assertEquals(4, application.getGameType());
 
 		application.getLbLevelSelectorView().getNewLevelBtn().doClick();
+		
+		assertTrue(application.getLbLevelView().getLevel().getTileRange()[1]);
 
-		application.getLbLevelView().getLvlNameTextField()
-				.setText("My New Level");
+		application.getLbLevelView().getTileRangeCheckBoxes().get(1).doClick();
 
-		assertEquals("\"My New Level\"", application.getLbLevelView()
-				.getLevelNameLbl().getText());
-
+		assertFalse(application.getLbLevelView().getLevel().getTileRange()[1]);
+		
 	}
 }

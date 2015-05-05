@@ -8,6 +8,11 @@ import junit.framework.TestCase;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.world.World;
 
+/**
+ * 
+ * @author Tiffany
+ *
+ */
 public class TestUpdateMovesLeftController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {

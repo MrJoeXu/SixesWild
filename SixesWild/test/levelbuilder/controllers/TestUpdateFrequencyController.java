@@ -6,28 +6,26 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 import src.levelbuilder.view.LevelBuilderWindow;
-import src.sixeswildgame.world.World;
 
 /**
  * 
  * @author Tiffany
  *
  */
-public class TestUpdateTimeControllers extends TestCase {
+public class TestUpdateFrequencyController extends TestCase {
 	public void test() throws FileNotFoundException, FontFormatException,
 			IOException {
 		LevelBuilderWindow application = new LevelBuilderWindow();
 
-		application.getLightningBtn().doClick();
+		application.getEliminationBtn().doClick();
 
-		assertEquals(2, application.getGameType());
+		assertEquals(4, application.getGameType());
 
 		application.getLbLevelSelectorView().getNewLevelBtn().doClick();
 
-		application.getLbLevelView().getTimerMinuteTextField().setText("4");
-		application.getLbLevelView().getTimerSecondTextField().setText("40");
+		application.getLbLevelView().getFrequencySlider().setValue(3);
 
-		assertEquals(4, application.getLbLevelView().getLevel().getMinutes());
-		assertEquals(40, application.getLbLevelView().getLevel().getSeconds());
+		assertEquals(21, application.getLbLevelView().getLevel().getBonusFrequency());
+
 	}
 }
