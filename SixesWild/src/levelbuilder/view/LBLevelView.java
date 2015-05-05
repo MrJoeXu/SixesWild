@@ -787,13 +787,13 @@ public class LBLevelView extends JPanel {
 		checkbxSwapTiles.addActionListener(new UpdateSwapTilesController(
 				application, level, swapTilesTextField, checkbxSwapTiles));
 		swapTilesTextField.getDocument().addDocumentListener(
-				new UpdateResetBoardController(application, level,
+				new UpdateSwapTilesController(application, level,
 						swapTilesTextField, checkbxSwapTiles));
 
 		checkbxRemoveTile.addActionListener(new UpdateRemoveTileController(
 				application, level, removeTileTextField, checkbxRemoveTile));
 		removeTileTextField.getDocument().addDocumentListener(
-				new UpdateResetBoardController(application, level,
+				new UpdateRemoveTileController(application, level,
 						removeTileTextField, checkbxRemoveTile));
 
 		if (application.getGameType() != 2) {
