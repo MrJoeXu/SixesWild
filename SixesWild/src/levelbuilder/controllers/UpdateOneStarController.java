@@ -61,7 +61,7 @@ public class UpdateOneStarController implements DocumentListener {
 	 */
 	public void changeOneStarValue() {
 		if (textField.getText().isEmpty()) {
-			level.setTwoStarScore(0);
+			level.setOneStarScore(0);
 		}
 		if (textField.getText().matches("^[0-9]+$")) {
 			int oneStarValue = Integer.parseInt(textField.getText());

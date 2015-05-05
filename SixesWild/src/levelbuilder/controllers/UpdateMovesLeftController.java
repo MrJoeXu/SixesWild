@@ -72,5 +72,6 @@ public class UpdateMovesLeftController implements DocumentListener {
 		}
 		application.getLbLevelView().getSaveLbl().setText("Unsaved Changes");
 	}
-
+	
+	
 }
