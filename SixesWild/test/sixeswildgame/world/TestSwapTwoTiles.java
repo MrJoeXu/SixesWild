@@ -2,6 +2,7 @@ package test.sixeswildgame.world;
 
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
+import java.util.AbstractList;
 
 import org.junit.Test;
 
@@ -14,8 +15,8 @@ import src.sixeswildgame.world.Tile;
 public class TestSwapTwoTiles extends TestCase{
 	
 	Board tb = new Board(9);
-	Tile tt1 = new Tile(5,2,9,9,3,1,false);
-	Tile tt2 = new Tile(4,0,9,8,2,3,false);
+	Tile tt1 = new Tile(5,2,8,7,3,1,true);
+	Tile tt2 = new Tile(4,0,7,8,2,3,true);
 	private boolean enabled;
 	Space ts1 = new Space(tt1, enabled);
 	Space ts2 = new Space(tt2,enabled);
