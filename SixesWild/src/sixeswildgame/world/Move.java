@@ -125,6 +125,9 @@ public class Move {
 						m++;
 				}
 				
+				if (gameType == 5)
+					System.out.println("My m is " + m + " and j is" + j);
+				
 				if (j-m == 0) {
 					if ((level.getBoard().getSpace(0,
 						this.tiles.get(i).getColumn()).isEnabled())) {
@@ -147,6 +150,9 @@ public class Move {
 				}
 				
 				else {
+					if (gameType == 5)
+						System.out.println("in here");
+					
 					lv.getBoard().setTile(
 						j,
 						this.tiles.get(i).getColumn(),
@@ -154,21 +160,23 @@ public class Move {
 								.getSpace((j - m),
 										this.tiles.get(i).getColumn())
 								.getTile());
-				}
-				
-				if (this.gameType == 3){
-					for (int x = 0; x < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension()); x++){
-						if (sixAboveSeven(lv, lv.getBoard().getGrid().get(x).getTile())) {
-							releaseSix(lv, lv.getBoard().getGrid().get(x).getTile());
-						}
+				}	
+			}
+			
+			if (this.gameType == 3){
+				for (int x = 0; x < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension()); x++){
+					if (sixAboveSeven(lv, lv.getBoard().getGrid().get(x).getTile())) {
+						releaseSix(lv, lv.getBoard().getGrid().get(x).getTile());
 					}
 				}
 			}
 		}
+		if (gameType == 5)
+			System.out.println("Finished Row: " + tiles.get(0).getRow() + " Column: " + tiles.get(0).getColumn());
 	}
 	
 	protected void releaseSix (Level lv, Tile tl) {
-		System.out.println("SixRelease called!");
+		System.out.println("SixRelease called with Tile: " + tl.getRow() + ", " + tl.getColumn());
 		Move newMove = new Move(tl, lv, 5);
 		ArrayList<Tile> tileArray = new ArrayList<Tile>();
 		Tile newTl = newMove.makeTile(lv, tl.getColumn());
@@ -181,7 +189,6 @@ public class Move {
 			if (lv.getBoard().getSpace
 					((tl.getRow() + 1),
 					tl.getColumn()).getTile().getValue()== 7) {
-					System.out.println("Six Above Seven True! " + tl.getColumn() + ", " + tl.getRow());
 					return true;
 				}
 		}
