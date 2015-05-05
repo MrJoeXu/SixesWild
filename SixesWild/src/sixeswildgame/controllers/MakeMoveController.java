@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import src.sixeswildgame.world.Tile;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+ 
+import javax.swing.*;
 
 import javax.swing.BorderFactory;
 
@@ -73,8 +74,7 @@ public class MakeMoveController implements MouseListener{
 				RemoveTileMove newMove = new RemoveTileMove(tileView.getTile(), level);
 				newMove.doMove(level);
 				updateBoard();
-				application.getLevelView().getRemoveTileCheckBox()
-				.setSelected(false);
+				application.getLevelView().getRemoveTileCheckBox().setSelected(false);
 				application.getLevelView().setRemoveTile(false);
 			}
 		}
@@ -149,7 +149,7 @@ public class MakeMoveController implements MouseListener{
 	public void updateBoard() {
 		if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
 			if (level.hasWon(application.getGameType())) {
-				
+				level.setLocked(false);
 			};
 			return;
 		}
@@ -173,7 +173,6 @@ public class MakeMoveController implements MouseListener{
 				.getGrid()) {
 			TileView tv = sv.getTileView();
 			tv.addMouseListener(new MakeMoveController(tv, level, application));
-
 			if (sv.getSpace().isMarked()) {
 				tv.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 				tv.repaint();
@@ -182,7 +181,6 @@ public class MakeMoveController implements MouseListener{
 		
 		application.getLevelView().getBoardView().setVisible(true);
 		application.getLevelView().updateLevelInfo();
-		
 		application.getLevelView().repaint();
 		application.getFrmSixesWild().pack();
 	}
