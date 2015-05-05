@@ -28,6 +28,7 @@ public class TestSwapTwoTiles extends TestCase{
 	}
 	
 	public void testDoMove(){
+		
 		tsttm.setTile1(tt1);
 		assertEquals(tt1,tsttm.getTile1());	
 		

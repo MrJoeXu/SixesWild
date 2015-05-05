@@ -11,6 +11,7 @@ import src.sixeswildgame.world.*;
 
 public class TestBoard extends TestCase{
 
+	
 	Board tb = new Board(9);
 	Tile tt = new Tile(5,2,9,9,3,1,false);
 	private boolean enabled;
