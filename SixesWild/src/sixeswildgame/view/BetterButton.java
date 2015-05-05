@@ -10,7 +10,15 @@ public class BetterButton extends JButton {
 	int width;
 	int height;
 	int radius;
-	
+
+	/**
+	 * Creates new BetterButton with specified column, width, height, and radius
+	 * 
+	 * @param col
+	 * @param width
+	 * @param height
+	 * @param radius
+	 */
 	public BetterButton(Color col, int width, int height, int radius) {
 		setContentAreaFilled(false);
 		this.col = col;
@@ -18,11 +26,14 @@ public class BetterButton extends JButton {
 		this.height = height;
 		this.radius = radius;
 	}
-	
+
+	/**
+	 * Creates a better looking JButton
+	 */
 	protected void paintComponent(Graphics g) {
-		   g.setColor(this.col);
-		   g.fillRoundRect(0, 0, width, height, radius, radius);
-		   super.paintComponent(g);
+		g.setColor(this.col);
+		g.fillRoundRect(0, 0, width, height, radius, radius);
+		super.paintComponent(g);
 	}
 
 	/**
@@ -33,7 +44,8 @@ public class BetterButton extends JButton {
 	}
 
 	/**
-	 * @param col the col to set
+	 * @param col
+	 *            the col to set
 	 */
 	public void setCol(Color col) {
 		this.col = col;
@@ -47,7 +59,8 @@ public class BetterButton extends JButton {
 	}
 
 	/**
-	 * @param width the width to set
+	 * @param width
+	 *            the width to set
 	 */
 	public void setWidth(int width) {
 		this.width = width;
@@ -61,7 +74,8 @@ public class BetterButton extends JButton {
 	}
 
 	/**
-	 * @param height the height to set
+	 * @param height
+	 *            the height to set
 	 */
 	public void setHeight(int height) {
 		this.height = height;
@@ -75,7 +89,8 @@ public class BetterButton extends JButton {
 	}
 
 	/**
-	 * @param radius the radius to set
+	 * @param radius
+	 *            the radius to set
 	 */
 	public void setRadius(int radius) {
 		this.radius = radius;
