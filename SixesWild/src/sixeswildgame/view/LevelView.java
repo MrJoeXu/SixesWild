@@ -121,8 +121,10 @@ public class LevelView extends JPanel{
 		}
 		
 		for (SpaceView sv : boardView.getGrid()) {
-			sv.getTileView().addMouseListener(new MakeMoveController(sv.getTileView(), level, application));
+			MakeMoveController makeMV = new MakeMoveController(sv.getTileView(), level, application);
+			sv.getTileView().addMouseListener(makeMV);
 		}
+		
 	}
 	
 	public BoardView getBoardView() {

@@ -182,7 +182,7 @@ public class Level {
 			if (this.board.getGrid().get(i).getTile().getValue() == 6)
 				this.board.getGrid().get(i).setEnabled(true);
 			if (!this.board.getGrid().get(i).isEnabled())
-				System.out.println("Setting " + i + " to enabled");
+				System.out.println(this.name + "Setting " + i + " to enabled");
 				this.board.getGrid().get(i).setIsMarked(true);
 		}
 	}
