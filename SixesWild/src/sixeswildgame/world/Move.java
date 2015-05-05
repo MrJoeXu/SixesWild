@@ -89,41 +89,70 @@ public class Move {
 	 * @param nwTiles
 	 */
 	protected void fallDown(Level lv, ArrayList<Tile> nwTiles) {
-		System.out.println("First Value: " + this.tiles.get(0).getValue());
-		for (int i = 0; i < this.tiles.size(); i++) {
-			for (int j = i + 1; j < this.tiles.size() - 1; j++) {
-				if (tiles.get(i).getRow() > this.tiles.get(j).getRow()) {
-					Tile temp = tiles.get(i);
-					tiles.set(j, tiles.get(i));
-					tiles.set(i, temp);
+		boolean flag = true;
+		for (int v = 0; v < tiles.size(); v++)
+			System.out.print (" " + tiles.get(v).getValue() + ",");
+		while (flag) {
+			flag = false;
+			for (int j = 0; j < this.tiles.size() - 1; j++) {
+				if (tiles.get(j).getRow() > this.tiles.get(j+1).getRow()) {
+					Tile temp = tiles.get(j);
+					tiles.set(j, tiles.get(j+1));
+					tiles.set(j+1, temp);
+					flag = true;
 				}
 			}
-		}
-		System.out.println("First Value: " + this.tiles.get(0).getValue());
+		}		
 
 		for (int i = 0; i < this.tiles.size(); i++) {
 			lv.getBoard()
 					.getSpace(this.tiles.get(i).getRow(),
 							this.tiles.get(i).getColumn()).setIsMarked(true);
 			for (int j = this.tiles.get(i).getRow(); j >= 0; j--) {
-				if (j > 0) {
-					while (!(level.getBoard().getSpace((j - 1),
-							this.tiles.get(i).getColumn()).isEnabled())) {
-						System.out.println("Testing j: " + j);
-						j--;
-					}
-					lv.getBoard().setTile(
-							j,
-							this.tiles.get(i).getColumn(),
-							level.getBoard()
-									.getSpace((j - 1),
-											this.tiles.get(i).getColumn())
-									.getTile());
+				if(!(level.getBoard().getSpace((j), this.tiles.get(i).getColumn()).isEnabled())) {	
+					continue;
 				}
-
+				
+				
+				if (j == 0) {
+					if ((level.getBoard().getSpace(j,
+							this.tiles.get(i).getColumn()).isEnabled())) {
+						lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
+					}
+					continue;
+				}
+				
+				int m = 1;
+				while ((!(level.getBoard().getSpace((j-m),
+						this.tiles.get(i).getColumn()).isEnabled()))) {
+						m++;
+						if ((j-m) == 0)
+							break;
+				}
+				
+				if (j-m == 0) {
+					if ((level.getBoard().getSpace(0,
+							this.tiles.get(i).getColumn()).isEnabled())) {
+						lv.getBoard().setTile(j, this.tiles.get(i).getColumn(),
+								level.getBoard()
+								.getSpace((j - m),
+										this.tiles.get(i).getColumn())
+								.getTile());
+						
+						lv.getBoard().setTile(0, this.tiles.get(i).getColumn(),
+								nwTiles.get(i));
+					}
+					break;
+				}
+				
 				else {
-					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(),
-							nwTiles.get(i));
+					lv.getBoard().setTile(
+						j,
+						this.tiles.get(i).getColumn(),
+						level.getBoard()
+								.getSpace((j - m),
+										this.tiles.get(i).getColumn())
+								.getTile());
 				}
 			}
 		}
