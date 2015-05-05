@@ -23,25 +23,35 @@ import src.sixeswildgame.world.World;
  *
  */
 public class SelectGameTypeController implements ActionListener {
-	
+
 	protected World world;
 	protected SixesWildWindow application;
 	protected int gameType;
 
 	/**
+	 * Creates new SelectGameTypeController with specified application, world,
+	 * and gameType
 	 * 
+	 * @param application
+	 * @param world
+	 * @param gameType
 	 */
-	public SelectGameTypeController(SixesWildWindow application, World world, int gameType) {
+	public SelectGameTypeController(SixesWildWindow application, World world,
+			int gameType) {
 		this.application = application;
 		this.world = world;
 		this.gameType = gameType;
 	}
 
+	/**
+	 * Opens level selecting for specific game type
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		application.setGameType(gameType);
 		try {
-			application.setLevelSelectorView(new LevelSelectorView(application, world));
+			application.setLevelSelectorView(new LevelSelectorView(application,
+					world));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,14 +62,14 @@ public class SelectGameTypeController implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		application.getLevelSelectorView().setPreferredSize(new Dimension(1000,708));
-		application.getFrmSixesWild().setContentPane(application.getLevelSelectorView());
+		application.getLevelSelectorView().setPreferredSize(
+				new Dimension(1000, 708));
+		application.getFrmSixesWild().setContentPane(
+				application.getLevelSelectorView());
 		application.getLevelSelectorView().setVisible(true);
 		application.getFrmSixesWild().setTitle("Level Select");
 		application.getFrmSixesWild().pack();
 		application.getFrmSixesWild().repaint();
 	}
-	
-	
 
 }

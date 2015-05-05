@@ -19,27 +19,40 @@ import src.sixeswildgame.world.World;
  *
  */
 
-public class LevelBackController implements ActionListener{
+public class LevelBackController implements ActionListener {
 
 	protected World world;
 	protected Level level;
 	protected SixesWildWindow application;
-	
-	public LevelBackController(World world, SixesWildWindow application, Level level) {
+
+	/**
+	 * Creates new LevelBackController with specified world, application, and
+	 * level
+	 * 
+	 * @param world
+	 * @param application
+	 * @param level
+	 */
+	public LevelBackController(World world, SixesWildWindow application,
+			Level level) {
 		this.world = world;
 		this.application = application;
 		this.level = level;
 	}
 
+	/**
+	 * Returns back to selecting levels
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		int index = world.getLevels(application.getGameType()).indexOf(level);
-		world.getLevels(application.getGameType()).set(index, new Level(level.getFile()));
-	
+		world.getLevels(application.getGameType()).set(index,
+				new Level(level.getFile()));
+
 		try {
-			application.setLevelSelectorView(new LevelSelectorView(
-					application, world));
+			application.setLevelSelectorView(new LevelSelectorView(application,
+					world));
 		} catch (FontFormatException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -52,4 +65,3 @@ public class LevelBackController implements ActionListener{
 	}
 
 }
-

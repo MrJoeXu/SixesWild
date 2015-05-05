@@ -19,20 +19,26 @@ import src.sixeswildgame.world.World;
  * @author Joe Xu
  *
  */
-public class StartController implements ActionListener{ 
+public class StartController implements ActionListener {
 
 	protected SixesWildWindow application;
 	protected World world;
 	protected int gameType;
 
 	/**
+	 * Creates new StartController with specified application and world
 	 * 
+	 * @param application
+	 * @param world
 	 */
 	public StartController(SixesWildWindow application, World world) {
 		this.application = application;
 		this.world = world;
 	}
-
+	
+	/**
+	 * Opens the GameTypeView 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
@@ -47,8 +53,10 @@ public class StartController implements ActionListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		application.getGameTypeView().setPreferredSize(new Dimension(1000,708));
-		application.getFrmSixesWild().setContentPane(application.getGameTypeView());
+		application.getGameTypeView()
+				.setPreferredSize(new Dimension(1000, 708));
+		application.getFrmSixesWild().setContentPane(
+				application.getGameTypeView());
 		application.getGameTypeView().setVisible(true);
 		application.getFrmSixesWild().setTitle("Game Type");
 		application.getFrmSixesWild().pack();

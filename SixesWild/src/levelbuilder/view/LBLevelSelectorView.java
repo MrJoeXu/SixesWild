@@ -61,7 +61,16 @@ public class LBLevelSelectorView extends JPanel {
 	protected LevelBuilderWindow application;
 	protected World world;
 	protected JCheckBox toggleSoundCheckBox;
-	
+
+	/**
+	 * Creates new LBLevelSelectorView with specified application and world
+	 * 
+	 * @param application
+	 * @param world
+	 * @throws FileNotFoundException
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public LBLevelSelectorView(LevelBuilderWindow application, World world)
 			throws FileNotFoundException, FontFormatException, IOException {
 		this.application = application;
@@ -69,14 +78,24 @@ public class LBLevelSelectorView extends JPanel {
 		this.levelButtons = new ArrayList<JButton>();
 		initialize();
 	}
-
+	
+	/**
+	 * Initializes LBLevelSelectorView
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void initialize() throws FileNotFoundException, FontFormatException,
 			IOException {
 		initializeModel();
 		initializeView();
 		initializeController();
 	}
-
+	
+	/**
+	 * Initializes controllers of LBLevelSelectorView
+	 */
 	private void initializeController() {
 		backBtn.addActionListener(new LBGameTypeBackController(application,
 				world));
@@ -122,7 +141,10 @@ public class LBLevelSelectorView extends JPanel {
 		}
 
 	}
-
+	
+	/**
+	 * Initializes model of LBLevelSelectorView
+	 */
 	private void initializeModel() {
 
 		numLevels = new File("saveddata/custom/"
@@ -130,6 +152,9 @@ public class LBLevelSelectorView extends JPanel {
 
 	}
 
+	/**
+	 * Initializes view of LBLevelSelectorView
+	 */
 	private void initializeView() throws FileNotFoundException,
 			FontFormatException, IOException {
 		setPreferredSize(new Dimension(1000, 708));
