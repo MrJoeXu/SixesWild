@@ -96,8 +96,8 @@ public class ResetBoardController implements ActionListener {
 					.getGrid()) {
 				TileView tv = sv.getTileView();
 				tv.addMouseListener(new MakeMoveController(tv, level, application));
-				if (sv.getSpace().isMarked()) {
-					tv.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+				if (sv.getSpace().isMarked() && application.getGameType() == 4) {
+					tv.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
 					tv.repaint();
 				}
 			}
@@ -107,9 +107,6 @@ public class ResetBoardController implements ActionListener {
 			
 			application.getLevelView().repaint();
 			application.getFrmSixesWild().pack();
-		
 		}
-		
 	}
-	
 }

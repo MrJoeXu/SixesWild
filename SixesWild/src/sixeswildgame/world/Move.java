@@ -113,10 +113,7 @@ public class Move {
 				}
 				
 				if (j == 0) {
-					if ((level.getBoard().getSpace(j,
-							this.tiles.get(i).getColumn()).isEnabled())) {
-						lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
-					}
+					lv.getBoard().setTile(j, this.tiles.get(i).getColumn(), nwTiles.get(i));
 					continue;
 				}
 					
@@ -159,9 +156,11 @@ public class Move {
 								.getTile());
 				}
 				
-				if ((this.gameType == 3) && (!lv.hasWon(3))){
-					if (sixAboveSeven(lv, lv.getBoard().getSpace(j, this.tiles.get(i).getColumn()).getTile())) {
-						releaseSix(lv, lv.getBoard().getSpace(j, this.tiles.get(i).getColumn()).getTile());
+				if (this.gameType == 3){
+					for (int x = 0; x < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension()); x++){
+						if (sixAboveSeven(lv, lv.getBoard().getGrid().get(x).getTile())) {
+							releaseSix(lv, lv.getBoard().getGrid().get(x).getTile());
+						}
 					}
 				}
 			}
@@ -170,22 +169,21 @@ public class Move {
 	
 	protected void releaseSix (Level lv, Tile tl) {
 		System.out.println("SixRelease called!");
-		Move newMove = new Move(tl, lv, 0);
+		Move newMove = new Move(tl, lv, 5);
 		ArrayList<Tile> tileArray = new ArrayList<Tile>();
-		Tile newTl = newMove.makeTile(lv, newMove.getTiles().get(0).getColumn());
+		Tile newTl = newMove.makeTile(lv, tl.getColumn());
 		tileArray.add(newTl);
 		newMove.fallDown(lv, tileArray);
 	}
 	
 	protected boolean sixAboveSeven(Level lv, Tile tl) {
 		if (tl.getValue() == 6){
-			if (tl.getRow() < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension())) {
-				if (lv.getBoard().getGrid().get(tl.getRow()*lv.getBoard().getDimension() + tl.getColumn()
-					+ lv.getBoard().getDimension()).getTile().getValue() == 7) {
-					System.out.println("Six Above Seven True!");
+			if (lv.getBoard().getSpace
+					((tl.getRow() + 1),
+					tl.getColumn()).getTile().getValue()== 7) {
+					System.out.println("Six Above Seven True! " + tl.getColumn() + ", " + tl.getRow());
 					return true;
 				}
-			}
 		}
 		return false;
 	}

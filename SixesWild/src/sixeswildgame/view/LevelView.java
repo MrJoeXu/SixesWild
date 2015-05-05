@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -294,6 +295,16 @@ public class LevelView extends JPanel{
 		int panelX = (1000 - length)/2;
 		int panelY = (708 - length)/2;
 		boardView.setBounds(panelX, panelY, length, length);
+		// Marks marked spaces as gray
+		for (SpaceView sv : this.getBoardView()
+				.getGrid()) {
+			TileView tv = sv.getTileView();
+			tv.addMouseListener(new MakeMoveController(tv, level, application));
+			if (sv.getSpace().isMarked() && application.getGameType() == 4) {
+				tv.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+				tv.repaint();
+			}
+		}
 		boardPanel.setBounds(panelX, panelY, length, length);
 		this.add(boardPanel);
 		boardPanel.add(boardView);

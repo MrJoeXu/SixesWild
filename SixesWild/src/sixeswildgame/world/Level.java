@@ -181,9 +181,9 @@ public class Level {
 		for (int i = 0; i < this.board.getGrid().size(); i++) {
 			if (this.board.getGrid().get(i).getTile().getValue() == 6)
 				this.board.getGrid().get(i).setEnabled(true);
-			if (!this.board.getGrid().get(i).isEnabled())
-				System.out.println(this.name + "Setting " + i + " to enabled");
+			if (!this.board.getGrid().get(i).isEnabled()){
 				this.board.getGrid().get(i).setIsMarked(true);
+			}
 		}
 	}
 

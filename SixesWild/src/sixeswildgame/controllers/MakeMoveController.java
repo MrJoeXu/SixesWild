@@ -46,12 +46,6 @@ public class MakeMoveController implements MouseListener{
 		this.application = application;
 	}
 	
-	public MakeMoveController() {
-		this.tileView = null;
-		this.level = null;
-		this.application = null;
-	}
-	
 	public void mousePressed(MouseEvent me) {
 		
 		if (application.getLevelView().isSwapTwoTiles() && level.getSwapTwoTilesMoves() > 0) {
@@ -136,6 +130,10 @@ public class MakeMoveController implements MouseListener{
 		
 		
 		if (!level.isMakingMove() && notSwap) tileView.setBorder(null);
+		if ((application.getGameType() == 4) && (level.getBoard().getSpace(tileView.getTile().getRow(), tileView.getTile().getColumn()).isMarked())) {
+			tileView.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+			tileView.repaint();
+		}
 	}
 
 	@Override
