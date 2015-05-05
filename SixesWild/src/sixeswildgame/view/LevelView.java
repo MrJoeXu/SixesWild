@@ -229,7 +229,7 @@ public class LevelView extends JPanel{
 		movesLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		movesLeft.setForeground(Color.white);
 		movesLeft.setBounds(220, 635, 166, 47);
-		this.add(movesLeft);
+		if (application.getGameType() != 2) this.add(movesLeft);
 		
 		timeLeft = new BetterLabel(Color.decode("#D76262"),166,47,10);
 		timeLeft.setText(String.format("%02d", level.getMinutes()) + ":" + String.format("%02d", level.getSeconds()));

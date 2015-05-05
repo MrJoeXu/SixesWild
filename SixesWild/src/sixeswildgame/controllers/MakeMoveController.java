@@ -136,7 +136,6 @@ public class MakeMoveController implements MouseListener{
 		}
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		
 		if (level.isMakingMove() && !application.getLevelView().isRemoveTile() && !application.getLevelView().isSwapTwoTiles()) 
