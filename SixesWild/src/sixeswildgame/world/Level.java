@@ -273,11 +273,12 @@ public class Level {
 		for (int i = 0; i < this.board.getGrid().size(); i++) {
 			if (this.board.getGrid().get(i).getTile().getValue() == 6)
 				this.board.getGrid().get(i).setEnabled(true);
+			if (!this.board.getGrid().get(i).isEnabled())
+				this.board.getGrid().get(i).setIsMarked(true);
 		}
 		String levelString = toString();
 
 		try {
-
 			file = new File("saveddata/custom/" + gameType + "/" + id + ".txt");
 
 			// if file doesnt exists, then create it

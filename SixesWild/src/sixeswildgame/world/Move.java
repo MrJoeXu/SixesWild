@@ -123,17 +123,23 @@ public class Move {
 					continue;
 				}
 				
+				if (sixAboveSeven(lv, lv.getBoard().getSpace(j, this.tiles.get(i).getColumn()).getTile())) {
+					releaseSix(lv);
+					break;
+				}
+					
 				int m = 1;
+				System.out.println("J Val: " + j + "m val " + m);
 				while ((!(level.getBoard().getSpace((j-m),
 						this.tiles.get(i).getColumn()).isEnabled()))) {
-						m++;
 						if ((j-m) == 0)
 							break;
+						m++;
 				}
 				
 				if (j-m == 0) {
 					if ((level.getBoard().getSpace(0,
-							this.tiles.get(i).getColumn()).isEnabled())) {
+						this.tiles.get(i).getColumn()).isEnabled())) {
 						lv.getBoard().setTile(j, this.tiles.get(i).getColumn(),
 								level.getBoard()
 								.getSpace((j - m),
@@ -160,21 +166,32 @@ public class Move {
 		
 		
 		if ((this.gameType == 3) && (!lv.hasWon(3))) {
-			for (int i = 0; i < lv.getBoard().getGrid().size(); i++){
-				if (lv.getBoard().getGrid().get(i).getTile().getValue() == 6){
-					if (i < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension())) {
-						if (lv.getBoard().getGrid().get(i + lv.getBoard().getDimension()).getTile().getValue() == 7) {
-							Move newMove = new Move(lv.getBoard().getGrid().get(i).getTile(), lv, this.gameType);
-							ArrayList<Tile> tileArray = new ArrayList<Tile>();
-							Tile tl = newMove.makeTile(lv, newMove.getTiles().get(0).getColumn());
-							tileArray.add(tl);
-							newMove.fallDown(lv, tileArray);
-						}
-					}
-				}
-					
+			releaseSix(lv);
+		}
+	}
+	
+	protected void releaseSix (Level lv) {
+		for (int i = 0; i < lv.getBoard().getGrid().size(); i++){
+			if (sixAboveSeven(lv, lv.getBoard().getGrid().get(i).getTile())) {
+				Move newMove = new Move(lv.getBoard().getGrid().get(i).getTile(), lv, this.gameType);
+				ArrayList<Tile> tileArray = new ArrayList<Tile>();
+				Tile tl = newMove.makeTile(lv, newMove.getTiles().get(0).getColumn());
+				tileArray.add(tl);
+				newMove.fallDown(lv, tileArray);
 			}
 		}
+	}
+	
+	protected boolean sixAboveSeven(Level lv, Tile tl) {
+		if (tl.getValue() == 6){
+			if (tl.getRow() < (lv.getBoard().getGrid().size() - lv.getBoard().getDimension())) {
+				if (lv.getBoard().getGrid().get(tl.getRow()*lv.getBoard().getDimension() + tl.getColumn()
+					+ lv.getBoard().getDimension()).getTile().getValue() == 7) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
