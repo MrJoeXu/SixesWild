@@ -11,7 +11,9 @@ import org.junit.Test;
 import src.sixeswildgame.world.Board;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.Move;
+import src.sixeswildgame.world.RemoveTileMove;
 import src.sixeswildgame.world.Space;
+import src.sixeswildgame.world.SwapTwoTilesMove;
 import src.sixeswildgame.world.Tile;
 
 public class TestLevel extends TestCase{
@@ -104,7 +106,7 @@ public class TestLevel extends TestCase{
 		tb.setGrid(grid);
 		
 		Move tm = new Move(tt1,tll,1);
-		
+		tll.setMove(tm);
 		assertEquals(tm, tll.getMove());
 	}
 	
@@ -165,4 +167,15 @@ public class TestLevel extends TestCase{
 		assertEquals(1, tll.getMovesLeft());
 	}
 	
+	public void testSetnGetsttMove(){
+		SwapTwoTilesMove tsttm = new SwapTwoTilesMove(tt1,tll,1);
+		tll.setSttMove(tsttm);
+		assertEquals(tsttm, tll.getSttMove());
+	}
+	
+	public void testSetnGetrtMove(){
+		RemoveTileMove trtm = new RemoveTileMove(tt1,tll,2);
+		tll.setRtMove(trtm);
+		assertEquals(trtm, tll.getRtMove());
+	}
 }
