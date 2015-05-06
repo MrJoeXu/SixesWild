@@ -226,4 +226,8 @@ public class TestLevel extends TestCase{
 		tel.getBoard().setGrid(grid);
 		assertEquals(true, tel.hasWon(4));
 	}
+	
+	public void testSaveFile(){
+		tll.save("1");
+	}
 }
