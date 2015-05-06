@@ -7,6 +7,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -131,7 +132,19 @@ public class TileView extends JPanel {
 		//bucket
 		case 7:
 			g.setColor(Color.decode("#33CCFF"));
-			valueLbl.setText("7");
+			ImageIcon smallBucket = new ImageIcon("resources/Bucket.png");
+			ImageIcon bucket = new ImageIcon("resources/BucketBig.png");
+			
+			if (this.length < 40) {				
+				valueLbl.setIcon(smallBucket);
+				valueLbl.setBounds(6, 6, 24, 24);
+				g.setColor(Color.white);
+			}
+			else if (this.length >= 40) {
+				valueLbl.setIcon(bucket);
+				valueLbl.setBounds(8, 8, 35, 35);
+				g.setColor(Color.decode("#A38F85"));
+			}
 			bonusLbl.setVisible(false);
 			break;
 		default:
