@@ -270,10 +270,7 @@ public class SixesWildWindow {
 		}
 	}
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void showSplashScreen() {
 		JWindow splash = new JWindow();
 	    BufferedImage splashScreenImg;
 		try {
@@ -297,6 +294,14 @@ public class SixesWildWindow {
 	    }
 	    splash.setVisible(false);
 	    splash.dispose();
+	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		
+		showSplashScreen();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -109,7 +109,6 @@ public class LevelSummaryView extends JPanel {
 		ImageIcon GreyStar = new ImageIcon("resources/greyyStar.png");
 		ImageIcon RedStar = new ImageIcon("resources/redStar.png");
 		
-
 		JLabel oneStarLbl = new JLabel();
 		if (level.getCurrentScore() > level.getOneStarScore()) {
 			oneStarLbl.setIcon(RedStar);
@@ -118,7 +117,6 @@ public class LevelSummaryView extends JPanel {
 		oneStarLbl.setBounds(377, 327, 80, 80);
 		this.add(oneStarLbl);
 
-		
 		JLabel twoStarLbl = new JLabel();
 		if (level.getCurrentScore() > level.getTwoStarScore()) {
 			twoStarLbl.setIcon(RedStar);

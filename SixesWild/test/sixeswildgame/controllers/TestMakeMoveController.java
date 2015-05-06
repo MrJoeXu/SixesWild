@@ -12,6 +12,7 @@ import src.sixeswildgame.controllers.ResetBoardController;
 import src.sixeswildgame.controllers.SelectGameTypeController;
 import src.sixeswildgame.controllers.SelectLevelController;
 import src.sixeswildgame.controllers.StartController;
+import src.sixeswildgame.view.LevelSummaryView;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.world.Level;
 import src.sixeswildgame.world.World;
@@ -84,6 +85,9 @@ public class TestMakeMoveController extends TestCase {
 		rbc.mousePressed(null);
 		
 		assertEquals(level.getRemoveTileMoves() + 1, numRemoveMoves);
+		
+		LevelSummaryView lsv = new LevelSummaryView(application, level);
+		application.showSplashScreen();
 		
 		rbc.mouseReleased(null);
 		
