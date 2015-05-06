@@ -45,6 +45,7 @@ public class Level {
 	protected boolean isLocked;
 	protected boolean[] tileRange;
 	protected boolean[] allowedSpecialMoves;
+	protected boolean passLevel;
 
 	protected Move move;
 	protected SwapTwoTilesMove sttMove;
@@ -75,7 +76,8 @@ public class Level {
 		this.bonusFrequency = 3;
 		this.minutes = 0;
 		this.seconds = 0;
-		this.isLocked = false;
+		this.isLocked = true;
+		this.passLevel = false;
 		this.tileRange = new boolean[5];
 		for (int i = 0; i < 5; i++) {
 			tileRange[i] = true;
@@ -234,14 +236,12 @@ public class Level {
 		switch (gameType) {
 		case 1:
 			if (this.getCurrentScore() > this.getOneStarScore()) {
-				isLocked = false;
 				return true;
 			} else
 				return false;
 		case 2:
 			if (minutes == 0 && seconds == 0) {
 				if (currentScore > oneStarScore) {
-					isLocked = false;
 					return true;
 				}
 			} else
@@ -721,6 +721,14 @@ public class Level {
 	 */
 	public void setRtMove(RemoveTileMove rtMove) {
 		this.rtMove = rtMove;
+	}
+
+	public boolean isPassLevel() {
+		return passLevel;
+	}
+
+	public void setPassLevel(boolean passLevel) {
+		this.passLevel = passLevel;
 	}
 
 }

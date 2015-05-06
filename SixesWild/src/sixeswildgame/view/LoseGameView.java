@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import src.sixeswildgame.controllers.BackHomeController;
 import src.sixeswildgame.world.Level;
 
 /**
@@ -31,6 +32,7 @@ import src.sixeswildgame.world.Level;
 public class LoseGameView extends JPanel {
 	SixesWildWindow application;
 	Level level;
+	protected JButton homeBtn;
 	
 	/** 
 	 * @param application
@@ -53,8 +55,7 @@ public class LoseGameView extends JPanel {
 	}
 	
 	private void initializeController() {
-		// TODO Auto-generated method stub
-		
+		homeBtn.addActionListener(new BackHomeController(application, level));
 	}
 
 	private void initializeModel() {
@@ -149,21 +150,14 @@ public class LoseGameView extends JPanel {
 		niceLbl.setBounds(400, 482, 222, 48);
 		this.add(niceLbl);
 		
-		JButton homeBtn = new BetterButton(Color.decode("#D76262"),130,64,10);
+		homeBtn = new BetterButton(Color.decode("#D76262"),130,64,10);
 		homeBtn.setBorderPainted(false);
 		homeBtn.setFocusPainted(false);
 		Icon homeIcon = new ImageIcon("resources/home.png");
 		homeBtn.setIcon(homeIcon);
-		homeBtn.setBounds(320, 587, 130, 64);
+		homeBtn.setBounds(435, 593, 130, 64);
 		this.add(homeBtn); 
 		
-		JButton nextBtn = new BetterButton(Color.decode("#D76262"),130,64,10);
-		nextBtn.setBorderPainted(false);
-		nextBtn.setFocusPainted(false);
-		Icon nextIcon = new ImageIcon("resources/next.png");
-		nextBtn.setIcon(nextIcon);
-		nextBtn.setBounds(550, 587, 130, 64);
-		this.add(nextBtn); 
 		
 	} 
 

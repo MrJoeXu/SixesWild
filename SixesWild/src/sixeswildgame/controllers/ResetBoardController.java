@@ -36,7 +36,7 @@ public class ResetBoardController implements ActionListener {
 	 * @param level
 	 */
 	public ResetBoardController(SixesWildWindow application, Level level) {
-		super();
+		super(); 
 		this.application = application;
 		this.level = level;
 	}

@@ -93,12 +93,7 @@ public class MakeMoveController implements MouseListener{
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
 				RemoveTileMove newMove = new RemoveTileMove(tileView.getTile(), level, application.getGameType());
 				newMove.doMove(level);
-				try {
-					updateBoard();
-				} catch (FontFormatException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 				application.getLevelView().getRemoveTileCheckBox().setSelected(false);
 				application.getLevelView().setRemoveTile(false);
 			}
@@ -194,7 +189,11 @@ public class MakeMoveController implements MouseListener{
 	public void updateBoard() throws FileNotFoundException, FontFormatException, IOException {
 		  if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
 		    if (level.hasWon(application.getGameType())) {
-		      level.setLocked(false);
+		      level.setPassLevel(true);
+		      if (level.getCurrentScore() > level.getHighScore()) {
+		    	  level.setHighScore(level.getCurrentScore());
+		      }
+		      
 		      application.setLevelSummary(new LevelSummaryView(application, level));
 		      application.getLevelSummary().setPreferredSize(new Dimension(1000, 708));
 		      this.application.getFrmSixesWild().setContentPane(application.getLevelSummary());
