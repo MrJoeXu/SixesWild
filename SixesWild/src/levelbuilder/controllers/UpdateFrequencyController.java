@@ -75,10 +75,10 @@ public class UpdateFrequencyController implements ChangeListener {
 			int bonusSlide = (int) slider.getValue();
 			switch (bonusSlide) {
 			case 3:
-				level.setBonusFrequency(21);
+				level.setBonusFrequency(1);
 				break;
 			case 4:
-				level.setBonusFrequency(12);
+				level.setBonusFrequency(2);
 				break;
 			case 5:
 				level.setBonusFrequency(3);
