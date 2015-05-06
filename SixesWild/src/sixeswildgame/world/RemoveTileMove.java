@@ -19,7 +19,7 @@ public class RemoveTileMove extends Move {
 	 * @param tl
 	 * @param lv
 	 */
-	public RemoveTileMove(Tile tl, Level lv, int type) {
+	public RemoveTileMove(Tile tl, Level lv, int type){
 		super(tl, lv, type);
 		this.tile = tl;
 		this.level = level;
