@@ -34,7 +34,10 @@ public class TestLevel extends TestCase{
 	Space ts5 = new Space(tt5, enabled);
 	
 	ArrayList<Space> grid= new ArrayList<Space>();
-	Level tll = new Level(tb,1,"1");
+	Level tpl = new Level(tb,1,"1");
+	Level tll = new Level(tb,1,"2");
+	Level trl = new Level(tb,1,"3");
+	Level tel = new Level(tb,1,"4");
 	
 	@Test
 	public void testSetnGetHighScore() {
@@ -48,8 +51,8 @@ public class TestLevel extends TestCase{
 	}
 	
 	public void testSetnGetGameType(){
-		tll.setGameType(1);
-		assertEquals(1, tll.getGameType());
+		tll.setGameType(2);
+		assertEquals(2, tll.getGameType());
 	}
 	
 	public void testgetBoard(){
@@ -177,5 +180,50 @@ public class TestLevel extends TestCase{
 		RemoveTileMove trtm = new RemoveTileMove(tt1,tll,2);
 		tll.setRtMove(trtm);
 		assertEquals(trtm, tll.getRtMove());
+	}
+	
+	public void testHasWonPuzzle(){
+		tpl.setCurrentScore(100);
+		tpl.setOneStarScore(90);
+		tpl.setLocked(false);
+		assertEquals(true, tpl.hasWon(1));
+	}
+	
+	public void testHasWonLightning(){
+		tll.setCurrentScore(100);
+		tll.setOneStarScore(90);
+		tll.setLocked(false);
+		tll.setMinutes(0);
+		tll.setSeconds(1);
+		
+		tll.decrementTime();
+		assertEquals(true, tll.hasWon(2));
+	}
+	
+	public void testHasWonRelease() {
+		grid.add(ts1);
+		grid.add(ts2);
+		grid.add(ts3);
+		grid.add(ts4);
+		tb.setGrid(grid);
+		
+		trl.getBoard().setGrid(grid);
+		assertEquals(true, trl.hasWon(3));
+	}
+	
+	public void testHasWonElimination(){
+		ts1.setIsMarked(true);
+		ts2.setIsMarked(true);
+		ts3.setIsMarked(true);
+		ts4.setIsMarked(true);
+		
+		grid.add(ts1);
+		grid.add(ts2);
+		grid.add(ts3);
+		grid.add(ts4);
+		tb.setGrid(grid);
+		
+		tel.getBoard().setGrid(grid);
+		assertEquals(true, tel.hasWon(4));
 	}
 }
