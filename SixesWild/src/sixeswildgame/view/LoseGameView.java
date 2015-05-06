@@ -27,7 +27,8 @@ import src.sixeswildgame.world.Level;
  * @author Joe Xu
  *
  */
-public class LevelSummaryView extends JPanel {
+
+public class LoseGameView extends JPanel {
 	SixesWildWindow application;
 	Level level;
 	
@@ -38,8 +39,8 @@ public class LevelSummaryView extends JPanel {
 	 * @throws FontFormatException 
 	 * @throws FileNotFoundException 
 	 */
-	public LevelSummaryView(SixesWildWindow application, Level level) throws FileNotFoundException, FontFormatException, IOException {
-		super();
+	public LoseGameView(SixesWildWindow application, Level level) throws FileNotFoundException, FontFormatException, IOException {
+		
 		this.application = application;
 		this.level = level; 
 		initialize();
@@ -64,17 +65,18 @@ public class LevelSummaryView extends JPanel {
 	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		this.setLayout(null);
 		this.setBackground(Color.decode("#CAC2BE"));
+		
 		Font f60 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 60);
 		Font f50 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 50);
 		Font f35 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 35);
 		
-		JLabel congLbl = new JLabel("Congratulations!");
+		JLabel congLbl = new JLabel("Don't Give Up!");
 		congLbl.setFont(f60);
-		congLbl.setBounds(263, 75, 475, 82);
+		congLbl.setBounds(288, 72, 475, 82);
 		congLbl.setForeground(Color.decode("#D76262"));
 		this.add(congLbl);
 		
-		JLabel levelLbl = new JLabel("You passed Level " + application.gameLevel+1 +" of ");
+		JLabel levelLbl = new JLabel("You failed Level " + application.gameLevel+1 +" of ");
 		levelLbl.setFont(f35);
 		levelLbl.setBounds(157, 171, 800, 67);
 		switch (application.gameType) {
@@ -141,7 +143,7 @@ public class LevelSummaryView extends JPanel {
 		highScoreLbl.setBounds(194, 426, 650, 48);
 		this.add(highScoreLbl);
 		
-		JLabel niceLbl = new JLabel ("Keep going!");
+		JLabel niceLbl = new JLabel ("Keep trying!");
 		niceLbl.setFont(f35);
 		niceLbl.setForeground(Color.decode("#D76262"));
 		niceLbl.setBounds(400, 482, 222, 48);

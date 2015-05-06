@@ -8,17 +8,21 @@ import java.util.ArrayList;
 import src.sixeswildgame.world.Tile;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontFormatException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
- 
-import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import javax.swing.BorderFactory;
+import javax.swing.*;
 
 import src.levelbuilder.controllers.TileController;
 import src.levelbuilder.view.LevelBuilderWindow;
 import src.sixeswildgame.view.BoardView;
+import src.sixeswildgame.view.LevelSummaryView;
 import src.sixeswildgame.view.LevelView;
+import src.sixeswildgame.view.LoseGameView;
 import src.sixeswildgame.view.SixesWildWindow;
 import src.sixeswildgame.view.SpaceView;
 import src.sixeswildgame.view.TileView;
@@ -71,7 +75,12 @@ public class MakeMoveController implements MouseListener{
 				else {
 					level.getSttMove().setTile2(tileView.getTile());
 					level.getSttMove().doMove(level);
-					updateBoard();
+					try {
+						updateBoard();
+					} catch (FontFormatException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					level.setSttMove(null);
 					application.getLevelView().getSwapTilesCheckBox()
 					.setSelected(false);
@@ -84,7 +93,12 @@ public class MakeMoveController implements MouseListener{
 			if ((tileView.getTile().getValue() < 6) && (tileView.getTile().getValue() > 0)) {	
 				RemoveTileMove newMove = new RemoveTileMove(tileView.getTile(), level, application.getGameType());
 				newMove.doMove(level);
-				updateBoard();
+				try {
+					updateBoard();
+				} catch (FontFormatException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				application.getLevelView().getRemoveTileCheckBox().setSelected(false);
 				application.getLevelView().setRemoveTile(false);
 			}
@@ -162,20 +176,41 @@ public class MakeMoveController implements MouseListener{
 		
 		if (level.isMakingMove() && !application.getLevelView().isRemoveTile() && !application.getLevelView().isSwapTwoTiles()) 
 			level.getMove().doMove(level);
-			updateBoard();
+			try {
+				updateBoard();
+			} catch (FontFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 	}
 	
 	/**
 	 * Updates the board view according to move made
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	public void updateBoard() {
-		if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
-			if (level.hasWon(application.getGameType())) {
-				level.setLocked(false);
-			};
-			return;
-		}
+	public void updateBoard() throws FileNotFoundException, FontFormatException, IOException {
+		  if (application.getGameType() != 3 && level.getMovesLeft() == 0) {
+		    if (level.hasWon(application.getGameType())) {
+		      level.setLocked(false);
+		      application.setLevelSummary(new LevelSummaryView(application, level));
+		      application.getLevelSummary().setPreferredSize(new Dimension(1000, 708));
+		      this.application.getFrmSixesWild().setContentPane(application.getLevelSummary());
+		      application.getLevelSummary().setVisible(true);
+		      application.getFrmSixesWild().pack();
+		      application.getFrmSixesWild().repaint();
+		    }
+		    else {
+		      application.setLoseView(new LoseGameView(application, level));
+		      application.getLoseView().setPreferredSize(new Dimension(1000, 708));
+		      this.application.getFrmSixesWild().setContentPane(application.getLoseView());
+		      application.getLoseView().setVisible(true);
+		      application.getFrmSixesWild().pack();
+		      application.getFrmSixesWild().repaint();
+		    }
+		  }
 		
 		level.setMakingMove(false);
 		

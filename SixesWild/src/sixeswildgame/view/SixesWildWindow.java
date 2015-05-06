@@ -45,55 +45,47 @@ import src.sixeswildgame.world.World;
 
 public class SixesWildWindow {
 
-	// JFrames
+	//JFrames
 	protected JFrame frmSixesWild;
-
-	// JPanels
+	
+	//JPanels
 	protected JPanel mainMenuView;
 	protected GameTypeView gameTypeView;
 	protected LevelSelectorView levelSelectorView;
 	protected LevelView levelView;
-
-	// JButtons
+	protected LevelSummaryView levelSummary;
+	protected LoseGameView loseView;
+	
+	//JButtons
 	protected JButton startButton;
 	protected JButton closeBtn;
 	protected JButton miniBtn;
-
-	// World
+	
+	//World
 	protected World world;
-
+	
 	protected int gameType;
 	protected int gameLevel;
 
 	/**
-	 * Creates new SixesWildWindow
-	 * 
-	 * @throws IOException
-	 * @throws FontFormatException
+	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 * @throws FileNotFoundException
 	 */
-	public SixesWildWindow() throws FileNotFoundException, FontFormatException,
-			IOException {
+	public SixesWildWindow() throws FileNotFoundException, FontFormatException, IOException {
 		initialize();
 	}
-
-	/**
-	 * Initializes SixesWildWindow
-	 * 
-	 * @throws FileNotFoundException
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
-	private void initialize() throws FileNotFoundException,
-			FontFormatException, IOException {
+	
+	private void initialize() throws FileNotFoundException, FontFormatException, IOException {
 		initializeModel();
 		initializeView();
 		initializeControllers();
-
+		
 	}
 
 	/**
-	 * Initializes model
+	 * Initialize the model.
 	 */
 	private void initializeModel() {
 		world = new World();
@@ -101,54 +93,52 @@ public class SixesWildWindow {
 		File dir = new File("saveddata/custom/puzzle");
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
-			for (File child : directoryListing) {
-				Level level = new Level(child);
-				world.getPuzzleLevels().add(level);
-			}
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getPuzzleLevels().add(level);
+		  }
 		} else {
 		}
-
+		
 		dir = new File("saveddata/custom/lightning");
 		directoryListing = dir.listFiles();
 		if (directoryListing != null) {
-			for (File child : directoryListing) {
-				Level level = new Level(child);
-				world.getLightningLevels().add(level);
-			}
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getLightningLevels().add(level);
+		  }
 		} else {
 		}
-
+		
 		dir = new File("saveddata/custom/release");
 		directoryListing = dir.listFiles();
 		if (directoryListing != null) {
-			for (File child : directoryListing) {
-				Level level = new Level(child);
-				world.getReleaseLevels().add(level);
-			}
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getReleaseLevels().add(level);
+		  }
 		} else {
 		}
-
+		
 		dir = new File("saveddata/custom/elimination");
 		directoryListing = dir.listFiles();
 		if (directoryListing != null) {
-			for (File child : directoryListing) {
-				Level level = new Level(child);
-				world.getEliminationLevels().add(level);
-			}
+		  for (File child : directoryListing) {
+		  	Level level = new Level(child);
+		  	world.getEliminationLevels().add(level);
+		  }
 		} else {
 		}
 
 	}
 
 	/**
-	 * Initializes views
-	 * 
-	 * @throws IOException
-	 * @throws FontFormatException
-	 * @throws FileNotFoundException
+	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	private void initializeView() throws FileNotFoundException,
-			FontFormatException, IOException {
+	private void initializeView() throws FileNotFoundException, FontFormatException, IOException {
 		frmSixesWild = new JFrame();
 		frmSixesWild.setTitle("Sixes Wild");
 		frmSixesWild.setSize(1000, 708);
@@ -158,114 +148,98 @@ public class SixesWildWindow {
 		frmSixesWild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSixesWild.setBackground(Color.decode("#E5E5E5"));
 		frmSixesWild.setLayout(null);
-		frmSixesWild.getRootPane().setBorder(
-				BorderFactory.createMatteBorder(4, 4, 4, 4,
-						Color.decode("#A38F85")));
+		frmSixesWild.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.decode("#A38F85")));
 
 		this.mainMenuView = (JPanel) frmSixesWild.getContentPane();
-
+		
 		JLabel lblSixeswild = new JLabel("SixesWild");
-		Font f50 = Font.createFont(
-				Font.TRUETYPE_FONT,
-				new FileInputStream(new File(
-						"resources/avenir-next-regular.ttf"))).deriveFont(
-				Font.PLAIN, 50);
+		Font f50 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 50);
 		lblSixeswild.setFont(f50);
 		lblSixeswild.setBounds(390, 162, 225, 68);
 		lblSixeswild.setForeground(Color.decode("#D76262"));
-		// lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
+		//lblSixeswild.setHorizontalAlignment(JLabel.CENTER);
 		frmSixesWild.getContentPane().add(lblSixeswild);
-
-		startButton = new BetterButton(Color.decode("#D76262"), 200, 52, 10);
+		
+		
+		startButton = new BetterButton(Color.decode("#D76262"),200,52,10);
 		startButton.setBorderPainted(false);
 		startButton.setFocusPainted(false);
-		Font f22 = Font.createFont(
-				Font.TRUETYPE_FONT,
-				new FileInputStream(new File(
-						"resources/avenir-next-regular.ttf"))).deriveFont(
-				Font.PLAIN, 22);
+		Font f22 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 22);
 		startButton.setFont(f22);
 		startButton.setText("Start");
 		startButton.setBounds(401, 302, 200, 52);
 		startButton.setForeground(Color.white);
 		frmSixesWild.getContentPane().add(startButton);
 
+		
 		JLabel label1 = new JLabel("Presented by");
 		label1.setBounds(438, 412, 135, 30);
 		label1.setFont(f22);
 		label1.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label1);
-
+		
 		JLabel label2 = new JLabel("Matthew Beaulieu");
-		Font f15 = Font.createFont(
-				Font.TRUETYPE_FONT,
-				new FileInputStream(new File(
-						"resources/avenir-next-regular.ttf"))).deriveFont(
-				Font.PLAIN, 15);
+		Font f15 = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("resources/avenir-next-regular.ttf"))).deriveFont(Font.PLAIN, 15);
 		label2.setBounds(439, 461, 123, 20);
 		label2.setFont(f15);
 		label2.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label2);
-
+		
 		JLabel label3 = new JLabel("Tiffany Leung");
 		label3.setBounds(456, 486, 90, 20);
 		label3.setFont(f15);
 		label3.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label3);
-
+		
 		JLabel label4 = new JLabel("Jiaqi Ren");
 		label4.setBounds(469, 511, 65, 20);
 		label4.setFont(f15);
 		label4.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label4);
-
+		
 		JLabel label5 = new JLabel("Halsey Vandenberg");
 		label5.setBounds(436, 536, 133, 20);
 		label5.setFont(f15);
 		label5.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label5);
-
+		
 		JLabel label6 = new JLabel("Ziyao Xu \"Joe\"");
 		label6.setBounds(459, 561, 100, 20);
 		label6.setFont(f15);
 		label6.setForeground(Color.decode("#D76262"));
 		frmSixesWild.getContentPane().add(label6);
-
-		closeBtn = new BetterButton(Color.decode("#D76262"), 40, 40, 10);
+		
+		closeBtn = new BetterButton(Color.decode("#D76262"),40,40,10);
 		closeBtn.setBorderPainted(false);
 		closeBtn.setFocusPainted(false);
 		Icon closeIcon = new ImageIcon("resources/close.png");
 		closeBtn.setIcon(closeIcon);
 		closeBtn.setBounds(930, 20, 40, 40);
-		frmSixesWild.getContentPane().add(closeBtn);
-
-		miniBtn = new BetterButton(Color.decode("#50E3C2"), 40, 40, 10);
+		frmSixesWild.getContentPane().add(closeBtn); 
+		
+		miniBtn = new BetterButton(Color.decode("#50E3C2"),40,40,10);
 		miniBtn.setBorderPainted(false);
 		miniBtn.setFocusPainted(false);
 		Icon minIcon = new ImageIcon("resources/min.png");
 		miniBtn.setIcon(minIcon);
 		miniBtn.setBounds(880, 20, 40, 40);
-		frmSixesWild.getContentPane().add(miniBtn);
+		frmSixesWild.getContentPane().add(miniBtn); 
 
+		
 	}
-
+	
 	/**
-	 * Initialize controllers
+	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
 		startButton.addActionListener(new StartController(this, world));
 		closeBtn.addActionListener(new CloseGameController(world, this));
-		miniBtn.addActionListener(new MinimizeGameController(world, this));
-
+		miniBtn.addActionListener(new MinimizeGameController(world,this));
+		
 	}
-
-	/**
-	 * Returns game type name
-	 * 
-	 * @return
-	 */
+	
 	public String getGameTypeName() {
-
+		
 		switch (gameType) {
 		case 1:
 			return "puzzle";
@@ -279,14 +253,9 @@ public class SixesWildWindow {
 			return "Unknown";
 		}
 	}
-
-	/**
-	 * Returns the color of game type
-	 * 
-	 * @return
-	 */
+	
 	public Color getGameTypeColor() {
-
+		
 		switch (gameType) {
 		case 1:
 			return Color.decode("#D76262");
@@ -300,37 +269,35 @@ public class SixesWildWindow {
 			return Color.white;
 		}
 	}
-
+	
 	/**
-	 * Launches the application
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		JWindow splash = new JWindow();
-		BufferedImage splashScreenImg;
+	    BufferedImage splashScreenImg;
 		try {
-			splashScreenImg = ImageIO.read(new File(
-					"resources/swSplashScreen.png"));
-			splash.getContentPane().add(
-					new JLabel(new ImageIcon(splashScreenImg)));
+			splashScreenImg = ImageIO.read(new File("resources/swSplashScreen.png"));
+			splash.getContentPane().add(new JLabel(new ImageIcon(splashScreenImg)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		int width = 800;
-		int height = 800;
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (screen.width - width) / 2;
-		int y = (screen.height - height) / 2;
-		splash.setBounds(x, y, width, height);
-		splash.setVisible(true);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		splash.setVisible(false);
-		splash.dispose();
-
+	    int width = 800;
+	    int height = 800;
+	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (screen.width - width) / 2;
+	    int y = (screen.height - height) / 2;
+	    splash.setBounds(x, y, width, height);
+	    splash.setVisible(true);
+	    try {
+	        Thread.sleep(3000);
+	    } catch (InterruptedException e) {
+	        e.printStackTrace();
+	    }
+	    splash.setVisible(false);
+	    splash.dispose();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -340,26 +307,25 @@ public class SixesWildWindow {
 					e.printStackTrace();
 				}
 			}
-			// InputStream is =
-			// MyClass.class.getClassLoader().getResourceAsStream(name)
+			//InputStream is = MyClass.class.getClassLoader().getResourceAsStream(name)
 		});
 	}
 
 	/**
 	 * @return the gameTypeView
 	 */
-
+	
+	
 	public GameTypeView getGameTypeView() {
 		return gameTypeView;
 	}
-
+	
 	public JFrame getFrmSixesWild() {
 		return frmSixesWild;
 	}
 
 	/**
-	 * @param gameTypeView
-	 *            the gameTypeView to set
+	 * @param gameTypeView the gameTypeView to set
 	 */
 	public void setGameTypeView(GameTypeView gameTypeView) {
 		this.gameTypeView = gameTypeView;
@@ -373,8 +339,7 @@ public class SixesWildWindow {
 	}
 
 	/**
-	 * @param startButton
-	 *            the startButton to set
+	 * @param startButton the startButton to set
 	 */
 	public void setStartButton(JButton startButton) {
 		this.startButton = startButton;
@@ -424,49 +389,31 @@ public class SixesWildWindow {
 		this.levelView = levelView;
 	}
 
-	/**
-	 * @return the closeBtn
-	 */
-	public JButton getCloseBtn() {
-		return closeBtn;
+	public LevelSummaryView getLevelSummary() {
+		return levelSummary;
 	}
 
-	/**
-	 * @param closeBtn
-	 *            the closeBtn to set
-	 */
-	public void setCloseBtn(JButton closeBtn) {
-		this.closeBtn = closeBtn;
+	public void setLevelSummary(LevelSummaryView levelSummary) {
+		this.levelSummary = levelSummary;
 	}
 
-	/**
-	 * @return the miniBtn
-	 */
-	public JButton getMiniBtn() {
-		return miniBtn;
+	public LoseGameView getLoseView() {
+		return loseView;
 	}
 
-	/**
-	 * @param miniBtn
-	 *            the miniBtn to set
-	 */
-	public void setMiniBtn(JButton miniBtn) {
-		this.miniBtn = miniBtn;
+	public void setLoseView(LoseGameView loseView) {
+		this.loseView = loseView;
 	}
 
-	/**
-	 * @return the world
-	 */
 	public World getWorld() {
 		return world;
 	}
 
-	/**
-	 * @param world
-	 *            the world to set
-	 */
 	public void setWorld(World world) {
 		this.world = world;
 	}
+
+	//Getters and Setters
+	
 
 }
