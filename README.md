@@ -27,9 +27,13 @@ and you are unable to set the exact percentage chance they appear..
 
 ##Team Members:
 Matthew Beaulieu
+
 Jiaqi Ren
+
 Halsey Vandenberg
+
 Tiffany Leung
+
 Joe Xu
 
 This is a project for WPI CS 3733 - Software Engineering.
